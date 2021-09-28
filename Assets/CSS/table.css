@@ -1,0 +1,32 @@
+table
+{
+	width: 90%;
+	margin: 0px auto;
+	text-align: left;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+}
+th
+{
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+td
+{
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+.oddrowcolor
+{
+	background-color:#F0F8FF;
+}
+.evenrowcolor
+{
+	background-color:#D1EDF2;
+}
