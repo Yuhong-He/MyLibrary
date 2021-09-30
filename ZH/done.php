@@ -15,7 +15,7 @@ else
 var check = "<?php echo $check ?>";
 if(check==1)
 {
-	alert("请核对暗号，瑞丽江畔...")
+	alert("先核对暗号...")
 	var opened=window.open('about:blank','_self');
 	window.location.replace("login.php");
 }
@@ -24,7 +24,7 @@ if(check==1)
 if($check==0)
 {
 	$code=$_GET['id'];
-	require_once "db.php";
+	require_once "../db.php";
 	$sql="UPDATE obtain SET Process='Y' WHERE Code='$code'";
 	mysqli_query($db,$sql);
 	mysqli_close($db);

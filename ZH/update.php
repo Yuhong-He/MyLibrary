@@ -2,8 +2,9 @@
 <html>
 	<head>
 		<title>更新书籍信息</title>
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/index.css">
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/input.css">
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/input.css">
 		<?php
 		session_start();
 		if (isset($_SESSION["admin"])&&$_SESSION["admin"]!=NULL)
@@ -26,7 +27,7 @@
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="Assets/js/header.js"></script>
+		<script type="text/javascript" src="header.js"></script>
 		<div class="article" style="padding-bottom:80px;">
 			<h1><nobr>更新书籍信息</nobr></h1>
 			<div id="wrapper">
@@ -35,7 +36,7 @@
 						<form method="post" onsubmit="return AllSubmit()">
 <?php
 $hscode=$_GET['id'];
-require_once "db.php";
+require_once "../db.php";
 $book_info=mysqli_query($db,"SELECT * FROM books WHERE hscode='$hscode'");
 while ($row=mysqli_fetch_row($book_info))
 {
@@ -69,7 +70,7 @@ while ($row=mysqli_fetch_row($book_info))
 			</div>
 		</div>
 <?php
-require_once "db.php";
+require_once "../db.php";
 if(	isset($_POST['Author']) && isset($_POST['Title']) && isset($_POST['Location']) && 
 	isset($_POST['Publisher']) && isset($_POST['Year']) && isset($_POST['Code']) && isset($_POST['Category']) )
 {
@@ -123,6 +124,6 @@ else if(check==1)
 	window.top.close();
 }
 </script>
-		<script type="text/javascript" src="Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/js/footer.js"></script>
 	</body>
 </html>

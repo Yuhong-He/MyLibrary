@@ -2,8 +2,9 @@
 <html>
 	<head>
 		<title>文献互助管理</title>
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/index.css">
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/table.css">
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/table.css">
 		<?php
 		session_start();
 		if (isset($_SESSION["admin"])&&$_SESSION["admin"]!=NULL)
@@ -49,12 +50,12 @@
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="Assets/js/header.js"></script>
+		<script type="text/javascript" src="header.js"></script>
 		<div class="article">
 			<h1><nobr>文献互助管理</nobr></h1>
 			<div style="margin: 0px auto; text-align: center; padding-bottom:60px;">
 <?php
-require_once "db.php";
+require_once "../db.php";
 $result=mysqli_query($db,"SELECT * FROM obtain WHERE Process='N' ORDER BY Code ASC");
 echo '<table id="tablecolor" style="font-size:15px;">'."\n";
 echo ("<tr><th>书籍信息</th><th>邮箱</th><th>身份</th><th>理由</th><th>时间</th><th></th></tr>");
@@ -90,6 +91,6 @@ mysqli_close($db);
 ?>
 			</div>
 		</div>
-		<script type="text/javascript" src="Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/js/footer.js"></script>
 	</body>
 </html>

@@ -4,7 +4,7 @@
 	<head>
 <?php
 $cateid=$_GET['id'];
-require_once "db.php";
+require_once "../db.php";
 $cate_info=mysqli_query($db,"SELECT CategoryName FROM category WHERE CategoryID='$cateid'");
 while ($row=mysqli_fetch_row($cate_info))
 {
@@ -12,8 +12,9 @@ while ($row=mysqli_fetch_row($cate_info))
 }
 echo "<title>$cate_name</title>";
 ?>
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/index.css">
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/table.css">
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/table.css">
 		<script type="text/javascript">    
 		function tablecolor(id)
 		{
@@ -41,7 +42,7 @@ echo "<title>$cate_name</title>";
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="Assets/js/header.js"></script>
+		<script type="text/javascript" src="header.js"></script>
 		<div class="article">
 <?php
 echo "<h1><nobr>$cate_name</nobr></h1>";
@@ -80,6 +81,6 @@ mysqli_close($db);
 ?>
 			</div>
 		</div>
-	<script type="text/javascript" src="Assets/js/footer.js"></script>
+	<script type="text/javascript" src="../Assets/js/footer.js"></script>
 	</body>
 </html>

@@ -2,8 +2,9 @@
 <html>
 	<head>
 		<title>录入书籍信息</title>
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/index.css">
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/input.css">
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/input.css">
 		<?php
 		session_start();
 		if (isset($_SESSION["admin"])&&$_SESSION["admin"]!=NULL)
@@ -26,7 +27,7 @@
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="Assets/js/header.js"></script>
+		<script type="text/javascript" src="header.js"></script>
 		<div class="article" style="padding-bottom:80px;">
 			<h1><nobr>录入书籍信息</nobr></h1>
 			<div id="wrapper">
@@ -47,7 +48,7 @@
 			</div>
 		</div>
 <?php
-require_once "db.php";
+require_once "../db.php";
 $result=mysqli_query($db,"SELECT Title,Code FROM books");
 while($row=mysqli_fetch_row($result))
 {
@@ -159,6 +160,6 @@ else if(check==3)
 	alert("出现一号多书，请检查")
 }
 </script>
-		<script type="text/javascript" src="Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/js/footer.js"></script>
 	</body>
 </html>

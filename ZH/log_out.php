@@ -10,7 +10,7 @@ else
 {
 	$un=NULL;
 }
-require_once "db.php";
+require_once "../db.php";
 $username=mysqli_query($db,"SELECT UserName FROM user");
 while($row=mysqli_fetch_row($username))
 {

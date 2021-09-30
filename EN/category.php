@@ -53,7 +53,7 @@ while ($row=mysqli_fetch_row($category))
 		echo("<tr><td>");
 		echo($row[0]);
 		echo("</td><td><a href='by_category.php?id=$row[0]' target='_blank'>");
-		echo($row[1]);
+		echo($row[2]);
 		echo("</a></td><td>");
 		echo(sizeof($count));
 		echo("</td></tr>\n");

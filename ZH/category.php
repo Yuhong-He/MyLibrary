@@ -2,8 +2,9 @@
 <html>
 	<head>
 		<title>滇志阁·分类</title>
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/index.css">
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/table.css">
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/table.css">
 		<script type="text/javascript">    
 		function tablecolor(id)
 		{
@@ -31,12 +32,12 @@
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="Assets/js/header.js"></script>
+		<script type="text/javascript" src="header.js"></script>
 		<div class="article">
 			<h1><nobr>分类</nobr></h1>
 			<div style="width:50%; margin: 0px auto; text-align: center; padding-bottom:60px;">
 <?php
-require_once "db.php";
+require_once "../db.php";
 $category=mysqli_query($db,"SELECT * FROM category ORDER BY CategoryID ASC");
 echo '<table id="tablecolor" style="font-size:15px;">'."\n";
 echo ("<tr><th>分类编号</th><th>分类名称</th><th>总计</th></tr>");
@@ -64,6 +65,6 @@ mysqli_close($db);
 ?>
 			</div>
 		</div>
-		<script type="text/javascript" src="Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/js/footer.js"></script>
 	</body>
 </html>

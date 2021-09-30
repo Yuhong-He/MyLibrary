@@ -38,7 +38,7 @@ function AllSubmit()
 		}
 		else
 		{
-			alert('Clike "fair use only" please.”');
+			alert('Clike "fair use only" please.');
 			return false;
 		}
 	}
@@ -53,7 +53,7 @@ function AllSubmit()
 				<div id="login">
 					<div class="loginSystem">
 						<form method="post" onsubmit="return AllSubmit()">
-							<dl><dt>Book you need:</dt><dd><input name="Book" class="field-value" type="text" id="txt1"/></dd></dl>
+							<dl><dt>I need book:</dt><dd><input name="Book" class="field-value" type="text" id="txt1"/></dd></dl>
 							<dl><dt>Send to Email:</dt><dd><input name="Email" class="field-value" type="text" id="txt2"/></dd></dl>
 							<dl><dt>I am...</dt><dd>
 							<label for="id1"><span style="margin-left:20px;">Wikipedian</span></label><input type="radio" id="id1" name="Identity" value="维基人">

@@ -5,7 +5,7 @@
 <?php
 $cateid=$_GET['id'];
 require_once "../db.php";
-$cate_info=mysqli_query($db,"SELECT CategoryName FROM category WHERE CategoryID='$cateid'");
+$cate_info=mysqli_query($db,"SELECT EnCatName FROM category WHERE CategoryID='$cateid'");
 while ($row=mysqli_fetch_row($cate_info))
 {
 	$cate_name=$row[0];
@@ -45,7 +45,7 @@ echo "<title>$cate_name</title>";
 		<script type="text/javascript" src="header.js"></script>
 		<div class="article">
 <?php
-echo "<h1><nobr>$cate_name</nobr></h1>";
+echo "<h1>$cate_name</h1>";
 ?>
 			<div style="margin: 0px auto; min-height:385px; padding-bottom:60px; text-align: center;">
 <?php

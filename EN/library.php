@@ -32,11 +32,11 @@ mysqli_close($db);
 ?>
 	<body>
 		<script type="text/javascript" src="header.js"></script>
-		<div class="article">
+		<div class="article" style="padding-bottom:60px;">
 			<h1><nobr>Yunnan Gazetteer Library</nobr></h1>
 			<img src="../Assets/image/Dali Prefectural Museum.jpg" title="Dali Prefectural Museum" style="width:40%; border-radius:30px; float:right; margin-top:20px; margin-left:20px; margin-bottom:10px;"/>
 			<p style="text-align:left;text-indent:2em;">Yunnan Gazetteer Library recorded the catalogue of my e-books about Yunnan. For now, there are <span style="text-decoration:underline; text-decoration-color:red;"><?php echo $total; ?></span> books that exist.</p>
-			<p style="text-align:left;text-indent:2em;">It is not easy for scholars to publish their research results. So I would not put the download link on the website. But for the free knowledge and academic freedom purpose, I'd like to help with the reasonable e-book obtain request.  If you need the e-books I have when you edit Wikipedia or study the local history & culture of Yunnan, please leave your requirements on my <a href="https://zh.wikipedia.org/wiki/User_talk:瑞丽江的河水">Wikipedia user talk page</a>, and also you can send requirements through the "Obtain" page of this website. I don't charge any fees. I hope Yunnan, the marvellous place, could be known by more people.</p>
+			<p style="text-align:left;text-indent:2em;">It is not easy for scholars to publish their research results. So I would not put the download link on the website. But for the free knowledge and academic freedom purpose, I'd like to help with the reasonable e-book obtain request.  If you need the e-books I have when you edit Wikipedia or study the local history & culture of Yunnan, please send your requirements through the "Obtain" page of this website, and you can also send me an email. I don't charge any fees. I hope Yunnan, the marvellous place, could be known by more people.</p>
 			<ul class='find-content' style='margin-top:3%;'>
 				<li><a href='search.php'>Search</a></li>
 				<li><a href='category.php'>Category</a></li>

@@ -3,13 +3,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<head>
 		<title>引用页</title>
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/index.css">
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
 	</head>
 	<body>
-		<script type="text/javascript" src="Assets/js/header.js"></script>
+		<script type="text/javascript" src="header.js"></script>
 <?php
 $hscode=$_GET['id'];
-require_once "db.php";
+require_once "../db.php";
 $book_info=mysqli_query($db,"SELECT * FROM books WHERE hscode='$hscode'");
 while ($row=mysqli_fetch_row($book_info))
 {
@@ -183,6 +184,6 @@ function vancouver()
 	window.top.close();
 }
 </script>
-	<script type="text/javascript" src="Assets/js/footer.js"></script>
+	<script type="text/javascript" src="../Assets/js/footer.js"></script>
 	</body>
 </html>

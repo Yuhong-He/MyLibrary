@@ -3,8 +3,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<head>
 		<title>精确搜索</title>
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/index.css">
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/table.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/table.css">
 		<script type="text/javascript">    
 		function tablecolor(id)
 		{
@@ -32,7 +32,7 @@
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="Assets/js/header.js"></script>
+		<script type="text/javascript" src="header.js"></script>
 		<div class="article">
 			<h1><nobr>精确搜索</nobr></h1>
 			<div style="margin: 0px auto; padding-bottom:60px; text-align: center;">
@@ -43,7 +43,7 @@
 					</p>
 				</form>
 <?php
-require_once "db.php";
+require_once "../db.php";
 if(isset($_POST['Title']))
 {
 	$title_get=$_POST['Title'];
@@ -112,6 +112,6 @@ mysqli_close($db);
 ?>
 			</div>
 		</div>
-		<script type="text/javascript" src="Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/js/footer.js"></script>
 	</body>
 </html>

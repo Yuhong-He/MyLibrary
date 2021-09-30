@@ -3,10 +3,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<head>
 		<title>找资料秘籍</title>
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/index.css">
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
 	</head>
 	<body>
-		<script type="text/javascript" src="Assets/js/header.js"></script>
+		<script type="text/javascript" src="header.js"></script>
 		<div class="article">
 			<h1><nobr>找资料秘籍</nobr></h1>
 			<div style="text-align:left; text-indent:2em; padding-bottom:50px">
@@ -18,6 +19,6 @@
 				<p>英文书籍可以通过<a href="http://libgen.rs/">创世纪图书馆</a>获取，已经进入公有领域的古老文献可以在<a href="http://archive.org/">互联网档案馆</a>里找找，英文论文可使用<a href="https://sci-hub.se/">Sci-Hub</a>。最后这个对于广大科研玩家应该是人尽皆知的吧。</p>
 			</div>
 		</div>
-		<script type="text/javascript" src="Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/js/footer.js"></script>
 	</body>
 </html>

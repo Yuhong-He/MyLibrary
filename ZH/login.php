@@ -2,8 +2,9 @@
 <html>
 	<head>
 		<title>核对暗号</title>
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/index.css">
-		<link rel="stylesheet" type="text/css" href="Assets/CSS/login.css">
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/CSS/login.css">
 		<script type="text/javascript">
 function AllSubmit()
 {
@@ -25,7 +26,7 @@ function AllSubmit()
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="Assets/js/header.js"></script>
+		<script type="text/javascript" src="header.js"></script>
 		<div class="article">
 			<h1><nobr>核对暗号</nobr></h1>
 			<div class="noticeinfo">核对成功后可进行下一步操作</div>
@@ -45,7 +46,7 @@ function AllSubmit()
 			</div>
 		</div>
 		<?php
-		require_once "db.php";
+		require_once "../db.php";
 		$username=mysqli_query($db,"SELECT UserName FROM user");
 		while($row=mysqli_fetch_row($username))
 		{
@@ -102,6 +103,6 @@ function AllSubmit()
 			alert("你一定是对面派来的的卧底！");
 		}
 		</script>
-		<script type="text/javascript" src="Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/js/footer.js"></script>
 	</body>
 </html>

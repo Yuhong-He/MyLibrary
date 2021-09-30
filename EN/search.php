@@ -79,7 +79,7 @@ if(isset($_POST['Title']))
 			echo($row[5]);
 			echo("</td><td>");
 			echo("<div style='white-space:nowrap;'><a href='by_category.php?id=$row[6]' style='cursor:help;' title='");
-			$catename=mysqli_query($db,"SELECT CategoryName FROM category JOIN books ON category.CategoryID = $row[6]");
+			$catename=mysqli_query($db,"SELECT EnCatName FROM category JOIN books ON category.CategoryID = $row[6]");
 			while ($rowcate=mysqli_fetch_row($catename))
 			{
 				echo($rowcate[0]);
