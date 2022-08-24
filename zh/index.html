@@ -10,6 +10,7 @@
             $("#headerContent").load("header.html");
             $("#footerContent").load("../Assets/common/footer.html");
             displayTotalBooks();
+            setTimeout(() => navBlockColor(), 50);
         });
         function displayTotalBooks() {
             const xmlhttp = new XMLHttpRequest();
@@ -23,9 +24,13 @@
             xmlhttp.open("GET","../Assets/common/countBooks.php",true);
             xmlhttp.send();
         }
+        function navBlockColor() {
+            const nav = document.getElementById('nav_home');
+            nav.className += 'active';
+        }
     </script>
 </head>
-<body onload="checkLoginAndDisplayUsername()">
+<body onload="checkLoginAndDisplay()">
 <div id="headerContent"></div>
 <div class="container">
     <div class="row" style="font-size: 1.2em;font-family: STXingkai,serif;">
