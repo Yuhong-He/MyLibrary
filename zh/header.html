@@ -121,7 +121,77 @@
         });
 
         $("#signup_btn").click(function() {
-            alert(getCookie(getCookie("username") + "Auth"));
+            reset_form("#registerModel form");
+            $("#registerModel").modal({
+                backdrop:"static"
+            });
+        });
+
+        function validate_register_form(userName, password, passwordRepeat, email) {
+            const regName = /(^[a-zA-Z]{3,16}$)/;
+            if(userName===""||userName===null){
+                show_validate_msg("#userName_register", "error", "请输入用户名");
+                return false;
+            } else if(!regName.test(userName)){
+                show_validate_msg("#userName_register", "error", "用户名只能是3-16位英文");
+                return false;
+            } else {
+                show_validate_msg("#userName_register", "success", "");
+            }
+            if(password.length < 5){
+                show_validate_msg("#password_register", "error", "密码至少有五位");
+                return false;
+            } else {
+                show_validate_msg("#password_register", "success", "");
+            }
+            if(password!==passwordRepeat){
+                show_validate_msg("#password_register_repeat", "error", "密码不一致");
+                return false;
+            } else {
+                show_validate_msg("#password_register_repeat", "success", "");
+            }
+            const regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+            if(email === ""){
+                show_validate_msg("#email_register", "error", "请输入邮箱");
+                return false;
+            } else if (!regEmail.test(email)){
+                show_validate_msg("#email_register", "error", "邮箱格式不正确")
+                return false;
+            } else {
+                show_validate_msg("#email_register", "success", "")
+            }
+            return true;
+        }
+
+        $("#model_register_btn").click(function() {
+            const userName = $("#userName_register").val();
+            const password = $("#password_register").val();
+            const passwordRepeat = $("#password_register_repeat").val();
+            const email = $("#email_register").val();
+            if(!validate_register_form(userName, password, passwordRepeat, email)){
+                return false;
+            }
+            $.ajax({
+                url:"register.php",
+                method:"POST",
+                data:{
+                    username: userName,
+                    password: password,
+                    email: email
+                },
+                success:function(result){
+                    if(result.code === 200) {
+                        setCookie(userName, password, result.email, result.authority);
+                        $("#userName_input").val(userName);
+                        $("#password_input").val(password);
+                        $("#registerModel").modal('hide');
+                    } else {
+                        if(result.code === 202){
+                            show_validate_msg("#userName_register", "error", result.message);
+                        }
+                    }
+                }
+            });
         });
     </script>
 </head>
@@ -133,7 +203,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">登录面板</h4>
+                <h4 class="modal-title">登录面板</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -157,6 +227,54 @@
                 <button type="button" class="btn btn-success" id="signup_btn" style="float: left">注册</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" id="model_login_btn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Register Model-->
+<div class="modal fade" id="registerModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">注册面板</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="userName" class="form-control" id="userName_register">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="password" class="form-control" id="password_register">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">再输一次</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="passwordRepeat" class="form-control" id="password_register_repeat">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="email" class="form-control" id="email_register">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="model_register_btn">确认</button>
             </div>
         </div>
     </div>
@@ -200,7 +318,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="font-size: 1.2em">
                     <ul class="nav navbar-nav">
                         <li id="nav_home"><a href="index.html">首页</a></li>
-                        <li class="dropdown">
+                        <li class="dropdown" id="nav_books">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">找书<span class="caret"></span></a>
                             <ul class="dropdown-menu" style="min-width: 68px">
                                 <li id="nav_search"><a href="search.php">搜索</a></li>
