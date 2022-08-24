@@ -9,20 +9,9 @@
     <script src="../Assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/5badc55ad0.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../Assets/common/userLogin.js"></script>
+    <script type="text/javascript" src="../Assets/common/cookie.js"></script>
     <title>Header Navigate Bar</title>
     <script>
-        function getCookie(cname)
-        {
-            const name = cname + "=";
-            const ca = document.cookie.split(';');
-            for(let i=0; i<ca.length; i++)
-            {
-                const c = ca[i].trim();
-                if (c.indexOf(name)===0) return c.substring(name.length,c.length);
-            }
-            return "";
-        }
-
         function reset_form(element) {
             $(element)[0].reset();
             $(element).find("*").removeClass("has-error has-success");
@@ -90,9 +79,7 @@
                 },
                 success:function(result){
                     if(result.code === 200) {
-                        document.cookie="username=" + userName;
-                        document.cookie=userName + "=" + password;
-                        document.cookie=userName + "Email=" + result.email;
+                        setCookie(userName, password, result.email);
                         checkLoginAndDisplay();
                         $("#loginModel").modal('hide');
                     } else {
@@ -122,9 +109,7 @@
                 },
                 success:function(){
                     const username = getCookie("username");
-                    document.cookie = username + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                    document.cookie = username + "Email=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                    destroyCookie(username);
                     checkLoginAndDisplay();
                     window.location.replace("index.html");
                 }

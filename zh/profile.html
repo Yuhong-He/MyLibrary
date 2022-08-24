@@ -59,9 +59,7 @@
                 },
                 success:function(result){
                     if(result.code === 200) {
-                        document.cookie="username=" + newUsername;
-                        document.cookie=newUsername + "=" + newPassword;
-                        document.cookie=newUsername + "Email=" + result.email;
+                        setCookie(newUsername, newPassword, result.email);
 
                         $("#usernameModel").modal('hide');
                         $("#passwordModel").modal('hide');
