@@ -16,10 +16,13 @@ while($row=mysqli_fetch_row($password))
 {
     $all_password[]=$row[0];
 }
-$code=400;
-$message="未知错误";
+$code=202;
+$message="用户名已存在";
 for($start=0; $start<sizeof($all_user_name); $start++)
 {
+    if($unNew!=$un && $unNew==$all_user_name[$start]){
+        break;
+    }
     if($un==$all_user_name[$start])
     {
         if($pw==$all_password[$start])

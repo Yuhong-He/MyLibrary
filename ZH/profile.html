@@ -57,28 +57,42 @@
                         document.cookie="username=" + newUsername;
                         document.cookie=newUsername + "=" + newPassword;
                         document.cookie=newUsername + "Email=" + result.email;
+
+                        $("#usernameModel").modal('hide');
                         $("#passwordModel").modal('hide');
                         $("#emailModel").modal('hide');
+
+                        const usernameReplace = document.getElementById('username');
+                        usernameReplace.innerHTML=newUsername;
+                        checkLoginAndDisplayUsername();
+
                         const passwordReplace = document.getElementById('password');
                         let hiddenPassword = "";
                         for(let i=0; i<newPassword.length; i++){
                             hiddenPassword = hiddenPassword + "*";
                         }
                         passwordReplace.innerHTML=hiddenPassword;
+
                         const emailReplace = document.getElementById('email');
                         emailReplace.innerHTML=email;
                     } else {
                         if(result.code === 201){
+                            show_validate_msg("#username_password", "error", result.message);
                             show_validate_msg("#old_password", "error", result.message);
                             show_validate_msg("#email_password", "error", result.message);
-                        } else if(result.code === 400) {
-                            $("#message_model_message").text(result.message);
-                            $("#messageModel").modal({
-                                backdrop: "static"
-                            });
+                        } else if(result.code === 202) {
+                            show_validate_msg("#new_username", "error", result.message);
                         }
                     }
                 }
+            });
+        }
+
+        function editUsername(){
+            reset_form("#usernameModel form");
+            $("#new_username").val(getCookie("username"));
+            $("#usernameModel").modal({
+                backdrop:"static"
             });
         }
 
@@ -91,17 +105,36 @@
 
         function editEmail(){
             reset_form("#emailModel form");
+            $("#new_email").val(getCookie(getCookie("username") + "Email"));
             $("#emailModel").modal({
                 backdrop:"static"
             });
         }
 
+        function saveUsername(){
+            const oldUsername = getCookie("username");
+            const newUsername = $("#new_username").val();
+            const password = $("#username_password").val();
+            const email = getCookie(oldUsername + "Email");
+            const regName = /(^[a-zA-Z]{3,16}$)/;
+            if(newUsername===""||newUsername===null){
+                show_validate_msg("#new_username", "error", "必须填写用户名");
+                return false;
+            } else if(!regName.test(newUsername)){
+                show_validate_msg("#new_username", "error", "用户名只能是3-16位英文");
+                return false;
+            } else {
+                show_validate_msg("#new_username", "success", "");
+            }
+            updateInfo(oldUsername, password, newUsername, password, email);
+        }
+
         function savePassword(){
-            const oldPassword = $("#old_password").val();
             const username = getCookie("username");
-            const email = getCookie(username + "Email");
+            const oldPassword = $("#old_password").val();
             const newPassword = $("#new_password").val();
             const repeatPassword = $("#repeat_password").val();
+            const email = getCookie(username + "Email");
             if(newPassword.length < 5){
                 show_validate_msg("#new_password", "error", "密码至少有五位");
                 return false;
@@ -118,8 +151,8 @@
         }
 
         function saveEmail(){
-            const password = $("#email_password").val();
             const username = getCookie("username");
+            const password = $("#email_password").val();
             const email = $("#new_email").val();
             const regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
             if(email === ""){
@@ -145,6 +178,40 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Username Model-->
+<div class="modal fade" id="usernameModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改用户名</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">账户密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="passwordOld" class="form-control" id="username_password">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="usernameNew" class="form-control" id="new_username">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="saveUsername()">确认</button>
             </div>
         </div>
     </div>
@@ -236,17 +303,17 @@
         <div class="col-md-12" style="font-size: 1.5em;">
             <table class="table">
                 <tr>
-                    <td>用户名：</td>
+                    <th>用户名</th>
                     <td><span id="username"></span></td>
-                    <td><button type="button" class="btn btn-primary">修改</button></td>
+                    <td><button type="button" class="btn btn-primary" onclick="editUsername()">修改</button></td>
                 </tr>
                 <tr>
-                    <td>密码：</td>
+                    <th>密码</th>
                     <td><span id="password"></span></td>
                     <td><button type="button" class="btn btn-primary" onclick="editPassword()">修改</button></td>
                 </tr>
                 <tr>
-                    <td>邮箱：</td>
+                    <th>邮箱</th>
                     <td><span id="email"></span></td>
                     <td><button type="button" class="btn btn-primary" onclick="editEmail()">修改</button></td>
                 </tr>
