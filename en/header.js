@@ -42,7 +42,7 @@ document.writeln("			<ul class=\'nav-content\'>");
 document.writeln("				<li><a href=\'library.php\'>Library</a></li>");
 document.writeln("				<li><a href=\'obtain.php\' target=\'_blank\'>Obtain</a></li>");
 document.writeln("				<li><a href=\'thesis.php\'>Thesis</a></li>");
-document.writeln("				<li><a href=\'../ZH/index.html\'>中文</a></li>");
+document.writeln("				<li><a href=\'../zh/index.html\'>中文</a></li>");
 document.writeln("			</ul>");
 document.writeln("		</div>");
 document.writeln("	</body>");
