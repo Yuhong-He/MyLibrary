@@ -9,19 +9,21 @@
         $(document).ready(function(){
             $("#headerContent").load("header.html");
             $("#footerContent").load("../Assets/common/footer.html");
+            displayTotalBooks();
         });
+        function displayTotalBooks() {
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState===4 && xmlhttp.status===200)
+                {
+                    document.getElementById("totalBooks").innerHTML=xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET","../Assets/common/countBooks.php",true);
+            xmlhttp.send();
+        }
     </script>
-    <?php
-    require_once "../Assets/common/db.php";
-    $sql = "SELECT * FROM books";
-    $result=mysqli_query($db, $sql);
-    while ($row=mysqli_fetch_row($result))
-    {
-        $count[]=$row[1];
-    }
-    $total=sizeof($count);
-    mysqli_close($db);
-    ?>
 </head>
 <body onload="checkLoginAndDisplayUsername()">
 <div id="headerContent"></div>
@@ -40,7 +42,7 @@
         </div>
         <div class="col-md-12">
             <img src="../Assets/image/Dali Prefectural Museum.jpg" style="width:20%; border-radius:20px; float:right; margin-top:5px; margin-left:20px; margin-bottom:3px;" alt="大理白族自治州图书馆">
-            <p>我是一名云南史地爱好者，有收集云南书籍资料的爱好。本站目前共录有<span style="text-decoration:underline; text-decoration-color:limegreen;"><?php echo $total; ?></span>本书。</p>
+            <p>我是一名云南史地爱好者，有收集云南书籍资料的爱好。本站目前共录有<span style="text-decoration:underline; text-decoration-color:limegreen;" id="totalBooks"></span>本书。</p>
             <p>如您学习、研究云南地方文化历史而需要我所收集的资料，请通过本站的“互助”提交请求，也可以向我的邮箱发送邮件。</p>
         </div>
     </div>
