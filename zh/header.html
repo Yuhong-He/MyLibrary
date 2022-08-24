@@ -8,14 +8,9 @@
     <script type="text/javascript" src="../Assets/js/jquery-3.6.0.min.js"></script>
     <script src="../Assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/5badc55ad0.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../Assets/common/userLogin.js"></script>
     <title>Header Navigate Bar</title>
     <script>
-        function checkLoginAndDisplayUsername() {
-            const username = getCookie("username");
-            const usernameReplaceLogin = document.getElementById('login_btn');
-            usernameReplaceLogin.innerHTML=username;
-        }
-
         function getCookie(cname)
         {
             const name = cname + "=";
@@ -100,9 +95,8 @@
                         document.cookie="username=" + userName;
                         document.cookie=userName + "=" + password;
                         document.cookie=userName + "Email=" + result.email;
+                        checkLoginAndDisplayUsername();
                         $("#loginModel").modal('hide');
-                        const usernameReplaceLogin = document.getElementById('login_btn');
-                        usernameReplaceLogin.innerHTML=userName;
                     } else {
                         if(result.code === 201){
                             show_validate_msg("#password_input", "error", result.message);
@@ -134,8 +128,7 @@
                     document.cookie = username + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
                     document.cookie = username + "Email=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
                     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                    const usernameReplaceLogin = document.getElementById('login_btn');
-                    usernameReplaceLogin.innerHTML="登录";
+                    checkLoginAndDisplayUsername();
                     $("#message_model_message").text("成功退出。");
                     $("#messageModel").modal({
                         backdrop: "static"
@@ -145,7 +138,7 @@
             });
         });
 
-        $("#profile_btn").click(function() {
+        $("#username_btn").click(function() {
             const username = getCookie("username");
             if(username===""){
                 $("#message_model_message").text("您并未登录。");
@@ -252,14 +245,9 @@
                                 <li><a href="../en/index.html">English</a></li>
                             </ul>
                         </li>
+                        <li id="username_block"><a href="#" id="username_btn"></a></li>
                         <li><a href="#" id="login_btn">登录</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" id="account_btn">账户<span class="caret"></span></a>
-                            <ul class="dropdown-menu" style="min-width: 68px">
-                                <li><a href="#" id="profile_btn">账户信息</a></li>
-                                <li><a href="#" id="logout_btn">登出</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="#" id="logout_btn">登出</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
