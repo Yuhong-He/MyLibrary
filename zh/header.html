@@ -79,7 +79,7 @@
                 },
                 success:function(result){
                     if(result.code === 200) {
-                        setCookie(userName, password, result.email);
+                        setCookie(userName, password, result.email, result.authority);
                         checkLoginAndDisplay();
                         $("#loginModel").modal('hide');
                     } else {
@@ -121,7 +121,7 @@
         });
 
         $("#signup_btn").click(function() {
-            alert("aaa");
+            alert(getCookie(getCookie("username") + "Auth"));
         });
     </script>
 </head>

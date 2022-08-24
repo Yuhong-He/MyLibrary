@@ -1,7 +1,8 @@
-function setCookie(username, password, email) {
+function setCookie(username, password, email, authority) {
     document.cookie="username=" + username;
     document.cookie=username + "=" + password;
     document.cookie=username + "Email=" + email;
+    document.cookie=username + "Auth=" + authority;
 }
 
 function getCookie(cName)
@@ -20,4 +21,5 @@ function destroyCookie(username) {
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     document.cookie = username + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     document.cookie = username + "Email=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = username + "Auth=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 }

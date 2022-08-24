@@ -18,6 +18,11 @@ while($row=mysqli_fetch_row($email))
 {
     $all_email[]=$row[0];
 }
+$authority=mysqli_query($db, "SELECT Authority FROM user");
+while($row=mysqli_fetch_row($authority))
+{
+    $all_auth[]=$row[0];
+}
 $code=400;
 $message="用户名不存在";
 for($start=0; $start<sizeof($all_user_name); $start++)
@@ -31,6 +36,7 @@ for($start=0; $start<sizeof($all_user_name); $start++)
             $code=200;
             $message="密码正确";
             $email=$all_email[$start];
+            $authority=$all_auth[$start];
         }
         else
         {
@@ -45,7 +51,8 @@ $str = array
 (
     'code'=>$code,
     'message'=>$message,
-    'email'=>$email
+    'email'=>$email,
+    'authority'=>$authority
 );
 $jsonEncode = json_encode($str);
 echo $jsonEncode;

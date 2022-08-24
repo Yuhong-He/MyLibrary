@@ -46,7 +46,7 @@
             }
         }
 
-        function updateInfo(oldUsername, oldPassword, newUsername, newPassword, email){
+        function updateInfo(oldUsername, oldPassword, newUsername, newPassword, email, authority){
             $.ajax({
                 url:"updateProfile.php",
                 method:"POST",
@@ -55,11 +55,12 @@
                     password: oldPassword,
                     newUsername: newUsername,
                     newPassword: newPassword,
-                    email: email
+                    email: email,
+                    authority: authority
                 },
                 success:function(result){
                     if(result.code === 200) {
-                        setCookie(newUsername, newPassword, result.email);
+                        setCookie(newUsername, newPassword, result.email, result.authority);
 
                         $("#usernameModel").modal('hide');
                         $("#passwordModel").modal('hide');
@@ -119,6 +120,7 @@
             const newUsername = $("#new_username").val();
             const password = $("#username_password").val();
             const email = getCookie(oldUsername + "Email");
+            const authority = getCookie(oldUsername + "Auth");
             const regName = /(^[a-zA-Z]{3,16}$)/;
             if(newUsername===""||newUsername===null){
                 show_validate_msg("#new_username", "error", "必须填写用户名");
@@ -129,7 +131,7 @@
             } else {
                 show_validate_msg("#new_username", "success", "");
             }
-            updateInfo(oldUsername, password, newUsername, password, email);
+            updateInfo(oldUsername, password, newUsername, password, email, authority);
         }
 
         function savePassword(){
@@ -138,6 +140,7 @@
             const newPassword = $("#new_password").val();
             const repeatPassword = $("#repeat_password").val();
             const email = getCookie(username + "Email");
+            const authority = getCookie(username + "Auth");
             if(newPassword.length < 5){
                 show_validate_msg("#new_password", "error", "密码至少有五位");
                 return false;
@@ -150,13 +153,14 @@
             } else {
                 show_validate_msg("#repeat_password", "success", "");
             }
-            updateInfo(username, oldPassword, username, newPassword, email);
+            updateInfo(username, oldPassword, username, newPassword, email, authority);
         }
 
         function saveEmail(){
             const username = getCookie("username");
             const password = $("#email_password").val();
             const email = $("#new_email").val();
+            const authority = getCookie(username + "Auth");
             const regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
             if(email === ""){
                 show_validate_msg("#new_email", "error", "请输入邮箱");
@@ -167,7 +171,7 @@
             } else {
                 show_validate_msg("#new_email", "success", "")
             }
-            updateInfo(username, password, username, password, email);
+            updateInfo(username, password, username, password, email, authority);
         }
     </script>
 </head>

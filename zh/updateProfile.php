@@ -5,6 +5,7 @@ $pw=$_POST['password'];
 $unNew=$_POST['newUsername'];
 $pwNew=$_POST['newPassword'];
 $em=$_POST['email'];
+$auth=$_POST['authority'];
 require_once "../Assets/common/db.php";
 $username=mysqli_query($db, "SELECT UserName FROM user");
 while($row=mysqli_fetch_row($username))
@@ -45,7 +46,8 @@ $str = array
 (
     'code'=>$code,
     'message'=>$message,
-    'email'=>$em
+    'email'=>$em,
+    'authority'=>$auth
 );
 $jsonEncode = json_encode($str);
 echo $jsonEncode;
