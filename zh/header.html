@@ -29,20 +29,33 @@
             $(element).find(".help-block").text("");
         }
 
-        $("#login_btn").click(function() {
-            reset_form("#loginModel form");
-            const username = getCookie("username");
-            if(username!==""){
-                $("#message_model_message").text("您已经登录，请退出后再登录其他账户。");
-                $("#messageModel").modal({
-                    backdrop: "static"
-                });
-                return false;
+        function show_validate_msg(element, status, msg) {
+            $(element).parent().removeClass("has-success has-error");
+            $(element).next("span").text("");
+            if("success"===status){
+                $(element).parent().addClass("has-success");
+                $(element).next("span").text("");
+            } else if("error"===status){
+                $(element).parent().addClass("has-error");
+                $(element).next("span").text(msg);
             }
+        }
+
+        $("#loginLogout_btn").click(function() {
+            const username = getCookie("username");
+            if(username===""){
+                login();
+            } else {
+                logout();
+            }
+        });
+
+        function login(){
+            reset_form("#loginModel form");
             $("#loginModel").modal({
                 backdrop:"static"
             });
-        });
+        }
 
         function validate_login_form() {
             const userName = $("#userName_input").val();
@@ -62,23 +75,8 @@
             return true;
         }
 
-        function show_validate_msg(element, status, msg) {
-            $(element).parent().removeClass("has-success has-error");
-            $(element).next("span").text("");
-            if("success"===status){
-                $(element).parent().addClass("has-success");
-                $(element).next("span").text("");
-            } else if("error"===status){
-                $(element).parent().addClass("has-error");
-                $(element).next("span").text(msg);
-            }
-        }
-
         $("#model_login_btn").click(function() {
             if(!validate_login_form()){
-                return false;
-            }
-            if($(this).attr("ajax-validate") === "error"){
                 return false;
             }
             const userName = $("#userName_input").val();
@@ -108,15 +106,14 @@
             });
         });
 
-        $("#logout_btn").click(function() {
+        function logout() {
+            $("#logoutModel").modal({
+                backdrop:"static"
+            });
+        }
+
+        $("#confirm_logout_btn").click(function(){
             const username = getCookie("username");
-            if(username===""){
-                $("#message_model_message").text("您并未登录。");
-                $("#messageModel").modal({
-                    backdrop: "static"
-                });
-                return false;
-            }
             $.ajax({
                 url:"logout.php",
                 method:"POST",
@@ -129,26 +126,13 @@
                     document.cookie = username + "Email=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
                     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
                     checkLoginAndDisplayUsername();
-                    $("#message_model_message").text("成功退出。");
-                    $("#messageModel").modal({
-                        backdrop: "static"
-                    });
                     window.location.replace("index.html");
                 }
             });
         });
 
         $("#username_btn").click(function() {
-            const username = getCookie("username");
-            if(username===""){
-                $("#message_model_message").text("您并未登录。");
-                $("#messageModel").modal({
-                    backdrop: "static"
-                });
-                return false;
-            } else {
-                window.location.replace("profile.html");
-            }
+            window.location.replace("profile.html");
         });
 
         $("#signup_btn").click(function() {
@@ -193,15 +177,17 @@
     </div>
 </div>
 
-<!--General Message Model-->
-<div class="modal fade" id="messageModel" tabindex="-1" role="dialog">
+<!-- Logout Model -->
+<div class="modal fade" id="logoutModel" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-body">
-                <p id="message_model_message"></p>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确认退出？</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-danger" id="confirm_logout_btn">退出</button>
             </div>
         </div>
     </div>
@@ -246,8 +232,7 @@
                             </ul>
                         </li>
                         <li id="username_block"><a href="#" id="username_btn"></a></li>
-                        <li><a href="#" id="login_btn">登录</a></li>
-                        <li><a href="#" id="logout_btn">登出</a></li>
+                        <li><a href="#" id="loginLogout_btn"></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
