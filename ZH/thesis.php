@@ -13,7 +13,7 @@
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="header.js"></script>
+		<script type="text/javascript" src="common.js"></script>
 		<div class="article">
 			<h1><nobr>滇史论辑</nobr></h1>
 			<div style="text-align:left; text-indent:2em; padding-bottom:50px">
@@ -26,6 +26,6 @@
 				<p>下载链接：<a href="https://pan.baidu.com/s/1681rVDWZb5j-NoNBIQD7sQ" target='_blank'>百度网盘</a>（提取码：abcd，解压密码：xiliuheshui2021）；<span style="color:blue; cursor:pointer;" onclick='fake()'>谷歌云盘</span>。如果链接死了通知我换新。</p>
 			</div>
 		</div>
-		<script type="text/javascript" src="../Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

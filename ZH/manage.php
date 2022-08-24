@@ -39,7 +39,7 @@
 		</style>
 	</head>
 	<body>
-		<script type="text/javascript" src="header.js"></script>
+		<script type="text/javascript" src="common.js"></script>
 		<div class="article">
 			<h1><nobr>管理系统</nobr></h1>
 			<ul class='find-content' style='margin-top:5%;'>
@@ -47,6 +47,6 @@
 				<li><a href='request.php'>文献互助</a></li>
 			</ul>
 		</div>
-		<script type="text/javascript" src="../Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

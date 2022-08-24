@@ -42,7 +42,7 @@ echo "<title>$cate_name</title>";
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="header.js"></script>
+		<script type="text/javascript" src="common.js"></script>
 		<div class="article">
 <?php
 echo "<h1><nobr>$cate_name</nobr></h1>";
@@ -81,6 +81,6 @@ mysqli_close($db);
 ?>
 			</div>
 		</div>
-	<script type="text/javascript" src="../Assets/js/footer.js"></script>
+	<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

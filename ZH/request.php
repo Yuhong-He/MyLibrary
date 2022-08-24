@@ -50,7 +50,7 @@
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="header.js"></script>
+		<script type="text/javascript" src="common.js"></script>
 		<div class="article">
 			<h1><nobr>文献互助管理</nobr></h1>
 			<div style="margin: 0px auto; text-align: center; padding-bottom:60px;">
@@ -91,6 +91,6 @@ mysqli_close($db);
 ?>
 			</div>
 		</div>
-		<script type="text/javascript" src="../Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

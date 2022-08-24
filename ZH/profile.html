@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>账户信息</title>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="../Assets/common/userLogin.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#headerContent").load("header.html");
+            $("#footerContent").load("../Assets/common/footer.html");
+            setTimeout(() => displayInfo(), 50);
+        });
+
+        function displayInfo(){
+            const username = getCookie("username");
+            if(username===""){
+                window.location.replace("index.php");
+                return false;
+            }
+            $("#username").text(username);
+            const password = getCookie(username);
+            let hiddenPassword = "";
+            for(let i=0; i<password.length; i++){
+                hiddenPassword = hiddenPassword + "*";
+            }
+            $("#password").text(hiddenPassword);
+            const email = getCookie(username + "Email");
+            $("#email").text(email);
+        }
+
+        function show_validate_msg(element, status, msg) {
+            $(element).parent().removeClass("has-success has-error");
+            $(element).next("span").text("");
+            if("success"===status){
+                $(element).parent().addClass("has-success");
+                $(element).next("span").text("");
+            } else if("error"===status){
+                $(element).parent().addClass("has-error");
+                $(element).next("span").text(msg);
+            }
+        }
+
+        function updateInfo(oldUsername, oldPassword, newUsername, newPassword, email){
+            $.ajax({
+                url:"updateProfile.php",
+                method:"POST",
+                data:{
+                    username: oldUsername,
+                    password: oldPassword,
+                    newUsername: newUsername,
+                    newPassword: newPassword,
+                    email: email
+                },
+                success:function(result){
+                    if(result.code === 200) {
+                        document.cookie="username=" + newUsername;
+                        document.cookie=newUsername + "=" + newPassword;
+                        document.cookie=newUsername + "Email=" + result.email;
+                        $("#passwordModel").modal('hide');
+                        $("#emailModel").modal('hide');
+                        const passwordReplace = document.getElementById('password');
+                        let hiddenPassword = "";
+                        for(let i=0; i<newPassword.length; i++){
+                            hiddenPassword = hiddenPassword + "*";
+                        }
+                        passwordReplace.innerHTML=hiddenPassword;
+                        const emailReplace = document.getElementById('email');
+                        emailReplace.innerHTML=email;
+                    } else {
+                        if(result.code === 201){
+                            show_validate_msg("#old_password", "error", result.message);
+                            show_validate_msg("#email_password", "error", result.message);
+                        } else if(result.code === 400) {
+                            $("#message_model_message").text(result.message);
+                            $("#messageModel").modal({
+                                backdrop: "static"
+                            });
+                        }
+                    }
+                }
+            });
+        }
+
+        function editPassword(){
+            reset_form("#passwordModel form");
+            $("#passwordModel").modal({
+                backdrop:"static"
+            });
+        }
+
+        function editEmail(){
+            reset_form("#emailModel form");
+            $("#emailModel").modal({
+                backdrop:"static"
+            });
+        }
+
+        function savePassword(){
+            const oldPassword = $("#old_password").val();
+            const username = getCookie("username");
+            const email = getCookie(username + "Email");
+            const newPassword = $("#new_password").val();
+            const repeatPassword = $("#repeat_password").val();
+            if(newPassword.length < 5){
+                show_validate_msg("#new_password", "error", "密码至少有五位");
+                return false;
+            } else {
+                show_validate_msg("#new_password", "success", "");
+            }
+            if(newPassword!==repeatPassword){
+                show_validate_msg("#repeat_password", "error", "新密码不一致");
+                return false;
+            } else {
+                show_validate_msg("#repeat_password", "success", "");
+            }
+            updateInfo(username, oldPassword, username, newPassword, email);
+        }
+
+        function saveEmail(){
+            const password = $("#email_password").val();
+            const username = getCookie("username");
+            const email = $("#new_email").val();
+            const regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+            if(email === ""){
+                show_validate_msg("#new_email", "error", "请输入邮箱");
+                return false;
+            } else if (!regEmail.test(email)){
+                show_validate_msg("#new_email", "error", "邮箱格式不正确")
+                return false;
+            } else {
+                show_validate_msg("#new_email", "success", "")
+            }
+            updateInfo(username, password, username, password, email);
+        }
+    </script>
+</head>
+<body onload="checkLoginAndDisplayUsername()">
+<!--General Message Model-->
+<div class="modal fade" id="messageModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="message_model_message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Password Model-->
+<div class="modal fade" id="passwordModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">旧密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="passwordOld" class="form-control" id="old_password">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">新密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="passwordNew" class="form-control" id="new_password">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">再输一次</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="passwordRepeat" class="form-control" id="repeat_password">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="savePassword()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Email Model-->
+<div class="modal fade" id="emailModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改邮箱</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">账户密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="passwordOld" class="form-control" id="email_password">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="emailNew" class="form-control" id="new_email">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="saveEmail()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="headerContent"></div>
+<div class="container">
+    <div class="row" style="font-size: 1.2em;font-family: STXingkai,serif;">
+        <div class="col-md-12">
+            <h2>账户信息</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="font-size: 1.5em;">
+            <table class="table">
+                <tr>
+                    <td>用户名：</td>
+                    <td><span id="username"></span></td>
+                    <td><button type="button" class="btn btn-primary">修改</button></td>
+                </tr>
+                <tr>
+                    <td>密码：</td>
+                    <td><span id="password"></span></td>
+                    <td><button type="button" class="btn btn-primary" onclick="editPassword()">修改</button></td>
+                </tr>
+                <tr>
+                    <td>邮箱：</td>
+                    <td><span id="email"></span></td>
+                    <td><button type="button" class="btn btn-primary" onclick="editEmail()">修改</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="footerContent"></div>
+</body>
+</html>

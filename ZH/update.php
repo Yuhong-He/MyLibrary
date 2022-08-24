@@ -27,7 +27,7 @@
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="header.js"></script>
+		<script type="text/javascript" src="common.js"></script>
 		<div class="article" style="padding-bottom:80px;">
 			<h1><nobr>更新书籍信息</nobr></h1>
 			<div id="wrapper">
@@ -124,6 +124,6 @@ else if(check==1)
 	window.top.close();
 }
 </script>
-		<script type="text/javascript" src="../Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

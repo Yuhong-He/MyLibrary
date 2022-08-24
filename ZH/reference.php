@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
 	</head>
 	<body>
-		<script type="text/javascript" src="header.js"></script>
+		<script type="text/javascript" src="common.js"></script>
 <?php
 $hscode=$_GET['id'];
 require_once "../db.php";
@@ -184,6 +184,6 @@ function vancouver()
 	window.top.close();
 }
 </script>
-	<script type="text/javascript" src="../Assets/js/footer.js"></script>
+	<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

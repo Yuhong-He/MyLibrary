@@ -26,6 +26,6 @@
 				<p>Download link: <a href="https://pan.baidu.com/s/1681rVDWZb5j-NoNBIQD7sQ" target='_blank'>Baidu Netdisk</a> (Extraction code: abcd; Unzip code: xiliuheshui2021); <span style="color:blue; cursor:pointer;" onclick='fake()'>Google Drive</span>.</p>
 			</div>
 		</div>
-		<script type="text/javascript" src="../Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

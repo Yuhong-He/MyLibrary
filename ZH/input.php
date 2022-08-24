@@ -27,7 +27,7 @@
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="header.js"></script>
+		<script type="text/javascript" src="common.js"></script>
 		<div class="article" style="padding-bottom:80px;">
 			<h1><nobr>录入书籍信息</nobr></h1>
 			<div id="wrapper">
@@ -160,6 +160,6 @@ else if(check==3)
 	alert("出现一号多书，请检查")
 }
 </script>
-		<script type="text/javascript" src="../Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

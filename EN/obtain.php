@@ -87,6 +87,6 @@ var book = "<?php echo $bk ?>";
 var email = "<?php echo $em ?>";
 alert("You send the request of “"+book+"” successful. I will send the book to email “"+email+"” soon, please be patient. If you urgent need the book, you can send me an email.");
 </script>
-		<script type="text/javascript" src="../Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

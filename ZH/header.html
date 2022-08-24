@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../Assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../Assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../Assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/5badc55ad0.js" crossorigin="anonymous"></script>
+    <title>Header Navigate Bar</title>
+    <script>
+        function checkLoginAndDisplayUsername() {
+            const username = getCookie("username");
+            const usernameReplaceLogin = document.getElementById('login_btn');
+            usernameReplaceLogin.innerHTML=username;
+        }
+
+        function getCookie(cname)
+        {
+            const name = cname + "=";
+            const ca = document.cookie.split(';');
+            for(let i=0; i<ca.length; i++)
+            {
+                const c = ca[i].trim();
+                if (c.indexOf(name)===0) return c.substring(name.length,c.length);
+            }
+            return "";
+        }
+
+        function reset_form(element) {
+            $(element)[0].reset();
+            $(element).find("*").removeClass("has-error has-success");
+            $(element).find(".help-block").text("");
+        }
+
+        $("#login_btn").click(function() {
+            reset_form("#loginModel form");
+            const username = getCookie("username");
+            if(username!==""){
+                $("#message_model_message").text("您已经登录，请退出后再登录其他账户。");
+                $("#messageModel").modal({
+                    backdrop: "static"
+                });
+                return false;
+            }
+            $("#loginModel").modal({
+                backdrop:"static"
+            });
+        });
+
+        function validate_login_form() {
+            const userName = $("#userName_input").val();
+            if(userName === ""){
+                show_validate_msg("#userName_input", "error", "请输入用户名");
+                return false;
+            } else {
+                show_validate_msg("#userName_input", "success", "");
+            }
+            const password = $("#password_input").val();
+            if(password === ""){
+                show_validate_msg("#password_input", "error", "请输入密码");
+                return false;
+            } else {
+                show_validate_msg("#password_input", "success", "");
+            }
+            return true;
+        }
+
+        function show_validate_msg(element, status, msg) {
+            $(element).parent().removeClass("has-success has-error");
+            $(element).next("span").text("");
+            if("success"===status){
+                $(element).parent().addClass("has-success");
+                $(element).next("span").text("");
+            } else if("error"===status){
+                $(element).parent().addClass("has-error");
+                $(element).next("span").text(msg);
+            }
+        }
+
+        $("#model_login_btn").click(function() {
+            if(!validate_login_form()){
+                return false;
+            }
+            if($(this).attr("ajax-validate") === "error"){
+                return false;
+            }
+            const userName = $("#userName_input").val();
+            const password = $("#password_input").val();
+            $.ajax({
+                url:"login.php",
+                method:"POST",
+                data:{
+                    username: userName,
+                    password: password
+                },
+                success:function(result){
+                    if(result.code === 200) {
+                        document.cookie="username=" + userName;
+                        document.cookie=userName + "=" + password;
+                        document.cookie=userName + "Email=" + result.email;
+                        $("#loginModel").modal('hide');
+                        const usernameReplaceLogin = document.getElementById('login_btn');
+                        usernameReplaceLogin.innerHTML=userName;
+                    } else {
+                        if(result.code === 201){
+                            show_validate_msg("#password_input", "error", result.message);
+                        } else if(result.code === 400) {
+                            show_validate_msg("#userName_input", "error", result.message);
+                        }
+                    }
+                }
+            });
+        });
+
+        $("#logout_btn").click(function() {
+            const username = getCookie("username");
+            if(username===""){
+                $("#message_model_message").text("您并未登录。");
+                $("#messageModel").modal({
+                    backdrop: "static"
+                });
+                return false;
+            }
+            $.ajax({
+                url:"logout.php",
+                method:"POST",
+                data:{
+                    username: username
+                },
+                success:function(){
+                    const username = getCookie("username");
+                    document.cookie = username + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                    document.cookie = username + "Email=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                    const usernameReplaceLogin = document.getElementById('login_btn');
+                    usernameReplaceLogin.innerHTML="登录";
+                    $("#message_model_message").text("成功退出。");
+                    $("#messageModel").modal({
+                        backdrop: "static"
+                    });
+                    window.location.replace("index.php");
+                }
+            });
+        });
+
+        $("#profile_btn").click(function() {
+            const username = getCookie("username");
+            if(username===""){
+                $("#message_model_message").text("您并未登录。");
+                $("#messageModel").modal({
+                    backdrop: "static"
+                });
+                return false;
+            } else {
+                window.location.replace("profile.html");
+            }
+        });
+    </script>
+</head>
+
+<body onload="checkLoginAndDisplayUsername();">
+<!--Login Model-->
+<div class="modal fade" id="loginModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">登录面板</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="userName" class="form-control" id="userName_input">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="password" class="form-control" id="password_input">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="model_login_btn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--General Message Model-->
+<div class="modal fade" id="messageModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="message_model_message"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Main Body-->
+<div class="container">
+    <div class="row" style="margin-top: 2%">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.php">
+                        <img alt="Brand" src="../Assets/image/logo.jpg" height="20">
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="font-size: 1.2em">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.php">首页<span class="sr-only">(current)</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">找书<span class="caret"></span></a>
+                            <ul class="dropdown-menu" style="min-width: 68px">
+                                <li><a href="search.php">搜索</a></li>
+                                <li><a href="category.php">按分类</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="obtain.php">互助</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><i class="fa-solid fa-language"></i><span class="caret"></span></a>
+                            <ul class="dropdown-menu" style="min-width: 68px">
+                                <li><a href="../EN/index.html">English</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" id="login_btn">登录</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" id="account_btn">账户<span class="caret"></span></a>
+                            <ul class="dropdown-menu" style="min-width: 68px">
+                                <li><a href="#" id="profile_btn">账户信息</a></li>
+                                <li><a href="#" id="logout_btn">登出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+</div>
+</body>
+</html>

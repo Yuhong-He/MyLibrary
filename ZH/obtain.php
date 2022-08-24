@@ -46,7 +46,7 @@ function AllSubmit()
 		</script>
 	</head>
 	<body>
-		<script type="text/javascript" src="header.js"></script>
+		<script type="text/javascript" src="common.js"></script>
 		<div class="article">
 			<h1><nobr>文献互助</nobr></h1>
 			<div id="wrapper">
@@ -87,6 +87,6 @@ var book = "<?php echo $bk ?>";
 var email = "<?php echo $em ?>";
 alert("您已成功提交“"+book+"”的互助申请。我会尽快将书籍发送到邮箱“"+email+"”，请耐心等待。如您急需该书，可以直接向我发邮件。");
 </script>
-		<script type="text/javascript" src="../Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>

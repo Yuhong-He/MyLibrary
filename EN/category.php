@@ -65,6 +65,6 @@ mysqli_close($db);
 ?>
 			</div>
 		</div>
-		<script type="text/javascript" src="../Assets/js/footer.js"></script>
+		<script type="text/javascript" src="../Assets/common/footer.js"></script>
 	</body>
 </html>
