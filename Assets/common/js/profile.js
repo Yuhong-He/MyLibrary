@@ -15,11 +15,6 @@ function displayInfo(){
     $("#email").text(email);
 }
 
-function navBlockColor() {
-    const nav = document.getElementById('nav_profile');
-    nav.className += 'active';
-}
-
 function editUsername(){
     reset_form("#usernameModel form");
     $("#new_username").val(getCookie("username"));

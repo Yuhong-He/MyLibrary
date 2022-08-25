@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>账户信息</title>
-    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="../Assets/common/js/common.js"></script>
     <script type="text/javascript" src="js/profile.js"></script>
     <script type="text/javascript" src="../Assets/common/js/profile.js"></script>
-    <script type="text/javascript" src="../Assets/common/generalFunctions.js"></script>
+    <script type="text/javascript" src="../Assets/common/js/generalFunctions.js"></script>
     <script>
         $(document).ready(function(){
             $("#headerContent").load("header.html");
-            $("#footerContent").load("../Assets/common/footer.html");
+            $("#footerContent").load("../Assets/common/html/footer.html");
             setTimeout(() => displayInfo(), 50);
             setTimeout(() => navBlockColor(), 50);
         });
+        function navBlockColor() {
+            const nav = document.getElementById('nav_profile');
+            nav.className += 'active';
+        }
     </script>
 </head>
 <body onload="checkLoginAndDisplay()">
