@@ -1,17 +1,17 @@
 function validate_login_form() {
-    const userName = $("#userName_input").val();
+    const userName = $("#userName_login").val();
     if(userName === ""){
-        show_validate_msg("#userName_input", "error", "请输入用户名");
+        show_validate_msg("#userName_login", "error", "请输入用户名");
         return false;
     } else {
-        show_validate_msg("#userName_input", "success", "");
+        show_validate_msg("#userName_login", "success", "");
     }
-    const password = $("#password_input").val();
+    const password = $("#password_login").val();
     if(password === ""){
-        show_validate_msg("#password_input", "error", "请输入密码");
+        show_validate_msg("#password_login", "error", "请输入密码");
         return false;
     } else {
-        show_validate_msg("#password_input", "success", "");
+        show_validate_msg("#password_login", "success", "");
     }
     return true;
 }
@@ -20,8 +20,8 @@ $("#model_login_btn").click(function() {
     if(!validate_login_form()){
         return false;
     }
-    const userName = $("#userName_input").val();
-    const password = $("#password_input").val();
+    const userName = $("#userName_login").val();
+    const password = $("#password_login").val();
     $.ajax({
         url:"../Assets/common/php/login.php",
         method:"POST",
@@ -32,13 +32,13 @@ $("#model_login_btn").click(function() {
         success:function(result){
             if(result.code === 200) {
                 setCookie(userName, password, result.email, result.authority);
-                checkLoginAndDisplay();
+                displayAfterLoad();
                 $("#loginModel").modal('hide');
             } else {
                 if(result.code === 201){
-                    show_validate_msg("#password_input", "error", "密码不正确");
+                    show_validate_msg("#password_login", "error", "密码不正确");
                 } else if(result.code === 400) {
-                    show_validate_msg("#userName_input", "error", "用户名不存在");
+                    show_validate_msg("#userName_login", "error", "用户名不存在");
                 }
             }
         }
@@ -100,12 +100,15 @@ $("#model_register_btn").click(function() {
         success:function(result){
             if(result.code === 200) {
                 setCookie(userName, password, result.email, result.authority);
-                $("#userName_input").val(userName);
-                $("#password_input").val(password);
+                $("#userName_login").val(userName);
+                $("#password_login").val(password);
                 $("#registerModel").modal('hide');
             } else {
                 if(result.code === 202){
                     show_validate_msg("#userName_register", "error", "用户名已存在");
+                }
+                if(result.code === 203){
+                    show_validate_msg("#email_register", "error", "邮箱已被使用");
                 }
             }
         }

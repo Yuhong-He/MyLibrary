@@ -4,15 +4,15 @@ function displayInfo(){
         window.location.replace("index.html");
         return false;
     }
-    $("#username").text(username);
+    $("#profile_username").text(username);
     const password = getCookie(username);
     let hiddenPassword = "";
     for(let i=0; i<password.length; i++){
         hiddenPassword = hiddenPassword + "*";
     }
-    $("#password").text(hiddenPassword);
+    $("#profile_password").text(hiddenPassword);
     const email = getCookie(username + "Email");
-    $("#email").text(email);
+    $("#profile_email").text(email);
 }
 
 function editUsername(){

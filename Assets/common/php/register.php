@@ -4,26 +4,24 @@ $un=$_POST['username'];
 $pw=$_POST['password'];
 $em=$_POST['email'];
 require_once "db.php";
-$username=mysqli_query($db, "SELECT UserName FROM user");
-while($row=mysqli_fetch_row($username))
-{
-    $all_user_name[]=$row[0];
+$code=200;
+$resUsername=mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un'");
+$rewUsername = mysqli_fetch_assoc($resUsername);
+if ($rewUsername['num'] != 0) {
+    $code=202;
 }
-$code=202;
-for($start=0; $start<sizeof($all_user_name); $start++)
-{
-    if($un==$all_user_name[$start])
-    {
-        break;
-    } else {
-        $sql="INSERT INTO user (UserName,Password,Email,Authority)
-			VALUES ('$un','$pw','$em',1)";
-        $result=mysqli_query($db,$sql);
-        if($result==true){
-            $code=200;
-        }
+if($code!=202){
+    $resEmail=mysqli_query($db, "SELECT count(Email) as num FROM user where Email = '$em'");
+    $rewEmail = mysqli_fetch_assoc($resEmail);
+    if ($rewEmail['num'] != 0) {
+        $code=203;
     }
 }
+if($code!=202 && $code!=203){
+    $sql="INSERT INTO user (UserName,Password,Email,Authority) VALUES ('$un','$pw','$em',1)";
+    mysqli_query($db, $sql);
+}
+mysqli_close($db);
 $str = array
 (
     'code'=>$code,

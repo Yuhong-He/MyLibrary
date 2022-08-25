@@ -1,7 +1,9 @@
-function checkLoginAndDisplay() {
+function displayAfterLoad() {
     setTimeout(() => userDisplay(), 50);
     setTimeout(() => adminDisplay(), 50);
+    setTimeout(() => autoFooter(), 50);
 }
+
 function userDisplay() {
     const username = getCookie("username");
     if(username===""||username===null){
@@ -38,6 +40,15 @@ function adminDisplay() {
     } else {
         const manageBlock = document.getElementById('nav_manage');
         manageBlock.style.display = "none";
+    }
+}
+
+function autoFooter(){
+    const bodyHeight = $("body").height();
+    const footerHeight = $("footer").height();
+    const iHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    if(bodyHeight > (iHeight - footerHeight)){
+        $("body").append('<div style="height: ' + 5 * footerHeight + 'px"></div>');
     }
 }
 

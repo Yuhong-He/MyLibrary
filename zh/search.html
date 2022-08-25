@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>按书名找书</title>
+    <script type="text/javascript" src="../Assets/common/js/common.js"></script>
+    <script type="text/javascript" src="../Assets/common/js/generalFunctions.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#headerContent").load("header.html");
+            $("#footerContent").load("../Assets/common/html/footer.html");
+            setTimeout(() => navBlockColor(), 50);
+        });
+        function navBlockColor() {
+            const navParent = document.getElementById('nav_books');
+            navParent.className += ' active';
+            const navChild = document.getElementById('nav_search');
+            navChild.className += 'active';
+        }
+    </script>
+</head>
+<body onload="displayAfterLoad()">
+<div id="headerContent"></div>
+<div class="container">
+    <div class="row" style="font-size: 1.2em;font-family: STXingkai,serif;">
+        <div class="col-md-12">
+            <h2>按书名找书</h2>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 1%">
+        <div class="col-xs-6 col-sm-6 col-md-5">
+            <input type="text" class="form-control" placeholder="搜索书名">
+        </div>
+        <div class="col-md-3 col-md-offset-0 pull-right">
+            <button type="button" class="btn btn-primary" id="add_new_book_btn">新增</button>
+            <button type="button" class="btn btn-danger" id="delete_all_books_btn">删除</button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">显示<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="min-width:73px">
+                    <li id="display_5_rows"><a href="#">5行</a></li>
+                    <li id="display_10_rows"><a href="#">10行</a></li>
+                    <li id="display_20_rows"><a href="#">20行</a></li>
+                    <li id="display_50_rows"><a href="#">50行</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 2%">
+        <div class="col-md-12">
+            <table class="table table-hover" id="books_table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="check_all"/>
+                        </th>
+                        <th>题名</th>
+                        <th>作者</th>
+                        <th>出版社</th>
+                        <th>年份</th>
+                        <th>分类</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td><input type='checkbox' class='check_item'/></td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                    <td>Germany</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" id="page_info_area">111</div>
+        <div class="col-md-6" id="page_nav_area">111</div>
+    </div>
+</div>
+</body>
+<div id="footerContent"></div>
+</html>

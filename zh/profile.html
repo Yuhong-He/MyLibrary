@@ -20,7 +20,7 @@
         }
     </script>
 </head>
-<body onload="checkLoginAndDisplay()">
+<body onload="displayAfterLoad()">
 <!--General Message Model-->
 <div class="modal fade" id="messageModel" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -156,23 +156,23 @@
             <table class="table">
                 <tr>
                     <th>用户名</th>
-                    <td><span id="username"></span></td>
+                    <td><span id="profile_username"></span></td>
                     <td><button type="button" class="btn btn-primary" onclick="editUsername()">修改</button></td>
                 </tr>
                 <tr>
                     <th>密码</th>
-                    <td><span id="password"></span></td>
+                    <td><span id="profile_password"></span></td>
                     <td><button type="button" class="btn btn-primary" onclick="editPassword()">修改</button></td>
                 </tr>
                 <tr>
                     <th>邮箱</th>
-                    <td><span id="email"></span></td>
+                    <td><span id="profile_email"></span></td>
                     <td><button type="button" class="btn btn-primary" onclick="editEmail()">修改</button></td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
-<div id="footerContent"></div>
 </body>
+<div id="footerContent"></div>
 </html>
