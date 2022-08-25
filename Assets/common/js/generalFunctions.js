@@ -68,6 +68,6 @@ function displayTotalBooks() {
             document.getElementById("total_books").innerHTML=xmlhttp.responseText;
         }
     }
-    xmlhttp.open("GET","../Assets/common/countBooks.php",true);
+    xmlhttp.open("GET","../Assets/common/php/countBooks.php",true);
     xmlhttp.send();
 }

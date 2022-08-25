@@ -8,8 +8,8 @@
     <script type="text/javascript" src="../Assets/js/jquery-3.6.0.min.js"></script>
     <script src="../Assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/5badc55ad0.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../Assets/common/cookie.js"></script>
-    <script type="text/javascript" src="../Assets/common/generalFunctions.js"></script>
+    <script type="text/javascript" src="../Assets/common/js/cookie.js"></script>
+    <script type="text/javascript" src="../Assets/common/js/generalFunctions.js"></script>
     <title>Header Navigate Bar</title>
     <script>
         $("#loginLogout_btn").click(function() {
@@ -53,7 +53,7 @@
             const userName = $("#userName_input").val();
             const password = $("#password_input").val();
             $.ajax({
-                url:"php/login.php",
+                url:"../Assets/common/php/login.php",
                 method:"POST",
                 data:{
                     username: userName,
@@ -84,7 +84,7 @@
         $("#confirm_logout_btn").click(function(){
             const username = getCookie("username");
             $.ajax({
-                url:"php/logout.php",
+                url:"../Assets/common/php/logout.php",
                 method:"POST",
                 data:{
                     username: username
@@ -154,7 +154,7 @@
                 return false;
             }
             $.ajax({
-                url:"php/register.php",
+                url:"../Assets/common/php/register.php",
                 method:"POST",
                 data:{
                     username: userName,
