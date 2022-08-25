@@ -7,7 +7,6 @@
     <link href="../Assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="../Assets/js/jquery-3.6.0.min.js"></script>
     <script src="../Assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/5badc55ad0.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../Assets/common/js/cookie.js"></script>
     <script type="text/javascript" src="../Assets/common/js/generalFunctions.js"></script>
     <title>Header Navigate Bar</title>
@@ -66,9 +65,9 @@
                         $("#loginModel").modal('hide');
                     } else {
                         if(result.code === 201){
-                            show_validate_msg("#password_input", "error", result.message);
+                            show_validate_msg("#password_input", "error", "密码不正确");
                         } else if(result.code === 400) {
-                            show_validate_msg("#userName_input", "error", result.message);
+                            show_validate_msg("#userName_input", "error", "用户名不存在");
                         }
                     }
                 }
@@ -169,7 +168,7 @@
                         $("#registerModel").modal('hide');
                     } else {
                         if(result.code === 202){
-                            show_validate_msg("#userName_register", "error", result.message);
+                            show_validate_msg("#userName_register", "error", "用户名已存在");
                         }
                     }
                 }
@@ -318,7 +317,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><i class="fa-solid fa-language"></i><span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><img src="../Assets/image/language-solid.svg" width="20" alt="Language button"><span class="caret"></span></a>
                             <ul class="dropdown-menu" style="min-width: 68px">
                                 <li><a href="../en/index.html">English</a></li>
                             </ul>
