@@ -3,7 +3,7 @@ header('Content-Type:text/json;charset=utf-8');
 $un=$_POST['username'];
 $pw=$_POST['password'];
 $em=$_POST['email'];
-require_once "../Assets/common/db.php";
+require_once "../../Assets/common/db.php";
 $username=mysqli_query($db, "SELECT UserName FROM user");
 while($row=mysqli_fetch_row($username))
 {

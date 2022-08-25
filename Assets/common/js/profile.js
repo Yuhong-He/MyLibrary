@@ -19,3 +19,26 @@ function navBlockColor() {
     const nav = document.getElementById('nav_profile');
     nav.className += 'active';
 }
+
+function editUsername(){
+    reset_form("#usernameModel form");
+    $("#new_username").val(getCookie("username"));
+    $("#usernameModel").modal({
+        backdrop:"static"
+    });
+}
+
+function editPassword(){
+    reset_form("#passwordModel form");
+    $("#passwordModel").modal({
+        backdrop:"static"
+    });
+}
+
+function editEmail(){
+    reset_form("#emailModel form");
+    $("#new_email").val(getCookie(getCookie("username") + "Email"));
+    $("#emailModel").modal({
+        backdrop:"static"
+    });
+}

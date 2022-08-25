@@ -8,28 +8,10 @@
     <script type="text/javascript" src="../Assets/js/jquery-3.6.0.min.js"></script>
     <script src="../Assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/5badc55ad0.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../Assets/common/userLogin.js"></script>
     <script type="text/javascript" src="../Assets/common/cookie.js"></script>
+    <script type="text/javascript" src="../Assets/common/generalFunctions.js"></script>
     <title>Header Navigate Bar</title>
     <script>
-        function reset_form(element) {
-            $(element)[0].reset();
-            $(element).find("*").removeClass("has-error has-success");
-            $(element).find(".help-block").text("");
-        }
-
-        function show_validate_msg(element, status, msg) {
-            $(element).parent().removeClass("has-success has-error");
-            $(element).next("span").text("");
-            if("success"===status){
-                $(element).parent().addClass("has-success");
-                $(element).next("span").text("");
-            } else if("error"===status){
-                $(element).parent().addClass("has-error");
-                $(element).next("span").text(msg);
-            }
-        }
-
         $("#loginLogout_btn").click(function() {
             const username = getCookie("username");
             if(username===""){
@@ -71,7 +53,7 @@
             const userName = $("#userName_input").val();
             const password = $("#password_input").val();
             $.ajax({
-                url:"login.php",
+                url:"php/login.php",
                 method:"POST",
                 data:{
                     username: userName,
@@ -102,7 +84,7 @@
         $("#confirm_logout_btn").click(function(){
             const username = getCookie("username");
             $.ajax({
-                url:"logout.php",
+                url:"php/logout.php",
                 method:"POST",
                 data:{
                     username: username
@@ -172,7 +154,7 @@
                 return false;
             }
             $.ajax({
-                url:"register.php",
+                url:"php/register.php",
                 method:"POST",
                 data:{
                     username: userName,
