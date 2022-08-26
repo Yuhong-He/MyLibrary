@@ -10,12 +10,102 @@
             $("#headerContent").load("header.html");
             $("#footerContent").load("../Assets/common/html/footer.html");
             setTimeout(() => navBlockColor(), 50);
+            to_page(1, 10);
+            setTimeout(() => checkbox(), 50);
         });
+
         function navBlockColor() {
-            const navParent = document.getElementById('nav_books');
-            navParent.className += ' active';
-            const navChild = document.getElementById('nav_search');
-            navChild.className += 'active';
+            document.getElementById('nav_books').className += ' active';
+            document.getElementById('nav_search').className += 'active';
+            document.getElementById('display_10_rows').className += 'active';
+        }
+
+        function rows_5_selected() {
+            to_page(1, 5);
+            document.getElementById('display_5_rows').className = 'active';
+            document.getElementById('display_10_rows').className = 'inactive';
+            document.getElementById('display_20_rows').className = 'inactive';
+            document.getElementById('display_50_rows').className = 'inactive';
+        }
+
+        function rows_10_selected() {
+            to_page(1, 10);
+            document.getElementById('display_5_rows').className = 'inactive';
+            document.getElementById('display_10_rows').className = 'active';
+            document.getElementById('display_20_rows').className = 'inactive';
+            document.getElementById('display_50_rows').className = 'inactive';
+        }
+
+        function rows_20_selected() {
+            to_page(1, 20);
+            document.getElementById('display_5_rows').className = 'inactive';
+            document.getElementById('display_10_rows').className = 'inactive';
+            document.getElementById('display_20_rows').className = 'active';
+            document.getElementById('display_50_rows').className = 'inactive';
+        }
+
+        function rows_50_selected() {
+            to_page(1, 50);
+            document.getElementById('display_5_rows').className = 'inactive';
+            document.getElementById('display_10_rows').className = 'inactive';
+            document.getElementById('display_20_rows').className = 'inactive';
+            document.getElementById('display_50_rows').className = 'active';
+        }
+
+        function checkbox(){
+            $("#check_all").click(function(){
+                $(".check_item").prop("checked", $(this).prop("checked"));
+            });
+
+            $(document).on("click", ".check_item", function(){
+                const flag = $(".check_item:checked").length === $(".check_item").length;
+                $("#check_all").prop("checked", flag);
+            });
+        }
+
+        function to_page(pn, display_rows) {
+            build_books_table(pn, display_rows);
+            build_page_info(display_rows);
+            build_page_nav(pn, display_rows);
+        }
+
+        function build_books_table(pn, display_rows){
+            const xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange=function()
+            {
+                if (xmlHttp.readyState===4 && xmlHttp.status===200)
+                {
+                    document.getElementById("all_books_table_body").innerHTML=xmlHttp.responseText;
+                }
+            }
+            xmlHttp.open("GET", "../Assets/common/php/allBooks.php?page=" + pn + "&rows=" + display_rows, true);
+            xmlHttp.send();
+        }
+
+        function build_page_info(display_rows){
+            const xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange=function()
+            {
+                if (xmlHttp.readyState===4 && xmlHttp.status===200)
+                {
+                    document.getElementById("page_info_area").innerHTML=xmlHttp.responseText;
+                }
+            }
+            xmlHttp.open("GET", "php/getPageInfo.php?rows=" + display_rows + "&table=books", true);
+            xmlHttp.send();
+        }
+
+        function build_page_nav(pn, display_rows){
+            const xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange=function()
+            {
+                if (xmlHttp.readyState===4 && xmlHttp.status===200)
+                {
+                    document.getElementById("page_nav_area").innerHTML=xmlHttp.responseText;
+                }
+            }
+            xmlHttp.open("GET", "php/buildPageNav.php?page=" + pn + "&rows=" + display_rows + "&table=books", true);
+            xmlHttp.send();
         }
     </script>
 </head>
@@ -28,20 +118,19 @@
         </div>
     </div>
     <div class="row" style="padding-top: 1%">
-        <div class="col-xs-6 col-sm-6 col-md-5">
+        <div class="col-xs-5 col-sm-5 col-md-5">
             <input type="text" class="form-control" placeholder="搜索书名">
         </div>
-        <div class="col-md-3 col-md-offset-0 pull-right">
+        <div class="col-md-2 col-md-offset-0 pull-right">
             <button type="button" class="btn btn-primary" id="add_new_book_btn">新增</button>
-            <button type="button" class="btn btn-danger" id="delete_all_books_btn">删除</button>
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">显示<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" style="min-width:73px">
-                    <li id="display_5_rows"><a href="#">5行</a></li>
-                    <li id="display_10_rows"><a href="#">10行</a></li>
-                    <li id="display_20_rows"><a href="#">20行</a></li>
-                    <li id="display_50_rows"><a href="#">50行</a></li>
+                    <li id="display_5_rows" onclick="rows_5_selected()"><a href="#">5行</a></li>
+                    <li id="display_10_rows" onclick="rows_10_selected()"><a href="#">10行</a></li>
+                    <li id="display_20_rows" onclick="rows_20_selected()"><a href="#">20行</a></li>
+                    <li id="display_50_rows" onclick="rows_50_selected()"><a href="#">50行</a></li>
                 </ul>
             </div>
         </div>
@@ -51,9 +140,6 @@
             <table class="table table-hover" id="books_table">
                 <thead>
                     <tr>
-                        <th>
-                            <input type="checkbox" id="check_all"/>
-                        </th>
                         <th>题名</th>
                         <th>作者</th>
                         <th>出版社</th>
@@ -62,167 +148,17 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td><input type='checkbox' class='check_item'/></td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                    <td>Germany</td>
-                </tr>
-                </tbody>
+                <tbody id="all_books_table_body"></tbody>
             </table>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6" id="page_info_area">111</div>
-        <div class="col-md-6" id="page_nav_area">111</div>
+        <div class="col-xs-3">
+            <div id="page_info_area" style="padding-top: 10%"></div>
+        </div>
+        <div class="col-xs-8">
+            <div class="pull-right" id="page_nav_area"></div>
+        </div>
     </div>
 </div>
 </body>
