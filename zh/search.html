@@ -20,7 +20,6 @@
             $("#footerContent").load("../Assets/common/html/footer.html");
             setTimeout(() => navBlockColor(), 50);
             to_page(1);
-            setTimeout(() => checkbox(), 50);
         });
 
         function navBlockColor() {
@@ -63,17 +62,6 @@
             document.getElementById('display_10_rows').className = 'inactive';
             document.getElementById('display_20_rows').className = 'inactive';
             document.getElementById('display_50_rows').className = 'active';
-        }
-
-        function checkbox(){
-            $("#check_all").click(function(){
-                $(".check_item").prop("checked", $(this).prop("checked"));
-            });
-
-            $(document).on("click", ".check_item", function(){
-                const flag = $(".check_item:checked").length === $(".check_item").length;
-                $("#check_all").prop("checked", flag);
-            });
         }
 
         function to_page(pn) {

@@ -14,15 +14,15 @@ $result=mysqli_query($db, $sql);
 $total_records = mysqli_num_rows($result);
 $total_pages = ceil($total_records / $rows);
 echo "<ul class='pagination'>";
-if($page == 1) {
+if($page == 1 && $total_records != 0) {
     echo "<li class='disabled'><span>首页</span></li>";
     echo "<li class='disabled'><span aria-hidden='true'>&laquo;</span></li>";
-} else {
+} else if($total_records != 0) {
     echo "<li onclick='to_page(1)'><a href='#'>首页</a></li>";
     echo "<li onclick='to_page(" . ($page - 1) . ")'><a href='#'><span aria-hidden='true'>&laquo;</span></a></li>";
 }
 if($total_pages < 5) {
-    if($total_pages <= 1){
+    if($total_pages == 1){
         echo "<li class='active'><a href='#' style='z-index: 0'>1</a></li>";
     }
     if($total_pages == 2){
@@ -106,10 +106,10 @@ if($total_pages < 5) {
     }
 }
 
-if($total_pages <= 1 || $page == $total_pages) {
+if($page == $total_pages && $total_records != 0) {
     echo "<li class='disabled'><span>末页</span></li>";
     echo "<li class='disabled'><span aria-hidden='true'>&raquo;</span></li>";
-} else {
+} else if($total_records != 0) {
     echo "<li onclick='to_page(" . ($page + 1) . ")'><a href='#'><span aria-hidden='true'>&raquo;</span></a></li>";
     echo "<li onclick='to_page(" . $total_pages . ")'><a href='#'>末页</a></li>";
 }

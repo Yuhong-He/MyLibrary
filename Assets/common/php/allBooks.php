@@ -27,6 +27,7 @@ if($search == ""){
 $result=mysqli_query($db, $sql);
 while($row = mysqli_fetch_array($result))
 {
+    $count[]=$row[0];
     echo "<tr>";
     echo "<td>" . $row['Title'] . "</td>";
     echo "<td>" . $row['Author'] . "</td>";
@@ -51,5 +52,13 @@ while($row = mysqli_fetch_array($result))
             <button class='btn btn-danger btn-sm'><span class='glyphicon glyphicon-trash'></span></button>
           </td>";
     echo "</tr>";
+}
+if(empty($count)==TRUE)
+{
+    if($lang == "zh"){
+        echo "<td colspan='6' style='text-align: center; font-size: large; color: grey;'>暂无数据</td>";
+    } else {
+        echo "<td colspan='6' style='text-align: center; font-size: large; color: grey;'>No Data Found</td>";
+    }
 }
 mysqli_close($db);
