@@ -3,6 +3,7 @@ $page=$_GET['page'];
 $rows=$_GET['rows'];
 $sortByColumn=$_GET['sortByColumn'];
 $sortOrder=$_GET['sortOrder'];
+$lang=$_GET['lang'];
 require_once "db.php";
 $start_from = ($page - 1) * $rows;
 if($sortByColumn == 'hscode'){
@@ -20,7 +21,19 @@ while($row = mysqli_fetch_array($result))
     echo "<td>" . $row['Author'] . "</td>";
     echo "<td>" . $row['Publisher'] . "</td>";
     echo "<td>" . $row['Year'] . "</td>";
-    echo "<td>" . $row['Category'] . "</td>";
+    $cateID = $row['Category'];
+    $cateName = "";
+    if($lang == "zh"){
+        $cateNameResult=mysqli_query($db,"SELECT CategoryName FROM category JOIN books ON category.CategoryID = $cateID");
+    } else {
+        $cateNameResult=mysqli_query($db,"SELECT EnCatName FROM category JOIN books ON category.CategoryID = $cateID");
+    }
+    while ($rowCate=mysqli_fetch_row($cateNameResult))
+    {
+        $cateName = $rowCate[0];
+        break;
+    }
+    echo "<td><a href='by_category.php?id=" . $cateID . "'>" . $cateName . "</a></td>";
     echo "<td>
             <button class='btn btn-default btn-sm'><span class='glyphicon glyphicon-bookmark'></span></button>
             <button class='btn btn-primary btn-sm'><span class='glyphicon glyphicon-pencil'></span></button>

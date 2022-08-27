@@ -32,8 +32,8 @@ $("#model_login_btn").click(function() {
         success:function(result){
             if(result.code === 200) {
                 setCookie(userName, password, result.email, result.authority);
-                displayAfterLoad();
                 $("#loginModel").modal('hide');
+                location.reload();
             } else {
                 if(result.code === 201){
                     show_validate_msg("#password_login", "error", "密码不正确");
