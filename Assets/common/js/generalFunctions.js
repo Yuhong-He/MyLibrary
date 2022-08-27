@@ -69,16 +69,3 @@ function show_validate_msg(element, status, msg) {
         $(element).next("span").text(msg);
     }
 }
-
-function displayTotalBooks() {
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState===4 && xmlhttp.status===200)
-        {
-            document.getElementById("total_books").innerHTML=xmlhttp.responseText;
-        }
-    }
-    xmlhttp.open("GET","../Assets/common/php/countBooks.php",true);
-    xmlhttp.send();
-}

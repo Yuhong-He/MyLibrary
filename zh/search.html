@@ -71,45 +71,54 @@
         }
 
         function build_books_table(pn){
-            const xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange=function()
-            {
-                if (xmlHttp.readyState===4 && xmlHttp.status===200)
-                {
-                    document.getElementById("all_books_table_body").innerHTML=xmlHttp.responseText;
+            $.ajax({
+                url:"../Assets/common/php/allBooks.php",
+                method:"GET",
+                data:{
+                    page: pn,
+                    rows: display_rows,
+                    sortByColumn: sort_by_column,
+                    sortOrder: sort_order,
+                    lang: lang,
+                    search: search_value
+                },
+                success:function(result){
+                    document.getElementById("all_books_table_body").innerHTML=result;
                 }
-            }
-            const url = "../Assets/common/php/allBooks.php?page=" + pn + "&rows=" + display_rows + "&sortByColumn=" + sort_by_column + "&sortOrder=" + sort_order + "&lang=" + lang + "&search=" + search_value;
-            xmlHttp.open("GET", url, true);
-            xmlHttp.send();
+            });
         }
 
         function build_page_info(){
-            const xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange=function()
-            {
-                if (xmlHttp.readyState===4 && xmlHttp.status===200)
-                {
-                    document.getElementById("page_info_area").innerHTML=xmlHttp.responseText;
+            $.ajax({
+                url:"php/getPageInfo.php",
+                method:"GET",
+                data:{
+                    rows: display_rows,
+                    table: "books",
+                    column: "Title",
+                    search: search_value
+                },
+                success:function(result){
+                    document.getElementById("page_info_area").innerHTML=result;
                 }
-            }
-            const url = "php/getPageInfo.php?rows=" + display_rows + "&table=books&column=Title&search=" + search_value;
-            xmlHttp.open("GET", url, true);
-            xmlHttp.send();
+            });
         }
 
         function build_page_nav(pn){
-            const xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange=function()
-            {
-                if (xmlHttp.readyState===4 && xmlHttp.status===200)
-                {
-                    document.getElementById("page_nav_area").innerHTML=xmlHttp.responseText;
+            $.ajax({
+                url:"php/buildPageNav.php",
+                method:"GET",
+                data:{
+                    page: pn,
+                    rows: display_rows,
+                    table: "books",
+                    column: "Title",
+                    search: search_value
+                },
+                success:function(result){
+                    document.getElementById("page_nav_area").innerHTML=result;
                 }
-            }
-            const url = "php/buildPageNav.php?page=" + pn + "&rows=" + display_rows + "&table=books&column=Title&search=" + search_value;
-            xmlHttp.open("GET", url, true);
-            xmlHttp.send();
+            });
         }
 
         function book_title_sort() {
