@@ -1,9 +1,17 @@
 <?php
 $page=$_GET['page'];
 $rows=$_GET['rows'];
+$sortByColumn=$_GET['sortByColumn'];
+$sortOrder=$_GET['sortOrder'];
 require_once "db.php";
 $start_from = ($page - 1) * $rows;
-$sql = "SELECT * FROM books ORDER BY hscode DESC LIMIT $start_from, $rows";
+if($sortByColumn == 'hscode'){
+    $sql = "SELECT * FROM books ORDER BY $sortByColumn DESC LIMIT $start_from, $rows";
+} else if($sortOrder == "asc"){
+    $sql = "SELECT * FROM books ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci ASC LIMIT $start_from, $rows";
+} else {
+    $sql = "SELECT * FROM books ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci DESC LIMIT $start_from, $rows";
+}
 $result=mysqli_query($db, $sql);
 while($row = mysqli_fetch_array($result))
 {
