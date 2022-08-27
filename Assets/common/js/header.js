@@ -31,8 +31,7 @@ $("#confirm_logout_btn").click(function(){
         success:function(){
             const username = getCookie("username");
             destroyCookie(username);
-            displayAfterLoad();
-            window.location.replace("index.html");
+            location.reload();
         }
     });
 });
