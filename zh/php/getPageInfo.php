@@ -1,8 +1,14 @@
 <?php
 $rows=$_GET['rows'];
 $table=$_GET['table'];
+$column=$_GET['column'];
+$search=$_GET['search'];
 require_once "../../Assets/common/php/db.php";
-$sql = "SELECT * FROM $table ORDER BY hscode DESC";
+if($search == ""){
+    $sql = "SELECT * FROM $table";
+} else {
+    $sql = "SELECT * FROM $table WHERE $column LIKE '%$search%'";
+}
 $result=mysqli_query($db, $sql);
 $total_records = mysqli_num_rows($result);
 $total_pages = ceil($total_records / $rows);

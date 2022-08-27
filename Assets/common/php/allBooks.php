@@ -4,14 +4,25 @@ $rows=$_GET['rows'];
 $sortByColumn=$_GET['sortByColumn'];
 $sortOrder=$_GET['sortOrder'];
 $lang=$_GET['lang'];
+$search=$_GET['search'];
 require_once "db.php";
 $start_from = ($page - 1) * $rows;
-if($sortByColumn == 'hscode'){
-    $sql = "SELECT * FROM books ORDER BY $sortByColumn DESC LIMIT $start_from, $rows";
-} else if($sortOrder == "asc"){
-    $sql = "SELECT * FROM books ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci ASC LIMIT $start_from, $rows";
+if($search == ""){
+    if($sortByColumn == 'hscode'){
+        $sql = "SELECT * FROM books ORDER BY $sortByColumn DESC LIMIT $start_from, $rows";
+    } else if($sortOrder == "asc"){
+        $sql = "SELECT * FROM books ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci ASC LIMIT $start_from, $rows";
+    } else {
+        $sql = "SELECT * FROM books ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci DESC LIMIT $start_from, $rows";
+    }
 } else {
-    $sql = "SELECT * FROM books ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci DESC LIMIT $start_from, $rows";
+    if($sortByColumn == 'hscode'){
+        $sql = "SELECT * FROM books WHERE Title LIKE '%$search%' ORDER BY $sortByColumn DESC LIMIT $start_from, $rows";
+    } else if($sortOrder == "asc"){
+        $sql = "SELECT * FROM books WHERE Title LIKE '%$search%' ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci ASC LIMIT $start_from, $rows";
+    } else {
+        $sql = "SELECT * FROM books WHERE Title LIKE '%$search%' ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci DESC LIMIT $start_from, $rows";
+    }
 }
 $result=mysqli_query($db, $sql);
 while($row = mysqli_fetch_array($result))

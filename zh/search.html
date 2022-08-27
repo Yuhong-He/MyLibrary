@@ -14,11 +14,12 @@
         let sort_by_column = "hscode";
         let sort_order = "desc";
         let lang = "zh";
+        let search_value = "";
         $(document).ready(function(){
             $("#headerContent").load("header.html");
             $("#footerContent").load("../Assets/common/html/footer.html");
             setTimeout(() => navBlockColor(), 50);
-            to_page(1, display_rows);
+            to_page(1);
             setTimeout(() => checkbox(), 50);
         });
 
@@ -30,7 +31,7 @@
 
         function rows_5_selected() {
             display_rows = 5;
-            to_page(1, display_rows);
+            to_page(1);
             document.getElementById('display_5_rows').className = 'active';
             document.getElementById('display_10_rows').className = 'inactive';
             document.getElementById('display_20_rows').className = 'inactive';
@@ -39,7 +40,7 @@
 
         function rows_10_selected() {
             display_rows = 10;
-            to_page(1, display_rows);
+            to_page(1);
             document.getElementById('display_5_rows').className = 'inactive';
             document.getElementById('display_10_rows').className = 'active';
             document.getElementById('display_20_rows').className = 'inactive';
@@ -48,7 +49,7 @@
 
         function rows_20_selected() {
             display_rows = 20;
-            to_page(1, display_rows);
+            to_page(1);
             document.getElementById('display_5_rows').className = 'inactive';
             document.getElementById('display_10_rows').className = 'inactive';
             document.getElementById('display_20_rows').className = 'active';
@@ -57,7 +58,7 @@
 
         function rows_50_selected() {
             display_rows = 50;
-            to_page(1, display_rows);
+            to_page(1);
             document.getElementById('display_5_rows').className = 'inactive';
             document.getElementById('display_10_rows').className = 'inactive';
             document.getElementById('display_20_rows').className = 'inactive';
@@ -90,7 +91,7 @@
                     document.getElementById("all_books_table_body").innerHTML=xmlHttp.responseText;
                 }
             }
-            const url = "../Assets/common/php/allBooks.php?page=" + pn + "&rows=" + display_rows + "&sortByColumn=" + sort_by_column + "&sortOrder=" + sort_order + "&lang=" + lang;
+            const url = "../Assets/common/php/allBooks.php?page=" + pn + "&rows=" + display_rows + "&sortByColumn=" + sort_by_column + "&sortOrder=" + sort_order + "&lang=" + lang + "&search=" + search_value;
             xmlHttp.open("GET", url, true);
             xmlHttp.send();
         }
@@ -104,7 +105,8 @@
                     document.getElementById("page_info_area").innerHTML=xmlHttp.responseText;
                 }
             }
-            xmlHttp.open("GET", "php/getPageInfo.php?rows=" + display_rows + "&table=books", true);
+            const url = "php/getPageInfo.php?rows=" + display_rows + "&table=books&column=Title&search=" + search_value;
+            xmlHttp.open("GET", url, true);
             xmlHttp.send();
         }
 
@@ -117,7 +119,8 @@
                     document.getElementById("page_nav_area").innerHTML=xmlHttp.responseText;
                 }
             }
-            xmlHttp.open("GET", "php/buildPageNav.php?page=" + pn + "&rows=" + display_rows + "&table=books", true);
+            const url = "php/buildPageNav.php?page=" + pn + "&rows=" + display_rows + "&table=books&column=Title&search=" + search_value;
+            xmlHttp.open("GET", url, true);
             xmlHttp.send();
         }
 
@@ -136,7 +139,7 @@
                 document.getElementById('book_title_sort').src='../Assets/image/sort-up-solid.svg';
                 title_sort_verify = 0;
             }
-            to_page(1, display_rows);
+            to_page(1);
         }
 
         function book_author_sort() {
@@ -154,7 +157,7 @@
                 document.getElementById('book_author_sort').src='../Assets/image/sort-up-solid.svg';
                 author_sort_verify = 0;
             }
-            to_page(1, display_rows);
+            to_page(1);
         }
 
         function book_publisher_sort() {
@@ -172,7 +175,7 @@
                 document.getElementById('book_publisher_sort').src='../Assets/image/sort-up-solid.svg';
                 publisher_sort_verify = 0;
             }
-            to_page(1, display_rows);
+            to_page(1);
         }
 
         function book_year_sort() {
@@ -190,7 +193,13 @@
                 document.getElementById('book_year_sort').src='../Assets/image/sort-up-solid.svg';
                 year_sort_verify = 0;
             }
-            to_page(1, display_rows);
+            to_page(1);
+        }
+
+        function search_book() {
+            let search_value_before_clean = document.getElementById('search_box').value;
+            search_value = search_value_before_clean.replace(/\'/g, "\\'");
+            to_page(1);
         }
     </script>
 </head>
@@ -204,7 +213,7 @@
     </div>
     <div class="row" style="padding-top: 1%">
         <div class="col-xs-5 col-sm-5 col-md-5">
-            <input type="text" class="form-control" placeholder="搜索书名">
+            <input type="text" class="form-control" placeholder="搜索书名" id="search_box" oninput="search_book()">
         </div>
         <div class="col-md-2 col-md-offset-0 pull-right">
             <button type="button" class="btn btn-primary" id="add_new_book_btn">新增</button>

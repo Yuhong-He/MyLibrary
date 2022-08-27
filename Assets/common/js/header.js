@@ -1,3 +1,5 @@
+$('.dropdown-toggle').dropdown();
+
 function login(){
     reset_form("#loginModel form");
     $("#loginModel").modal({
