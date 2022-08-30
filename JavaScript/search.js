@@ -1,8 +1,5 @@
 let display_rows = 5;
-let title_sort_verify = 0;
-let author_sort_verify = 0;
-let publisher_sort_verify = 0;
-let year_sort_verify = 0;
+const sort_verify = {title: 0, author: 0, publisher: 0, year: 0};
 let sort_by_column = "id";
 let sort_order = "desc";
 let lang = "zh";
@@ -23,52 +20,47 @@ function navBlockColor() {
     document.getElementById('display_5_rows').className += 'active';
 }
 
-$(document).on("click", "#display_5_rows", function(){
-    display_rows = 5;
-    to_page(1);
-    document.getElementById('display_5_rows').className = 'active';
+function active_rows_selector(rows) {
+    document.getElementById('display_5_rows').className = 'inactive';
     document.getElementById('display_10_rows').className = 'inactive';
     document.getElementById('display_20_rows').className = 'inactive';
     document.getElementById('display_50_rows').className = 'inactive';
+    document.getElementById(rows).className = 'active';
+}
+
+function extendBodyHeight(){
+    if(extend_body_height === false) {
+        extend_body_height = true;
+        setTimeout(() => autoFooter(), 200);
+    }
+}
+
+$(document).on("click", "#display_5_rows", function(){
+    display_rows = 5;
+    to_page(1);
+    active_rows_selector('display_5_rows');
+    extendBodyHeight();
 });
 
 $(document).on("click", "#display_10_rows", function(){
     display_rows = 10;
     to_page(1);
-    document.getElementById('display_5_rows').className = 'inactive';
-    document.getElementById('display_10_rows').className = 'active';
-    document.getElementById('display_20_rows').className = 'inactive';
-    document.getElementById('display_50_rows').className = 'inactive';
-    if(extend_body_height === false) {
-        extend_body_height = true;
-        setTimeout(() => autoFooter(), 200);
-    }
+    active_rows_selector('display_10_rows');
+    extendBodyHeight();
 });
 
 $(document).on("click", "#display_20_rows", function(){
     display_rows = 20;
     to_page(1);
-    document.getElementById('display_5_rows').className = 'inactive';
-    document.getElementById('display_10_rows').className = 'inactive';
-    document.getElementById('display_20_rows').className = 'active';
-    document.getElementById('display_50_rows').className = 'inactive';
-    if(extend_body_height === false) {
-        extend_body_height = true;
-        setTimeout(() => autoFooter(), 200);
-    }
+    active_rows_selector('display_20_rows');
+    extendBodyHeight();
 });
 
 $(document).on("click", "#display_50_rows", function(){
     display_rows = 50;
     to_page(1);
-    document.getElementById('display_5_rows').className = 'inactive';
-    document.getElementById('display_10_rows').className = 'inactive';
-    document.getElementById('display_20_rows').className = 'inactive';
-    document.getElementById('display_50_rows').className = 'active';
-    if(extend_body_height === false) {
-        extend_body_height = true;
-        setTimeout(() => autoFooter(), 200);
-    }
+    active_rows_selector('display_50_rows');
+    extendBodyHeight();
 });
 
 function to_page(pn) {
@@ -128,76 +120,73 @@ function build_page_nav(pn){
     });
 }
 
-$(document).on("click", "#book_title_header", function(){
+function sort_table(column) {
+    document.getElementById('book_title_sort').src='../Resources/image/sort-solid.svg';
     document.getElementById('book_author_sort').src='../Resources/image/sort-solid.svg';
     document.getElementById('book_publisher_sort').src='../Resources/image/sort-solid.svg';
     document.getElementById('book_year_sort').src='../Resources/image/sort-solid.svg';
-    if(title_sort_verify === 0){
-        sort_by_column = "Title";
-        sort_order = "desc";
-        document.getElementById('book_title_sort').src='../Resources/image/sort-down-solid.svg';
-        title_sort_verify = 1;
-    } else if(title_sort_verify === 1){
-        sort_by_column = "Title";
-        sort_order = "asc";
-        document.getElementById('book_title_sort').src='../Resources/image/sort-up-solid.svg';
-        title_sort_verify = 0;
+    sort_by_column = column;
+    if(column === "Title") {
+        if(sort_verify.title === 0){
+            sort_order = "desc";
+            document.getElementById('book_title_sort').src='../Resources/image/sort-down-solid.svg';
+            sort_verify.title = 1;
+        } else if(sort_verify.title === 1){
+            sort_order = "asc";
+            document.getElementById('book_title_sort').src='../Resources/image/sort-up-solid.svg';
+            sort_verify.title = 0;
+        }
+    }
+    if(column === "Author") {
+        if(sort_verify.author === 0){
+            sort_order = "desc";
+            document.getElementById('book_author_sort').src='../Resources/image/sort-down-solid.svg';
+            sort_verify.author = 1;
+        } else if(sort_verify.author === 1){
+            sort_order = "asc";
+            document.getElementById('book_author_sort').src='../Resources/image/sort-up-solid.svg';
+            sort_verify.author = 0;
+        }
+    }
+    if(column === "Publisher") {
+        if(sort_verify.publisher === 0){
+            sort_order = "desc";
+            document.getElementById('book_publisher_sort').src='../Resources/image/sort-down-solid.svg';
+            sort_verify.publisher = 1;
+        } else if(sort_verify.publisher === 1){
+            sort_order = "asc";
+            document.getElementById('book_publisher_sort').src='../Resources/image/sort-up-solid.svg';
+            sort_verify.publisher = 0;
+        }
+    }
+    if(column === "Year") {
+        if(sort_verify.year === 0){
+            sort_order = "desc";
+            document.getElementById('book_year_sort').src='../Resources/image/sort-down-solid.svg';
+            sort_verify.year = 1;
+        } else if(sort_verify.year === 1){
+            sort_order = "asc";
+            document.getElementById('book_year_sort').src='../Resources/image/sort-up-solid.svg';
+            sort_verify.year = 0;
+        }
     }
     to_page(1);
+}
+
+$(document).on("click", "#book_title_header", function(){
+    sort_table("Title");
 });
 
 $(document).on("click", "#book_author_header", function(){
-    document.getElementById('book_title_sort').src='../Resources/image/sort-solid.svg';
-    document.getElementById('book_publisher_sort').src='../Resources/image/sort-solid.svg';
-    document.getElementById('book_year_sort').src='../Resources/image/sort-solid.svg';
-    if(author_sort_verify === 0){
-        sort_by_column = "Author";
-        sort_order = "desc";
-        document.getElementById('book_author_sort').src='../Resources/image/sort-down-solid.svg';
-        author_sort_verify = 1;
-    } else if(author_sort_verify === 1){
-        sort_by_column = "Author";
-        sort_order = "asc";
-        document.getElementById('book_author_sort').src='../Resources/image/sort-up-solid.svg';
-        author_sort_verify = 0;
-    }
-    to_page(1);
+    sort_table("Author");
 });
 
 $(document).on("click", "#book_publisher_header", function(){
-    document.getElementById('book_title_sort').src='../Resources/image/sort-solid.svg';
-    document.getElementById('book_author_sort').src='../Resources/image/sort-solid.svg';
-    document.getElementById('book_year_sort').src='../Resources/image/sort-solid.svg';
-    if(publisher_sort_verify === 0){
-        sort_by_column = "Publisher";
-        sort_order = "desc";
-        document.getElementById('book_publisher_sort').src='../Resources/image/sort-down-solid.svg';
-        publisher_sort_verify = 1;
-    } else if(publisher_sort_verify === 1){
-        sort_by_column = "Publisher";
-        sort_order = "asc";
-        document.getElementById('book_publisher_sort').src='../Resources/image/sort-up-solid.svg';
-        publisher_sort_verify = 0;
-    }
-    to_page(1);
+    sort_table("Publisher");
 });
 
 $(document).on("click", "#book_year_header", function(){
-    document.getElementById('book_title_sort').src='../Resources/image/sort-solid.svg';
-    document.getElementById('book_author_sort').src='../Resources/image/sort-solid.svg';
-    document.getElementById('book_publisher_sort').src='../Resources/image/sort-solid.svg';
-    if(year_sort_verify === 0){
-        sort_by_column = "Year";
-        sort_order = "desc";
-        document.getElementById('book_year_sort').src='../Resources/image/sort-down-solid.svg';
-        year_sort_verify = 1;
-    } else if(year_sort_verify === 1){
-        sort_by_column = "Year";
-        sort_order = "asc";
-        document.getElementById('book_year_sort').src='../Resources/image/sort-up-solid.svg';
-        year_sort_verify = 0;
-    }
-    to_page(1);
+    sort_table("Year");
 });
 
 $(function() {
