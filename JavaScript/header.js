@@ -1,3 +1,58 @@
+$(document).ready(function(){
+    displayAfterLoad();
+});
+
+$('.dropdown-toggle').dropdown();
+
+function login(){
+    reset_form("#loginModel form");
+    $("#loginModel").modal({
+        backdrop:"static"
+    });
+}
+
+$("#loginLogout_btn").click(function() {
+    const username = getCookie("username");
+    if(username===""){
+        login();
+    } else {
+        logout();
+    }
+});
+
+function logout() {
+    $("#logoutModel").modal({
+        backdrop:"static"
+    });
+}
+
+$("#confirm_logout_btn").click(function(){
+    const username = getCookie("username");
+    $.ajax({
+        url:"../PHP/logout.php",
+        method:"POST",
+        data:{
+            username: username
+        },
+        success:function(){
+            const username = getCookie("username");
+            destroyCookie(username);
+            location.reload();
+        }
+    });
+});
+
+$("#username_btn").click(function() {
+    window.location.replace("profile.html");
+});
+
+$("#signup_btn").click(function() {
+    reset_form("#registerModel form");
+    $("#registerModel").modal({
+        backdrop:"static"
+    });
+});
+
 function validate_login_form() {
     const userName = $("#userName_login").val();
     if(userName === ""){
@@ -23,7 +78,7 @@ $("#model_login_btn").click(function() {
     const userName = $("#userName_login").val();
     const password = $("#password_login").val();
     $.ajax({
-        url:"../Assets/common/php/login.php",
+        url:"../PHP/login.php",
         method:"POST",
         data:{
             username: userName,
@@ -90,7 +145,7 @@ $("#model_register_btn").click(function() {
         return false;
     }
     $.ajax({
-        url:"../Assets/common/php/register.php",
+        url:"../PHP/register.php",
         method:"POST",
         data:{
             username: userName,

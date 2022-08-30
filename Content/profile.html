@@ -3,24 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>账户信息</title>
-    <script type="text/javascript" src="../Assets/common/js/common.js"></script>
-    <script type="text/javascript" src="js/profile.js"></script>
-    <script type="text/javascript" src="../Assets/common/js/profile.js"></script>
-    <script type="text/javascript" src="../Assets/common/js/generalFunctions.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#headerContent").load("header.html");
-            $("#footerContent").load("../Assets/common/html/footer.html");
-            setTimeout(() => displayInfo(), 50);
-            setTimeout(() => navBlockColor(), 50);
-        });
-        function navBlockColor() {
-            const nav = document.getElementById('nav_profile');
-            nav.className += 'active';
-        }
-    </script>
+    <script type="text/javascript" src="../JavaScript/common.js"></script>
+    <script type="text/javascript" src="../JavaScript/profile.js"></script>
+    <script type="text/javascript" src="../JavaScript/generalFunctions.js"></script>
 </head>
-<body onload="displayAfterLoad()">
+<body>
 <!--General Message Model-->
 <div class="modal fade" id="messageModel" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -63,7 +50,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="saveUsername()">确认</button>
+                <button type="button" class="btn btn-primary" id="save_username_button">确认</button>
             </div>
         </div>
     </div>
@@ -104,7 +91,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="savePassword()">确认</button>
+                <button type="button" class="btn btn-primary" id="save_password_button">确认</button>
             </div>
         </div>
     </div>
@@ -138,7 +125,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="saveEmail()">确认</button>
+                <button type="button" class="btn btn-primary" id="save_email_button">确认</button>
             </div>
         </div>
     </div>
@@ -157,17 +144,17 @@
                 <tr>
                     <th>用户名</th>
                     <td><span id="profile_username"></span></td>
-                    <td><button type="button" class="btn btn-primary" onclick="editUsername()">修改</button></td>
+                    <td><button type="button" class="btn btn-primary" id="edit_username_button">修改</button></td>
                 </tr>
                 <tr>
                     <th>密码</th>
                     <td><span id="profile_password"></span></td>
-                    <td><button type="button" class="btn btn-primary" onclick="editPassword()">修改</button></td>
+                    <td><button type="button" class="btn btn-primary" id="edit_password_button">修改</button></td>
                 </tr>
                 <tr>
                     <th>邮箱</th>
                     <td><span id="profile_email"></span></td>
-                    <td><button type="button" class="btn btn-primary" onclick="editEmail()">修改</button></td>
+                    <td><button type="button" class="btn btn-primary" id="edit_email_button">修改</button></td>
                 </tr>
             </table>
         </div>

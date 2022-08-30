@@ -4,7 +4,7 @@ $rows=$_GET['rows'];
 $table=$_GET['table'];
 $column=$_GET['column'];
 $search=$_GET['search'];
-require_once "../../Assets/common/php/db.php";
+require_once "db.php";
 if($search == ""){
     $sql = "SELECT * FROM $table";
 } else {

@@ -1,6 +1,59 @@
+$(document).ready(function(){
+    $("#headerContent").load("header.html");
+    $("#footerContent").load("footer.html");
+    displayAfterLoad();
+    setTimeout(() => displayInfo(), 50);
+    setTimeout(() => navBlockColor(), 50);
+});
+
+function navBlockColor() {
+    const nav = document.getElementById('nav_profile');
+    nav.className += 'active';
+}
+
+function displayInfo(){
+    const username = getCookie("username");
+    if(username===""){
+        window.location.replace("index.html");
+        return false;
+    }
+    $("#profile_username").text(username);
+    const password = getCookie(username);
+    let hiddenPassword = "";
+    for(let i=0; i<password.length; i++){
+        hiddenPassword = hiddenPassword + "*";
+    }
+    $("#profile_password").text(hiddenPassword);
+    const email = getCookie(username + "Email");
+    $("#profile_email").text(email);
+}
+
+$(document).on("click", "#edit_username_button", function(){
+    reset_form("#usernameModel form");
+    $("#new_username").val(getCookie("username"));
+    $("#usernameModel").modal({
+        backdrop:"static"
+    });
+});
+
+$(document).on("click", "#edit_password_button", function(){
+    reset_form("#passwordModel form");
+    $("#passwordModel").modal({
+        backdrop:"static"
+    });
+});
+
+$(document).on("click", "#edit_email_button", function(){
+    reset_form("#emailModel form");
+    $("#new_email").val(getCookie(getCookie("username") + "Email"));
+    $("#emailModel").modal({
+        backdrop:"static"
+    });
+});
+
 function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword, newEmail, authority){
     $.ajax({
-        url:"../Assets/common/php/updateProfile.php",
+        url:"../PHP/updateProfile.php",
         method:"POST",
         data:{
             username: oldUsername,
@@ -47,7 +100,7 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
     });
 }
 
-function saveUsername(){
+$(document).on("click", "#save_username_button", function(){
     const oldUsername = getCookie("username");
     const newUsername = $("#new_username").val();
     const password = $("#username_password").val();
@@ -64,9 +117,9 @@ function saveUsername(){
         show_validate_msg("#new_username", "success", "");
     }
     updateInfo(oldUsername, password, email, newUsername, password, email, authority);
-}
+});
 
-function savePassword(){
+$(document).on("click", "#save_password_button", function(){
     const username = getCookie("username");
     const oldPassword = $("#old_password").val();
     const newPassword = $("#new_password").val();
@@ -86,9 +139,9 @@ function savePassword(){
         show_validate_msg("#repeat_password", "success", "");
     }
     updateInfo(username, oldPassword, email, username, newPassword, email, authority);
-}
+});
 
-function saveEmail(){
+$(document).on("click", "#save_email_button", function(){
     const username = getCookie("username");
     const password = $("#email_password").val();
     const oldEmail = getCookie(username + "Email");
@@ -105,4 +158,4 @@ function saveEmail(){
         show_validate_msg("#new_email", "success", "")
     }
     updateInfo(username, password, oldEmail, username, password, newEmail, authority);
-}
+});

@@ -35,7 +35,7 @@
 			<h1><nobr>分类</nobr></h1>
 			<div style="width:50%; margin: 0px auto; text-align: center; padding-bottom:60px;">
 <?php
-require_once "../Assets/common/php/db.php";
+require_once "../Resources/common/php/db.php";
 $category=mysqli_query($db,"SELECT * FROM category ORDER BY CategoryID ASC");
 echo '<table id="tablecolor" style="font-size:15px;">'."\n";
 echo ("<tr><th>分类编号</th><th>分类名称</th><th>总计</th></tr>");

@@ -3,8 +3,8 @@
 	<head>
 		<title>更新书籍信息</title>
 		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
-		<link rel="stylesheet" type="text/css" href="../Assets/CSS/index.css">
-		<link rel="stylesheet" type="text/css" href="../Assets/CSS/input.css">
+		<link rel="stylesheet" type="text/css" href="../Resources/CSS/index.css">
+		<link rel="stylesheet" type="text/css" href="../Resources/CSS/input.css">
 		<?php
 		session_start();
 		if (isset($_SESSION["admin"])&&$_SESSION["admin"]!=NULL)
@@ -124,6 +124,6 @@ else if(check==1)
 	window.top.close();
 }
 </script>
-		<script type="text/javascript" src="../Assets/common/footer.js"></script>
+		<script type="text/javascript" src="../Resources/common/footer.js"></script>
 	</body>
 </html>

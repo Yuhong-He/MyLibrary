@@ -1,7 +1,6 @@
 function displayAfterLoad() {
     setTimeout(() => userDisplay(), 50);
     setTimeout(() => adminDisplay(), 50);
-    setTimeout(() => autoFooter(), 50);
 }
 
 function userDisplay() {
@@ -69,3 +68,7 @@ function show_validate_msg(element, status, msg) {
         $(element).next("span").text(msg);
     }
 }
+
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})
