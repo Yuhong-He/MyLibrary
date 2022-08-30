@@ -1,34 +1,36 @@
 <?php
 header('Content-Type:text/json;charset=utf-8');
-$id=$_GET['id'];
-require_once "db.php";
-$sql = "SELECT * FROM books WHERE id = $id";
-$result=mysqli_query($db, $sql);
-$author = "";
-$title = "";
-$location = "";
-$publisher = "";
-$year = "";
-$code = "";
-while($row = mysqli_fetch_array($result))
-{
-    $author = $row['Author'];
-    $title = $row['Title'];
-    $location = $row['Location'];
-    $publisher = $row['Publisher'];
-    $year = $row['Year'];
-    $code = $row['Code'];
+$id = $_GET['id'] ?? '';
+if($id != '') {
+    require_once "db.php";
+    $sql = "SELECT * FROM books WHERE id = $id";
+    $result=mysqli_query($db, $sql);
+    $author = "";
+    $title = "";
+    $location = "";
+    $publisher = "";
+    $year = "";
+    $code = "";
+    while($row = mysqli_fetch_array($result))
+    {
+        $author = $row['Author'];
+        $title = $row['Title'];
+        $location = $row['Location'];
+        $publisher = $row['Publisher'];
+        $year = $row['Year'];
+        $code = $row['Code'];
+    }
+    mysqli_close($db);
+    $wikipedia = generateWikipediaReference($author, $title, $location, $publisher, $year, $code);
+    $gbt7714 = generateGBTReference($author, $title, $location, $publisher, $year);
+    $str = array
+    (
+        'wikipedia'=>$wikipedia,
+        'gbt7714'=>$gbt7714
+    );
+    $jsonEncode = json_encode($str);
+    echo $jsonEncode;
 }
-mysqli_close($db);
-$wikipedia = generateWikipediaReference($author, $title, $location, $publisher, $year, $code);
-$gbt7714 = generateGBTReference($author, $title, $location, $publisher, $year);
-$str = array
-(
-    'wikipedia'=>$wikipedia,
-    'gbt7714'=>$gbt7714
-);
-$jsonEncode = json_encode($str);
-echo $jsonEncode;
 
 function generateWikipediaReference($author, $title, $location, $publisher, $year, $code): string
 {
