@@ -11,7 +11,7 @@
         let author_sort_verify = 0;
         let publisher_sort_verify = 0;
         let year_sort_verify = 0;
-        let sort_by_column = "hscode";
+        let sort_by_column = "id";
         let sort_order = "desc";
         let lang = "zh";
         let search_value = "";
@@ -20,7 +20,12 @@
             $("#footerContent").load("../Assets/common/html/footer.html");
             setTimeout(() => navBlockColor(), 50);
             to_page(1);
+            displayAfterLoad();
         });
+
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
 
         function navBlockColor() {
             document.getElementById('nav_books').className += ' active';
@@ -198,9 +203,83 @@
             search_value = search_value_before_clean.replace(/\'/g, "\\'");
             to_page(1);
         }
+
+        $(document).on("click", ".cite_btn", function(){
+            const book_id = $(this).attr("cite-id");
+            $.ajax({
+                url:"../Assets/common/php/citeBook.php",
+                method:"GET",
+                data:{
+                    id: book_id
+                },
+                success:function(result){
+                    document.getElementById("wikipedia_template").innerHTML=result.wikipedia;
+                    document.getElementById("gbt7714_2015").innerHTML=result.gbt7714;
+                }
+            });
+            $("#citeBookModal").modal({
+                backdrop: "static"
+            });
+        });
+
+        $(document).on("click", "#wikipedia_copy_button", function(){
+            const copied_body = document.getElementById("wikipedia_template").value;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copied_body);
+            }
+        });
+
+        $(document).on("click", "#gbt7714_copy_button", function(){
+            const copied_body = document.getElementById("gbt7714_2015").value;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copied_body);
+            }
+        });
     </script>
 </head>
-<body onload="displayAfterLoad()">
+<body>
+<!-- Cite Book Model -->
+<div class="modal fade" id="citeBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">引用书籍</h4>
+            </div>
+            <div class="modal-body">
+                <table style="border: none; width: 100%; border-collapse: separate; border-spacing: 0 10px;">
+                    <tr>
+                        <td colspan="2"><label for="wikipedia_template">维基百科<a href="https://zh.wikipedia.org/wiki/Template:Cite_book" target="_blank">Cite Book模板</a></label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea style="min-width: 100%; border: 2px solid #ccc; border-radius: 4px; background-color: #f8f8f8; resize:none;" id="wikipedia_template" readonly></textarea>
+                        </td>
+                        <td style="text-align: center">
+                            <a tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" data-content=复制成功 id="wikipedia_copy_button">复制</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><label for="gbt7714_2015">参考文献著录规则（GB/T 7714－2015）</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea style="min-width: 100%; border: 2px solid #ccc; border-radius: 4px; background-color: #f8f8f8; resize:none;" id="gbt7714_2015" readonly></textarea>
+                        </td>
+                        <td style="text-align: center">
+                            <a tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" data-content=复制成功 id="gbt7714_copy_button">复制</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Main Body-->
 <div id="headerContent"></div>
 <div class="container">
     <div class="row" style="font-size: 1.2em;font-family: STXingkai,serif;">

@@ -5,12 +5,16 @@ $column=$_GET['column'];
 $search=$_GET['search'];
 require_once "../../Assets/common/php/db.php";
 if($search == ""){
-    $sql = "SELECT * FROM $table";
+    $sql = "SELECT COUNT(*) FROM $table";
 } else {
-    $sql = "SELECT * FROM $table WHERE $column LIKE '%$search%'";
+    $sql = "SELECT COUNT(*) FROM $table WHERE $column LIKE '%$search%'";
 }
 $result=mysqli_query($db, $sql);
-$total_records = mysqli_num_rows($result);
+$total_records=0;
+while ($row=mysqli_fetch_row($result))
+{
+    $total_records=$row[0];
+}
 $total_pages = ceil($total_records / $rows);
 if($total_pages > 0){
     echo "共有数据<span style='font-weight: bold; color:#73BE73;'>" . $total_records . "</span>条，分为<span style='font-weight: bold; color:#73BE73;'>" . $total_pages . "</span>页";

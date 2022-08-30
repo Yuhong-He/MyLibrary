@@ -8,7 +8,7 @@ $search=$_GET['search'];
 require_once "db.php";
 $start_from = ($page - 1) * $rows;
 if($search == ""){
-    if($sortByColumn == 'hscode'){
+    if($sortByColumn == 'id'){
         $sql = "SELECT * FROM books ORDER BY $sortByColumn DESC LIMIT $start_from, $rows";
     } else if($sortOrder == "asc"){
         $sql = "SELECT * FROM books ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci ASC LIMIT $start_from, $rows";
@@ -16,7 +16,7 @@ if($search == ""){
         $sql = "SELECT * FROM books ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci DESC LIMIT $start_from, $rows";
     }
 } else {
-    if($sortByColumn == 'hscode'){
+    if($sortByColumn == 'id'){
         $sql = "SELECT * FROM books WHERE Title LIKE '%$search%' ORDER BY $sortByColumn DESC LIMIT $start_from, $rows";
     } else if($sortOrder == "asc"){
         $sql = "SELECT * FROM books WHERE Title LIKE '%$search%' ORDER BY convert($sortByColumn using gbk) collate gbk_chinese_ci ASC LIMIT $start_from, $rows";
@@ -47,7 +47,7 @@ while($row = mysqli_fetch_array($result))
     }
     echo "<td><a href='by_category.php?id=" . $cateID . "'>" . $cateName . "</a></td>";
     echo "<td>
-            <button class='btn btn-default btn-sm'><span class='glyphicon glyphicon-bookmark'></span></button>
+            <button class='btn btn-default btn-sm cite_btn' cite-id='" . $row['id'] . "'><span class='glyphicon glyphicon-book'></span></button>
             <button class='btn btn-primary btn-sm'><span class='glyphicon glyphicon-pencil'></span></button>
             <button class='btn btn-danger btn-sm'><span class='glyphicon glyphicon-trash'></span></button>
           </td>";
