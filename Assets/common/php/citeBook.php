@@ -34,12 +34,10 @@ function generateWikipediaReference($author, $title, $location, $publisher, $yea
 {
     if($author != "") {
         $ref_name = refName($author, $year);
-        $wp_reference = "<ref name=\"" .$ref_name ."\">{{cite book ";
         $cleaned_author = cleanAuthorForWP($author);
-        $wp_reference = $wp_reference .$cleaned_author;
+        $wp_reference = "<ref name=\"" .$ref_name ."\">{{cite book " .$cleaned_author;
     } else {
-        $ref_name = refName($title, $year);
-        $wp_reference = "<ref name=\"" .$ref_name ."\">{{cite book ";
+        $wp_reference = "<ref name=\"" .$title ."\">{{cite book ";
     }
     $wp_reference = $wp_reference ."|title=" .$title ." ";
     if($location != "") {
@@ -62,6 +60,18 @@ function generateWikipediaReference($author, $title, $location, $publisher, $yea
         $wp_reference = $wp_reference .$cleaned_code ." ";
     }
     return $wp_reference ."}}</ref>{{rp|}}";
+}
+
+function refName($author, $year): string
+{
+    $first_author_before_trim = cleanAuthorForGBT($author);
+    if(substr_count($first_author_before_trim, "，") > 0) {
+        $first_comma_digit = strpos($first_author_before_trim, "，");
+        $first_author = substr($first_author_before_trim, 0, $first_comma_digit);
+    } else {
+        $first_author = $first_author_before_trim;
+    }
+    return $first_author .substr($year, 0, 4);
 }
 
 function cleanCodeForWP($code): string
@@ -115,12 +125,6 @@ function cleanAuthorForWP($author): string
         $cleaned_author = "|author=" .$author ." ";
     }
     return $cleaned_author;
-}
-
-function refName($name, $year): string
-{
-    $first = substr($name, 0, 3);
-    return $first .$year;
 }
 
 function generateGBTReference($author, $title, $location, $publisher, $year): string
