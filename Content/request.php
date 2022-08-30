@@ -55,7 +55,7 @@
 			<h1><nobr>文献互助管理</nobr></h1>
 			<div style="margin: 0px auto; text-align: center; padding-bottom:60px;">
 <?php
-require_once "../db.php";
+require_once "../PHP/db.php";
 $result=mysqli_query($db,"SELECT * FROM obtain WHERE Process='N' ORDER BY Code ASC");
 echo '<table id="tablecolor" style="font-size:15px;">'."\n";
 echo ("<tr><th>书籍信息</th><th>邮箱</th><th>身份</th><th>理由</th><th>时间</th><th></th></tr>");

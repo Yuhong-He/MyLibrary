@@ -5,6 +5,7 @@ let sort_order = "desc";
 let lang = "zh";
 let search_value = "";
 let extend_body_height = false;
+let totalRecord, currentPage;
 
 $(document).ready(function(){
     $("#headerContent").load("header.html");
@@ -64,12 +65,6 @@ $(document).on("click", "#display_50_rows", function(){
 });
 
 function to_page(pn) {
-    build_books_table(pn);
-    build_page_info();
-    build_page_nav(pn);
-}
-
-function build_books_table(pn){
     $.ajax({
         url:"../PHP/allBooks.php",
         method:"GET",
@@ -82,42 +77,97 @@ function build_books_table(pn){
             search: search_value
         },
         success:function(result){
-            document.getElementById("all_books_table_body").innerHTML=result;
+            build_books_table(result);
+            build_page_info(result);
+            build_page_nav(result);
         }
     });
 }
 
-function build_page_info(){
-    $.ajax({
-        url:"../PHP/getPageInfo.php",
-        method:"GET",
-        data:{
-            rows: display_rows,
-            table: "books",
-            column: "Title",
-            search: search_value
-        },
-        success:function(result){
-            document.getElementById("page_info_area").innerHTML=result;
-        }
-    });
+function build_books_table(result){
+    if(result.count > 0) {
+        $("#all_books_table_body").empty();
+        const book = result.body;
+        $.each(book, function(index, item){
+            const bookTitle = $("<td></td>").append(item.title);
+            const bookAuthor = $("<td></td>").append(item.author);
+            const bookPublisher = $("<td></td>").append(item.publisher);
+            const bookYear = $("<td></td>").append(item.year);
+            const catName = $("<td></td>").append($("<a></a>")
+                .attr("href", "by_category.php?id=" + item.catId)
+                .append(item.catName));
+            const citeBtn = $("<button></button>").addClass("btn btn-default btn-sm cite_btn")
+                .append($("<span></span>").addClass("glyphicon glyphicon-book"));
+            citeBtn.attr("cite-id", item.id);
+            const editBtn = $("<button></button>").addClass("btn btn-primary btn-sm")
+                .append($("<span></span>").addClass("glyphicon glyphicon-pencil"));
+            const delBtn = $("<button></button>").addClass("btn btn-danger btn-sm")
+                .append($("<span></span>").addClass("glyphicon glyphicon-trash"));
+            const btnTd = $("<td></td>").append(citeBtn).append(" ").append(editBtn).append(" ").append(delBtn);
+            $("<tr></tr>").append(bookTitle).append(bookAuthor).append(bookPublisher)
+                .append(bookYear).append(catName).append(btnTd)
+                .appendTo("#all_books_table_body");
+        })
+    } else {
+        document.getElementById("all_books_table_body").innerHTML=
+            "<td colspan='6' style='text-align: center; font-size: large; color: grey;'>暂无数据</td>";
+    }
 }
 
-function build_page_nav(pn){
-    $.ajax({
-        url:"../PHP/buildPageNav.php",
-        method:"GET",
-        data:{
-            page: pn,
-            rows: display_rows,
-            table: "books",
-            column: "Title",
-            search: search_value
-        },
-        success:function(result){
-            document.getElementById("page_nav_area").innerHTML=result;
+function build_page_info(result){
+    $("#page_info_area").empty();
+    $("#page_info_area").append("共有数据<span style='font-weight: bold; color:#73BE73;'>" + result.count + "</span>条，分为<span style='font-weight: bold; color:#73BE73;'>" + result.pages + "</span>页");
+    totalRecord = result.count;
+    currentPage = result.currentPage;
+}
+
+function build_page_nav(result){
+    $("#page_nav_area").empty();
+
+    let ul = $("<ul></ul>").addClass("pagination");
+    let firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+    let prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;").attr("href", "#"));
+    if(currentPage === 1) {
+        firstPageLi.addClass("disabled");
+        prePageLi.addClass("disabled");
+    } else {
+        firstPageLi.click(function() {
+            to_page(1);
+        });
+        prePageLi.click(function() {
+            to_page(currentPage - 1);
+        });
+    }
+    ul.append(firstPageLi).append(prePageLi);
+
+    $.each(result.navigatePageNums, function(index, item){
+        let numLi = $("<li></li>").append($("<a></a>").append(item).attr("href", "#"));
+        if(currentPage === item) {
+            numLi.addClass("active");
         }
+        numLi.click(function() {
+            to_page(item);
+        });
+        ul.append(numLi)
     });
+
+    let nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;").attr("href", "#"));
+    let lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "#"));
+    if(currentPage === result.pages) {
+        nextPageLi.addClass("disabled");
+        lastPageLi.addClass("disabled");
+    } else {
+        nextPageLi.click(function() {
+            to_page(currentPage + 1);
+        });
+        lastPageLi.click(function() {
+            to_page(result.pages);
+        });
+    }
+    ul.append(nextPageLi).append(lastPageLi);
+
+    let nav = $("<nav></nav>").append(ul);
+    nav.appendTo("#page_nav_area");
 }
 
 function sort_table(column) {

@@ -24,7 +24,7 @@ if(check==1)
 if($check==0)
 {
 	$code=$_GET['id'];
-	require_once "../db.php";
+	require_once "../PHP/db.php";
 	$sql="UPDATE obtain SET Process='Y' WHERE Code='$code'";
 	mysqli_query($db,$sql);
 	mysqli_close($db);
