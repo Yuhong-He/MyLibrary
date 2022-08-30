@@ -36,7 +36,7 @@
 						<form method="post" onsubmit="return AllSubmit()">
 <?php
 $hscode=$_GET['id'];
-require_once "../db.php";
+require_once "../PHP/db.php";
 $book_info=mysqli_query($db,"SELECT * FROM books WHERE hscode='$hscode'");
 while ($row=mysqli_fetch_row($book_info))
 {

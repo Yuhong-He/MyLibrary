@@ -48,7 +48,7 @@
 			</div>
 		</div>
 <?php
-require_once "../db.php";
+require_once "../PHP/db.php";
 $result=mysqli_query($db,"SELECT Title,Code FROM books");
 while($row=mysqli_fetch_row($result))
 {

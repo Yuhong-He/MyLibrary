@@ -4,7 +4,7 @@
 	<head>
 <?php
 $cateid=$_GET['id'];
-require_once "../Resources/common/php/db.php";
+require_once "../PHP/db.php";
 $cate_info=mysqli_query($db,"SELECT CategoryName FROM category WHERE CategoryID='$cateid'");
 while ($row=mysqli_fetch_row($cate_info))
 {

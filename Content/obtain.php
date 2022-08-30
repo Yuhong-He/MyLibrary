@@ -68,7 +68,7 @@ function AllSubmit()
 			</div>
 		</div>
 <?php
-require_once "../db.php";
+require_once "../PHP/db.php";
 if(	isset($_POST['Book']) && isset($_POST['Email']) && isset($_POST['Identity']) && isset($_POST['Reason']) )
 {
 	$bk=$_POST['Book'];
