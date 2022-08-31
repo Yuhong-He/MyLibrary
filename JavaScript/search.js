@@ -13,7 +13,6 @@ $(document).ready(function(){
     setTimeout(() => navBlockColor(), 50);
     to_page(1);
     displayAfterLoad();
-    extendBodyHeight();
 });
 
 function navBlockColor() {
@@ -31,9 +30,14 @@ function active_rows_selector(rows) {
 }
 
 function extendBodyHeight(){
-    if(extend_body_height === false) {
-        extend_body_height = true;
-        setTimeout(() => autoFooter(), 200);
+    const bodyHeight = $("body").height();
+    const footerHeight = $("footer").height();
+    const iHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    if(bodyHeight > (iHeight - footerHeight)){
+        if(extend_body_height === false) {
+            $("#main_container").append('<div style="height: ' + 5 * footerHeight + 'px"></div>');
+            extend_body_height = true;
+        }
     }
 }
 
@@ -41,28 +45,24 @@ $(document).on("click", "#display_5_rows", function(){
     display_rows = 5;
     to_page(1);
     active_rows_selector('display_5_rows');
-    extendBodyHeight();
 });
 
 $(document).on("click", "#display_10_rows", function(){
     display_rows = 10;
     to_page(1);
     active_rows_selector('display_10_rows');
-    extendBodyHeight();
 });
 
 $(document).on("click", "#display_20_rows", function(){
     display_rows = 20;
     to_page(1);
     active_rows_selector('display_20_rows');
-    extendBodyHeight();
 });
 
 $(document).on("click", "#display_50_rows", function(){
     display_rows = 50;
     to_page(1);
     active_rows_selector('display_50_rows');
-    extendBodyHeight();
 });
 
 function to_page(pn) {
@@ -147,8 +147,10 @@ function build_page_nav(result){
     ul.append(firstPageLi).append(prePageLi);
 
     $.each(result.navigatePageNums, function(index, item){
-        let numLi = $("<li></li>").append($("<a></a>").append(item).attr("href", "#"));
+        let numA = $("<a></a>").append(item).attr("href", "#");
+        let numLi = $("<li></li>").append(numA);
         if(currentPage === item) {
+            numA.css("z-index", 0);
             numLi.addClass("active");
         }
         numLi.click(function() {

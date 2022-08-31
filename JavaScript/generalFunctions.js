@@ -42,15 +42,6 @@ function adminDisplay() {
     }
 }
 
-function autoFooter(){
-    const bodyHeight = $("body").height();
-    const footerHeight = $("footer").height();
-    const iHeight = document.documentElement.clientHeight || document.body.clientHeight;
-    if(bodyHeight > (iHeight - footerHeight)){
-        $("body").append('<div style="height: ' + 5 * footerHeight + 'px"></div>');
-    }
-}
-
 function reset_form(element) {
     $(element)[0].reset();
     $(element).find("*").removeClass("has-error has-success");
