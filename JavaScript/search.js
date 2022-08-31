@@ -13,6 +13,7 @@ $(document).ready(function(){
     setTimeout(() => navBlockColor(), 50);
     to_page(1);
     displayAfterLoad();
+    extendBodyHeight();
 });
 
 function navBlockColor() {
@@ -80,6 +81,7 @@ function to_page(pn) {
             build_books_table(result);
             build_page_info(result);
             build_page_nav(result);
+            extendBodyHeight();
         }
     });
 }

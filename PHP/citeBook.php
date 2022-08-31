@@ -76,6 +76,20 @@ function refName($author, $year): string
     return $first_author .substr($year, 0, 4);
 }
 
+function cleanAuthorForWP($author): string
+{
+    if(substr_count($author, "; ") > 0) {
+        $cleaned_author = "|author1=" .$author;
+        for($i = 2; $i < substr_count($author, "; ") + 2; $i++) {
+            $cleaned_author=preg_replace("/; /", " |author" .$i ."=", $cleaned_author, 1);
+        }
+        $cleaned_author = $cleaned_author ." ";
+    } else {
+        $cleaned_author = "|author=" .$author ." ";
+    }
+    return $cleaned_author;
+}
+
 function cleanCodeForWP($code): string
 {
     $result = "";
@@ -113,20 +127,6 @@ function cleanCodeForWP($code): string
         }
     }
     return $result;
-}
-
-function cleanAuthorForWP($author): string
-{
-    if(substr_count($author, "; ") > 0) {
-        $cleaned_author = "|author1=" .$author;
-        for($i = 2; $i < substr_count($author, "; ") + 2; $i++) {
-            $cleaned_author=preg_replace("/; /", " |author" .$i ."=", $cleaned_author, 1);
-        }
-        $cleaned_author = $cleaned_author ." ";
-    } else {
-        $cleaned_author = "|author=" .$author ." ";
-    }
-    return $cleaned_author;
 }
 
 function generateGBTReference($author, $title, $location, $publisher, $year): string
@@ -172,7 +172,7 @@ function cleanAuthorForGBT($author)
         $cleaned_author = substr($cleaned_author, 0, $result);
         $cleaned_author = $cleaned_author ."，等";
     }
-    return $cleaned_author;
+    return preg_replace("/， /","，", $cleaned_author);
 }
 
 function str_n_pos($str, $find, $n){
