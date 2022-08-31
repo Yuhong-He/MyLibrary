@@ -125,10 +125,14 @@ function build_page_nav(result){
     $("#page_nav_area").empty();
 
     let ul = $("<ul></ul>").addClass("pagination");
-    let firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
-    let prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;").attr("href", "#"));
+    let firstPageA = $("<a></a>").append("首页").attr("href", "#");
+    let firstPageLi = $("<li></li>").append(firstPageA);
+    let prePageA = $("<a></a>").append("&laquo;").attr("href", "#");
+    let prePageLi = $("<li></li>").append(prePageA);
     if(currentPage === 1) {
+        firstPageA.removeAttr("href", "#");
         firstPageLi.addClass("disabled");
+        prePageA.removeAttr("href", "#");
         prePageLi.addClass("disabled");
     } else {
         firstPageLi.click(function() {
@@ -151,10 +155,14 @@ function build_page_nav(result){
         ul.append(numLi)
     });
 
-    let nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;").attr("href", "#"));
-    let lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "#"));
+    let nextPageA = $("<a></a>").append("&raquo;").attr("href", "#");
+    let nextPageLi = $("<li></li>").append(nextPageA);
+    let lastPageA = $("<a></a>").append("末页").attr("href", "#");
+    let lastPageLi = $("<li></li>").append(lastPageA);
     if(currentPage === result.pages) {
+        nextPageA.removeAttr("href", "#");
         nextPageLi.addClass("disabled");
+        lastPageA.removeAttr("href", "#");
         lastPageLi.addClass("disabled");
     } else {
         nextPageLi.click(function() {
