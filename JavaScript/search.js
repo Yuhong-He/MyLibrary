@@ -4,7 +4,6 @@ let sort_by_column = "id";
 let sort_order = "desc";
 let lang = "zh";
 let search_value = "";
-let extend_body_height = false;
 let totalRecord, currentPage;
 
 $(document).ready(function(){
@@ -27,18 +26,6 @@ function active_rows_selector(rows) {
     document.getElementById('display_20_rows').className = 'inactive';
     document.getElementById('display_50_rows').className = 'inactive';
     document.getElementById(rows).className = 'active';
-}
-
-function extendBodyHeight(){
-    const bodyHeight = $("body").height();
-    const footerHeight = $("footer").height();
-    const iHeight = document.documentElement.clientHeight || document.body.clientHeight;
-    if(bodyHeight > (iHeight - footerHeight)){
-        if(extend_body_height === false) {
-            $("#main_container").append('<div style="height: ' + 5 * footerHeight + 'px"></div>');
-            extend_body_height = true;
-        }
-    }
 }
 
 $(document).on("click", "#display_5_rows", function(){
@@ -81,7 +68,7 @@ function to_page(pn) {
             build_books_table(result);
             build_page_info(result);
             build_page_nav(result);
-            extendBodyHeight();
+            extendMainContainerHeight();
         }
     });
 }
@@ -117,69 +104,77 @@ function build_books_table(result){
 }
 
 function build_page_info(result){
-    $("#page_info_area").empty();
-    $("#page_info_area").append("共有数据<span style='font-weight: bold; color:#73BE73;'>" + result.count + "</span>条，分为<span style='font-weight: bold; color:#73BE73;'>" + result.pages + "</span>页");
-    totalRecord = result.count;
-    currentPage = result.currentPage;
+    if(result.count > 0) {
+        $("#page_info_area").empty();
+        $("#page_info_area").append("共有数据<span style='font-weight: bold; color:#73BE73;'>" + result.count + "</span>条，分为<span style='font-weight: bold; color:#73BE73;'>" + result.pages + "</span>页");
+        totalRecord = result.count;
+        currentPage = result.currentPage;
+    } else {
+        $("#page_info_area").empty();
+    }
 }
 
 function build_page_nav(result){
-    $("#page_nav_area").empty();
+    if(result.count > 0) {
+        $("#page_nav_area").empty();
 
-    let ul = $("<ul></ul>").addClass("pagination");
-    let firstPageA = $("<a></a>").append("首页").attr("href", "#");
-    let firstPageLi = $("<li></li>").append(firstPageA);
-    let prePageA = $("<a></a>").append("&laquo;").attr("href", "#");
-    let prePageLi = $("<li></li>").append(prePageA);
-    if(currentPage === 1) {
-        firstPageA.removeAttr("href", "#");
-        firstPageLi.addClass("disabled");
-        prePageA.removeAttr("href", "#");
-        prePageLi.addClass("disabled");
-    } else {
-        firstPageLi.click(function() {
-            to_page(1);
-        });
-        prePageLi.click(function() {
-            to_page(currentPage - 1);
-        });
-    }
-    ul.append(firstPageLi).append(prePageLi);
-
-    $.each(result.navigatePageNums, function(index, item){
-        let numA = $("<a></a>").append(item).attr("href", "#");
-        let numLi = $("<li></li>").append(numA);
-        if(currentPage === item) {
-            numA.css("z-index", 0);
-            numLi.addClass("active");
+        let ul = $("<ul></ul>").addClass("pagination");
+        let firstPageA = $("<a></a>").append("首页").attr("href", "#");
+        let firstPageLi = $("<li></li>").append(firstPageA);
+        let prePageA = $("<a></a>").append("&laquo;").attr("href", "#");
+        let prePageLi = $("<li></li>").append(prePageA);
+        if (currentPage === 1) {
+            firstPageA.removeAttr("href", "#");
+            firstPageLi.addClass("disabled");
+            prePageA.removeAttr("href", "#");
+            prePageLi.addClass("disabled");
+        } else {
+            firstPageLi.click(function () {
+                to_page(1);
+            });
+            prePageLi.click(function () {
+                to_page(currentPage - 1);
+            });
         }
-        numLi.click(function() {
-            to_page(item);
-        });
-        ul.append(numLi)
-    });
+        ul.append(firstPageLi).append(prePageLi);
 
-    let nextPageA = $("<a></a>").append("&raquo;").attr("href", "#");
-    let nextPageLi = $("<li></li>").append(nextPageA);
-    let lastPageA = $("<a></a>").append("末页").attr("href", "#");
-    let lastPageLi = $("<li></li>").append(lastPageA);
-    if(currentPage === result.pages) {
-        nextPageA.removeAttr("href", "#");
-        nextPageLi.addClass("disabled");
-        lastPageA.removeAttr("href", "#");
-        lastPageLi.addClass("disabled");
+        $.each(result.navigatePageNums, function (index, item) {
+            let numA = $("<a></a>").append(item).attr("href", "#");
+            let numLi = $("<li></li>").append(numA);
+            if (currentPage === item) {
+                numA.css("z-index", 0);
+                numLi.addClass("active");
+            }
+            numLi.click(function () {
+                to_page(item);
+            });
+            ul.append(numLi)
+        });
+
+        let nextPageA = $("<a></a>").append("&raquo;").attr("href", "#");
+        let nextPageLi = $("<li></li>").append(nextPageA);
+        let lastPageA = $("<a></a>").append("末页").attr("href", "#");
+        let lastPageLi = $("<li></li>").append(lastPageA);
+        if (currentPage === result.pages) {
+            nextPageA.removeAttr("href", "#");
+            nextPageLi.addClass("disabled");
+            lastPageA.removeAttr("href", "#");
+            lastPageLi.addClass("disabled");
+        } else {
+            nextPageLi.click(function () {
+                to_page(currentPage + 1);
+            });
+            lastPageLi.click(function () {
+                to_page(result.pages);
+            });
+        }
+        ul.append(nextPageLi).append(lastPageLi);
+
+        let nav = $("<nav></nav>").append(ul);
+        nav.appendTo("#page_nav_area");
     } else {
-        nextPageLi.click(function() {
-            to_page(currentPage + 1);
-        });
-        lastPageLi.click(function() {
-            to_page(result.pages);
-        });
+        $("#page_nav_area").empty();
     }
-    ul.append(nextPageLi).append(lastPageLi);
-
-    let nav = $("<nav></nav>").append(ul);
-    nav.appendTo("#page_nav_area");
 }
 
 function sort_table(column) {

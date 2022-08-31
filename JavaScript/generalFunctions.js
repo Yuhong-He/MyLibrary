@@ -42,6 +42,18 @@ function adminDisplay() {
     }
 }
 
+function extendMainContainerHeight() {
+    const bodyHeight = $("body").height();
+    const footerHeight = $("footer").height();
+    const iHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    if (bodyHeight > (iHeight - footerHeight)) {
+        $("#extended_empty_div").remove();
+        $("#main_container").append('<div id="extended_empty_div" style="height: ' + 5 * footerHeight + 'px"></div>');
+    } else {
+        $("#extended_empty_div").remove();
+    }
+}
+
 function reset_form(element) {
     $(element)[0].reset();
     $(element).find("*").removeClass("has-error has-success");
