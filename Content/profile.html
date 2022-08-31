@@ -133,18 +133,18 @@
 
 <div id="headerContent"></div>
 <div class="container">
-    <div class="row" style="font-size: 1.2em;font-family: STXingkai,serif;">
+    <div class="row" style="font-size: 1.2em;">
         <div class="col-md-12">
             <h2>账户信息</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12" style="font-size: 1.5em;">
-            <table class="table">
+            <table class="table" style="width: 100%;">
                 <tr>
-                    <th>用户名</th>
-                    <td><span id="profile_username"></span></td>
-                    <td><button type="button" class="btn btn-primary" id="edit_username_button">修改</button></td>
+                    <th style="width: 10%;">用户名</th>
+                    <td style="width: 10%;"><span id="profile_username"></span></td>
+                    <td style="width: 10%;"><button type="button" class="btn btn-primary" id="edit_username_button">修改</button></td>
                 </tr>
                 <tr>
                     <th>密码</th>
@@ -157,6 +157,26 @@
                     <td><button type="button" class="btn btn-primary" id="edit_email_button">修改</button></td>
                 </tr>
             </table>
+        </div>
+    </div>
+    <div class="row" style="font-size: 1.2em;">
+        <div class="col-md-12">
+            <h2>其他</h2>
+        </div>
+    </div>
+    <div class="row" style="font-size: 1.2em; padding-top: 20px;">
+        <div class="col-md-12">
+            <table style="width: 100%">
+                <tr>
+                    <th style="width: 10%;">权限组：</th>
+                    <td><span id="profile_user_rights"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row" style="font-size: 1.2em; padding-top: 20px;">
+        <div class="col-md-12">
+            <a href="my_requests">查看我的互助请求</a>
         </div>
     </div>
 </div>

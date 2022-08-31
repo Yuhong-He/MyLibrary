@@ -26,6 +26,8 @@ function displayInfo(){
     $("#profile_password").text(hiddenPassword);
     const email = getCookie(username + "Email");
     $("#profile_email").text(email);
+    const user_rights = getCookie(username + "Auth") === "1" ? "用户" : "管理员";
+    $("#profile_user_rights").text(user_rights);
 }
 
 $(document).on("click", "#edit_username_button", function(){
