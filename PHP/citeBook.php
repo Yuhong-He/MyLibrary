@@ -163,7 +163,7 @@ function cleanAuthorForGBT($author)
     $cleaned_author = preg_replace("/[;,]/","，", $author);
     $cleaned_author = str_replace("等 ", '等  ', $cleaned_author);
     $read_file = file_get_contents('../Resources/config/authorTitle.txt');
-    $matched_words = explode(', ', $read_file);
+    $matched_words = explode(',', $read_file);
     foreach ($matched_words as $key => $value) {
         $cleaned_author = str_replace($value, '', $cleaned_author);
     }
