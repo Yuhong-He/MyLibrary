@@ -4,6 +4,7 @@ function displayAfterLoad() {
 }
 
 function userDisplay() {
+    const lang = getLang();
     const username = getCookie("username");
     if(username===""||username===null){
         const usernameReplaceLogin = document.getElementById('username_btn');
@@ -15,7 +16,7 @@ function userDisplay() {
         const manageBlock = document.getElementById('nav_manage');
         manageBlock.style.display = "none";
         const loginLogout = document.getElementById('loginLogout_btn');
-        loginLogout.innerHTML = "登录";
+        loginLogout.innerHTML = arrLang[lang]["LOGIN"];
     } else {
         const usernameReplaceLogin = document.getElementById('username_btn');
         usernameReplaceLogin.innerHTML = username;
@@ -26,7 +27,7 @@ function userDisplay() {
         const manageBlock = document.getElementById('nav_manage');
         manageBlock.style.display = "none";
         const loginLogout = document.getElementById('loginLogout_btn');
-        loginLogout.innerHTML = "登出";
+        loginLogout.innerHTML = arrLang[lang]["LOGOUT"];
     }
 }
 
@@ -75,3 +76,33 @@ function show_validate_msg(element, status, msg) {
 $(function () {
     $('[data-toggle="popover"]').popover()
 })
+
+function getLang() {
+    let lang = getCookie("lang");
+    if(lang === "") {
+        switch (navigator.language.toLowerCase()) {
+            case "zh-hans":
+                lang = "hans";
+                break;
+            case "zh-cn":
+                lang = "hans";
+                break;
+            case "zh":
+                lang = "hans";
+                break;
+            case "zh-hant":
+                lang = "hant";
+                break;
+            case "zh-hk":
+                lang = "hant";
+                break;
+            case "zh-tw":
+                lang = "hant";
+                break;
+            default:
+                lang = "en";
+                break;
+        }
+    }
+    return lang;
+}
