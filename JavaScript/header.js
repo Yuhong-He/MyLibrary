@@ -1,5 +1,10 @@
+const lang = getLang();
 $(document).ready(function(){
+    $(".lang").each(function(index, element) {
+        $(this).text(arrLang[lang][$(this).attr("key")]);
+    });
     displayAfterLoad();
+    setLanguageSelect();
 });
 
 $('.dropdown-toggle').dropdown();
@@ -56,14 +61,14 @@ $("#signup_btn").click(function() {
 function validate_login_form() {
     const userName = $("#userName_login").val();
     if(userName === ""){
-        show_validate_msg("#userName_login", "error", "请输入用户名");
+        show_validate_msg("#userName_login", "error", arrLang[lang]["ENTER_USERNAME"]);
         return false;
     } else {
         show_validate_msg("#userName_login", "success", "");
     }
     const password = $("#password_login").val();
     if(password === ""){
-        show_validate_msg("#password_login", "error", "请输入密码");
+        show_validate_msg("#password_login", "error", arrLang[lang]["ENTER_PASSWORD"]);
         return false;
     } else {
         show_validate_msg("#password_login", "success", "");
@@ -91,9 +96,9 @@ $("#model_login_btn").click(function() {
                 location.reload();
             } else {
                 if(result.code === 201){
-                    show_validate_msg("#password_login", "error", "密码不正确");
+                    show_validate_msg("#password_login", "error", arrLang[lang]["PASSWORD_INCORRECT"]);
                 } else if(result.code === 400) {
-                    show_validate_msg("#userName_login", "error", "用户名不存在");
+                    show_validate_msg("#userName_login", "error", arrLang[lang]["USERNAME_NOT_EXIST"]);
                 }
             }
         }
@@ -103,32 +108,32 @@ $("#model_login_btn").click(function() {
 function validate_register_form(userName, password, passwordRepeat, email) {
     const regName = /(^[a-zA-Z]{3,16}$)/;
     if(userName===""||userName===null){
-        show_validate_msg("#userName_register", "error", "请输入用户名");
+        show_validate_msg("#userName_register", "error", arrLang[lang]["ENTER_USERNAME"]);
         return false;
     } else if(!regName.test(userName)){
-        show_validate_msg("#userName_register", "error", "用户名只能是3-16位英文");
+        show_validate_msg("#userName_register", "error", arrLang[lang]["INVALID_USERNAME"]);
         return false;
     } else {
         show_validate_msg("#userName_register", "success", "");
     }
     if(password.length < 5){
-        show_validate_msg("#password_register", "error", "密码至少有五位");
+        show_validate_msg("#password_register", "error", arrLang[lang]["INVALID_PASSWORD"]);
         return false;
     } else {
         show_validate_msg("#password_register", "success", "");
     }
     if(password!==passwordRepeat){
-        show_validate_msg("#password_register_repeat", "error", "密码不一致");
+        show_validate_msg("#password_register_repeat", "error", arrLang[lang]["PASSWORD_NOT_MATCH"]);
         return false;
     } else {
         show_validate_msg("#password_register_repeat", "success", "");
     }
     const regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
     if(email === ""){
-        show_validate_msg("#email_register", "error", "请输入邮箱");
+        show_validate_msg("#email_register", "error", arrLang[lang]["ENTER_EMAIL"]);
         return false;
     } else if (!regEmail.test(email)){
-        show_validate_msg("#email_register", "error", "邮箱格式不正确")
+        show_validate_msg("#email_register", "error", arrLang[lang]["INVALID_EMAIL"])
         return false;
     } else {
         show_validate_msg("#email_register", "success", "")
@@ -160,12 +165,72 @@ $("#model_register_btn").click(function() {
                 $("#registerModel").modal('hide');
             } else {
                 if(result.code === 202){
-                    show_validate_msg("#userName_register", "error", "用户名已存在");
+                    show_validate_msg("#userName_register", "error", arrLang[lang]["USERNAME_EXIST"]);
                 }
                 if(result.code === 203){
-                    show_validate_msg("#email_register", "error", "邮箱已被使用");
+                    show_validate_msg("#email_register", "error", arrLang[lang]["EMAIL_USED"]);
                 }
             }
         }
     });
+});
+
+function setLanguageSelect() {
+    const language_code = new Map([
+        ["en", "select_english"],
+        ["hans", "select_hans"],
+        ["hant", "select_hant"],
+    ]);
+    if(lang !== "") {
+        chooseLanguage(language_code.get(lang));
+    } else {
+        switch (navigator.language.toLowerCase()) {
+            case "zh-hans":
+                chooseLanguage(language_code.get("hans"));
+                break;
+            case "zh-cn":
+                chooseLanguage(language_code.get("hans"));
+                break;
+            case "zh":
+                chooseLanguage(language_code.get("hans"));
+                break;
+            case "zh-hant":
+                chooseLanguage(language_code.get("hant"));
+                break;
+            case "zh-hk":
+                chooseLanguage(language_code.get("hant"));
+                break;
+            case "zh-tw":
+                chooseLanguage(language_code.get("hant"));
+                break;
+            default:
+                chooseLanguage(language_code.get("en"));
+                break;
+        }
+    }
+}
+
+function chooseLanguage(language_id) {
+    document.getElementById("select_english").className = 'inactive';
+    document.getElementById("select_hans").className = 'inactive';
+    document.getElementById("select_hant").className = 'inactive';
+    document.getElementById(language_id).className = 'active';
+}
+
+$("#select_english").click(function() {
+    document.cookie="lang=en";
+    chooseLanguage("select_english");
+    location.reload();
+});
+
+$("#select_hans").click(function() {
+    document.cookie="lang=hans";
+    chooseLanguage("select_hans");
+    location.reload();
+});
+
+$("#select_hant").click(function() {
+    document.cookie="lang=hant";
+    chooseLanguage("select_hant");
+    location.reload();
 });

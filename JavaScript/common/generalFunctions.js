@@ -1,9 +1,36 @@
+function setCookie(username, password, email, authority) {
+    document.cookie="username=" + username;
+    document.cookie=username + "=" + password;
+    document.cookie=username + "Email=" + email;
+    document.cookie=username + "Auth=" + authority;
+}
+
+function getCookie(cName)
+{
+    const name = cName + "=";
+    const ca = document.cookie.split(';');
+    for(let i=0; i<ca.length; i++)
+    {
+        const c = ca[i].trim();
+        if (c.indexOf(name)===0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+function destroyCookie(username) {
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = username + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = username + "Email=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = username + "Auth=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+}
+
 function displayAfterLoad() {
     setTimeout(() => userDisplay(), 50);
     setTimeout(() => adminDisplay(), 50);
 }
 
 function userDisplay() {
+    const lang = getLang();
     const username = getCookie("username");
     if(username===""||username===null){
         const usernameReplaceLogin = document.getElementById('username_btn');
@@ -15,7 +42,7 @@ function userDisplay() {
         const manageBlock = document.getElementById('nav_manage');
         manageBlock.style.display = "none";
         const loginLogout = document.getElementById('loginLogout_btn');
-        loginLogout.innerHTML = "登录";
+        loginLogout.innerHTML = arrLang[lang]["LOGIN"];
     } else {
         const usernameReplaceLogin = document.getElementById('username_btn');
         usernameReplaceLogin.innerHTML = username;
@@ -26,7 +53,7 @@ function userDisplay() {
         const manageBlock = document.getElementById('nav_manage');
         manageBlock.style.display = "none";
         const loginLogout = document.getElementById('loginLogout_btn');
-        loginLogout.innerHTML = "登出";
+        loginLogout.innerHTML = arrLang[lang]["LOGOUT"];
     }
 }
 
@@ -75,3 +102,33 @@ function show_validate_msg(element, status, msg) {
 $(function () {
     $('[data-toggle="popover"]').popover()
 })
+
+function getLang() {
+    let lang = getCookie("lang");
+    if(lang === "") {
+        switch (navigator.language.toLowerCase()) {
+            case "zh-hans":
+                lang = "hans";
+                break;
+            case "zh-cn":
+                lang = "hans";
+                break;
+            case "zh":
+                lang = "hans";
+                break;
+            case "zh-hant":
+                lang = "hant";
+                break;
+            case "zh-hk":
+                lang = "hant";
+                break;
+            case "zh-tw":
+                lang = "hant";
+                break;
+            default:
+                lang = "en";
+                break;
+        }
+    }
+    return lang;
+}

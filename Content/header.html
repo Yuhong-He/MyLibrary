@@ -8,8 +8,8 @@
     <script type="text/javascript" src="../Resources/jquery/jquery-3.6.0.min.js"></script>
     <script src="../Resources/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../JavaScript/header.js"></script>
-    <script type="text/javascript" src="../JavaScript/cookie.js"></script>
-    <script type="text/javascript" src="../JavaScript/generalFunctions.js"></script>
+    <script type="text/javascript" src="../JavaScript/common/i18n.js"></script>
+    <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <title>Header Navigate Bar</title>
 </head>
 
@@ -19,20 +19,28 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">登录面板</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="lang" key="LOGIN"></span>
+                </h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">用户名</label>
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="USERNAME"></span>
+                        </label>
                         <div class="col-sm-10">
                             <input type="text" name="userName" class="form-control" id="userName_login">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">密码</label>
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="PASSWORD"></span>
+                        </label>
                         <div class="col-sm-10">
                             <input type="password" name="password" class="form-control" id="password_login">
                             <span class="help-block"></span>
@@ -41,9 +49,15 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="signup_btn" style="float: left">注册</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="model_login_btn">确认</button>
+                <button type="button" class="btn btn-success" id="signup_btn" style="float: left">
+                    <span class="lang" key="REGISTER"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="lang" key="CLOSE"></span>
+                </button>
+                <button type="button" class="btn btn-primary" id="model_login_btn">
+                    <span class="lang" key="CONFIRM"></span>
+                </button>
             </div>
         </div>
     </div>
@@ -54,34 +68,46 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">注册面板</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="lang" key="REGISTER"></span>
+                </h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">用户名</label>
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="USERNAME"></span>
+                        </label>
                         <div class="col-sm-10">
                             <input type="text" name="userName" class="form-control" id="userName_register">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">密码</label>
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="PASSWORD"></span>
+                        </label>
                         <div class="col-sm-10">
                             <input type="password" name="password" class="form-control" id="password_register">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">再输一次</label>
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="INPUT_AGAIN"></span>
+                        </label>
                         <div class="col-sm-10">
                             <input type="password" name="passwordRepeat" class="form-control" id="password_register_repeat">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">邮箱</label>
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="EMAIL"></span>
+                        </label>
                         <div class="col-sm-10">
                             <input type="text" name="email" class="form-control" id="email_register">
                             <span class="help-block"></span>
@@ -90,8 +116,12 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="model_register_btn">确认</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="lang" key="CLOSE"></span>
+                </button>
+                <button type="button" class="btn btn-primary" id="model_register_btn">
+                    <span class="lang" key="CONFIRM"></span>
+                </button>
             </div>
         </div>
     </div>
@@ -102,12 +132,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">确认退出？</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="lang" key="CONFIRM_LOGOUT"></span>
+                </h4>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-danger" id="confirm_logout_btn">退出</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="lang" key="CLOSE"></span>
+                </button>
+                <button type="button" class="btn btn-danger" id="confirm_logout_btn">
+                    <span class="lang" key="CONFIRM"></span>
+                </button>
             </div>
         </div>
     </div>
@@ -134,32 +172,79 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="font-size: 1.2em">
                     <ul class="nav navbar-nav">
-                        <li id="nav_home"><a href="index.html">首页</a></li>
+                        <li id="nav_home">
+                            <a href="index.html">
+                                <span class="lang" key="HOME"></span>
+                            </a>
+                        </li>
                         <li class="dropdown" id="nav_books">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">找书<span class="caret"></span></a>
-                            <ul class="dropdown-menu" style="min-width: 68px">
-                                <li id="nav_search"><a href="search.html">按书名</a></li>
-                                <li id="nav_category"><a href="category.php">按分类</a></li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                <span class="lang" key="FIND_BOOKS"></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" style="min-width: 0">
+                                <li id="nav_search">
+                                    <a href="search.html">
+                                        <span class="lang" key="BY_SEARCH"></span>
+                                    </a>
+                                </li>
+                                <li id="nav_category">
+                                    <a href="category.php">
+                                        <span class="lang" key="BY_CATEGORY"></span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
-                        <li id="nav_obtain"><a href="obtain.php">互助</a></li>
+                        <li id="nav_obtain">
+                            <a href="obtain.php">
+                                <span class="lang" key="REQUEST_BOOK"></span>
+                            </a>
+                        </li>
                         <li class="dropdown" id="nav_manage">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">管理<span class="caret"></span></a>
-                            <ul class="dropdown-menu" style="min-width: 68px">
-                                <li id="nav_manage_user"><a href="manage_user.html">管理用户</a></li>
-                                <li id="nav_manage_request"><a href="manage_request.html">处理请求</a></li>
-                                <li id="nav_restore_delete"><a href="restore_delete.html">恢复删除</a></li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                <span class="lang" key="MANAGE"></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" style="min-width: 0">
+                                <li id="nav_manage_user">
+                                    <a href="manage_user.html">
+                                        <span class="lang" key="MANAGE_USER"></span>
+                                    </a>
+                                </li>
+                                <li id="nav_manage_request">
+                                    <a href="manage_request.html">
+                                        <span class="lang" key="MANAGE_REQUEST"></span>
+                                    </a>
+                                </li>
+                                <li id="nav_restore_delete">
+                                    <a href="restore_delete.html">
+                                        <span class="lang" key="RESTORE_DELETE"></span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><img src="../Resources/image/language-solid.svg" width="20"><span class="caret"></span></a>
-                            <ul class="dropdown-menu" style="min-width: 68px">
-                                <li><a href="../en/index.html">English</a></li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                <img src="../Resources/image/language-solid.svg" width="20">
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" style="min-width: 0">
+                                <li id="select_hans">
+                                    <a href="#">简体中文</a>
+                                </li>
+                                <li id="select_hant">
+                                    <a href="#">繁體中文</a>
+                                </li>
+                                <li id="select_english">
+                                    <a href="#">English</a>
+                                </li>
                             </ul>
                         </li>
-                        <li id="nav_profile"><a href="#" id="username_btn"></a></li>
+                        <li id="nav_profile">
+                            <a href="#" id="username_btn"></a>
+                        </li>
                         <li><a href="#" id="loginLogout_btn"></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

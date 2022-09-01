@@ -2,7 +2,6 @@ let display_rows = 5;
 const sort_verify = {title: 0, author: 0, publisher: 0, year: 0};
 let sort_by_column = "id";
 let sort_order = "desc";
-let lang = "zh";
 let search_value = "";
 let totalRecord, currentPage;
 
@@ -53,6 +52,12 @@ $(document).on("click", "#display_50_rows", function(){
 });
 
 function to_page(pn) {
+    let search_lang;
+    if(getLang() === "en") {
+        search_lang = "en";
+    } else {
+        search_lang = "zh";
+    }
     $.ajax({
         url:"../PHP/allBooks.php",
         method:"GET",
@@ -61,7 +66,7 @@ function to_page(pn) {
             rows: display_rows,
             sortByColumn: sort_by_column,
             sortOrder: sort_order,
-            lang: lang,
+            lang: search_lang,
             search: search_value
         },
         success:function(result){
@@ -99,14 +104,26 @@ function build_books_table(result){
         })
     } else {
         document.getElementById("all_books_table_body").innerHTML=
-            "<td colspan='6' style='text-align: center; font-size: large; color: grey;'>暂无数据</td>";
+            "<td colspan='6' style='text-align: center; font-size: large; color: grey;'>" +
+            arrLang[lang]["NO_DATA"] +
+            "</td>";
     }
 }
 
 function build_page_info(result){
     if(result.count > 0) {
         $("#page_info_area").empty();
-        $("#page_info_area").append("共有数据<span style='font-weight: bold; color:#73BE73;'>" + result.count + "</span>条，分为<span style='font-weight: bold; color:#73BE73;'>" + result.pages + "</span>页");
+        $("#page_info_area").append(
+            arrLang[lang]["BOOK_PAGE_INFO1"] +
+            "<span style='font-weight: bold; color:#73BE73;'>" +
+            result.count +
+            "</span>" +
+            arrLang[lang]["BOOK_PAGE_INFO2"] +
+            "<span style='font-weight: bold; color:#73BE73;'>" +
+            result.pages +
+            "</span>" +
+            arrLang[lang]["BOOK_PAGE_INFO3"]
+        );
         totalRecord = result.count;
         currentPage = result.currentPage;
     } else {
@@ -119,7 +136,7 @@ function build_page_nav(result){
         $("#page_nav_area").empty();
 
         let ul = $("<ul></ul>").addClass("pagination");
-        let firstPageA = $("<a></a>").append("首页").attr("href", "#");
+        let firstPageA = $("<a></a>").append(arrLang[lang]["FIRST_PAGE"]).attr("href", "#");
         let firstPageLi = $("<li></li>").append(firstPageA);
         let prePageA = $("<a></a>").append("&laquo;").attr("href", "#");
         let prePageLi = $("<li></li>").append(prePageA);
@@ -153,7 +170,7 @@ function build_page_nav(result){
 
         let nextPageA = $("<a></a>").append("&raquo;").attr("href", "#");
         let nextPageLi = $("<li></li>").append(nextPageA);
-        let lastPageA = $("<a></a>").append("末页").attr("href", "#");
+        let lastPageA = $("<a></a>").append(arrLang[lang]["LAST_PAGE"]).attr("href", "#");
         let lastPageLi = $("<li></li>").append(lastPageA);
         if (currentPage === result.pages) {
             nextPageA.removeAttr("href", "#");

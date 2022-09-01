@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>按书名找书</title>
-    <script type="text/javascript" src="../JavaScript/common.js"></script>
-    <script type="text/javascript" src="../JavaScript/generalFunctions.js"></script>
+    <title>搜索 Search</title>
+    <script type="text/javascript" src="../JavaScript/common/common.js"></script>
+    <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/search.js"></script>
 </head>
 <body>
@@ -13,37 +13,58 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">引用书籍</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="lang" key="CITE_BOOK"></span>
+                </h4>
             </div>
             <div class="modal-body">
                 <table style="border: none; width: 100%; border-collapse: separate; border-spacing: 0 10px;">
                     <tr>
-                        <td colspan="2"><label for="wikipedia_template">维基百科<a href="https://zh.wikipedia.org/wiki/Template:Cite_book" target="_blank">Cite Book模板</a></label></td>
+                        <td colspan="2">
+                            <label for="wikipedia_template">
+                                <span class="lang" key="WIKIPEDIA"></span>
+                                <a href="https://en.wikipedia.org/wiki/Template:Cite_book" target="_blank">
+                                    <span class="lang" key="CITE_BOOK_TEMPLATE"></span>
+                                </a>
+                            </label>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <textarea style="min-width: 100%; border: 2px solid #ccc; border-radius: 4px; background-color: #f8f8f8; resize:none;" id="wikipedia_template" readonly></textarea>
                         </td>
                         <td style="text-align: center">
-                            <a tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" data-content=复制成功 id="wikipedia_copy_button">复制</a>
+                            <a tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-placement="right" data-trigger="focus" data-content=&checkmark; id="wikipedia_copy_button">
+                                <span class="lang" key="COPY"></span>
+                            </a>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2"><label for="gbt7714_2015">参考文献著录规则（GB/T 7714－2015）</label></td>
+                        <td colspan="2">
+                            <label for="gbt7714_2015">
+                                <span class="lang" key="GBT7714"></span>
+                            </label>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <textarea style="min-width: 100%; border: 2px solid #ccc; border-radius: 4px; background-color: #f8f8f8; resize:none;" id="gbt7714_2015" readonly></textarea>
                         </td>
                         <td style="text-align: center">
-                            <a tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" data-content=复制成功 id="gbt7714_copy_button">复制</a>
+                            <a tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-placement="right" data-trigger="focus" data-content=&checkmark; id="gbt7714_copy_button">
+                                <span class="lang" key="COPY"></span>
+                            </a>
                         </td>
                     </tr>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="lang" key="CLOSE"></span>
+                </button>
             </div>
         </div>
     </div>
@@ -54,23 +75,41 @@
 <div class="container" id="main_container">
     <div class="row" style="font-size: 1.2em;">
         <div class="col-md-12">
-            <h2>按书名找书</h2>
+            <h2><span class="lang" key="FIND_BOOK_BY_TITLE"></span></h2>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-5 col-sm-5 col-md-5">
-            <label for="search_box"></label><input type="text" class="form-control" placeholder="搜索书名" id="search_box">
+            <label for="search_box"></label>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" id="search_box">
+            </div>
         </div>
         <div class="col-md-2 col-md-offset-0 pull-right">
-            <button type="button" class="btn btn-primary" id="add_new_book_btn">新增</button>
+            <button type="button" class="btn btn-primary" id="add_new_book_btn">
+                <span class="lang" key="ADD"></span>
+            </button>
             <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">显示<span class="caret"></span>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="lang" key="DISPLAY_ROWS"></span>
+                    <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" style="min-width:73px">
-                    <li id="display_5_rows"><a href="#">5行</a></li>
-                    <li id="display_10_rows"><a href="#">10行</a></li>
-                    <li id="display_20_rows"><a href="#">20行</a></li>
-                    <li id="display_50_rows"><a href="#">50行</a></li>
+                    <li id="display_5_rows">
+                        <a href="#"><span class="lang" key="5Rows"></span></a>
+                    </li>
+                    <li id="display_10_rows">
+                        <a href="#"><span class="lang" key="10Rows"></span></a>
+                    </li>
+                    <li id="display_20_rows">
+                        <a href="#"><span class="lang" key="20Rows"></span></a>
+                    </li>
+                    <li id="display_50_rows">
+                        <a href="#"><span class="lang" key="50Rows"></span></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -81,23 +120,27 @@
                 <thead>
                     <tr>
                         <th style="cursor: pointer; width: 30%;" id="book_title_header">
-                            题名
+                            <span class="lang" key="BOOK_TITLE"></span>
                             <img src="../Resources/image/sort-solid.svg" id="book_title_sort" width="13" style="float: right" alt="Sort Icon">
                         </th>
                         <th style="cursor: pointer; width: 20%;" id="book_author_header">
-                            作者
+                            <span class="lang" key="AUTHOR"></span>
                             <img src="../Resources/image/sort-solid.svg" id="book_author_sort" width="13" style="float: right" alt="Sort Icon">
                         </th>
                         <th style="cursor: pointer; width: 15%;" id="book_publisher_header">
-                            出版社
+                            <span class="lang" key="PUBLISHER"></span>
                             <img src="../Resources/image/sort-solid.svg" id="book_publisher_sort" width="13" style="float: right" alt="Sort Icon">
                         </th>
                         <th style="cursor: pointer; width: 7%;" id="book_year_header">
-                            年份
+                            <span class="lang" key="YEAR"></span>
                             <img src="../Resources/image/sort-solid.svg" id="book_year_sort" width="13" style="float: right" alt="Sort Icon">
                         </th>
-                        <th style="width: 15%;">分类</th>
-                        <th>操作</th>
+                        <th style="width: 15%;">
+                            <span class="lang" key="CATEGORY"></span>
+                        </th>
+                        <th>
+                            <span class="lang" key="OPERATION"></span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody id="all_books_table_body"></tbody>
