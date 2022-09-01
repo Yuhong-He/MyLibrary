@@ -26,7 +26,7 @@ function displayInfo(){
     $("#profile_password").text(hiddenPassword);
     const email = getCookie(username + "Email");
     $("#profile_email").text(email);
-    const user_rights = getCookie(username + "Auth") === "1" ? "用户" : "管理员";
+    const user_rights = getCookie(username + "Auth") === "1" ? arrLang[lang]["USER"] : arrLang[lang]["ADMIN"];
     $("#profile_user_rights").text(user_rights);
 }
 
@@ -89,13 +89,13 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
                 emailReplace.innerHTML=newEmail;
             } else {
                 if(result.code === 201){
-                    show_validate_msg("#username_password", "error", "密码不正确");
-                    show_validate_msg("#old_password", "error", "密码不正确");
-                    show_validate_msg("#email_password", "error", "密码不正确");
+                    show_validate_msg("#username_password", "error", arrLang[lang]["PASSWORD_INCORRECT"]);
+                    show_validate_msg("#old_password", "error", arrLang[lang]["PASSWORD_INCORRECT"]);
+                    show_validate_msg("#email_password", "error", arrLang[lang]["PASSWORD_INCORRECT"]);
                 } else if(result.code === 202) {
-                    show_validate_msg("#new_username", "error", "用户名已存在");
+                    show_validate_msg("#new_username", "error", arrLang[lang]["USERNAME_EXIST"]);
                 } else if(result.code === 203) {
-                    show_validate_msg("#new_email", "error", "邮箱已被使用");
+                    show_validate_msg("#new_email", "error", arrLang[lang]["EMAIL_USED"]);
                 }
             }
         }
@@ -110,10 +110,10 @@ $(document).on("click", "#save_username_button", function(){
     const authority = getCookie(oldUsername + "Auth");
     const regName = /(^[a-zA-Z]{3,16}$)/;
     if(newUsername===""||newUsername===null){
-        show_validate_msg("#new_username", "error", "必须填写用户名");
+        show_validate_msg("#new_username", "error", arrLang[lang]["ENTER_USERNAME"]);
         return false;
     } else if(!regName.test(newUsername)){
-        show_validate_msg("#new_username", "error", "用户名只能是3-16位英文");
+        show_validate_msg("#new_username", "error", arrLang[lang]["INVALID_USERNAME"]);
         return false;
     } else {
         show_validate_msg("#new_username", "success", "");
@@ -129,13 +129,13 @@ $(document).on("click", "#save_password_button", function(){
     const email = getCookie(username + "Email");
     const authority = getCookie(username + "Auth");
     if(newPassword.length < 5){
-        show_validate_msg("#new_password", "error", "密码至少有五位");
+        show_validate_msg("#new_password", "error", arrLang[lang]["INVALID_PASSWORD"]);
         return false;
     } else {
         show_validate_msg("#new_password", "success", "");
     }
     if(newPassword!==repeatPassword){
-        show_validate_msg("#repeat_password", "error", "新密码不一致");
+        show_validate_msg("#repeat_password", "error", arrLang[lang]["PASSWORD_NOT_MATCH"]);
         return false;
     } else {
         show_validate_msg("#repeat_password", "success", "");
@@ -151,10 +151,10 @@ $(document).on("click", "#save_email_button", function(){
     const authority = getCookie(username + "Auth");
     const regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
     if(newEmail === ""){
-        show_validate_msg("#new_email", "error", "请输入邮箱");
+        show_validate_msg("#new_email", "error", arrLang[lang]["ENTER_EMAIL"]);
         return false;
     } else if (!regEmail.test(newEmail)){
-        show_validate_msg("#new_email", "error", "邮箱格式不正确")
+        show_validate_msg("#new_email", "error", arrLang[lang]["INVALID_EMAIL"])
         return false;
     } else {
         show_validate_msg("#new_email", "success", "")

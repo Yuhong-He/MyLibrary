@@ -1,11 +1,4 @@
-$(document).ready(function(){
-    const lang = getLang();
-    $(".lang").each(function(index, element) {
-        $(this).text(arrLang[lang][$(this).attr("key")]);
-    });
-});
-
-const arrLang = {
+let arrLang = {
     "en": {
         "HOME": "Home",
         "FIND_BOOKS": "Find Books",
@@ -44,8 +37,48 @@ const arrLang = {
         "LIBRARY": "Library",
         "INTRODUCTION3-1": "I am an enthusiast of Yunnan history and geography, and I have the hobby that collect related books. Now there are ",
         "INTRODUCTION3-2": " books info stored in this website.",
-        "INTRODUCTION4": "If you need my collections when you study Yunnan history, you can ask request through the embedded \"Request\" entry (login required). If you actually need my help (not limited the data stored in the website), please send me e-mail directly. After all this site is just a homework project."
+        "INTRODUCTION4": "If you need my collections when you study Yunnan history, you can ask request through the embedded \"Request\" entry (login required). If you actually need my help (not limited the data stored in the website), please send me e-mail directly. After all this site is just a homework project.",
+
+        "FIND_BOOK_BY_TITLE": "Find book by title",
+        "ADD": "Add",
+        "DISPLAY_ROWS": "Rows",
+        "5Rows": "5 rows",
+        "10Rows": "10 rows",
+        "20Rows": "20 rows",
+        "50Rows": "50 rows",
+        "BOOK_TITLE": "Title",
+        "AUTHOR": "Author",
+        "PUBLISHER": "Publisher",
+        "YEAR": "Year",
+        "CATEGORY": "Category",
+        "OPERATION": "Operation",
+        "CITE_BOOK": "Cite Book",
+        "WIKIPEDIA": "Wikipedia",
+        "CITE_BOOK_TEMPLATE": "Template:Cite Book",
+        "COPY": "Copy",
+        "GBT7714": "Rules of B. Ref. & Cit. (GB/T 7714－2015)",
+        "SEARCH_TITLE": "Search book title",
+        "NO_DATA": "No Data",
+        "BOOK_PAGE_INFO1": "Total ",
+        "BOOK_PAGE_INFO2": " data, and ",
+        "BOOK_PAGE_INFO3": " pages",
+        "FIRST_PAGE": "First",
+        "LAST_PAGE": "Last",
+
+        "CHANGE_USERNAME": "Change Username",
+        "CHANGE_PASSWORD": "Change Password",
+        "OLD_PASSWORD": "Old Password",
+        "NEW_PASSWORD": "New Password",
+        "CHANGE_EMAIL": "Change Email",
+        "PROFILE": "Profile",
+        "CHANGE": "Change",
+        "OTHER": "Other",
+        "USER_RIGHTS_GROUP_HEADER": "User rights group:",
+        "VIEW_MY_REQUESTS": "View my requests",
+        "USER": "User",
+        "ADMIN": "Admin"
     },
+
     "hans": {
         "HOME": "首页",
         "FIND_BOOKS": "找书",
@@ -84,8 +117,48 @@ const arrLang = {
         "LIBRARY": "图书馆",
         "INTRODUCTION3-1": "我是一名云南史地爱好者，有收集云南书籍资料的爱好。本站目前共录有",
         "INTRODUCTION3-2": "本书。",
-        "INTRODUCTION4": "如您学习、研究云南历史而需要我所收集的资料，可以通过本站的“互助”提交请求（需要登录）。当然如果您真的有需求（不局限于本站数据库名单内的），请直接给我发送邮件，毕竟这个网站只是一个作业项目。"
+        "INTRODUCTION4": "如您学习、研究云南历史而需要我所收集的资料，可以通过本站的“互助”提交请求（需要登录）。当然如果您真的有需求（不局限于本站数据库名单内的），请直接给我发送邮件，毕竟这个网站只是一个作业项目。",
+
+        "FIND_BOOK_BY_TITLE": "按书名找书",
+        "ADD": "新增",
+        "DISPLAY_ROWS": "显示",
+        "5Rows": "5行",
+        "10Rows": "10行",
+        "20Rows": "20行",
+        "50Rows": "50行",
+        "BOOK_TITLE": "题名",
+        "AUTHOR": "作者",
+        "PUBLISHER": "出版社",
+        "YEAR": "年份",
+        "CATEGORY": "分类",
+        "OPERATION": "操作",
+        "CITE_BOOK": "引用书籍",
+        "WIKIPEDIA": "维基百科",
+        "CITE_BOOK_TEMPLATE": "Cite Book模板",
+        "COPY": "复制",
+        "GBT7714": "参考文献著录规则（GB/T 7714－2015）",
+        "SEARCH_TITLE": "搜索书名",
+        "NO_DATA": "暂无数据",
+        "BOOK_PAGE_INFO1": "共有数据",
+        "BOOK_PAGE_INFO2": "条，分为",
+        "BOOK_PAGE_INFO3": "页",
+        "FIRST_PAGE": "首页",
+        "LAST_PAGE": "末页",
+
+        "CHANGE_USERNAME": "修改用户名",
+        "CHANGE_PASSWORD": "修改密码",
+        "OLD_PASSWORD": "旧密码",
+        "NEW_PASSWORD": "新密码",
+        "CHANGE_EMAIL": "修改邮箱",
+        "PROFILE": "账户信息",
+        "CHANGE": "修改",
+        "OTHER": "其他",
+        "USER_RIGHTS_GROUP_HEADER": "用户权限组：",
+        "VIEW_MY_REQUESTS": "查看我的互助请求",
+        "USER": "用户",
+        "ADMIN": "管理员"
     },
+
     "hant": {
         "HOME": "首頁",
         "FIND_BOOKS": "找書",
@@ -124,6 +197,45 @@ const arrLang = {
         "LIBRARY": "圖書館",
         "INTRODUCTION3-1": "我是一名雲南史地愛好者，有收集雲南書籍資料的愛好。本站目前共錄有",
         "INTRODUCTION3-2": "本書。",
-        "INTRODUCTION4": "如您學習、研究雲南歷史而需要我所收集的資料，可以通過本站的「互助」提交請求（需要登錄）。當然如果您真的有需求（不局限於本站數據庫名單內的），請直接給我發送郵件，畢竟這個網站只是一個作業項目。"
+        "INTRODUCTION4": "如您學習、研究雲南歷史而需要我所收集的資料，可以通過本站的「互助」提交請求（需要登錄）。當然如果您真的有需求（不局限於本站數據庫名單內的），請直接給我發送郵件，畢竟這個網站只是一個作業項目。",
+
+        "FIND_BOOK_BY_TITLE": "按書名找書",
+        "ADD": "新增",
+        "DISPLAY_ROWS": "顯示",
+        "5Rows": "5行",
+        "10Rows": "10行",
+        "20Rows": "20行",
+        "50Rows": "50行",
+        "BOOK_TITLE": "題名",
+        "AUTHOR": "作者",
+        "PUBLISHER": "出版社",
+        "YEAR": "年份",
+        "CATEGORY": "分類",
+        "OPERATION": "操作",
+        "CITE_BOOK": "引用書籍",
+        "WIKIPEDIA": "維基百科",
+        "CITE_BOOK_TEMPLATE": "Cite Book模板",
+        "COPY": "複製",
+        "GBT7714": "參考文獻著錄規則（GB/T 7714－2015）",
+        "SEARCH_TITLE": "搜索書名",
+        "NO_DATA": "暫無數據",
+        "BOOK_PAGE_INFO1": "共有數據",
+        "BOOK_PAGE_INFO2": "條，分為",
+        "BOOK_PAGE_INFO3": "頁",
+        "FIRST_PAGE": "首頁",
+        "LAST_PAGE": "末頁",
+
+        "CHANGE_USERNAME": "修改用戶名",
+        "CHANGE_PASSWORD": "修改密碼",
+        "OLD_PASSWORD": "舊密碼",
+        "NEW_PASSWORD": "新密碼",
+        "CHANGE_EMAIL": "修改郵箱",
+        "PROFILE": "賬戶信息",
+        "CHANGE": "修改",
+        "OTHER": "其他",
+        "USER_RIGHTS_GROUP_HEADER": "用戶權限組：",
+        "VIEW_MY_REQUESTS": "查看我的互助請求",
+        "USER": "用戶",
+        "ADMIN": "管理員"
     }
 };

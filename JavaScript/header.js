@@ -1,38 +1,10 @@
+const lang = getLang();
 $(document).ready(function(){
+    $(".lang").each(function(index, element) {
+        $(this).text(arrLang[lang][$(this).attr("key")]);
+    });
     displayAfterLoad();
-    const language_code = new Map([
-        ["en", "select_english"],
-        ["hans", "select_hans"],
-        ["hant", "select_hant"],
-    ]);
-    const lang = getCookie("lang");
-    if(lang !== "") {
-        chooseLanguage(language_code.get(lang));
-    } else {
-        switch (navigator.language.toLowerCase()) {
-            case "zh-hans":
-                chooseLanguage(language_code.get("hans"));
-                break;
-            case "zh-cn":
-                chooseLanguage(language_code.get("hans"));
-                break;
-            case "zh":
-                chooseLanguage(language_code.get("hans"));
-                break;
-            case "zh-hant":
-                chooseLanguage(language_code.get("hant"));
-                break;
-            case "zh-hk":
-                chooseLanguage(language_code.get("hant"));
-                break;
-            case "zh-tw":
-                chooseLanguage(language_code.get("hant"));
-                break;
-            default:
-                chooseLanguage(language_code.get("en"));
-                break;
-        }
-    }
+    setLanguageSelect();
 });
 
 $('.dropdown-toggle').dropdown();
@@ -87,7 +59,6 @@ $("#signup_btn").click(function() {
 });
 
 function validate_login_form() {
-    const lang = getLang();
     const userName = $("#userName_login").val();
     if(userName === ""){
         show_validate_msg("#userName_login", "error", arrLang[lang]["ENTER_USERNAME"]);
@@ -106,7 +77,6 @@ function validate_login_form() {
 }
 
 $("#model_login_btn").click(function() {
-    const lang = getLang();
     if(!validate_login_form()){
         return false;
     }
@@ -136,7 +106,6 @@ $("#model_login_btn").click(function() {
 });
 
 function validate_register_form(userName, password, passwordRepeat, email) {
-    const lang = getLang();
     const regName = /(^[a-zA-Z]{3,16}$)/;
     if(userName===""||userName===null){
         show_validate_msg("#userName_register", "error", arrLang[lang]["ENTER_USERNAME"]);
@@ -173,7 +142,6 @@ function validate_register_form(userName, password, passwordRepeat, email) {
 }
 
 $("#model_register_btn").click(function() {
-    const lang = getLang();
     const userName = $("#userName_register").val();
     const password = $("#password_register").val();
     const passwordRepeat = $("#password_register_repeat").val();
@@ -206,6 +174,41 @@ $("#model_register_btn").click(function() {
         }
     });
 });
+
+function setLanguageSelect() {
+    const language_code = new Map([
+        ["en", "select_english"],
+        ["hans", "select_hans"],
+        ["hant", "select_hant"],
+    ]);
+    if(lang !== "") {
+        chooseLanguage(language_code.get(lang));
+    } else {
+        switch (navigator.language.toLowerCase()) {
+            case "zh-hans":
+                chooseLanguage(language_code.get("hans"));
+                break;
+            case "zh-cn":
+                chooseLanguage(language_code.get("hans"));
+                break;
+            case "zh":
+                chooseLanguage(language_code.get("hans"));
+                break;
+            case "zh-hant":
+                chooseLanguage(language_code.get("hant"));
+                break;
+            case "zh-hk":
+                chooseLanguage(language_code.get("hant"));
+                break;
+            case "zh-tw":
+                chooseLanguage(language_code.get("hant"));
+                break;
+            default:
+                chooseLanguage(language_code.get("en"));
+                break;
+        }
+    }
+}
 
 function chooseLanguage(language_id) {
     document.getElementById("select_english").className = 'inactive';
