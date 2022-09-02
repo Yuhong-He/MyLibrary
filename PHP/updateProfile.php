@@ -8,7 +8,8 @@ $pwNew = $_POST['newPassword'] ?? '';
 $emNew = $_POST['newEmail'] ?? '';
 $auth = $_POST['authority'] ?? '';
 $id = $_POST['id'] ?? '';
-if($un != "") {
+session_start();
+if($un == $_SESSION["Username"] && $pw == $_SESSION[$un ."Password"]) {
     require_once "db.php";
     $code=200;
     $resPassword=mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un' and Password = '$pw'");
@@ -33,6 +34,8 @@ if($un != "") {
     if($code!=201 && $code!= 202 && $code!= 203){
         $sql="UPDATE user SET UserName='$unNew',Password='$pwNew',Email='$emNew', Authority='$auth' WHERE id='$id'";
         mysqli_query($db,$sql);
+        $_SESSION["Username"] = $unNew;
+        $_SESSION[$unNew ."Password"] = $pwNew;
     }
     mysqli_close($db);
     $str = array
@@ -42,6 +45,11 @@ if($un != "") {
         'authority'=>$auth,
         'id'=>$id
     );
-    $jsonEncode = json_encode($str);
-    echo $jsonEncode;
+} else {
+    $str = array
+    (
+        'code'=>401
+    );
 }
+$jsonEncode = json_encode($str);
+echo $jsonEncode;

@@ -29,7 +29,9 @@ if($un != "") {
             $id=$row[2];
         }
         session_start();
-        $_SESSION[$un]=true;
+        $_SESSION["Username"] = $un;
+        $_SESSION[$un ."Password"] = $pw;
+        $_SESSION[$un ."Auth"] = $authority;
     }
     mysqli_close($db);
     $str = array

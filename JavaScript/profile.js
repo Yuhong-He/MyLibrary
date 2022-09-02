@@ -100,6 +100,8 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
                     show_validate_msg("#new_username", "error", arrLang[lang]["USERNAME_EXIST"]);
                 } else if(result.code === 203) {
                     show_validate_msg("#new_email", "error", arrLang[lang]["EMAIL_USED"]);
+                } else if(result.code === 401) {
+                    $("#profile_update_fail").css("display", "block");
                 }
             }
         }

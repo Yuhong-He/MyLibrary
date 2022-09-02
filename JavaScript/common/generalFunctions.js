@@ -29,12 +29,13 @@ function destroyCookie(username) {
 function displayAfterLoad() {
     setTimeout(() => userDisplay(), 50);
     setTimeout(() => adminDisplay(), 50);
+    setTimeout(() => webMasterDisplay(), 50);
 }
 
 function userDisplay() {
     const lang = getLang();
     const username = getCookie("username");
-    if(username===""||username===null){
+    if(username === "" || username === null){
         const usernameReplaceLogin = document.getElementById('username_btn');
         usernameReplaceLogin.innerHTML = "";
         const usernameBlock = document.getElementById('nav_profile');
@@ -62,11 +63,23 @@ function userDisplay() {
 function adminDisplay() {
     const username = getCookie("username");
     const auth = getCookie(username + "Auth");
-    if(auth==="2"){
+    if(auth === "2" || auth === "3"){
         const manageBlock = document.getElementById('nav_manage');
         manageBlock.style.display = "block";
     } else {
         const manageBlock = document.getElementById('nav_manage');
+        manageBlock.style.display = "none";
+    }
+}
+
+function webMasterDisplay() {
+    const username = getCookie("username");
+    const auth = getCookie(username + "Auth");
+    if(auth === "3"){
+        const manageBlock = document.getElementById('nav_manage_user');
+        manageBlock.style.display = "block";
+    } else {
+        const manageBlock = document.getElementById('nav_manage_user');
         manageBlock.style.display = "none";
     }
 }
