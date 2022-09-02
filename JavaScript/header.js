@@ -179,7 +179,7 @@ function setLanguageSelect() {
     const language_code = new Map([
         ["en", "select_english"],
         ["hans", "select_hans"],
-        ["hant", "select_hant"],
+        ["hant", "select_hant"]
     ]);
     if(lang !== "") {
         chooseLanguage(language_code.get(lang));
