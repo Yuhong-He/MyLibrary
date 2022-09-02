@@ -17,12 +17,7 @@ function login(){
 }
 
 $("#loginLogout_btn").click(function() {
-    const username = getCookie("username");
-    if(username===""){
-        login();
-    } else {
-        logout();
-    }
+    getCookie("username") === "" ? login() : logout();
 });
 
 function logout() {
