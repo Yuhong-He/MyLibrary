@@ -7,6 +7,7 @@ $unNew = $_POST['newUsername'] ?? '';
 $pwNew = $_POST['newPassword'] ?? '';
 $emNew = $_POST['newEmail'] ?? '';
 $auth = $_POST['authority'] ?? '';
+$id = $_POST['id'] ?? '';
 if($un != "") {
     require_once "db.php";
     $code=200;
@@ -30,16 +31,16 @@ if($un != "") {
         }
     }
     if($code!=201 && $code!= 202 && $code!= 203){
-        $sql="UPDATE user SET UserName='$unNew',Password='$pwNew',Email='$emNew', Authority='$auth' WHERE UserName='$un'";
+        $sql="UPDATE user SET UserName='$unNew',Password='$pwNew',Email='$emNew', Authority='$auth' WHERE id='$id'";
         mysqli_query($db,$sql);
-
     }
     mysqli_close($db);
     $str = array
     (
         'code'=>$code,
         'email'=>$emNew,
-        'authority'=>$auth
+        'authority'=>$auth,
+        'id'=>$id
     );
     $jsonEncode = json_encode($str);
     echo $jsonEncode;

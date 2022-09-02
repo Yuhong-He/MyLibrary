@@ -7,6 +7,7 @@ if($un != "") {
     $code=200;
     $email="";
     $authority="";
+    $id="";
     $resUsername=mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un'");
     $rewUsername = mysqli_fetch_assoc($resUsername);
     if ($rewUsername['num'] == 0) {
@@ -20,11 +21,12 @@ if($un != "") {
         }
     }
     if($code!=201 && $code!= 400){
-        $result=mysqli_query($db, "SELECT Email,Authority FROM user where UserName = '$un'");
+        $result=mysqli_query($db, "SELECT Email,Authority,id FROM user where UserName = '$un'");
         while($row=mysqli_fetch_row($result))
         {
             $email=$row[0];
             $authority=$row[1];
+            $id=$row[2];
         }
         session_start();
         $_SESSION[$un]=true;
@@ -34,7 +36,8 @@ if($un != "") {
     (
         'code'=>$code,
         'email'=>$email,
-        'authority'=>$authority
+        'authority'=>$authority,
+        'id'=>$id
     );
     $jsonEncode = json_encode($str);
     echo $jsonEncode;

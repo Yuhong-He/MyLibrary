@@ -1,4 +1,9 @@
 $(document).ready(function(){
+    const username = getCookie("username");
+    if(username===""){
+        window.location.replace("index.html");
+        return false;
+    }
     $("#headerContent").load("header.html");
     $("#footerContent").load("footer.html");
     displayAfterLoad();
@@ -13,11 +18,9 @@ function navBlockColor() {
 
 function displayInfo(){
     const username = getCookie("username");
-    if(username===""){
-        window.location.replace("index.html");
-        return false;
-    }
     $("#profile_username").text(username);
+    const userID = getCookie(username + "Id");
+    $("#profile_user_id").text(userID);
     const password = getCookie(username);
     let hiddenPassword = "";
     for(let i=0; i<password.length; i++){
@@ -53,7 +56,7 @@ $(document).on("click", "#edit_email_button", function(){
     });
 });
 
-function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword, newEmail, authority){
+function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword, newEmail, authority, id){
     $.ajax({
         url:"../PHP/updateProfile.php",
         method:"POST",
@@ -64,11 +67,12 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
             newUsername: newUsername,
             newPassword: newPassword,
             newEmail: newEmail,
-            authority: authority
+            authority: authority,
+            id: id
         },
         success:function(result){
             if(result.code === 200) {
-                setCookie(newUsername, newPassword, newEmail, result.authority);
+                setCookie(newUsername, newPassword, newEmail, result.authority, result.id);
 
                 $("#usernameModel").modal('hide');
                 $("#passwordModel").modal('hide');
@@ -108,6 +112,7 @@ $(document).on("click", "#save_username_button", function(){
     const password = $("#username_password").val();
     const email = getCookie(oldUsername + "Email");
     const authority = getCookie(oldUsername + "Auth");
+    const userId = getCookie(oldUsername + "Id");
     const regName = /(^[a-zA-Z]{3,16}$)/;
     if(newUsername===""||newUsername===null){
         show_validate_msg("#new_username", "error", arrLang[lang]["ENTER_USERNAME"]);
@@ -118,7 +123,7 @@ $(document).on("click", "#save_username_button", function(){
     } else {
         show_validate_msg("#new_username", "success", "");
     }
-    updateInfo(oldUsername, password, email, newUsername, password, email, authority);
+    updateInfo(oldUsername, password, email, newUsername, password, email, authority, userId);
 });
 
 $(document).on("click", "#save_password_button", function(){
@@ -128,6 +133,7 @@ $(document).on("click", "#save_password_button", function(){
     const repeatPassword = $("#repeat_password").val();
     const email = getCookie(username + "Email");
     const authority = getCookie(username + "Auth");
+    const userId = getCookie(username + "Id");
     if(newPassword.length < 5){
         show_validate_msg("#new_password", "error", arrLang[lang]["INVALID_PASSWORD"]);
         return false;
@@ -140,7 +146,7 @@ $(document).on("click", "#save_password_button", function(){
     } else {
         show_validate_msg("#repeat_password", "success", "");
     }
-    updateInfo(username, oldPassword, email, username, newPassword, email, authority);
+    updateInfo(username, oldPassword, email, username, newPassword, email, authority, userId);
 });
 
 $(document).on("click", "#save_email_button", function(){
@@ -149,6 +155,7 @@ $(document).on("click", "#save_email_button", function(){
     const oldEmail = getCookie(username + "Email");
     const newEmail = $("#new_email").val();
     const authority = getCookie(username + "Auth");
+    const userId = getCookie(username + "Id");
     const regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
     if(newEmail === ""){
         show_validate_msg("#new_email", "error", arrLang[lang]["ENTER_EMAIL"]);
@@ -159,5 +166,5 @@ $(document).on("click", "#save_email_button", function(){
     } else {
         show_validate_msg("#new_email", "success", "")
     }
-    updateInfo(username, password, oldEmail, username, password, newEmail, authority);
+    updateInfo(username, password, oldEmail, username, password, newEmail, authority, userId);
 });

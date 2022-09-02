@@ -86,7 +86,7 @@ $("#model_login_btn").click(function() {
         },
         success:function(result){
             if(result.code === 200) {
-                setCookie(userName, password, result.email, result.authority);
+                setCookie(userName, password, result.email, result.authority, result.id);
                 $("#loginModel").modal('hide');
                 location.reload();
             } else {
