@@ -9,46 +9,53 @@ $emNew = $_POST['newEmail'] ?? '';
 $auth = $_POST['authority'] ?? '';
 $id = $_POST['id'] ?? '';
 session_start();
-if($un == $_SESSION["Username"] && $pw == $_SESSION[$un ."Password"]) {
-    require_once "db.php";
-    $code=200;
-    $resPassword=mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un' and Password = '$pw'");
-    $rewPassword = mysqli_fetch_assoc($resPassword);
-    if ($rewPassword['num'] != 1) {
-        $code=201;
-    }
-    if($code!=201 && $un!=$unNew){
-        $resUsername=mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$unNew'");
-        $rewUsername = mysqli_fetch_assoc($resUsername);
-        if ($rewUsername['num'] != 0) {
-            $code=202;
+if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Password"])) {
+    if ($un == $_SESSION["Username"] && $pw == $_SESSION[$un . "Password"]) {
+        require_once "db.php";
+        $code = 200;
+        $resPassword = mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un' and Password = '$pw'");
+        $rewPassword = mysqli_fetch_assoc($resPassword);
+        if ($rewPassword['num'] != 1) {
+            $code = 201;
         }
-    }
-    if($code!=201 && $code!= 202 && $em!=$emNew){
-        $resEmail=mysqli_query($db, "SELECT count(Email) as num FROM user where Email = '$emNew'");
-        $rewEmail = mysqli_fetch_assoc($resEmail);
-        if ($rewEmail['num'] != 0) {
-            $code=203;
+        if ($code != 201 && $un != $unNew) {
+            $resUsername = mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$unNew'");
+            $rewUsername = mysqli_fetch_assoc($resUsername);
+            if ($rewUsername['num'] != 0) {
+                $code = 202;
+            }
         }
+        if ($code != 201 && $code != 202 && $em != $emNew) {
+            $resEmail = mysqli_query($db, "SELECT count(Email) as num FROM user where Email = '$emNew'");
+            $rewEmail = mysqli_fetch_assoc($resEmail);
+            if ($rewEmail['num'] != 0) {
+                $code = 203;
+            }
+        }
+        if ($code != 201 && $code != 202 && $code != 203) {
+            $sql = "UPDATE user SET UserName='$unNew',Password='$pwNew',Email='$emNew', Authority='$auth' WHERE id='$id'";
+            mysqli_query($db, $sql);
+            $_SESSION["Username"] = $unNew;
+            $_SESSION[$unNew . "Password"] = $pwNew;
+        }
+        mysqli_close($db);
+        $str = array
+        (
+            'code' => $code,
+            'email' => $emNew,
+            'authority' => $auth,
+            'id' => $id
+        );
+    } else {
+        $str = array
+        (
+            'code' => 401
+        );
     }
-    if($code!=201 && $code!= 202 && $code!= 203){
-        $sql="UPDATE user SET UserName='$unNew',Password='$pwNew',Email='$emNew', Authority='$auth' WHERE id='$id'";
-        mysqli_query($db,$sql);
-        $_SESSION["Username"] = $unNew;
-        $_SESSION[$unNew ."Password"] = $pwNew;
-    }
-    mysqli_close($db);
-    $str = array
-    (
-        'code'=>$code,
-        'email'=>$emNew,
-        'authority'=>$auth,
-        'id'=>$id
-    );
 } else {
     $str = array
     (
-        'code'=>401
+        'code' => 401
     );
 }
 $jsonEncode = json_encode($str);
