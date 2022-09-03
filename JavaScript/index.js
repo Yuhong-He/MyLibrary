@@ -11,11 +11,10 @@ function displayTotalBooks() {
         url:"../PHP/countBooks.php",
         method:"GET",
         success:function(result){
-            document.getElementById("total_books").innerHTML=result;
+            $("#total_books").html(result);
         }
     });
 }
 function navBlockColor() {
-    const nav = document.getElementById('nav_home');
-    nav.className += 'active';
+    $("#nav_home").addClass("active");
 }

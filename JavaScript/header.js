@@ -206,10 +206,10 @@ function setLanguageSelect() {
 }
 
 function chooseLanguage(language_id) {
-    document.getElementById("select_english").className = 'inactive';
-    document.getElementById("select_hans").className = 'inactive';
-    document.getElementById("select_hant").className = 'inactive';
-    document.getElementById(language_id).className = 'active';
+    $("#select_english").removeClass("active");
+    $("#select_hans").removeClass("active");
+    $("#select_hant").removeClass("active");
+    $("#" + language_id).addClass("active");
 }
 
 $("#select_english").click(function() {

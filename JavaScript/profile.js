@@ -12,8 +12,7 @@ $(document).ready(function(){
 });
 
 function navBlockColor() {
-    const nav = document.getElementById('nav_profile');
-    nav.className += 'active';
+    $("#nav_profile").addClass("active");
 }
 
 function displayInfo(){
@@ -78,19 +77,16 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
                 $("#passwordModel").modal('hide');
                 $("#emailModel").modal('hide');
 
-                const usernameReplace = document.getElementById('profile_username');
-                usernameReplace.innerHTML=newUsername;
+                $("#profile_username").html(newUsername);
                 displayAfterLoad();
 
-                const passwordReplace = document.getElementById('profile_password');
                 let hiddenPassword = "";
                 for(let i=0; i<newPassword.length; i++){
                     hiddenPassword = hiddenPassword + "*";
                 }
-                passwordReplace.innerHTML=hiddenPassword;
+                $("#profile_password").html(hiddenPassword);
 
-                const emailReplace = document.getElementById('profile_email');
-                emailReplace.innerHTML=newEmail;
+                $("#profile_email").html(newEmail);
             } else {
                 if(result.code === 201){
                     show_validate_msg("#username_password", "error", arrLang[lang]["PASSWORD_INCORRECT"]);

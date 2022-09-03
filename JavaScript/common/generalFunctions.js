@@ -36,27 +36,17 @@ function userDisplay() {
     const lang = getLang();
     const username = getCookie("username");
     if(username === "" || username === null){
-        const usernameReplaceLogin = document.getElementById('username_btn');
-        usernameReplaceLogin.innerHTML = "";
-        const usernameBlock = document.getElementById('nav_profile');
-        usernameBlock.style.display = "none";
-        const obtainBlock = document.getElementById('nav_obtain');
-        obtainBlock.style.display = "none";
-        const manageBlock = document.getElementById('nav_manage');
-        manageBlock.style.display = "none";
-        const loginLogout = document.getElementById('loginLogout_btn');
-        loginLogout.innerHTML = arrLang[lang]["LOGIN"];
+        $("#username_btn").html("");
+        $("#nav_profile").css("display", "none");
+        $("#nav_obtain").css("display", "none");
+        $("#nav_manage").css("display", "none");
+        $("#loginLogout_btn").html(arrLang[lang]["LOGIN"]);
     } else {
-        const usernameReplaceLogin = document.getElementById('username_btn');
-        usernameReplaceLogin.innerHTML = username;
-        const usernameBlock = document.getElementById('nav_profile');
-        usernameBlock.style.display = "block";
-        const obtainBlock = document.getElementById('nav_obtain');
-        obtainBlock.style.display = "block";
-        const manageBlock = document.getElementById('nav_manage');
-        manageBlock.style.display = "none";
-        const loginLogout = document.getElementById('loginLogout_btn');
-        loginLogout.innerHTML = arrLang[lang]["LOGOUT"];
+        $("#username_btn").html(username);
+        $("#nav_profile").css("display", "block");
+        $("#nav_obtain").css("display", "block");
+        $("#nav_manage").css("display", "none");
+        $("#loginLogout_btn").html(arrLang[lang]["LOGOUT"]);
     }
 }
 
@@ -64,11 +54,9 @@ function adminDisplay() {
     const username = getCookie("username");
     const auth = getCookie(username + "Auth");
     if(auth === "2" || auth === "3"){
-        const manageBlock = document.getElementById('nav_manage');
-        manageBlock.style.display = "block";
+        $("#nav_manage").css("display", "block");
     } else {
-        const manageBlock = document.getElementById('nav_manage');
-        manageBlock.style.display = "none";
+        $("#nav_manage").css("display", "none");
     }
 }
 
@@ -76,11 +64,9 @@ function webMasterDisplay() {
     const username = getCookie("username");
     const auth = getCookie(username + "Auth");
     if(auth === "3"){
-        const manageBlock = document.getElementById('nav_manage_user');
-        manageBlock.style.display = "block";
+        $("#nav_manage_user").css("display", "block");
     } else {
-        const manageBlock = document.getElementById('nav_manage_user');
-        manageBlock.style.display = "none";
+        $("#nav_manage_user").css("display", "none");
     }
 }
 

@@ -16,8 +16,8 @@ $(document).ready(function(){
 });
 
 function navBlockColor() {
-    document.getElementById('nav_books').className += ' active';
-    document.getElementById('nav_search').className += 'active';
+    $("#nav_books").addClass("active");
+    $("#nav_search").addClass("active");
     const rows_id = new Map([
         ["5", "display_5_rows"],
         ["10", "display_10_rows"],
@@ -25,18 +25,18 @@ function navBlockColor() {
         ["50", "display_50_rows"]
     ]);
     if(getCookie("book_display_rows") !== "") {
-        document.getElementById(rows_id.get(getCookie("book_display_rows"))).className += 'active';
+        $("#" + rows_id.get(getCookie("book_display_rows"))).addClass("active");
     } else {
-        document.getElementById('display_5_rows').className += 'active';
+        $("#display_5_rows").addClass("active");
     }
 }
 
 function active_rows_selector(rows) {
-    document.getElementById('display_5_rows').className = 'inactive';
-    document.getElementById('display_10_rows').className = 'inactive';
-    document.getElementById('display_20_rows').className = 'inactive';
-    document.getElementById('display_50_rows').className = 'inactive';
-    document.getElementById(rows).className = 'active';
+    $("#display_5_rows").removeClass("active");
+    $("#display_10_rows").removeClass("active");
+    $("#display_20_rows").removeClass("active");
+    $("#display_50_rows").removeClass("active");
+    $("#" + rows).addClass("active");
 }
 
 $(document).on("click", "#display_5_rows", function(){
@@ -208,52 +208,52 @@ function build_page_nav(result){
 }
 
 function sort_table(column) {
-    document.getElementById('book_title_sort').src='../Resources/image/sort-solid.svg';
-    document.getElementById('book_author_sort').src='../Resources/image/sort-solid.svg';
-    document.getElementById('book_publisher_sort').src='../Resources/image/sort-solid.svg';
-    document.getElementById('book_year_sort').src='../Resources/image/sort-solid.svg';
+    $("#book_title_sort").attr("src", "../Resources/image/sort-solid.svg");
+    $("#book_author_sort").attr("src", "../Resources/image/sort-solid.svg");
+    $("#book_publisher_sort").attr("src", "../Resources/image/sort-solid.svg");
+    $("#book_year_sort").attr("src", "../Resources/image/sort-solid.svg");
     sort_by_column = column;
     if(column === "Title") {
         if(sort_verify.title === 0){
             sort_order = "desc";
-            document.getElementById('book_title_sort').src='../Resources/image/sort-down-solid.svg';
+            $("#book_title_sort").attr("src", "../Resources/image/sort-down-solid.svg");
             sort_verify.title = 1;
         } else if(sort_verify.title === 1){
             sort_order = "asc";
-            document.getElementById('book_title_sort').src='../Resources/image/sort-up-solid.svg';
+            $("#book_title_sort").attr("src", "../Resources/image/sort-up-solid.svg");
             sort_verify.title = 0;
         }
     }
     if(column === "Author") {
         if(sort_verify.author === 0){
             sort_order = "desc";
-            document.getElementById('book_author_sort').src='../Resources/image/sort-down-solid.svg';
+            $("#book_author_sort").attr("src", "../Resources/image/sort-down-solid.svg");
             sort_verify.author = 1;
         } else if(sort_verify.author === 1){
             sort_order = "asc";
-            document.getElementById('book_author_sort').src='../Resources/image/sort-up-solid.svg';
+            $("#book_author_sort").attr("src", "../Resources/image/sort-up-solid.svg");
             sort_verify.author = 0;
         }
     }
     if(column === "Publisher") {
         if(sort_verify.publisher === 0){
             sort_order = "desc";
-            document.getElementById('book_publisher_sort').src='../Resources/image/sort-down-solid.svg';
+            $("#book_publisher_sort").attr("src", "../Resources/image/sort-down-solid.svg");
             sort_verify.publisher = 1;
         } else if(sort_verify.publisher === 1){
             sort_order = "asc";
-            document.getElementById('book_publisher_sort').src='../Resources/image/sort-up-solid.svg';
+            $("#book_publisher_sort").attr("src", "../Resources/image/sort-up-solid.svg");
             sort_verify.publisher = 0;
         }
     }
     if(column === "Year") {
         if(sort_verify.year === 0){
             sort_order = "desc";
-            document.getElementById('book_year_sort').src='../Resources/image/sort-down-solid.svg';
+            $("#book_year_sort").attr("src", "../Resources/image/sort-down-solid.svg");
             sort_verify.year = 1;
         } else if(sort_verify.year === 1){
             sort_order = "asc";
-            document.getElementById('book_year_sort').src='../Resources/image/sort-up-solid.svg';
+            $("#book_year_sort").attr("src", "../Resources/image/sort-up-solid.svg");
             sort_verify.year = 0;
         }
     }
@@ -279,7 +279,7 @@ $(document).on("click", "#book_year_header", function(){
 
 $(function() {
     $("#search_box").bind("input propertychange", function () {
-        let search_value_before_clean = document.getElementById('search_box').value;
+        let search_value_before_clean = $("#search_box").val();
         document.cookie="search_value=" + search_value_before_clean.replace(/\'/g, "\\'");
         if(search_value_before_clean !== "") {
             $("#clean_search_box").css("display", "block");
@@ -300,8 +300,8 @@ $(document).on("click", ".cite_btn", function(){
             id: book_id
         },
         success:function(result){
-            document.getElementById("wikipedia_template").innerHTML=result.wikipedia;
-            document.getElementById("gbt7714_2015").innerHTML=result.gbt7714;
+            $("#wikipedia_template").html(result.wikipedia);
+            $("#gbt7714_2015").html(result.gbt7714);
         }
     });
     $("#citeBookModal").modal({
@@ -310,14 +310,14 @@ $(document).on("click", ".cite_btn", function(){
 });
 
 $(document).on("click", "#wikipedia_copy_button", function(){
-    const copied_body = document.getElementById("wikipedia_template").value;
+    const copied_body = $("#wikipedia_template").val();
     if (navigator.clipboard) {
         navigator.clipboard.writeText(copied_body);
     }
 });
 
 $(document).on("click", "#gbt7714_copy_button", function(){
-    const copied_body = document.getElementById("gbt7714_2015").value;
+    const copied_body = $("#gbt7714_2015").val();
     if (navigator.clipboard) {
         navigator.clipboard.writeText(copied_body);
     }
