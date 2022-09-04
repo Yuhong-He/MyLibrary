@@ -353,10 +353,13 @@ $(document).on("click", "#clean_search_box", function(){
 });
 
 $(document).on("click", "#add_new_book_btn", function(){
-    reset_form("#addBookModal form");
     $("#addBookModal").modal({
         backdrop: "static"
     });
+});
+
+$(document).on("click", ".close_model_new_book", function(){
+    location.reload();
 });
 
 $(document).on("click", "#model_new_book_btn", function(){

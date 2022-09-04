@@ -87,6 +87,7 @@ let arrLang = {
         "VIEW_MY_REQUESTS": "View my requests",
         "USER": "User",
         "ADMIN": "Admin",
+        "SUPER_ADMIN": "Super Admin",
         "ERROR": "ERROR! ",
         "INVALID_PROFILE_UPDATE": "Invalid update. Maybe because the session has expired, please refresh or login again."
     },
@@ -179,6 +180,7 @@ let arrLang = {
         "VIEW_MY_REQUESTS": "查看我的互助请求",
         "USER": "用户",
         "ADMIN": "管理员",
+        "SUPER_ADMIN": "超级管理员",
         "ERROR": "错误！",
         "INVALID_PROFILE_UPDATE": "修改无效，可能是因为会话已过期，请刷新页面或登录重试。"
     },
@@ -271,6 +273,7 @@ let arrLang = {
         "VIEW_MY_REQUESTS": "查看我的互助請求",
         "USER": "用戶",
         "ADMIN": "管理員",
+        "SUPER_ADMIN": "超級管理員",
         "ERROR": "錯誤！",
         "INVALID_PROFILE_UPDATE": "修改無效，可能是因為會話已過期，請刷新頁面或登錄重試。"
     }

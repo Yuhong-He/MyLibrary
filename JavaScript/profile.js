@@ -28,7 +28,14 @@ function displayInfo(){
     $("#profile_password").text(hiddenPassword);
     const email = getCookie(username + "Email");
     $("#profile_email").text(email);
-    const user_rights = getCookie(username + "Auth") === "1" ? arrLang[lang]["USER"] : arrLang[lang]["ADMIN"];
+    let user_rights;
+    if(getCookie(username + "Auth") === "1") {
+        user_rights = arrLang[lang]["USER"];
+    } else if (getCookie(username + "Auth") === "2") {
+        user_rights = arrLang[lang]["ADMIN"];
+    } else {
+        user_rights = arrLang[lang]["SUPER_ADMIN"];
+    }
     $("#profile_user_rights").text(user_rights);
 }
 
