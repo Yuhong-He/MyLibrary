@@ -13,6 +13,10 @@ $(document).ready(function(){
     if(document.getElementById('search_box').value !== "") {
         $("#clean_search_box").css("display", "block");
     }
+    $('.js-example-basic-single').select2();
+    $('#new_book_category2').select2({
+        dropdownParent: $('#addBookModal')
+    });
 });
 
 function navBlockColor() {
@@ -40,28 +44,28 @@ function active_rows_selector(rows) {
 }
 
 $(document).on("click", "#display_5_rows", function(){
-    document.cookie="current_page=" + 1;
-    document.cookie="book_display_rows=" + 5;
+    document.cookie = "current_page=" + 1;
+    document.cookie = "book_display_rows=" + 5;
     to_page();
     active_rows_selector('display_5_rows');
 });
 
 $(document).on("click", "#display_10_rows", function(){
-    document.cookie="current_page=" + 1;
-    document.cookie="book_display_rows=" + 10;
+    document.cookie = "current_page=" + 1;
+    document.cookie = "book_display_rows=" + 10;
     to_page();
     active_rows_selector('display_10_rows');
 });
 
 $(document).on("click", "#display_20_rows", function(){
-    document.cookie="current_page=" + 1;
-    document.cookie="book_display_rows=" + 20;
+    document.cookie = "current_page=" + 1;
+    document.cookie = "book_display_rows=" + 20;
     to_page();
     active_rows_selector('display_20_rows');
 });
 
 $(document).on("click", "#display_50_rows", function(){
-    document.cookie="book_display_rows=" + 50;
+    document.cookie = "book_display_rows=" + 50;
     to_page();
     active_rows_selector('display_50_rows');
 });
@@ -84,7 +88,7 @@ function to_page() {
         },
         success:function(result){
             currentPage = result.currentPage;
-            document.cookie="current_page=" + currentPage;
+            document.cookie = "current_page=" + currentPage;
             build_books_table(result);
             build_page_info(result);
             build_page_nav(result);
@@ -157,11 +161,11 @@ function build_page_nav(result){
             prePageLi.addClass("disabled");
         } else {
             firstPageLi.click(function () {
-                document.cookie="current_page=" + 1;
+                document.cookie = "current_page=" + 1;
                 to_page();
             });
             prePageLi.click(function () {
-                document.cookie="current_page=" + (currentPage - 1);
+                document.cookie = "current_page=" + (currentPage - 1);
                 to_page();
             });
         }
@@ -175,7 +179,7 @@ function build_page_nav(result){
                 numLi.addClass("active");
             }
             numLi.click(function () {
-                document.cookie="current_page=" + item;
+                document.cookie = "current_page=" + item;
                 to_page();
             });
             ul.append(numLi)
@@ -192,11 +196,11 @@ function build_page_nav(result){
             lastPageLi.addClass("disabled");
         } else {
             nextPageLi.click(function () {
-                document.cookie="current_page=" + (currentPage + 1);
+                document.cookie = "current_page=" + (currentPage + 1);
                 to_page();
             });
             lastPageLi.click(function () {
-                document.cookie="current_page=" + result.pages;
+                document.cookie = "current_page=" + result.pages;
                 to_page();
             });
         }
@@ -257,7 +261,7 @@ function sort_table(column) {
             sort_verify.year = 0;
         }
     }
-    document.cookie="current_page=" + 1;
+    document.cookie = "current_page=" + 1;
     to_page();
 }
 
@@ -280,13 +284,13 @@ $(document).on("click", "#book_year_header", function(){
 $(function() {
     $("#search_box").bind("input propertychange", function () {
         let search_value_before_clean = $("#search_box").val();
-        document.cookie="search_value=" + search_value_before_clean.replace(/\'/g, "\\'");
+        document.cookie = "search_value=" + search_value_before_clean.replace(/\'/g, "\\'");
         if(search_value_before_clean !== "") {
             $("#clean_search_box").css("display", "block");
         } else {
             $("#clean_search_box").css("display", "none");
         }
-        document.cookie="current_page=" + 1;
+        document.cookie = "current_page=" + 1;
         to_page();
     });
 });
@@ -324,9 +328,69 @@ $(document).on("click", "#gbt7714_copy_button", function(){
 });
 
 $(document).on("click", "#clean_search_box", function(){
-    document.cookie="search_value=";
+    document.cookie = "search_value=";
     $("#search_box").val("");
     $("#clean_search_box").css("display", "none");
-    document.cookie="current_page=" + 1;
+    document.cookie = "current_page=" + 1;
     to_page();
+});
+
+$(document).on("click", "#add_new_book_btn", function(){
+    reset_form("#addBookModal form");
+    $("#addBookModal").modal({
+        backdrop: "static"
+    });
+});
+
+$(document).on("click", "#model_new_book_btn", function(){
+    if($("#new_book_title").val() === "") {
+        show_validate_msg("#new_book_title", "error", arrLang[lang]["BOOK_TITLE_REQUIRED"]);
+        return false;
+    }
+    if($("#new_book_category").val() === "") {
+        show_validate_msg("#new_book_category", "error", arrLang[lang]["BOOK_CATEGORY_REQUIRED"]);
+        return false;
+    }
+    $.ajax({
+        url:"../PHP/addBook.php",
+        method:"POST",
+        data:{
+            author: $("#new_book_author").val(),
+            title: $("#new_book_title").val(),
+            location: $("#new_book_location").val(),
+            publisher: $("#new_book_publisher").val(),
+            year: $("#new_book_year").val(),
+            code: $("#new_book_code").val(),
+            category: $("#new_book_category").val(),
+            bookNotRepeat: $("#confirm_book_not_repeat").is(":checked") ? "true" : "",
+            codeNotRepeat: $("#confirm_code_not_repeat").is(":checked") ? "true" : ""
+        },
+        success:function(result){
+            if(result.code === 200){
+                document.cookie = "current_page=" + 1;
+                document.cookie = "search_value=";
+                sort_by_column = "id";
+                to_page();
+                $("#addBookModal").modal('hide');
+            } else if(result.code === 201) {
+                $("#display_book_repeat_checkbox").css("display", "block");
+            } else if(result.code === 202) {
+                $("#display_code_repeat_checkbox").css("display", "block");
+            } else if(result.code === 203) {
+                show_validate_msg("#new_book_category", "error", arrLang[lang]["CATEGORY_NOT_EXIST"]);
+            }
+        }
+    });
+});
+
+$(function() {
+    $("#new_book_title").bind("input propertychange", function () {
+        $("#display_book_repeat_checkbox").css("display", "none");
+    });
+});
+
+$(function() {
+    $("#new_book_code").bind("input propertychange", function () {
+        $("#display_code_repeat_checkbox").css("display", "none");
+    });
 });

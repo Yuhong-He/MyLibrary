@@ -213,19 +213,19 @@ function chooseLanguage(language_id) {
 }
 
 $("#select_english").click(function() {
-    document.cookie="lang=en";
+    document.cookie = "lang=en";
     chooseLanguage("select_english");
     location.reload();
 });
 
 $("#select_hans").click(function() {
-    document.cookie="lang=hans";
+    document.cookie = "lang=hans";
     chooseLanguage("select_hans");
     location.reload();
 });
 
 $("#select_hant").click(function() {
-    document.cookie="lang=hant";
+    document.cookie = "lang=hant";
     chooseLanguage("select_hant");
     location.reload();
 });

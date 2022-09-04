@@ -5,8 +5,8 @@ $pw = $_POST['password'] ?? '';
 $em = $_POST['email'] ?? '';
 if($un != "") {
     require_once "db.php";
-    $code=200;
-    $resUsername=mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un'");
+    $code = 200;
+    $resUsername = mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un'");
     $rewUsername = mysqli_fetch_assoc($resUsername);
     if ($rewUsername['num'] != 0) {
         $code=202;

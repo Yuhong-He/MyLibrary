@@ -1,9 +1,9 @@
 function setCookie(username, password, email, authority, id) {
-    document.cookie="username=" + username;
-    document.cookie=username + "=" + password;
-    document.cookie=username + "Email=" + email;
-    document.cookie=username + "Auth=" + authority;
-    document.cookie=username + "Id=" + id;
+    document.cookie = "username=" + username;
+    document.cookie = username + "=" + password;
+    document.cookie = username + "Email=" + email;
+    document.cookie = username + "Auth=" + authority;
+    document.cookie = username + "Id=" + id;
 }
 
 function getCookie(cName)
