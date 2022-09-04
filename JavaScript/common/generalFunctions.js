@@ -55,8 +55,10 @@ function adminDisplay() {
     const auth = getCookie(username + "Auth");
     if(auth === "2" || auth === "3"){
         $("#nav_manage").css("display", "block");
+        $("#add_new_book_btn_div").css("display", "block");
     } else {
         $("#nav_manage").css("display", "none");
+        $("#add_new_book_btn_div").css("display", "none");
     }
 }
 

@@ -74,6 +74,13 @@
 <!-- Add Book Model -->
 <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
+        <div class="alert alert-danger alert-dismissible" role="alert" id="add_book_fail" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong><span class="lang" key="ERROR"></span></strong>
+            <span id="ADD_BOOK_ERROR"></span>
+        </div>
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -156,7 +163,7 @@
                             <span class="lang" key="CATEGORY"></span>
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" name="category" class="form-control" id="new_book_category">
+                            <select class="js-example-basic-single" name="state" id="new_book_category" style="width: 100%;"></select>
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -195,10 +202,7 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-2 col-md-offset-0 pull-right">
-            <button type="button" class="btn btn-primary" id="add_new_book_btn">
-                <span class="lang" key="ADD"></span>
-            </button>
+        <div class="col-md-1 col-md-offset-0 pull-right">
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="lang" key="DISPLAY_ROWS"></span>
@@ -219,6 +223,11 @@
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="col-md-1 col-md-offset-0 pull-right" id="add_new_book_btn_div">
+            <button type="button" class="btn btn-primary" id="add_new_book_btn">
+                <span class="lang" key="ADD"></span>
+            </button>
         </div>
     </div>
     <div class="row" style="padding-top: 2%">

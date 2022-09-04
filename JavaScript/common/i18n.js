@@ -71,7 +71,8 @@ let arrLang = {
         "BOOK_CATEGORY_REQUIRED": "Book category is required",
         "BOOK_REPEAT_CHECK": "This book may have already been recorded, if not, please click the checkbox and resubmit",
         "CODE_REPEAT_CHECK": "This book code has already been used, if it is correct, please click the checkbox and resubmit",
-        "CATEGORY_NOT_EXIST": "This book code has already been used, if it is correct, please click the checkbox and resubmit",
+        "CATEGORY_NOT_EXIST": "Category not exists",
+        "NO_ACCESS_ADD_BOOK": "You don't have access to add new book. Maybe because the session has expired, please refresh or login again.",
 
         "CHANGE_USERNAME": "Change Username",
         "CHANGE_PASSWORD": "Change Password",
@@ -163,6 +164,7 @@ let arrLang = {
         "BOOK_REPEAT_CHECK": "这本书很可能已被录入，如确认未曾录入，请勾选该方框并再次提交",
         "CODE_REPEAT_CHECK": "该标识码已被使用，请检查，如确认无误请勾选该方框并再次提交",
         "CATEGORY_NOT_EXIST": "分类不存在",
+        "NO_ACCESS_ADD_BOOK": "你没有权限插入数据，可能是因为会话已过期，请刷新页面或登录重试。",
 
         "CHANGE_USERNAME": "修改用户名",
         "CHANGE_PASSWORD": "修改密码",
@@ -254,6 +256,7 @@ let arrLang = {
         "BOOK_REPEAT_CHECK": "這本書很可能已被錄入，如確認未曾錄入，請勾選該方框並再次提交",
         "CODE_REPEAT_CHECK": "該標識碼已被使用，請檢查，如確認無誤請勾選該方框並再次提交",
         "CATEGORY_NOT_EXIST": "分類不存在",
+        "NO_ACCESS_ADD_BOOK": "你沒有權限插入數據，可能是因為會話已過期，請刷新頁面或登錄重試。",
 
         "CHANGE_USERNAME": "修改用戶名",
         "CHANGE_PASSWORD": "修改密碼",

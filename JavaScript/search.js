@@ -3,6 +3,23 @@ let sort_by_column = "id";
 let sort_order = "desc";
 let currentPage;
 
+let allCategory = [];
+$.ajax({
+    url:"../PHP/getCategory.php",
+    method:"GET",
+    data:{
+        lang: getLang() === "en" ? "en" : "zh"
+    },
+    success:function(result){
+        const array1 = { id: 0, text: '-'};
+        allCategory.push(array1);
+        $.each(result, function(index, item){
+            const category = {id: item.id, text: item.name};
+            allCategory.push(category);
+        })
+    }
+});
+
 $(document).ready(function(){
     $("#headerContent").load("header.html");
     $("#footerContent").load("footer.html");
@@ -13,8 +30,8 @@ $(document).ready(function(){
     if(document.getElementById('search_box').value !== "") {
         $("#clean_search_box").css("display", "block");
     }
-    $('.js-example-basic-single').select2();
-    $('#new_book_category2').select2({
+    $('#new_book_category').select2({
+        data: allCategory,
         dropdownParent: $('#addBookModal')
     });
 });
@@ -347,8 +364,9 @@ $(document).on("click", "#model_new_book_btn", function(){
         show_validate_msg("#new_book_title", "error", arrLang[lang]["BOOK_TITLE_REQUIRED"]);
         return false;
     }
-    if($("#new_book_category").val() === "") {
-        show_validate_msg("#new_book_category", "error", arrLang[lang]["BOOK_CATEGORY_REQUIRED"]);
+    if($("#new_book_category").val() === "0") {
+        $("#ADD_BOOK_ERROR").html(arrLang[lang]["BOOK_CATEGORY_REQUIRED"]);
+        $("#add_book_fail").css("display", "block");
         return false;
     }
     $.ajax({
@@ -363,7 +381,9 @@ $(document).on("click", "#model_new_book_btn", function(){
             code: $("#new_book_code").val(),
             category: $("#new_book_category").val(),
             bookNotRepeat: $("#confirm_book_not_repeat").is(":checked") ? "true" : "",
-            codeNotRepeat: $("#confirm_code_not_repeat").is(":checked") ? "true" : ""
+            codeNotRepeat: $("#confirm_code_not_repeat").is(":checked") ? "true" : "",
+            username: getCookie("username"),
+            authority: getCookie(getCookie("username") + "Auth")
         },
         success:function(result){
             if(result.code === 200){
@@ -372,12 +392,17 @@ $(document).on("click", "#model_new_book_btn", function(){
                 sort_by_column = "id";
                 to_page();
                 $("#addBookModal").modal('hide');
+                location.reload();
             } else if(result.code === 201) {
                 $("#display_book_repeat_checkbox").css("display", "block");
             } else if(result.code === 202) {
                 $("#display_code_repeat_checkbox").css("display", "block");
             } else if(result.code === 203) {
-                show_validate_msg("#new_book_category", "error", arrLang[lang]["CATEGORY_NOT_EXIST"]);
+                $("#ADD_BOOK_ERROR").html(arrLang[lang]["CATEGORY_NOT_EXIST"]);
+                $("#add_book_fail").css("display", "block");
+            } else if(result.code === 401) {
+                $("#ADD_BOOK_ERROR").html(arrLang[lang]["NO_ACCESS_ADD_BOOK"]);
+                $("#add_book_fail").css("display", "block");
             }
         }
     });
