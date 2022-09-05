@@ -3,23 +3,6 @@ let sort_by_column = "id";
 let sort_order = "desc";
 let currentPage;
 
-let allCategory = [];
-$.ajax({
-    url:"../PHP/getCategory.php",
-    method:"GET",
-    data:{
-        lang: getLang() === "en" ? "en" : "zh"
-    },
-    success:function(result){
-        const array1 = { id: 0, text: '-'};
-        allCategory.push(array1);
-        $.each(result, function(index, item){
-            const category = {id: item.id, text: item.name};
-            allCategory.push(category);
-        })
-    }
-});
-
 $(document).ready(function(){
     $("#headerContent").load("header.html");
     $("#footerContent").load("footer.html");
@@ -30,19 +13,7 @@ $(document).ready(function(){
     if(document.getElementById('search_box').value !== "") {
         $("#clean_search_box").css("display", "block");
     }
-    let select2_language;
-    if(getLang() === "hans") {
-        select2_language = "zh-CN";
-    } else if (getLang() === "hant") {
-        select2_language = "zh-TW";
-    } else {
-        select2_language = "en";
-    }
-    $('#new_book_category').select2({
-        data: allCategory,
-        dropdownParent: $('#addBookModal'),
-        language: select2_language
-    });
+    add_book_category_select2();
 });
 
 function navBlockColor() {
@@ -67,6 +38,45 @@ function active_rows_selector(rows) {
     $("#display_20_rows").removeClass("active");
     $("#display_50_rows").removeClass("active");
     $("#" + rows).addClass("active");
+}
+
+function add_book_category_select2() {
+    let select2_language;
+    if(getLang() === "hans") {
+        select2_language = "zh-CN";
+    } else if (getLang() === "hant") {
+        select2_language = "zh-TW";
+    } else {
+        select2_language = "en";
+    }
+    $('#new_book_category').select2({
+        ajax: {
+            url: "../PHP/getCategory.php",
+            dataType: 'json',
+            type : 'GET',
+            delay: 250,
+            data: function (params) {
+                return {
+                    search: params.term,
+                    lang: getLang() === "en" ? "en" : "zh"
+                };
+            },
+            processResults: function (result) {
+                let allCategory = [];
+                $.each(result, function(index, item){
+                    const category = {id: item.id, text: item.text};
+                    allCategory.push(category);
+                })
+                return {
+                    results: allCategory
+                };
+            },
+            cache: true
+        },
+        minimumInputLength: 1,
+        dropdownParent: $('#addBookModal'),
+        language: select2_language
+    });
 }
 
 $(document).on("click", "#display_5_rows", function(){
@@ -363,7 +373,7 @@ $(document).on("click", "#clean_search_box", function(){
 
 $(document).on("click", "#add_new_book_btn", function(){
     reset_form("#addBookModal form");
-    $("#select2-new_book_category-container").removeAttr("title").html("-");
+    $("#new_book_category").html("");
     $("#addBookModal").modal({
         backdrop: "static"
     });
@@ -374,7 +384,7 @@ $(document).on("click", "#model_new_book_btn", function(){
         show_validate_msg("#new_book_title", "error", arrLang[lang]["BOOK_TITLE_REQUIRED"]);
         return false;
     }
-    if($("#new_book_category").val() === "0") {
+    if($("#new_book_category").val() === null) {
         $("#ADD_BOOK_ERROR").html(arrLang[lang]["BOOK_CATEGORY_REQUIRED"]);
         $("#add_book_fail").css("display", "block");
         return false;
