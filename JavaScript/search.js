@@ -30,9 +30,18 @@ $(document).ready(function(){
     if(document.getElementById('search_box').value !== "") {
         $("#clean_search_box").css("display", "block");
     }
+    let select2_language;
+    if(getLang() === "hans") {
+        select2_language = "zh-CN";
+    } else if (getLang() === "hant") {
+        select2_language = "zh-TW";
+    } else {
+        select2_language = "en";
+    }
     $('#new_book_category').select2({
         data: allCategory,
-        dropdownParent: $('#addBookModal')
+        dropdownParent: $('#addBookModal'),
+        language: select2_language
     });
 });
 
@@ -353,13 +362,11 @@ $(document).on("click", "#clean_search_box", function(){
 });
 
 $(document).on("click", "#add_new_book_btn", function(){
+    reset_form("#addBookModal form");
+    $("#select2-new_book_category-container").removeAttr("title").html("-");
     $("#addBookModal").modal({
         backdrop: "static"
     });
-});
-
-$(document).on("click", ".close_model_new_book", function(){
-    location.reload();
 });
 
 $(document).on("click", "#model_new_book_btn", function(){

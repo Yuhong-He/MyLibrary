@@ -6,8 +6,7 @@ function setCookie(username, password, email, authority, id) {
     document.cookie = username + "Id=" + id;
 }
 
-function getCookie(cName)
-{
+function getCookie(cName) {
     const name = cName + "=";
     const ca = document.cookie.split(';');
     for(let i=0; i<ca.length; i++)
