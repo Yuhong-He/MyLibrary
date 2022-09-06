@@ -76,6 +76,9 @@ let arrLang = {
         "EDIT_BOOK": "Edit Book",
         "UPDATE": "Update",
         "NO_ACCESS_UPDATE_BOOK": "You don't have access to update book. Maybe because the session has expired, please refresh or login again.",
+        "DEL_BOOK": "Delete Book",
+        "DELETE": "Delete",
+        "NO_ACCESS_DELETE_BOOK": "You don't have access to delete book. Maybe because the session has expired, please refresh or login again.",
 
         "CHANGE_USERNAME": "Change Username",
         "CHANGE_PASSWORD": "Change Password",
@@ -172,6 +175,9 @@ let arrLang = {
         "EDIT_BOOK": "修改书籍",
         "UPDATE": "更新",
         "NO_ACCESS_UPDATE_BOOK": "你没有权限修改数据，可能是因为会话已过期，请刷新页面或登录重试。",
+        "DEL_BOOK": "删除书籍",
+        "DELETE": "删除",
+        "NO_ACCESS_DELETE_BOOK": "你没有权限删除数据，可能是因为会话已过期，请刷新页面或登录重试。",
 
         "CHANGE_USERNAME": "修改用户名",
         "CHANGE_PASSWORD": "修改密码",
@@ -268,6 +274,9 @@ let arrLang = {
         "EDIT_BOOK": "修改書籍",
         "UPDATE": "更新",
         "NO_ACCESS_UPDATE_BOOK": "你没有权限修改数据，可能是因为会话已过期，请刷新页面或登录重试。",
+        "DEL_BOOK": "刪除書籍",
+        "DELETE": "刪除",
+        "NO_ACCESS_DELETE_BOOK": "你没有权限刪除数据，可能是因为会话已过期，请刷新页面或登录重试。",
 
         "CHANGE_USERNAME": "修改用戶名",
         "CHANGE_PASSWORD": "修改密碼",

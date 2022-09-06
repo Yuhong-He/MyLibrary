@@ -5,12 +5,6 @@ if($id != '') {
     require_once "db.php";
     $sql = "SELECT * FROM books WHERE id = $id";
     $result=mysqli_query($db, $sql);
-    $author = "";
-    $title = "";
-    $location = "";
-    $publisher = "";
-    $year = "";
-    $code = "";
     while($row = mysqli_fetch_array($result))
     {
         $author = $row['Author'];
