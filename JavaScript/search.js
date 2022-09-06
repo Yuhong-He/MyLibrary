@@ -132,8 +132,9 @@ function to_page() {
             search: search_value
         },
         success:function(result){
-            const currentPage = result.currentPage;
-            document.cookie = "current_page=" + currentPage;
+            document.cookie = "current_page=" + result.currentPage;
+            document.cookie = "total_page=" + result.pages;
+            document.cookie = "total_data=" + result.count;
             build_books_table(result);
             build_page_info(result);
             build_page_nav(result);
@@ -430,9 +431,7 @@ $(document).on("click", "#insert_new_book_btn", function(){
         },
         success:function(result){
             if(result.code === 200){
-                document.cookie = "current_page=" + 1;
-                document.cookie = "search_value=";
-                document.cookie = "book_display_sort_column=id";
+                restoreSearchPage();
                 to_page();
                 $("#addBookModal").modal('hide');
             } else if(result.code === 201) {
@@ -584,6 +583,12 @@ $(document).on("click", "#confirm_delete_book", function(){
         },
         success:function(result){
             if(result.code === 200) {
+                const current_page = parseInt(getCookie("current_page"));
+                const total_page = parseInt(getCookie("total_page"));
+                const total_data = parseInt(getCookie("total_data"));
+                if((current_page === total_page) && (total_data % 5 === 1)) {
+                    document.cookie = "current_page=" + (current_page - 1);
+                }
                 to_page();
                 $("#delBookModal").modal('hide');
             } else if(result.code === 401) {
@@ -602,17 +607,21 @@ $(document).on("click", "#close_del_book_fail", function(){
 });
 
 $(document).on("click", "#restore_search_page", function(){
+    restoreSearchPage();
+    to_page();
+});
+
+function restoreSearchPage() {
     $("#book_title_sort").html('<i class="fa-solid fa-sort"></i>');
     $("#book_author_sort").html('<i class="fa-solid fa-sort"></i>');
     $("#book_publisher_sort").html('<i class="fa-solid fa-sort"></i>');
     $("#book_year_sort").html('<i class="fa-solid fa-sort"></i>');
     document.cookie = "book_display_rows=" + 5;
+    active_rows_selector('display_5_rows');
     document.cookie = "current_page=" + 1;
     $("#search_box").val("");
     $("#clean_search_box").css("display", "none");
     document.cookie = "search_value=";
     document.cookie = "book_display_sort_column=id";
     document.cookie = "book_display_sort_order=desc";
-    active_rows_selector('display_5_rows');
-    to_page();
-});
+}
