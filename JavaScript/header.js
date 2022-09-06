@@ -101,7 +101,7 @@ $("#model_login_btn").click(function() {
 });
 
 function validate_register_form(userName, password, passwordRepeat, email) {
-    const regName = /(^[a-zA-Z]{3,16}$)/;
+    const regName = /(^[a-zA-Z0-9]{3,16}$)/;
     if(userName===""||userName===null){
         show_validate_msg("#userName_register", "error", arrLang[lang]["ENTER_USERNAME"]);
         return false;

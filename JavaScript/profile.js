@@ -118,7 +118,7 @@ $(document).on("click", "#save_username_button", function(){
     const email = getCookie(oldUsername + "Email");
     const authority = getCookie(oldUsername + "Auth");
     const userId = getCookie(oldUsername + "Id");
-    const regName = /(^[a-zA-Z]{3,16}$)/;
+    const regName = /(^[a-zA-Z0-9]{3,16}$)/;
     if(newUsername===""||newUsername===null){
         show_validate_msg("#new_username", "error", arrLang[lang]["ENTER_USERNAME"]);
         return false;
