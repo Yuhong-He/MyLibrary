@@ -79,11 +79,11 @@
 <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="alert alert-danger alert-dismissible" role="alert" id="add_book_fail" style="display: none;">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" aria-label="Close" id="close_add_book_fail">
                 <span aria-hidden="true">&times;</span>
             </button>
             <strong><span class="lang" key="ERROR"></span></strong>
-            <span id="ADD_BOOK_ERROR"></span>
+            <span id="add_book_error"></span>
         </div>
         <div class="modal-content">
             <div class="modal-header">
@@ -91,7 +91,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">
-                    <span class="lang" key="ADD_BOOK"></span>
+                    <span id="add_book_modal_title"></span>
                 </h4>
             </div>
             <div class="modal-body">
@@ -173,12 +173,19 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <span class="lang" key="CLOSE"></span>
-                </button>
-                <button type="button" class="btn btn-primary" id="model_new_book_btn">
-                    <span class="lang" key="CONFIRM"></span>
-                </button>
+                <div style="float: left">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="lang" key="CLOSE"></span>
+                    </button>
+                </div>
+                <div style="float: right">
+                    <button type="button" class="btn btn-primary" id="insert_new_book_btn">
+                        <span class="lang" key="CONFIRM"></span>
+                    </button>
+                    <button type="button" class="btn btn-primary" id="update_book_btn">
+                        <span class="lang" key="UPDATE"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -205,7 +212,10 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-1 col-md-offset-0 pull-right">
+        <div class="col-md-2 col-md-offset-0 pull-right">
+            <button type="button" class="btn btn-primary" id="add_new_book_btn">
+                <span class="lang" key="ADD"></span>
+            </button>
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="lang" key="DISPLAY_ROWS"></span>
@@ -226,11 +236,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="col-md-1 col-md-offset-0 pull-right" id="add_new_book_btn_div">
-            <button type="button" class="btn btn-primary" id="add_new_book_btn">
-                <span class="lang" key="ADD"></span>
-            </button>
         </div>
     </div>
     <div class="row" style="padding-top: 2%">

@@ -1,5 +1,6 @@
 <?php
 header('Content-Type:text/json;charset=utf-8');
+$id = $_POST['id'] ?? '';
 $au = $_POST['author'] ?? '';
 $tt = $_POST['title'] ?? '';
 $lc = $_POST['location'] ?? '';
@@ -17,14 +18,14 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Auth"])) {
         require_once "db.php";
         $code = 200;
         if ($bookNotRepeat != "true") {
-            $resTitle = mysqli_query($db, "SELECT count(Title) as num FROM books where Title = '$tt'");
+            $resTitle = mysqli_query($db, "SELECT count(Title) as num FROM books where Title = '$tt' and id != '$id'");
             $rewTitle = mysqli_fetch_assoc($resTitle);
             if ($rewTitle['num'] != 0) {
                 $code = 201;
             }
         }
         if ($code == 200 && $cd != "" && $codeNotRepeat != "true") {
-            $resCode = mysqli_query($db, "SELECT count(Code) as num FROM books where Code = '$cd'");
+            $resCode = mysqli_query($db, "SELECT count(Code) as num FROM books where Code = '$cd' and id != '$id'");
             $rewCode = mysqli_fetch_assoc($resCode);
             if ($rewCode['num'] != 0) {
                 $code = 202;
@@ -38,8 +39,8 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Auth"])) {
             }
         }
         if ($code == 200) {
-            $sql = "INSERT INTO books (Author, Title, Location, Publisher, Year, Code, Category)
-			VALUES ('$au', '$tt', '$lc', '$ps', '$yr', '$cd', '$cg')";
+            $sql = "UPDATE books SET Author = '$au', Title = '$tt', Location = '$lc', Publisher = '$ps', Year = '$yr',
+                 Code = '$cd', Category = '$cg' WHERE id = '$id'";
             mysqli_query($db, $sql);
         }
     } else {

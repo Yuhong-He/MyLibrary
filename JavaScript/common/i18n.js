@@ -73,6 +73,9 @@ let arrLang = {
         "CODE_REPEAT_CHECK": "This book code has already been used, if it is correct, please click the checkbox and resubmit",
         "CATEGORY_NOT_EXIST": "Category not exists",
         "NO_ACCESS_ADD_BOOK": "You don't have access to add new book. Maybe because the session has expired, please refresh or login again.",
+        "EDIT_BOOK": "Edit Book",
+        "UPDATE": "Update",
+        "NO_ACCESS_UPDATE_BOOK": "You don't have access to update book. Maybe because the session has expired, please refresh or login again.",
 
         "CHANGE_USERNAME": "Change Username",
         "CHANGE_PASSWORD": "Change Password",
@@ -166,6 +169,9 @@ let arrLang = {
         "CODE_REPEAT_CHECK": "该标识码已被使用，请检查，如确认无误请勾选该方框并再次提交",
         "CATEGORY_NOT_EXIST": "分类不存在",
         "NO_ACCESS_ADD_BOOK": "你没有权限插入数据，可能是因为会话已过期，请刷新页面或登录重试。",
+        "EDIT_BOOK": "修改书籍",
+        "UPDATE": "更新",
+        "NO_ACCESS_UPDATE_BOOK": "你没有权限修改数据，可能是因为会话已过期，请刷新页面或登录重试。",
 
         "CHANGE_USERNAME": "修改用户名",
         "CHANGE_PASSWORD": "修改密码",
@@ -259,6 +265,9 @@ let arrLang = {
         "CODE_REPEAT_CHECK": "該標識碼已被使用，請檢查，如確認無誤請勾選該方框並再次提交",
         "CATEGORY_NOT_EXIST": "分類不存在",
         "NO_ACCESS_ADD_BOOK": "你沒有權限插入數據，可能是因為會話已過期，請刷新頁面或登錄重試。",
+        "EDIT_BOOK": "修改書籍",
+        "UPDATE": "更新",
+        "NO_ACCESS_UPDATE_BOOK": "你没有权限修改数据，可能是因为会话已过期，请刷新页面或登录重试。",
 
         "CHANGE_USERNAME": "修改用戶名",
         "CHANGE_PASSWORD": "修改密碼",
