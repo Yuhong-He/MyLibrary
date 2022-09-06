@@ -30,6 +30,7 @@ let arrLang = {
         "PASSWORD_NOT_MATCH": "Password not match",
         "ENTER_EMAIL": "Please enter email",
         "INVALID_EMAIL": "Invalid email address",
+        "RESTORE": "Restore",
 
         "OVERVIEW": "Overview",
         "INTRODUCTION1": "I come from Yunnan, China. Study Computer Science at Technology University Dublin since 2019. This website was developed based on the final project of Web Development course in the upper semester of 2nd year. The site was build with seperated frontend and backend structure, the frontend using Bootstrap, JavaScript and jQuery, the backend using PHP.",
@@ -79,6 +80,9 @@ let arrLang = {
         "DEL_BOOK": "Delete Book",
         "DELETE": "Delete",
         "NO_ACCESS_DELETE_BOOK": "You don't have access to delete book. Maybe because the session has expired, please refresh or login again.",
+        "NO_USER_RIGHTS_ADD_BOOK": "Your account doesn't have rights to add a new book.",
+        "NO_USER_RIGHTS_UPDATE_BOOK": "Your account doesn't have rights to update the book.",
+        "NO_USER_RIGHTS_DELETE_BOOK": "Your account doesn't have rights to delete the book.",
 
         "CHANGE_USERNAME": "Change Username",
         "CHANGE_PASSWORD": "Change Password",
@@ -178,6 +182,10 @@ let arrLang = {
         "DEL_BOOK": "删除书籍",
         "DELETE": "删除",
         "NO_ACCESS_DELETE_BOOK": "你没有权限删除数据，可能是因为会话已过期，请刷新页面或登录重试。",
+        "RESTORE": "恢复",
+        "NO_USER_RIGHTS_ADD_BOOK": "你的账户没有权限插入新数据。",
+        "NO_USER_RIGHTS_UPDATE_BOOK": "你的账户没有权限修改数据。",
+        "NO_USER_RIGHTS_DELETE_BOOK": "你的账户没有权限删除数据。",
 
         "CHANGE_USERNAME": "修改用户名",
         "CHANGE_PASSWORD": "修改密码",
@@ -277,6 +285,10 @@ let arrLang = {
         "DEL_BOOK": "刪除書籍",
         "DELETE": "刪除",
         "NO_ACCESS_DELETE_BOOK": "你没有权限刪除数据，可能是因为会话已过期，请刷新页面或登录重试。",
+        "RESTORE": "恢復",
+        "NO_USER_RIGHTS_ADD_BOOK": "你的賬戶沒有權限插入新數據。",
+        "NO_USER_RIGHTS_UPDATE_BOOK": "你的賬戶沒有權限修改數據。",
+        "NO_USER_RIGHTS_DELETE_BOOK": "你的账户没有权限刪除数据。",
 
         "CHANGE_USERNAME": "修改用戶名",
         "CHANGE_PASSWORD": "修改密碼",
