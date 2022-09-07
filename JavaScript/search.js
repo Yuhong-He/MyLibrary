@@ -586,7 +586,7 @@ $(document).on("click", "#confirm_delete_book", function(){
                 const current_page = parseInt(getCookie("current_page"));
                 const total_page = parseInt(getCookie("total_page"));
                 const total_data = parseInt(getCookie("total_data"));
-                if((current_page === total_page) && (total_data % 5 === 1)) {
+                if((current_page === total_page) && (total_data % 5 === 1) && (total_data !== 1)) {
                     document.cookie = "current_page=" + (current_page - 1);
                 }
                 to_page();
