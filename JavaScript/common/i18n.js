@@ -61,7 +61,7 @@ let arrLang = {
         "SEARCH_TITLE": "Search book title",
         "NO_DATA": "No Data",
         "BOOK_PAGE_INFO1": "Total ",
-        "BOOK_PAGE_INFO2": " data, and ",
+        "BOOK_PAGE_INFO2": " data, divided ",
         "BOOK_PAGE_INFO3": " pages",
         "FIRST_PAGE": "First",
         "LAST_PAGE": "Last",

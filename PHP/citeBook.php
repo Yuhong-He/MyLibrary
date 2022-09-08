@@ -152,21 +152,26 @@ function generateGBTReference($author, $title, $location, $publisher, $year): st
     return $gbt_reference;
 }
 
-function cleanAuthorForGBT($author)
+function cleanAuthorForGBT($author): string
 {
-    $cleaned_author = preg_replace("/[;,]/","，", $author);
-    $cleaned_author = str_replace("等 ", '等  ', $cleaned_author);
-    $read_file = file_get_contents('../Resources/config/authorTitle.txt');
-    $matched_words = explode(',', $read_file);
-    foreach ($matched_words as $key => $value) {
-        $cleaned_author = str_replace($value, '', $cleaned_author);
+    $cleaned_author_array = explode("; ", $author);
+    for($i = 0; $i < sizeof($cleaned_author_array); $i++) {
+        if(strpos($cleaned_author_array[$i], " ")) {
+            $spaceDigits = strripos($cleaned_author_array[$i], " ", 0);
+            $cleaned_author_array[$i] = substr($cleaned_author_array[$i], 0, $spaceDigits);
+        }
+        if(substr($cleaned_author_array[$i], -3) == "等") {
+            $cleaned_author_array[$i] = substr($cleaned_author_array[$i], 0, -3);
+        }
     }
-    if(substr_count($cleaned_author, "，") > 2) {
-        $result = str_n_pos($cleaned_author, "，", 3);
-        $cleaned_author = substr($cleaned_author, 0, $result);
-        $cleaned_author = $cleaned_author ."，等";
+    $cleaned_author_string = implode("，", $cleaned_author_array);
+    $cleaned_author_string = preg_replace("/[,]/","，", $cleaned_author_string);
+    if(substr_count($cleaned_author_string, "，") > 2) {
+        $result = str_n_pos($cleaned_author_string, "，", 3);
+        $cleaned_author_string = substr($cleaned_author_string, 0, $result);
+        $cleaned_author_string = $cleaned_author_string ."，等";
     }
-    return preg_replace("/， /","，", $cleaned_author);
+    return $cleaned_author_string;
 }
 
 function str_n_pos($str, $find, $n){

@@ -72,7 +72,7 @@ function add_book_category_select2() {
             processResults: function (result) {
                 let allCategory = [];
                 $.each(result, function(index, item){
-                    const category = {id: item.id, text: item.text};
+                    const category = {id: item.id, text: item.name};
                     allCategory.push(category);
                 })
                 return {
