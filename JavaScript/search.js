@@ -109,6 +109,7 @@ $(document).on("click", "#display_20_rows", function(){
 });
 
 $(document).on("click", "#display_50_rows", function(){
+    document.cookie = "current_page=" + 1;
     document.cookie = "book_display_rows=" + 50;
     to_page();
     active_rows_selector('display_50_rows');
