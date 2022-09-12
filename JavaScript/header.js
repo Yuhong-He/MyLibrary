@@ -86,7 +86,7 @@ $("#model_login_btn").click(function() {
         },
         success:function(result){
             if(result.code === 200) {
-                setCookie(userName, password, result.email, result.authority, result.id);
+                setUserCookie(userName, password, result.email, result.authority, result.id);
                 $("#loginModel").modal('hide');
                 location.reload();
             } else {
@@ -154,7 +154,7 @@ $("#model_register_btn").click(function() {
         },
         success:function(result){
             if(result.code === 200) {
-                setCookie(userName, password, result.email, result.authority);
+                setUserCookie(userName, password, result.email, result.authority);
                 $("#userName_login").val(userName);
                 $("#password_login").val(password);
                 $("#registerModel").modal('hide');

@@ -10,13 +10,17 @@ $auth = $_POST['authority'] ?? '';
 $id = $_POST['id'] ?? '';
 session_start();
 if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Password"])) {
-    if ($un == $_SESSION["Username"] && $pw == $_SESSION[$un . "Password"]) {
+    if ($un == $_SESSION["Username"]) {
         require_once "db.php";
         $code = 200;
-        $resPassword = mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un' and Password = '$pw'");
-        $rewPassword = mysqli_fetch_assoc($resPassword);
-        if ($rewPassword['num'] != 1) {
-            $code = 201;
+        $resPassword = mysqli_query($db, "SELECT Password FROM user where UserName = '$un'");
+        $passwordFromDB = "";
+        while($rewPassword = mysqli_fetch_array($resPassword))
+        {
+            $passwordFromDB = $rewPassword[0];
+        }
+        if(!password_verify($pw, $passwordFromDB)) {
+            $code=201;
         }
         if ($code != 201 && $un != $unNew) {
             $resUsername = mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$unNew'");
@@ -33,7 +37,8 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Password"])) {
             }
         }
         if ($code != 201 && $code != 202 && $code != 203) {
-            $sql = "UPDATE user SET UserName='$unNew',Password='$pwNew',Email='$emNew', Authority='$auth' WHERE id='$id'";
+            $encryptPW = password_hash($pwNew, PASSWORD_DEFAULT);
+            $sql = "UPDATE user SET UserName='$unNew',Password='$encryptPW',Email='$emNew', Authority='$auth' WHERE id='$id'";
             mysqli_query($db, $sql);
             $_SESSION["Username"] = $unNew;
             $_SESSION[$unNew . "Password"] = $pwNew;

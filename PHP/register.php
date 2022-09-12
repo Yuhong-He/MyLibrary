@@ -19,7 +19,8 @@ if($un != "") {
         }
     }
     if($code!=202 && $code!=203){
-        $sql="INSERT INTO user (UserName,Password,Email,Authority) VALUES ('$un','$pw','$em',1)";
+        $encryptPW = password_hash($pw, PASSWORD_DEFAULT);
+        $sql="INSERT INTO user (UserName,Password,Email,Authority) VALUES ('$un','$encryptPW','$em',1)";
         mysqli_query($db, $sql);
     }
     mysqli_close($db);

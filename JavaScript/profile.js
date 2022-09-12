@@ -20,9 +20,9 @@ function displayInfo(){
     $("#profile_username").text(username);
     const userID = getCookie(username + "Id");
     $("#profile_user_id").text(userID);
-    const password = getCookie(username);
+    const password = getCookie(username + "Password");
     let hiddenPassword = "";
-    for(let i=0; i<password.length; i++){
+    for(let i=0; i<password; i++){
         hiddenPassword = hiddenPassword + "*";
     }
     $("#profile_password").text(hiddenPassword);
@@ -78,7 +78,7 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
         },
         success:function(result){
             if(result.code === 200) {
-                setCookie(newUsername, newPassword, newEmail, result.authority, result.id);
+                setUserCookie(newUsername, newPassword, newEmail, result.authority, result.id);
 
                 $("#usernameModel").modal('hide');
                 $("#passwordModel").modal('hide');

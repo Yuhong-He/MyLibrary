@@ -8,15 +8,19 @@ if($un != "") {
     $email="";
     $authority="";
     $id="";
-    $resUsername=mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un'");
+    $resUsername = mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un'");
     $rewUsername = mysqli_fetch_assoc($resUsername);
     if ($rewUsername['num'] == 0) {
         $code=400;
     }
     if($code!=400){
-        $resPassword=mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un' and Password = '$pw'");
-        $rewPassword = mysqli_fetch_assoc($resPassword);
-        if ($rewPassword['num'] != 1) {
+        $resPassword = mysqli_query($db, "SELECT Password FROM user where UserName = '$un'");
+        $passwordFromDB = "";
+        while($rewPassword = mysqli_fetch_array($resPassword))
+        {
+            $passwordFromDB = $rewPassword[0];
+        }
+        if(!password_verify($pw, $passwordFromDB)) {
             $code=201;
         }
     }
