@@ -28,7 +28,7 @@ function destroyCookie(username) {
 function displayAfterLoad() {
     setTimeout(() => userDisplay(), 50);
     setTimeout(() => adminDisplay(), 50);
-    setTimeout(() => webMasterDisplay(), 50);
+    setTimeout(() => superAdminDisplay(), 50);
 }
 
 function userDisplay() {
@@ -55,13 +55,15 @@ function adminDisplay() {
     if(auth === "2" || auth === "3"){
         $("#nav_manage").css("display", "block");
         $("#add_new_book_btn").css("visibility", "visible");
+        $("#add_new_category_btn").css("visibility", "visible");
     } else {
         $("#nav_manage").css("display", "none");
         $("#add_new_book_btn").css("visibility", "hidden");
+        $("#add_new_category_btn").css("visibility", "hidden");
     }
 }
 
-function webMasterDisplay() {
+function superAdminDisplay() {
     const username = getCookie("username");
     const auth = getCookie(username + "Auth");
     if(auth === "3"){

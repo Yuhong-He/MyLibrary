@@ -60,9 +60,8 @@ function getBookList($page, $rows, $sortByColumn, $sortOrder, $lang, $search, $d
     $arr = [];
     while($row = mysqli_fetch_array($result))
     {
-        $res = ["title"=>$row['Title'], "author"=>$row['Author'], "publisher"=>$row['Publisher'], "location"=>$row['Location'],
+        $arr[] = ["title"=>$row['Title'], "author"=>$row['Author'], "publisher"=>$row['Publisher'], "location"=>$row['Location'],
             "year"=>$row['Year'], "code"=>$row['Code'], "catId"=>$row['CatId'], "catName"=>$row['CatName'], "id"=>$row['id']];
-        $arr[] = $res;
     }
     return $arr;
 }

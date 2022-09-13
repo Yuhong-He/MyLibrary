@@ -99,7 +99,12 @@ let arrLang = {
         "ADMIN": "Admin",
         "SUPER_ADMIN": "Super Admin",
         "ERROR": "ERROR! ",
-        "INVALID_PROFILE_UPDATE": "Invalid update. Maybe because the session has expired, please refresh or login again."
+        "INVALID_PROFILE_UPDATE": "Invalid update. Maybe because the session has expired, please refresh or login again.",
+
+        "ALL_CATEGORY": "All Category",
+        "ID": "ID",
+        "CATEGORY_NAME": "Category Name",
+        "TOTAL": "Total"
     },
 
     "hans": {
@@ -202,7 +207,12 @@ let arrLang = {
         "ADMIN": "管理员",
         "SUPER_ADMIN": "超级管理员",
         "ERROR": "错误！",
-        "INVALID_PROFILE_UPDATE": "修改无效，可能是因为会话已过期，请刷新页面或登录重试。"
+        "INVALID_PROFILE_UPDATE": "修改无效，可能是因为会话已过期，请刷新页面或登录重试。",
+
+        "ALL_CATEGORY": "所有分类",
+        "ID": "ID",
+        "CATEGORY_NAME": "分类名",
+        "TOTAL": "总计"
     },
 
     "hant": {
@@ -305,6 +315,11 @@ let arrLang = {
         "ADMIN": "管理員",
         "SUPER_ADMIN": "超級管理員",
         "ERROR": "錯誤！",
-        "INVALID_PROFILE_UPDATE": "修改無效，可能是因為會話已過期，請刷新頁面或登錄重試。"
+        "INVALID_PROFILE_UPDATE": "修改無效，可能是因為會話已過期，請刷新頁面或登錄重試。",
+
+        "ALL_CATEGORY": "所有分類",
+        "ID": "ID",
+        "CATEGORY_NAME": "分類名",
+        "TOTAL": "總計"
     }
 };
