@@ -40,24 +40,24 @@ function displayInfo(){
 }
 
 $(document).on("click", "#edit_username_button", function(){
-    reset_form("#usernameModel form");
+    reset_form("#usernameModal form");
     $("#new_username").val(getCookie("username"));
-    $("#usernameModel").modal({
+    $("#usernameModal").modal({
         backdrop:"static"
     });
 });
 
 $(document).on("click", "#edit_password_button", function(){
-    reset_form("#passwordModel form");
-    $("#passwordModel").modal({
+    reset_form("#passwordModal form");
+    $("#passwordModal").modal({
         backdrop:"static"
     });
 });
 
 $(document).on("click", "#edit_email_button", function(){
-    reset_form("#emailModel form");
+    reset_form("#emailModal form");
     $("#new_email").val(getCookie(getCookie("username") + "Email"));
-    $("#emailModel").modal({
+    $("#emailModal").modal({
         backdrop:"static"
     });
 });
@@ -80,9 +80,9 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
             if(result.code === 200) {
                 setUserCookie(newUsername, newPassword, newEmail, result.authority, result.id);
 
-                $("#usernameModel").modal('hide');
-                $("#passwordModel").modal('hide');
-                $("#emailModel").modal('hide');
+                $("#usernameModal").modal('hide');
+                $("#passwordModal").modal('hide');
+                $("#emailModal").modal('hide');
 
                 $("#profile_username").html(newUsername);
                 displayAfterLoad();

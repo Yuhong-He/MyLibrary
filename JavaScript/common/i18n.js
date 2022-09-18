@@ -104,7 +104,17 @@ let arrLang = {
         "ALL_CATEGORY": "All Category",
         "ID": "ID",
         "CATEGORY_NAME": "Category Name",
-        "TOTAL": "Total"
+        "TOTAL": "Total",
+        "ADD_CATEGORY": "Add Category",
+        "CATEGORY_ID_REQUIRED": "Category ID is required",
+        "CATEGORY_NAME_REQUIRED": "Category name is required",
+        "CATEGORY_ZH_NAME": "ZH name",
+        "CATEGORY_EN_NAME": "EN name",
+        "CATEGORY_ID_REPEAT": "This ID has been used.",
+        "CATEGORY_NAME_REPEAT": "This Name has been used.",
+        "NO_ACCESS_ADD_CATEGORY": "You don't have access to add new category. Maybe because the session has expired, please refresh or login again.",
+        "NO_USER_RIGHTS_ADD_CATEGORY": "Your account doesn't have rights to add a new category.",
+        "CAT_ID_FORMAT_NOT_MATCH": "ID must be 6 digits number, can not start with 0"
     },
 
     "hans": {
@@ -212,7 +222,17 @@ let arrLang = {
         "ALL_CATEGORY": "所有分类",
         "ID": "ID",
         "CATEGORY_NAME": "分类名",
-        "TOTAL": "总计"
+        "TOTAL": "总计",
+        "ADD_CATEGORY": "新增分类",
+        "CATEGORY_ID_REQUIRED": "必须填写分类ID",
+        "CATEGORY_NAME_REQUIRED": "必须填写分类名称",
+        "CATEGORY_ZH_NAME": "中文名",
+        "CATEGORY_EN_NAME": "英文名",
+        "CATEGORY_ID_REPEAT": "此ID已被使用",
+        "CATEGORY_NAME_REPEAT": "此分类名已被使用",
+        "NO_ACCESS_ADD_CATEGORY": "你没有权限插入数据，可能是因为会话已过期，请刷新页面或登录重试。",
+        "NO_USER_RIGHTS_ADD_CATEGORY": "你的账户没有权限插入新数据。",
+        "CAT_ID_FORMAT_NOT_MATCH": "ID必须是六位数字，且起始位不能是0"
     },
 
     "hant": {
@@ -320,6 +340,16 @@ let arrLang = {
         "ALL_CATEGORY": "所有分類",
         "ID": "ID",
         "CATEGORY_NAME": "分類名",
-        "TOTAL": "總計"
+        "TOTAL": "總計",
+        "ADD_CATEGORY": "新增分類",
+        "CATEGORY_ID_REQUIRED": "必須填寫分類ID",
+        "CATEGORY_NAME_REQUIRED": "必須填寫分類名稱",
+        "CATEGORY_ZH_NAME": "中文名",
+        "CATEGORY_EN_NAME": "英文名",
+        "CATEGORY_ID_REPEAT": "此ID已被使用",
+        "CATEGORY_NAME_REPEAT": "此分類名已被使用",
+        "NO_ACCESS_ADD_CATEGORY": "你沒有權限插入數據，可能是因為會話已過期，請刷新頁面或登錄重試。",
+        "NO_USER_RIGHTS_ADD_CATEGORY": "你的賬戶沒有權限插入新數據。",
+        "CAT_ID_FORMAT_NOT_MATCH": "ID必須是六位數字，且起始位不能是0"
     }
 };

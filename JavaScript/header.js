@@ -10,8 +10,8 @@ $(document).ready(function(){
 $('.dropdown-toggle').dropdown();
 
 function login(){
-    reset_form("#loginModel form");
-    $("#loginModel").modal({
+    reset_form("#loginModal form");
+    $("#loginModal").modal({
         backdrop:"static"
     });
 }
@@ -21,7 +21,7 @@ $("#loginLogout_btn").click(function() {
 });
 
 function logout() {
-    $("#logoutModel").modal({
+    $("#logoutModal").modal({
         backdrop:"static"
     });
 }
@@ -47,8 +47,8 @@ $("#username_btn").click(function() {
 });
 
 $("#signup_btn").click(function() {
-    reset_form("#registerModel form");
-    $("#registerModel").modal({
+    reset_form("#registerModal form");
+    $("#registerModal").modal({
         backdrop:"static"
     });
 });
@@ -71,7 +71,7 @@ function validate_login_form() {
     return true;
 }
 
-$("#model_login_btn").click(function() {
+$("#modal_login_btn").click(function() {
     if(!validate_login_form()){
         return false;
     }
@@ -87,7 +87,7 @@ $("#model_login_btn").click(function() {
         success:function(result){
             if(result.code === 200) {
                 setUserCookie(userName, password, result.email, result.authority, result.id);
-                $("#loginModel").modal('hide');
+                $("#loginModal").modal('hide');
                 location.reload();
             } else {
                 if(result.code === 201){
@@ -136,7 +136,7 @@ function validate_register_form(userName, password, passwordRepeat, email) {
     return true;
 }
 
-$("#model_register_btn").click(function() {
+$("#modal_register_btn").click(function() {
     const userName = $("#userName_register").val();
     const password = $("#password_register").val();
     const passwordRepeat = $("#password_register_repeat").val();
@@ -157,7 +157,7 @@ $("#model_register_btn").click(function() {
                 setUserCookie(userName, password, result.email, result.authority);
                 $("#userName_login").val(userName);
                 $("#password_login").val(password);
-                $("#registerModel").modal('hide');
+                $("#registerModal").modal('hide');
             } else {
                 if(result.code === 202){
                     show_validate_msg("#userName_register", "error", arrLang[lang]["USERNAME_EXIST"]);

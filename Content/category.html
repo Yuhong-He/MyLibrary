@@ -7,7 +7,77 @@
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/category.js"></script>
 </head>
+
 <body>
+<!--Add Category Modal-->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="alert alert-danger alert-dismissible" role="alert" id="add_category_fail" style="display: none;">
+            <button type="button" class="close" aria-label="Close" id="close_add_category_fail">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong><span class="lang" key="ERROR"></span></strong>
+            <span id="add_category_error"></span>
+        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span id="add_category_modal_title"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="ID"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="category_id" class="form-control" id="new_category_id">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="CATEGORY_ZH_NAME"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="category_name" class="form-control" id="new_category_zh_name">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="CATEGORY_EN_NAME"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="category_name" class="form-control" id="new_category_en_name">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div style="float: left">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="lang" key="CLOSE"></span>
+                    </button>
+                </div>
+                <div style="float: right">
+                    <button type="button" class="btn btn-primary" id="insert_new_category_btn">
+                        <span class="lang" key="CONFIRM"></span>
+                    </button>
+                    <button type="button" class="btn btn-primary" id="update_category_btn">
+                        <span class="lang" key="UPDATE"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--Main Body-->
 <div id="headerContent"></div>
 <div class="container" id="main_container">
