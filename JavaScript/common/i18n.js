@@ -114,7 +114,10 @@ let arrLang = {
         "CATEGORY_NAME_REPEAT": "This Name has been used.",
         "NO_ACCESS_ADD_CATEGORY": "You don't have access to add new category. Maybe because the session has expired, please refresh or login again.",
         "NO_USER_RIGHTS_ADD_CATEGORY": "Your account doesn't have rights to add a new category.",
-        "CAT_ID_FORMAT_NOT_MATCH": "ID must be 6 digits number, can not start with 0"
+        "CAT_ID_FORMAT_NOT_MATCH": "ID must be 6 digits number, can not start with 0",
+        "EDIT_CATEGORY": "Edit Category",
+        "NO_ACCESS_EDIT_CATEGORY": "You don't have access to edit the category. Maybe because the session has expired, please refresh or login again.",
+        "NO_USER_RIGHTS_EDIT_CATEGORY": "Your account doesn't have rights to edit the category."
     },
 
     "hans": {
@@ -232,7 +235,10 @@ let arrLang = {
         "CATEGORY_NAME_REPEAT": "此分类名已被使用",
         "NO_ACCESS_ADD_CATEGORY": "你没有权限插入数据，可能是因为会话已过期，请刷新页面或登录重试。",
         "NO_USER_RIGHTS_ADD_CATEGORY": "你的账户没有权限插入新数据。",
-        "CAT_ID_FORMAT_NOT_MATCH": "ID必须是六位数字，且起始位不能是0"
+        "CAT_ID_FORMAT_NOT_MATCH": "ID必须是六位数字，且起始位不能是0",
+        "EDIT_CATEGORY": "修改分类",
+        "NO_ACCESS_EDIT_CATEGORY": "你没有权限修改数据，可能是因为会话已过期，请刷新页面或登录重试。",
+        "NO_USER_RIGHTS_EDIT_CATEGORY": "你的账户没有权限修改数据。"
     },
 
     "hant": {
@@ -350,6 +356,9 @@ let arrLang = {
         "CATEGORY_NAME_REPEAT": "此分類名已被使用",
         "NO_ACCESS_ADD_CATEGORY": "你沒有權限插入數據，可能是因為會話已過期，請刷新頁面或登錄重試。",
         "NO_USER_RIGHTS_ADD_CATEGORY": "你的賬戶沒有權限插入新數據。",
-        "CAT_ID_FORMAT_NOT_MATCH": "ID必須是六位數字，且起始位不能是0"
+        "CAT_ID_FORMAT_NOT_MATCH": "ID必須是六位數字，且起始位不能是0",
+        "EDIT_CATEGORY": "修改分類",
+        "NO_ACCESS_EDIT_CATEGORY": "你沒有權限修改數據，可能是因為會話已過期，請刷新頁面或登錄重試。",
+        "NO_USER_RIGHTS_EDIT_CATEGORY": "你的賬戶沒有權限修改數據。"
     }
 };

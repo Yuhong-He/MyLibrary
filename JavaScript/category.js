@@ -296,7 +296,98 @@ $(document).on("click", "#insert_new_category_btn", function(){
                 $("#add_category_error").html(arrLang[lang]["NO_ACCESS_ADD_CATEGORY"]);
                 $("#add_category_fail").css("display", "block");
             } else if(result.code === 402) {
-                $("#add_category_error").html(arrLang[lang]["NO_USER_RIGHTS_ADD_BOOK"]);
+                $("#add_category_error").html(arrLang[lang]["NO_USER_RIGHTS_ADD_CATEGORY"]);
+                $("#add_category_fail").css("display", "block");
+            }
+        }
+    });
+});
+
+$(document).on("click", ".edit-btn", function(){
+    $("#add_category_modal_title").html(arrLang[lang]["EDIT_CATEGORY"]);
+    reset_form("#addCategoryModal form");
+    const cat_id = $(this).attr("edit-id");
+    $.ajax({
+        url:"../PHP/getOneCategory.php",
+        method:"GET",
+        data:{
+            id: cat_id
+        },
+        success:function(result){
+            $("#new_category_id").val(result.id);
+            $("#new_category_zh_name").val(result.zh_name);
+            $("#new_category_en_name").val(result.en_name);
+            $("#insert_new_category_btn").css("display", "none");
+            $("#update_category_btn").attr("cat-id", result.id).attr("cat-zh", result.zh_name).attr("cat-en", result.en_name)
+                .css("display", "block");
+        }
+    });
+    $("#addCategoryModal").modal({
+        backdrop: "static"
+    });
+});
+
+$(document).on("click", "#update_category_btn", function(){
+    const orig_id = $(this).attr("cat-id");
+    const orig_zh = $(this).attr("cat-zh");
+    const orig_en = $(this).attr("cat-en");
+    const id = $("#new_category_id").val().trim();
+    if(id === "") {
+        show_validate_msg("#new_category_id", "error", arrLang[lang]["CATEGORY_ID_REQUIRED"]);
+        return false;
+    }
+    const regId = /(^[0-9]{6}$)/;
+    if(!regId.test(id)) {
+        show_validate_msg("#new_category_id", "error", arrLang[lang]["CAT_ID_FORMAT_NOT_MATCH"]);
+        return false;
+    }
+    if(id < 100000) {
+        show_validate_msg("#new_category_id", "error", arrLang[lang]["CAT_ID_FORMAT_NOT_MATCH"]);
+        return false;
+    }
+    const zh_name = $("#new_category_zh_name").val().trim();
+    if(zh_name === "") {
+        show_validate_msg("#new_category_zh_name", "error", arrLang[lang]["CATEGORY_NAME_REQUIRED"]);
+        return false;
+    }
+    const en_name = $("#new_category_en_name").val().trim();
+    if(en_name === "") {
+        show_validate_msg("#new_category_en_name", "error", arrLang[lang]["CATEGORY_NAME_REQUIRED"]);
+        return false;
+    }
+    $.ajax({
+        url:"../PHP/updateCategory.php",
+        method:"POST",
+        data:{
+            orig_id: orig_id,
+            orig_zh: orig_zh,
+            orig_en: orig_en,
+            id: id,
+            zh_name: zh_name,
+            en_name: en_name,
+            rows: rows,
+            username: getCookie("username"),
+            authority: getCookie(getCookie("username") + "Auth")
+        },
+        success:function(result){
+            if(result.code === 200){
+                search = "";
+                $("#search_box").val("");
+                $("#clean_search_box").css("display", "none");
+                page = result.page;
+                to_page();
+                $("#addCategoryModal").modal('hide');
+            } else if(result.code === 201) {
+                show_validate_msg("#new_category_id", "error", arrLang[lang]["CATEGORY_ID_REPEAT"]);
+            } else if(result.code === 202) {
+                show_validate_msg("#new_category_zh_name", "error", arrLang[lang]["CATEGORY_NAME_REPEAT"]);
+            } else if(result.code === 203) {
+                show_validate_msg("#new_category_en_name", "error", arrLang[lang]["CATEGORY_NAME_REPEAT"]);
+            } else if(result.code === 401) {
+                $("#add_category_error").html(arrLang[lang]["NO_ACCESS_EDIT_CATEGORY"]);
+                $("#add_category_fail").css("display", "block");
+            } else if(result.code === 402) {
+                $("#add_category_error").html(arrLang[lang]["NO_USER_RIGHTS_EDIT_CATEGORY"]);
                 $("#add_category_fail").css("display", "block");
             }
         }
