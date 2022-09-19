@@ -117,7 +117,11 @@ let arrLang = {
         "CAT_ID_FORMAT_NOT_MATCH": "ID must be 6 digits number, can not start with 0",
         "EDIT_CATEGORY": "Edit Category",
         "NO_ACCESS_EDIT_CATEGORY": "You don't have access to edit the category. Maybe because the session has expired, please refresh or login again.",
-        "NO_USER_RIGHTS_EDIT_CATEGORY": "Your account doesn't have rights to edit the category."
+        "NO_USER_RIGHTS_EDIT_CATEGORY": "Your account doesn't have rights to edit the category.",
+        "DEL_CATEGORY": "Delete Category",
+        "CATEGORY_NOT_EMPTY": "Category is not empty, can only delete empty category.",
+        "NO_ACCESS_DELETE_CATEGORY": "You don't have access to delete the category. Maybe because the session has expired, please refresh or login again.",
+        "NO_USER_RIGHTS_DELETE_CATEGORY": "Your account doesn't have rights to delete the category."
     },
 
     "hans": {
@@ -238,7 +242,11 @@ let arrLang = {
         "CAT_ID_FORMAT_NOT_MATCH": "ID必须是六位数字，且起始位不能是0",
         "EDIT_CATEGORY": "修改分类",
         "NO_ACCESS_EDIT_CATEGORY": "你没有权限修改数据，可能是因为会话已过期，请刷新页面或登录重试。",
-        "NO_USER_RIGHTS_EDIT_CATEGORY": "你的账户没有权限修改数据。"
+        "NO_USER_RIGHTS_EDIT_CATEGORY": "你的账户没有权限修改数据。",
+        "DEL_CATEGORY": "删除分类",
+        "CATEGORY_NOT_EMPTY": "此分类仍有书籍！只可以删除空分类！",
+        "NO_ACCESS_DELETE_CATEGORY": "你没有权限删除数据，可能是因为会话已过期，请刷新页面或登录重试。",
+        "NO_USER_RIGHTS_DELETE_CATEGORY": "你的账户没有权限删除数据。"
     },
 
     "hant": {
@@ -359,6 +367,10 @@ let arrLang = {
         "CAT_ID_FORMAT_NOT_MATCH": "ID必須是六位數字，且起始位不能是0",
         "EDIT_CATEGORY": "修改分類",
         "NO_ACCESS_EDIT_CATEGORY": "你沒有權限修改數據，可能是因為會話已過期，請刷新頁面或登錄重試。",
-        "NO_USER_RIGHTS_EDIT_CATEGORY": "你的賬戶沒有權限修改數據。"
+        "NO_USER_RIGHTS_EDIT_CATEGORY": "你的賬戶沒有權限修改數據。",
+        "DEL_CATEGORY": "刪除分類",
+        "CATEGORY_NOT_EMPTY": "此分類仍有書籍！只可以刪除空分類！",
+        "NO_ACCESS_DELETE_CATEGORY": "你沒有權限刪除數據，可能是因為會話已過期，請刷新頁面或登錄重試。",
+        "NO_USER_RIGHTS_DELETE_CATEGORY": "你的賬戶沒有權限刪除數據。"
     }
 };

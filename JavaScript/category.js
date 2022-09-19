@@ -1,6 +1,8 @@
 let page = 1;
 let rows = 5;
 let search = "";
+let total_page = 0;
+let total_data = 0;
 $(document).ready(function(){
     $("#headerContent").load("header.html");
     $("#footerContent").load("footer.html");
@@ -152,6 +154,8 @@ function build_categories_table(result) {
 
 function build_page_info(result){
     $("#page_info_area").empty();
+    total_page = result.pages;
+    total_data = result.count;
     if(result.count > 0) {
         $("#page_info_area").append(
             arrLang[lang]["BOOK_PAGE_INFO1"] +
@@ -235,6 +239,7 @@ function build_page_nav(result){
 $(document).on("click", "#add_new_category_btn", function(){
     $("#add_category_modal_title").html(arrLang[lang]["ADD_CATEGORY"]);
     reset_form("#addCategoryModal form");
+    $("#add_category_fail").css("display", "none");
     $("#insert_new_category_btn").css("display", "block");
     $("#update_category_btn").css("display", "none");
     $("#addCategoryModal").modal({
@@ -305,6 +310,7 @@ $(document).on("click", "#insert_new_category_btn", function(){
 
 $(document).on("click", ".edit-btn", function(){
     $("#add_category_modal_title").html(arrLang[lang]["EDIT_CATEGORY"]);
+    $("#add_category_fail").css("display", "none");
     reset_form("#addCategoryModal form");
     const cat_id = $(this).attr("edit-id");
     $.ajax({
@@ -392,4 +398,66 @@ $(document).on("click", "#update_category_btn", function(){
             }
         }
     });
+});
+
+$(document).on("click", ".del-btn", function(){
+    $("#del_category_fail").css("display", "none");
+    const cat_id = $(this).attr("del-id");
+    $.ajax({
+        url:"../PHP/getOneCategory.php",
+        method:"GET",
+        data:{
+            id: cat_id
+        },
+        success:function(result){
+            if(getLang() === "en") {
+                $("#confirm_delete_category_info").html(result.en_name);
+            } else {
+                $("#confirm_delete_category_info").html(result.zh_name);
+            }
+            $("#confirm_delete_category").attr("cat-id", result.id);
+        }
+    });
+    $("#delCategoryModal").modal({
+        backdrop: "static"
+    });
+});
+
+$(document).on("click", "#confirm_delete_category", function(){
+    const cat_id = $(this).attr("cat-id");
+    $.ajax({
+        url:"../PHP/deleteCategory.php",
+        method:"POST",
+        data:{
+            id: cat_id,
+            username: getCookie("username"),
+            authority: getCookie(getCookie("username") + "Auth")
+        },
+        success:function(result){
+            if(result.code === 200) {
+                if((page === total_page) && (total_data % 5 === 1) && (total_data !== 1)) {
+                    page = page - 1;
+                }
+                to_page();
+                $("#delCategoryModal").modal('hide');
+            } else if(result.code === 201) {
+                $("#del_category_error").html(arrLang[lang]["CATEGORY_NOT_EMPTY"]);
+                $("#del_category_fail").css("display", "block");
+            } else if(result.code === 401) {
+                $("#del_category_error").html(arrLang[lang]["NO_ACCESS_DELETE_CATEGORY"]);
+                $("#del_category_fail").css("display", "block");
+            } else if(result.code === 402) {
+                $("#del_category_error").html(arrLang[lang]["NO_USER_RIGHTS_DELETE_CATEGORY"]);
+                $("#del_category_fail").css("display", "block");
+            }
+        }
+    });
+});
+
+$(document).on("click", "#close_add_category_fail", function(){
+    $("#add_category_fail").css("display", "none");
+});
+
+$(document).on("click", "#close_del_category_fail", function(){
+    $("#del_category_fail").css("display", "none");
 });
