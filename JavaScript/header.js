@@ -75,8 +75,16 @@ $("#modal_login_btn").click(function() {
     if(!validate_login_form()){
         return false;
     }
-    const userName = $("#userName_login").val();
-    const password = $("#password_login").val();
+    const userName = $("#userName_login").val().trim();
+    if(userName.length > 15) {
+        show_validate_msg("#userName_login", "error", arrLang[lang]["USERNAME_TOO_LONG"]);
+        return false;
+    }
+    const password = $("#password_login").val().trim();
+    if(password.length > 15) {
+        show_validate_msg("#password_login", "error", arrLang[lang]["PASSWORD_TOO_LONG"]);
+        return false;
+    }
     $.ajax({
         url:"../PHP/login.php",
         method:"POST",
@@ -111,7 +119,7 @@ function validate_register_form(userName, password, passwordRepeat, email) {
     } else {
         show_validate_msg("#userName_register", "success", "");
     }
-    if(password.length < 5){
+    if(password.length < 5 || password.length > 16){
         show_validate_msg("#password_register", "error", arrLang[lang]["INVALID_PASSWORD"]);
         return false;
     } else {
@@ -126,6 +134,9 @@ function validate_register_form(userName, password, passwordRepeat, email) {
     const regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
     if(email === ""){
         show_validate_msg("#email_register", "error", arrLang[lang]["ENTER_EMAIL"]);
+        return false;
+    } else if (email.length > 50){
+        show_validate_msg("#email_register", "error", arrLang[lang]["EMAIL_TOO_LONG"])
         return false;
     } else if (!regEmail.test(email)){
         show_validate_msg("#email_register", "error", arrLang[lang]["INVALID_EMAIL"])
@@ -159,11 +170,12 @@ $("#modal_register_btn").click(function() {
                 $("#password_login").val(password);
                 $("#registerModal").modal('hide');
             } else {
-                if(result.code === 202){
+                if(result.code === 202) {
                     show_validate_msg("#userName_register", "error", arrLang[lang]["USERNAME_EXIST"]);
-                }
-                if(result.code === 203){
+                } else if(result.code === 203) {
                     show_validate_msg("#email_register", "error", arrLang[lang]["EMAIL_USED"]);
+                } else if(result.code === 204) {
+                    show_validate_msg("#email_register", "error", arrLang[lang]["EMAIL_INVALID"]);
                 }
             }
         }

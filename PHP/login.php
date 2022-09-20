@@ -2,18 +2,19 @@
 header('Content-Type:text/json;charset=utf-8');
 $un = $_POST['username'] ?? '';
 $pw = $_POST['password'] ?? '';
-if($un != "") {
+if(strlen($un) > 0 && strlen($un) < 16 &&
+    strlen($pw) > 0 && strlen($pw) < 16) {
     require_once "db.php";
-    $code=200;
-    $email="";
-    $authority="";
-    $id="";
+    $code = 200;
+    $email = "";
+    $authority = "";
+    $id = "";
     $resUsername = mysqli_query($db, "SELECT count(UserName) as num FROM user where UserName = '$un'");
     $rewUsername = mysqli_fetch_assoc($resUsername);
     if ($rewUsername['num'] == 0) {
-        $code=400;
+        $code = 400;
     }
-    if($code!=400){
+    if($code != 400){
         $resPassword = mysqli_query($db, "SELECT Password FROM user where UserName = '$un'");
         $passwordFromDB = "";
         while($rewPassword = mysqli_fetch_array($resPassword))
@@ -21,10 +22,10 @@ if($un != "") {
             $passwordFromDB = $rewPassword[0];
         }
         if(!password_verify($pw, $passwordFromDB)) {
-            $code=201;
+            $code = 201;
         }
     }
-    if($code!=201 && $code!= 400){
+    if($code != 201 && $code != 400){
         $result=mysqli_query($db, "SELECT Email,Authority,id FROM user where UserName = '$un'");
         while($row=mysqli_fetch_row($result))
         {
@@ -47,4 +48,6 @@ if($un != "") {
     );
     $jsonEncode = json_encode($str);
     echo $jsonEncode;
+} else {
+    echo "Are u trying to do something?\n:(";
 }

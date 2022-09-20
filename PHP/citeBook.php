@@ -1,10 +1,11 @@
 <?php
 header('Content-Type:text/json;charset=utf-8');
 $id = $_GET['id'] ?? '';
-if($id != '') {
+if((is_numeric($id)) && ($id > 0)) {
     require_once "db.php";
     $sql = "SELECT * FROM books WHERE id = $id";
     $result=mysqli_query($db, $sql);
+    $check = false;
     while($row = mysqli_fetch_array($result))
     {
         $author = $row['Author'];
@@ -13,17 +14,24 @@ if($id != '') {
         $publisher = $row['Publisher'];
         $year = $row['Year'];
         $code = $row['Code'];
+        $check = true;
     }
     mysqli_close($db);
-    $wikipedia = generateWikipediaReference($author, $title, $location, $publisher, $year, $code);
-    $gbt7714 = generateGBTReference($author, $title, $location, $publisher, $year);
-    $str = array
-    (
-        'wikipedia'=>$wikipedia,
-        'gbt7714'=>$gbt7714
-    );
-    $jsonEncode = json_encode($str);
-    echo $jsonEncode;
+    if($check) {
+        $wikipedia = generateWikipediaReference($author, $title, $location, $publisher, $year, $code);
+        $gbt7714 = generateGBTReference($author, $title, $location, $publisher, $year);
+        $str = array
+        (
+            'wikipedia'=>$wikipedia,
+            'gbt7714'=>$gbt7714
+        );
+        $jsonEncode = json_encode($str);
+        echo $jsonEncode;
+    } else {
+        echo "Are u trying to do something?\n:(";
+    }
+} else {
+    echo "Are u trying to do something?\n:(";
 }
 
 function generateWikipediaReference($author, $title, $location, $publisher, $year, $code): string

@@ -337,9 +337,9 @@ $(document).on("click", "#book_year_header", function(){
 
 $(function() {
     $("#search_box").bind("input propertychange", function () {
-        let search_value_before_clean = $("#search_box").val();
-        document.cookie = "search_value=" + search_value_before_clean.replace(/\'/g, "\\'");
-        if(search_value_before_clean !== "") {
+        let search_value = $("#search_box").val();
+        document.cookie = "search_value=" + search_value;
+        if(search_value !== "") {
             $("#clean_search_box").css("display", "block");
         } else {
             $("#clean_search_box").css("display", "none");

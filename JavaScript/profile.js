@@ -103,6 +103,8 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
                     show_validate_msg("#new_username", "error", arrLang[lang]["USERNAME_EXIST"]);
                 } else if(result.code === 203) {
                     show_validate_msg("#new_email", "error", arrLang[lang]["EMAIL_USED"]);
+                } else if(result.code === 204) {
+                    show_validate_msg("#new_email", "error", arrLang[lang]["EMAIL_INVALID"]);
                 } else if(result.code === 401) {
                     $("#profile_update_fail").css("display", "block");
                 }
@@ -139,7 +141,7 @@ $(document).on("click", "#save_password_button", function(){
     const email = getCookie(username + "Email");
     const authority = getCookie(username + "Auth");
     const userId = getCookie(username + "Id");
-    if(newPassword.length < 5){
+    if(newPassword.length < 5 || newPassword.length > 16){
         show_validate_msg("#new_password", "error", arrLang[lang]["INVALID_PASSWORD"]);
         return false;
     } else {
@@ -164,6 +166,9 @@ $(document).on("click", "#save_email_button", function(){
     const regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
     if(newEmail === ""){
         show_validate_msg("#new_email", "error", arrLang[lang]["ENTER_EMAIL"]);
+        return false;
+    }else if (newEmail.length > 50) {
+        show_validate_msg("#new_email", "error", arrLang[lang]["EMAIL_TOO_LONG"])
         return false;
     } else if (!regEmail.test(newEmail)){
         show_validate_msg("#new_email", "error", arrLang[lang]["INVALID_EMAIL"])

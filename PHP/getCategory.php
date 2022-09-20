@@ -4,6 +4,7 @@ require_once "db.php";
 $lang = $_GET['lang'] ?? '';
 $search = $_GET['search'] ?? '';
 if($search != "") {
+    $search = preg_replace("/[\']/","\\'", $search);
     if($lang == "zh"){
         $sql = "SELECT CategoryID, CategoryName FROM category WHERE CategoryName LIKE '%$search%'";
     } else {
@@ -16,4 +17,6 @@ if($search != "") {
         $arr[] = ["id"=>$row[0], "name"=>$row[1]];
     }
     echo json_encode($arr);
+} else {
+    echo "Are u trying to do something?\n:(";
 }

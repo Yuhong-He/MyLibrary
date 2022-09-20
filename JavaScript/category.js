@@ -55,9 +55,9 @@ $(document).on("click", "#display_50_rows", function(){
 
 $(function() {
     $("#search_box").bind("input propertychange", function () {
-        let search_value_before_clean = $("#search_box").val();
-        search = search_value_before_clean.replace(/\'/g, "\\'").trim();
-        if(search_value_before_clean !== "") {
+        let search_value = $("#search_box").val().trim();
+        search = search_value;
+        if(search_value !== "") {
             $("#clean_search_box").css("display", "block");
         } else {
             $("#clean_search_box").css("display", "none");

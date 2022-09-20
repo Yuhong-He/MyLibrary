@@ -6,7 +6,10 @@ $rows = $_GET['rows'] ?? '';
 $lang = $_GET['lang'] ?? '';
 $search = $_GET['search'] ?? '';
 
-if($page != '') {
+if((is_numeric($page)) && ($page > 0) &&
+    (is_numeric($rows)) && ($rows > 0)) {
+
+    $search = preg_replace("/[\']/","\\'", $search);
 
     require_once "db.php";
     $arr = getCategoryList($page, $rows, $lang, $search, $db);
@@ -27,6 +30,8 @@ if($page != '') {
         'body'=>$arr
     );
     echo json_encode($str);
+} else {
+    echo "Are u trying to do something?\n:(";
 }
 
 function getCategoryList($page, $rows, $lang, $search, $db): array
@@ -46,21 +51,23 @@ function getCategoryList($page, $rows, $lang, $search, $db): array
     }
     $result = mysqli_query($db, $sql);
     $arr = [];
-    while($row = mysqli_fetch_array($result))
-    {
-        $sql = "SELECT count(*) FROM books WHERE Category = '$row[0]'";
-        $resultCount = mysqli_query($db, $sql);
-        $categoryTotal = 0;
-        while($rowTotal = mysqli_fetch_array($resultCount))
+    if($result != false) {
+        while($row = mysqli_fetch_array($result))
         {
-            $categoryTotal = $rowTotal[0];
+            $sql = "SELECT count(*) FROM books WHERE Category = '$row[0]'";
+            $resultCount = mysqli_query($db, $sql);
+            $categoryTotal = 0;
+            while($rowTotal = mysqli_fetch_array($resultCount))
+            {
+                $categoryTotal = $rowTotal[0];
+            }
+            $arr[] = ["id"=>$row[0], "name"=>$row[1], "total"=>$categoryTotal];
         }
-        $arr[] = ["id"=>$row[0], "name"=>$row[1], "total"=>$categoryTotal];
     }
     return $arr;
 }
 
-function getTotalRecords($search, $lang, mysqli $db)
+function getTotalRecords($search, $lang, mysqli $db): int
 {
     if($lang == "zh"){
         $cat_lang_column = "CategoryName";
@@ -73,10 +80,11 @@ function getTotalRecords($search, $lang, mysqli $db)
         $sql = "SELECT COUNT(*) FROM category WHERE $cat_lang_column LIKE '%$search%'";
     }
     $result = mysqli_query($db, $sql);
-    $total_records=0;
-    while ($row = mysqli_fetch_row($result))
-    {
-        $total_records=$row[0];
+    $total_records = 0;
+    if($result != false) {
+        while ($row = mysqli_fetch_row($result)) {
+            $total_records = $row[0];
+        }
     }
     return $total_records;
 }

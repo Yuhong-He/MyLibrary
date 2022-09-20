@@ -6,7 +6,7 @@ $en_name = $_POST['en_name'] ?? '';
 $rows = $_POST['rows'] ?? '';
 $un = $_POST['username'] ?? '';
 $auth = $_POST['authority'] ?? '';
-$page = 1;
+$str = array();
 session_start();
 if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Auth"])) {
     if ($un == $_SESSION["Username"] && $auth == $_SESSION[$un . "Auth"]) {
@@ -42,20 +42,23 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Auth"])) {
                 $catNum = $rewCatNum['rownum'];
 
                 $page = ceil($catNum / $rows);
+                $str = array
+                (
+                    'code' => $code,
+                    'page' => $page
+                );
             }
         } else {
             $code = 402;
+            $str = array('code' => $code);
         }
     } else {
         $code = 401;
+        $str = array('code' => $code);
     }
 } else {
     $code = 401;
+    $str = array('code' => $code);
 }
-$str = array
-(
-    'code' => $code,
-    'page' => $page
-);
 $jsonEncode = json_encode($str);
 echo $jsonEncode;
