@@ -100,9 +100,17 @@
                         <label class="col-sm-2 control-label">
                             <span class="lang" key="AUTHOR"></span>
                         </label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <input type="text" name="author" class="form-control" id="new_book_author">
                             <span class="help-block"></span>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-default" id="author_semicolon">
+                                <span aria-hidden="true">; </span>
+                            </button>
+                            <button type="button" class="btn btn-default" id="author_comma">
+                                <span aria-hidden="true">,</span>
+                            </button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -142,16 +150,21 @@
                         <label class="col-sm-2 control-label">
                             <span class="lang" key="YEAR"></span>
                         </label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <input type="text" name="year" class="form-control" id="new_book_year">
                             <span class="help-block"></span>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-default" id="year_comma">
+                                <span aria-hidden="true">,</span>
+                            </button>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">
                             <span class="lang" key="BOOK_CODE"></span>
                         </label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <input type="text" name="code" class="form-control" id="new_book_code">
                             <span class="help-block"></span>
                             <div id="display_code_repeat_checkbox" style="display: none;">
@@ -160,6 +173,14 @@
                                     <span class="lang" key="CODE_REPEAT_CHECK"></span>
                                 </label>
                             </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-default" id="code_dash">
+                                <span aria-hidden="true">-</span>
+                            </button>
+                            <button type="button" class="btn btn-default" id="code_dot">
+                                <span aria-hidden="true">·</span>
+                            </button>
                         </div>
                     </div>
                     <div class="form-group" style="padding-bottom: 17px;">

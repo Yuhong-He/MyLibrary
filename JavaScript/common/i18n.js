@@ -87,6 +87,7 @@ let arrLang = {
         "NO_USER_RIGHTS_ADD_BOOK": "Your account doesn't have rights to add a new book.",
         "NO_USER_RIGHTS_UPDATE_BOOK": "Your account doesn't have rights to update the book.",
         "NO_USER_RIGHTS_DELETE_BOOK": "Your account doesn't have rights to delete the book.",
+        "INVALID_BOOK_CODE": "Invalid book code",
 
         "CHANGE_USERNAME": "Change Username",
         "CHANGE_PASSWORD": "Change Password",
@@ -216,6 +217,7 @@ let arrLang = {
         "NO_USER_RIGHTS_ADD_BOOK": "你的账户没有权限插入新数据。",
         "NO_USER_RIGHTS_UPDATE_BOOK": "你的账户没有权限修改数据。",
         "NO_USER_RIGHTS_DELETE_BOOK": "你的账户没有权限删除数据。",
+        "INVALID_BOOK_CODE": "无效标识码",
 
         "CHANGE_USERNAME": "修改用户名",
         "CHANGE_PASSWORD": "修改密码",
@@ -345,6 +347,7 @@ let arrLang = {
         "NO_USER_RIGHTS_ADD_BOOK": "你的賬戶沒有權限插入新數據。",
         "NO_USER_RIGHTS_UPDATE_BOOK": "你的賬戶沒有權限修改數據。",
         "NO_USER_RIGHTS_DELETE_BOOK": "你的账户没有权限刪除数据。",
+        "INVALID_BOOK_CODE": "無效標識碼",
 
         "CHANGE_USERNAME": "修改用戶名",
         "CHANGE_PASSWORD": "修改密碼",
