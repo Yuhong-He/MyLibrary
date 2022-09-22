@@ -269,6 +269,7 @@ $("#confirm_request_btn").click(function() {
         success:function(result){
             if(result.code === 200) {
                 $("#requestModal").modal('hide');
+                window.location.replace("my_requests.html");
             } else {
                 if(result.code === 201) {
                     show_validate_msg("#book_title", "error", arrLang[lang]["INVALID_BOOK_TITLE"]);

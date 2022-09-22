@@ -64,9 +64,9 @@ let arrLang = {
         "GBT7714": "Rules of B. Ref. & Cit. (GB/T 7714－2015)",
         "SEARCH_TITLE": "Search book title",
         "NO_DATA": "No Data",
-        "BOOK_PAGE_INFO1": "Total ",
-        "BOOK_PAGE_INFO2": " data, divided ",
-        "BOOK_PAGE_INFO3": " pages",
+        "LIST_PAGE_INFO1": "Total ",
+        "LIST_PAGE_INFO2": " data, divided ",
+        "LIST_PAGE_INFO3": " pages",
         "FIRST_PAGE": "First",
         "LAST_PAGE": "Last",
         "ADD_BOOK": "Add Book",
@@ -132,7 +132,12 @@ let arrLang = {
         "ENTER_BOOK_YOU_NEED": "Enter the book please",
         "PLEASE_LOGIN": "Please Login",
         "INVALID_BOOK_TITLE": "Book info can not contains: ();",
-        "NO_ACCESS_REQUEST": "You don't have access to send request. Maybe because the session has expired, please refresh or login again."
+        "NO_ACCESS_REQUEST": "You don't have access to send request. Maybe because the session has expired, please refresh or login again.",
+        "MY_REQUEST": "My Requests",
+        "TIME": "Time",
+        "STATUS": "Status",
+        "NOT_FINISH_YET": "Not finish yet",
+        "FINISH": "Finish"
     },
 
     "hans": {
@@ -199,9 +204,9 @@ let arrLang = {
         "GBT7714": "参考文献著录规则（GB/T 7714－2015）",
         "SEARCH_TITLE": "搜索书名",
         "NO_DATA": "暂无数据",
-        "BOOK_PAGE_INFO1": "共有数据",
-        "BOOK_PAGE_INFO2": "条，分为",
-        "BOOK_PAGE_INFO3": "页",
+        "LIST_PAGE_INFO1": "共有数据",
+        "LIST_PAGE_INFO2": "条，分为",
+        "LIST_PAGE_INFO3": "页",
         "FIRST_PAGE": "首页",
         "LAST_PAGE": "末页",
         "ADD_BOOK": "新增书籍",
@@ -268,7 +273,12 @@ let arrLang = {
         "ENTER_BOOK_YOU_NEED": "请输入你需要的书籍",
         "PLEASE_LOGIN": "请先登录",
         "INVALID_BOOK_TITLE": "书籍信息不可以包括：();",
-        "NO_ACCESS_REQUEST": "你没有权限递交请求，可能是因为会话已过期，请刷新页面或登录重试。"
+        "NO_ACCESS_REQUEST": "你没有权限递交请求，可能是因为会话已过期，请刷新页面或登录重试。",
+        "MY_REQUEST": "我的请求",
+        "TIME": "时间",
+        "STATUS": "状态",
+        "NOT_FINISH_YET": "尚未完成",
+        "FINISH": "已完成"
     },
 
     "hant": {
@@ -335,9 +345,9 @@ let arrLang = {
         "GBT7714": "參考文獻著錄規則（GB/T 7714－2015）",
         "SEARCH_TITLE": "搜索書名",
         "NO_DATA": "暫無數據",
-        "BOOK_PAGE_INFO1": "共有數據",
-        "BOOK_PAGE_INFO2": "條，分為",
-        "BOOK_PAGE_INFO3": "頁",
+        "LIST_PAGE_INFO1": "共有數據",
+        "LIST_PAGE_INFO2": "條，分為",
+        "LIST_PAGE_INFO3": "頁",
         "FIRST_PAGE": "首頁",
         "LAST_PAGE": "末頁",
         "ADD_BOOK": "新增書籍",
@@ -404,6 +414,11 @@ let arrLang = {
         "ENTER_BOOK_YOU_NEED": "請輸入你需要的書籍",
         "PLEASE_LOGIN": "請先登錄",
         "INVALID_BOOK_TITLE": "書籍信息不可以包括：();",
-        "NO_ACCESS_REQUEST": "你沒有權限遞交請求，可能是因為會話已過期，請刷新頁面或登錄重試。"
+        "NO_ACCESS_REQUEST": "你沒有權限遞交請求，可能是因為會話已過期，請刷新頁面或登錄重試。",
+        "MY_REQUEST": "我的請求",
+        "TIME": "時間",
+        "STATUS": "狀態",
+        "NOT_FINISH_YET": "尚未完成",
+        "FINISH": "已完成"
     }
 };

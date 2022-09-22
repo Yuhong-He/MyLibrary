@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的请求 My Requests</title>
+    <script type="text/javascript" src="../JavaScript/common/common.js"></script>
+    <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
+    <script type="text/javascript" src="../JavaScript/my_requests.js"></script>
+</head>
+<body>
+<div id="headerContent"></div>
+<div class="container">
+    <div class="row" style="font-size: 1.2em;">
+        <div class="col-md-12">
+            <h2><span class="lang" key="MY_REQUEST"></span></h2>
+        </div>
+    </div>
+        <div class="row" style="padding-top: 2%">
+        <div class="col-md-12">
+            <table class="table table-hover" style="table-layout: fixed; word-break: break-all" id="requests_table">
+                <thead>
+                <tr>
+                    <th style="width: 40%;">
+                        <span class="lang" key="BOOK_TITLE"></span>
+                    </th>
+                    <th style="width: 25%;">
+                        <span class="lang" key="TIME"></span>
+                    </th>
+                    <th style="width: 10%;">
+                        <span class="lang" key="STATUS"></span>
+                    </th>
+                    <th style="width: 15%;">
+                        <span class="lang" key="ADMIN"></span>
+                    </th>
+                    <th>
+                        <span class="lang" key="OPERATION"></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="my_requests_table_body"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            <div id="page_info_area" style="padding-top: 10%"></div>
+        </div>
+        <div class="col-xs-8">
+            <div class="pull-right" id="page_nav_area"></div>
+        </div>
+    </div>
+</div>
+</body>
+<div id="footerContent"></div>
+</html>

@@ -136,3 +136,86 @@ function getLang() {
     }
     return lang;
 }
+
+function build_page_info(result){
+    const page_info_area = $("#page_info_area");
+    page_info_area.empty();
+    if(result.count > 0) {
+        page_info_area.append(
+            arrLang[lang]["LIST_PAGE_INFO1"] +
+            "<span style='font-weight: bold; color:#73BE73;'>" +
+            result.count +
+            "</span>" +
+            arrLang[lang]["LIST_PAGE_INFO2"] +
+            "<span style='font-weight: bold; color:#73BE73;'>" +
+            result.pages +
+            "</span>" +
+            arrLang[lang]["LIST_PAGE_INFO3"]
+        );
+    }
+}
+
+function build_page_nav(result) {
+    $("#page_nav_area").empty();
+    if(result.count > 0) {
+        let ul = $("<ul></ul>").addClass("pagination");
+        let firstPageA = $("<a></a>").append(arrLang[lang]["FIRST_PAGE"]).attr("href", "#");
+        let firstPageLi = $("<li></li>").append(firstPageA);
+        let prePageA = $("<a></a>").append("&laquo;").attr("href", "#");
+        let prePageLi = $("<li></li>").append(prePageA);
+        if (page === 1) {
+            firstPageA.removeAttr("href", "#");
+            firstPageLi.addClass("disabled");
+            prePageA.removeAttr("href", "#");
+            prePageLi.addClass("disabled");
+        } else {
+            firstPageLi.click(function () {
+                page = 1;
+                to_page();
+            });
+            prePageLi.click(function () {
+                page = page - 1;
+                to_page();
+            });
+        }
+        ul.append(firstPageLi).append(prePageLi);
+
+        $.each(result.navigatePageNums, function (index, item) {
+            let numA = $("<a></a>").append(item).attr("href", "#");
+            let numLi = $("<li></li>").append(numA);
+            if (page === item) {
+                numA.css("z-index", 0);
+                numLi.addClass("active");
+            }
+            numLi.click(function () {
+                page = item;
+                to_page();
+            });
+            ul.append(numLi)
+        });
+
+        let nextPageA = $("<a></a>").append("&raquo;").attr("href", "#");
+        let nextPageLi = $("<li></li>").append(nextPageA);
+        let lastPageA = $("<a></a>").append(arrLang[lang]["LAST_PAGE"]).attr("href", "#");
+        let lastPageLi = $("<li></li>").append(lastPageA);
+        if (page === result.pages) {
+            nextPageA.removeAttr("href", "#");
+            nextPageLi.addClass("disabled");
+            lastPageA.removeAttr("href", "#");
+            lastPageLi.addClass("disabled");
+        } else {
+            nextPageLi.click(function () {
+                page = page + 1;
+                to_page();
+            });
+            lastPageLi.click(function () {
+                page = result.pages;
+                to_page();
+            });
+        }
+        ul.append(nextPageLi).append(lastPageLi);
+
+        let nav = $("<nav></nav>").append(ul);
+        nav.appendTo("#page_nav_area");
+    }
+}

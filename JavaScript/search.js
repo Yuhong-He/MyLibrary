@@ -138,7 +138,7 @@ function to_page() {
             document.cookie = "total_data=" + result.count;
             build_books_table(result);
             build_page_info(result);
-            build_page_nav(result);
+            search_book_build_page_nav(result);
             extendMainContainerHeight();
         }
     });
@@ -176,32 +176,15 @@ function build_books_table(result){
                 .appendTo("#all_books_table_body");
         })
     } else {
-        document.getElementById("all_books_table_body").innerHTML=
+        $("#all_books_table_body").html(
             "<td colspan='6' style='text-align: center; font-size: large; color: grey;'>" +
             arrLang[lang]["NO_DATA"] +
-            "</td>";
-    }
-}
-
-function build_page_info(result){
-    const page_info_area = $("#page_info_area");
-    page_info_area.empty();
-    if(result.count > 0) {
-        page_info_area.append(
-            arrLang[lang]["BOOK_PAGE_INFO1"] +
-            "<span style='font-weight: bold; color:#73BE73;'>" +
-            result.count +
-            "</span>" +
-            arrLang[lang]["BOOK_PAGE_INFO2"] +
-            "<span style='font-weight: bold; color:#73BE73;'>" +
-            result.pages +
-            "</span>" +
-            arrLang[lang]["BOOK_PAGE_INFO3"]
+            "</td>"
         );
     }
 }
 
-function build_page_nav(result){
+function search_book_build_page_nav(result){
     $("#page_nav_area").empty();
     if(result.count > 0) {
         let ul = $("<ul></ul>").addClass("pagination");
