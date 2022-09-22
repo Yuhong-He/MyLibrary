@@ -1,4 +1,6 @@
 let page = 1;
+let total_page = 0;
+let total_data = 0;
 
 $(document).ready(function(){
     $("#headerContent").load("header.html");
@@ -18,6 +20,8 @@ function to_page() {
         },
         success:function(result){
             if(result.code === 200) {
+                total_page = result.pages;
+                total_data = result.count;
                 build_my_requests_table(result);
                 build_page_info(result);
                 build_page_nav(result);
@@ -61,3 +65,55 @@ function build_my_requests_table(result){
         );
     }
 }
+
+$(document).on("click", ".del-btn", function(){
+    const req_id = $(this).attr("del-id");
+    $.ajax({
+        url:"../PHP/getOneRequest.php",
+        method:"GET",
+        data:{
+            id: req_id
+        },
+        success:function(result){
+            if(result.code === 200) {
+                $("#confirm_delete_request_info").html(result.book);
+                $("#confirm_delete_request").attr("req-id", req_id);
+            }
+        }
+    });
+    $("#delRequestModal").modal({
+        backdrop: "static"
+    });
+});
+
+$(document).on("click", "#confirm_delete_request", function(){
+    const req_id = $(this).attr("req-id");
+    $.ajax({
+        url:"../PHP/deleteRequest.php",
+        method:"POST",
+        data:{
+            id: req_id,
+            user_name: getCookie("username"),
+            user_id: getCookie(getCookie("username") + "Id")
+        },
+        success:function(result){
+            if(result.code === 200) {
+                if((page === total_page) && (total_data % 5 === 1) && (total_data !== 1)) {
+                    page = page - 1;
+                }
+                to_page();
+                $("#delRequestModal").modal('hide');
+            } else if(result.code === 201) {
+                $("#del_request_error").html(arrLang[lang]["NOT_YOUR_REQUEST"]);
+                $("#del_request_fail").css("display", "block");
+            } else if(result.code === 401) {
+                $("#del_request_error").html(arrLang[lang]["NO_ACCESS_DELETE_REQUEST"]);
+                $("#del_request_fail").css("display", "block");
+            }
+        }
+    });
+});
+
+$(document).on("click", "#close_del_request_fail", function(){
+    $("#del_request_fail").css("display", "none");
+});

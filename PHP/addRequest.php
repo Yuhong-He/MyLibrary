@@ -14,6 +14,7 @@ if(isset($_SESSION["Username"])) {
                     VALUES ('$book', '$user_id', '$user_email', '$time', 'N')";
             mysqli_query($db, $sql);
             $code = 200;
+            mysqli_close($db);
         } else {
             $code = 201;
         }

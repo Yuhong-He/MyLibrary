@@ -86,6 +86,8 @@ function to_page() {
             search: search
         },
         success:function(result){
+            total_page = result.pages;
+            total_data = result.count;
             createTableHeader();
             build_categories_table(result);
             build_page_info(result);

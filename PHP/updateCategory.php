@@ -47,6 +47,7 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Auth"])) {
 
                 $page = ceil($catNum / $rows);
             }
+            mysqli_close($db);
         } else {
             $code = 402;
         }

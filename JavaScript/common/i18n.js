@@ -137,7 +137,10 @@ let arrLang = {
         "TIME": "Time",
         "STATUS": "Status",
         "NOT_FINISH_YET": "Not finish yet",
-        "FINISH": "Finish"
+        "FINISH": "Finish",
+        "DEL_REQUEST": "Delete Request",
+        "NOT_YOUR_REQUEST": "You can only delete your requests",
+        "NO_ACCESS_DELETE_REQUEST": "You don't have access to delete the request. Maybe because the session has expired, please refresh or login again."
     },
 
     "hans": {
@@ -278,7 +281,10 @@ let arrLang = {
         "TIME": "时间",
         "STATUS": "状态",
         "NOT_FINISH_YET": "尚未完成",
-        "FINISH": "已完成"
+        "FINISH": "已完成",
+        "DEL_REQUEST": "删除请求",
+        "NOT_YOUR_REQUEST": "你只可以删除自己的请求",
+        "NO_ACCESS_DELETE_REQUEST": "你没有权限删除数据，可能是因为会话已过期，请刷新页面或登录重试。"
     },
 
     "hant": {
@@ -419,6 +425,9 @@ let arrLang = {
         "TIME": "時間",
         "STATUS": "狀態",
         "NOT_FINISH_YET": "尚未完成",
-        "FINISH": "已完成"
+        "FINISH": "已完成",
+        "DEL_REQUEST": "刪除請求",
+        "NOT_YOUR_REQUEST": "你只可以刪除自己的請求",
+        "NO_ACCESS_DELETE_REQUEST": "你沒有權限刪除數據，可能是因為會話已過期，請刷新頁面或登錄重試。"
     }
 };

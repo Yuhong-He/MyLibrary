@@ -44,6 +44,7 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Auth"])) {
                  Code = '$cd', Category = '$cg' WHERE id = '$id'";
                 mysqli_query($db, $sql);
             }
+            mysqli_close($db);
         } else {
             $code = 402;
         }

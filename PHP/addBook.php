@@ -43,6 +43,7 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Auth"])) {
 			VALUES ('$au', '$tt', '$lc', '$ps', '$yr', '$cd', '$cg')";
                 mysqli_query($db, $sql);
             }
+            mysqli_close($db);
         } else {
             $code = 402;
         }

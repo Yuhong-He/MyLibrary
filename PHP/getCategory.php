@@ -16,6 +16,7 @@ if(strlen($search) > 0) {
         while ($row = mysqli_fetch_array($result)) {
             $arr[] = ["id" => $row[0], "name" => $row[1]];
         }
+        mysqli_close($db);
         echo json_encode($arr);
     } else {
         echo "Are u trying to do something?\n:(";
