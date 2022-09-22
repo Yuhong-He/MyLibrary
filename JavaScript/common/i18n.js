@@ -126,7 +126,13 @@ let arrLang = {
         "DEL_CATEGORY": "Delete Category",
         "CATEGORY_NOT_EMPTY": "Category is not empty, can only delete empty category.",
         "NO_ACCESS_DELETE_CATEGORY": "You don't have access to delete the category. Maybe because the session has expired, please refresh or login again.",
-        "NO_USER_RIGHTS_DELETE_CATEGORY": "Your account doesn't have rights to delete the category."
+        "NO_USER_RIGHTS_DELETE_CATEGORY": "Your account doesn't have rights to delete the category.",
+
+        "EDIT": "Edit",
+        "ENTER_BOOK_YOU_NEED": "Enter the book please",
+        "PLEASE_LOGIN": "Please Login",
+        "INVALID_BOOK_TITLE": "Book info can not contains: ();",
+        "NO_ACCESS_REQUEST": "You don't have access to send request. Maybe because the session has expired, please refresh or login again."
     },
 
     "hans": {
@@ -180,7 +186,7 @@ let arrLang = {
         "10Rows": "10行",
         "20Rows": "20行",
         "50Rows": "50行",
-        "BOOK_TITLE": "题名",
+        "BOOK_TITLE": "书名",
         "AUTHOR": "作者",
         "PUBLISHER": "出版社",
         "YEAR": "年份",
@@ -256,7 +262,13 @@ let arrLang = {
         "DEL_CATEGORY": "删除分类",
         "CATEGORY_NOT_EMPTY": "此分类仍有书籍！只可以删除空分类！",
         "NO_ACCESS_DELETE_CATEGORY": "你没有权限删除数据，可能是因为会话已过期，请刷新页面或登录重试。",
-        "NO_USER_RIGHTS_DELETE_CATEGORY": "你的账户没有权限删除数据。"
+        "NO_USER_RIGHTS_DELETE_CATEGORY": "你的账户没有权限删除数据。",
+
+        "EDIT": "修改",
+        "ENTER_BOOK_YOU_NEED": "请输入你需要的书籍",
+        "PLEASE_LOGIN": "请先登录",
+        "INVALID_BOOK_TITLE": "书籍信息不可以包括：();",
+        "NO_ACCESS_REQUEST": "你没有权限递交请求，可能是因为会话已过期，请刷新页面或登录重试。"
     },
 
     "hant": {
@@ -310,7 +322,7 @@ let arrLang = {
         "10Rows": "10行",
         "20Rows": "20行",
         "50Rows": "50行",
-        "BOOK_TITLE": "題名",
+        "BOOK_TITLE": "書名",
         "AUTHOR": "作者",
         "PUBLISHER": "出版社",
         "YEAR": "年份",
@@ -386,6 +398,12 @@ let arrLang = {
         "DEL_CATEGORY": "刪除分類",
         "CATEGORY_NOT_EMPTY": "此分類仍有書籍！只可以刪除空分類！",
         "NO_ACCESS_DELETE_CATEGORY": "你沒有權限刪除數據，可能是因為會話已過期，請刷新頁面或登錄重試。",
-        "NO_USER_RIGHTS_DELETE_CATEGORY": "你的賬戶沒有權限刪除數據。"
+        "NO_USER_RIGHTS_DELETE_CATEGORY": "你的賬戶沒有權限刪除數據。",
+
+        "EDIT": "修改",
+        "ENTER_BOOK_YOU_NEED": "請輸入你需要的書籍",
+        "PLEASE_LOGIN": "請先登錄",
+        "INVALID_BOOK_TITLE": "書籍信息不可以包括：();",
+        "NO_ACCESS_REQUEST": "你沒有權限遞交請求，可能是因為會話已過期，請刷新頁面或登錄重試。"
     }
 };

@@ -7,14 +7,56 @@ $(document).ready(function(){
     setLanguageSelect();
 });
 
-$('.dropdown-toggle').dropdown();
-
 function login(){
     reset_form("#loginModal form");
     $("#loginModal").modal({
         backdrop:"static"
     });
 }
+
+$("#modal_login_btn").click(function() {
+    const username = $("#userName_login").val().trim();
+    if(username === ""){
+        show_validate_msg("#userName_login", "error", arrLang[lang]["ENTER_USERNAME"]);
+        return false;
+    } else if(username.length > 15) {
+        show_validate_msg("#userName_login", "error", arrLang[lang]["USERNAME_TOO_LONG"]);
+        return false;
+    } else {
+        show_validate_msg("#userName_login", "success", "");
+    }
+    const password = $("#password_login").val().trim();
+    if(password === ""){
+        show_validate_msg("#password_login", "error", arrLang[lang]["ENTER_PASSWORD"]);
+        return false;
+    } else if(password.length > 15) {
+        show_validate_msg("#password_login", "error", arrLang[lang]["PASSWORD_TOO_LONG"]);
+        return false;
+    } else {
+        show_validate_msg("#password_login", "success", "");
+    }
+    $.ajax({
+        url:"../PHP/login.php",
+        method:"POST",
+        data:{
+            username: username,
+            password: password
+        },
+        success:function(result){
+            if(result.code === 200) {
+                setUserCookie(username, password, result.email, result.authority, result.id);
+                $("#loginModal").modal('hide');
+                location.reload();
+            } else {
+                if(result.code === 201){
+                    show_validate_msg("#password_login", "error", arrLang[lang]["PASSWORD_INCORRECT"]);
+                } else if(result.code === 400) {
+                    show_validate_msg("#userName_login", "error", arrLang[lang]["USERNAME_NOT_EXIST"]);
+                }
+            }
+        }
+    });
+});
 
 $("#loginLogout_btn").click(function() {
     getCookie("username") === "" ? login() : logout();
@@ -42,69 +84,10 @@ $("#confirm_logout_btn").click(function(){
     });
 });
 
-$("#username_btn").click(function() {
-    window.location.replace("profile.html");
-});
-
 $("#signup_btn").click(function() {
     reset_form("#registerModal form");
     $("#registerModal").modal({
         backdrop:"static"
-    });
-});
-
-function validate_login_form() {
-    const userName = $("#userName_login").val();
-    if(userName === ""){
-        show_validate_msg("#userName_login", "error", arrLang[lang]["ENTER_USERNAME"]);
-        return false;
-    } else {
-        show_validate_msg("#userName_login", "success", "");
-    }
-    const password = $("#password_login").val();
-    if(password === ""){
-        show_validate_msg("#password_login", "error", arrLang[lang]["ENTER_PASSWORD"]);
-        return false;
-    } else {
-        show_validate_msg("#password_login", "success", "");
-    }
-    return true;
-}
-
-$("#modal_login_btn").click(function() {
-    if(!validate_login_form()){
-        return false;
-    }
-    const userName = $("#userName_login").val().trim();
-    if(userName.length > 15) {
-        show_validate_msg("#userName_login", "error", arrLang[lang]["USERNAME_TOO_LONG"]);
-        return false;
-    }
-    const password = $("#password_login").val().trim();
-    if(password.length > 15) {
-        show_validate_msg("#password_login", "error", arrLang[lang]["PASSWORD_TOO_LONG"]);
-        return false;
-    }
-    $.ajax({
-        url:"../PHP/login.php",
-        method:"POST",
-        data:{
-            username: userName,
-            password: password
-        },
-        success:function(result){
-            if(result.code === 200) {
-                setUserCookie(userName, password, result.email, result.authority, result.id);
-                $("#loginModal").modal('hide');
-                location.reload();
-            } else {
-                if(result.code === 201){
-                    show_validate_msg("#password_login", "error", arrLang[lang]["PASSWORD_INCORRECT"]);
-                } else if(result.code === 400) {
-                    show_validate_msg("#userName_login", "error", arrLang[lang]["USERNAME_NOT_EXIST"]);
-                }
-            }
-        }
     });
 });
 
@@ -240,4 +223,68 @@ $("#select_hant").click(function() {
     document.cookie = "lang=hant";
     chooseLanguage("select_hant");
     location.reload();
+});
+
+$("#username_btn").click(function() {
+    if(getCookie("username") !== "") {
+        window.location.replace("profile.html");
+    } else {
+        $("#header_warning_message").html(arrLang[lang]["PLEASE_LOGIN"]);
+        $("#header_warning").css("display", "block");
+    }
+});
+
+$("#nav_request").click(function() {
+    if(getCookie("username") !== "") {
+        reset_form("#requestModal form");
+        $("#send_to_email").val(getCookie(getCookie("username") + "Email"));
+        $("#requestModal").modal({
+            backdrop:"static"
+        });
+    } else {
+        $("#header_warning_message").html(arrLang[lang]["PLEASE_LOGIN"]);
+        $("#header_warning").css("display", "block");
+    }
+});
+
+$("#change_email").click(function() {
+    window.location.replace("profile.html");
+});
+
+$("#confirm_request_btn").click(function() {
+    const book_info = $("#book_title").val().trim();
+    if(book_info === ""){
+        show_validate_msg("#book_title", "error", arrLang[lang]["ENTER_BOOK_YOU_NEED"]);
+        return false;
+    }
+    $.ajax({
+        url:"../PHP/addRequest.php",
+        method:"POST",
+        data:{
+            book: book_info,
+            user_name: getCookie("username"),
+            user_id: getCookie(getCookie("username") + "Id"),
+            email: getCookie(getCookie("username") + "Email")
+        },
+        success:function(result){
+            if(result.code === 200) {
+                $("#requestModal").modal('hide');
+            } else {
+                if(result.code === 201) {
+                    show_validate_msg("#book_title", "error", arrLang[lang]["INVALID_BOOK_TITLE"]);
+                } else if(result.code === 401) {
+                    $("#request_fail_info").html(arrLang[lang]["NO_ACCESS_REQUEST"]);
+                    $("#request_fail").css("display", "block");
+                }
+            }
+        }
+    });
+});
+
+$("#close_header_warning").click(function() {
+    $("#header_warning").css("display", "none");
+});
+
+$("#close_request_fail").click(function() {
+    $("#request_fail").css("display", "none");
 });

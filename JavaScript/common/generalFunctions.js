@@ -37,13 +37,13 @@ function userDisplay() {
     if(username === "" || username === null){
         $("#username_btn").html("");
         $("#nav_profile").css("display", "none");
-        $("#nav_obtain").css("display", "none");
+        $("#nav_request").css("display", "none");
         $("#nav_manage").css("display", "none");
         $("#loginLogout_btn").html(arrLang[lang]["LOGIN"]);
     } else {
         $("#username_btn").html(username);
         $("#nav_profile").css("display", "block");
-        $("#nav_obtain").css("display", "block");
+        $("#nav_request").css("display", "block");
         $("#nav_manage").css("display", "none");
         $("#loginLogout_btn").html(arrLang[lang]["LOGOUT"]);
     }
@@ -104,6 +104,8 @@ function show_validate_msg(element, status, msg) {
 $(function () {
     $('[data-toggle="popover"]').popover()
 })
+
+$('.dropdown-toggle').dropdown();
 
 function getLang() {
     let lang = getCookie("lang");
