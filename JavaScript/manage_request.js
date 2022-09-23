@@ -1,4 +1,6 @@
 let page = 1;
+let total_page = 0;
+let total_data = 0;
 let display_delete = false;
 
 $(document).ready(function(){
@@ -33,6 +35,8 @@ function to_page() {
         },
         success:function(result){
             if(result.code === 200) {
+                total_page = result.pages;
+                total_data = result.count;
                 build_all_requests_table(result);
                 build_page_info(result);
                 build_page_nav(result);
@@ -136,4 +140,53 @@ $(document).on("click", "#confirm_mark_done_request", function(){
 
 $(document).on("click", "#close_mark_done_request_fail", function(){
     $("#mark_done_request_fail").css("display", "none");
+});
+
+$(document).on("click", ".del-btn", function(){
+    $("#del_request_fail").css("display", "none");
+    const req_id = $(this).attr("del-id");
+    $.ajax({
+        url:"../PHP/getOneRequest.php",
+        method:"GET",
+        data:{
+            id: req_id
+        },
+        success:function(result){
+            if(result.code === 200) {
+                $("#confirm_delete_request_info").html(result.book);
+                $("#confirm_delete_request").attr("req-id", req_id);
+            }
+        }
+    });
+    $("#delRequestModal").modal({
+        backdrop: "static"
+    });
+});
+
+$(document).on("click", "#confirm_delete_request", function(){
+    const req_id = $(this).attr("req-id");
+    $.ajax({
+        url:"../PHP/deleteRequest.php",
+        method:"POST",
+        data:{
+            id: req_id,
+            user_name: getCookie("username"),
+            user_id: getCookie(getCookie("username") + "Id"),
+            user_auth: getCookie(getCookie("username") + "Auth")
+        },
+        success:function(result){
+            if(result.code === 200) {
+                if(display_delete === false) {
+                    if((page === total_page) && (total_data % 5 === 1) && (total_data !== 1)) {
+                        page = page - 1;
+                    }
+                }
+                to_page();
+                $("#delRequestModal").modal('hide');
+            } else if(result.code === 401) {
+                $("#del_request_error").html(arrLang[lang]["NO_ACCESS_DELETE_REQUEST"]);
+                $("#del_request_fail").css("display", "block");
+            }
+        }
+    });
 });

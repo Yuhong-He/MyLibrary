@@ -5,9 +5,14 @@ let total_data = 0;
 $(document).ready(function(){
     $("#headerContent").load("header.html");
     $("#footerContent").load("footer.html");
+    setTimeout(() => navBlockColor(), 50);
     to_page();
     displayAfterLoad();
 });
+
+function navBlockColor() {
+    $("#nav_profile").addClass("active");
+}
 
 function to_page() {
     $.ajax({
@@ -67,6 +72,7 @@ function build_my_requests_table(result){
 }
 
 $(document).on("click", ".del-btn", function(){
+    $("#del_request_fail").css("display", "none");
     const req_id = $(this).attr("del-id");
     $.ajax({
         url:"../PHP/getOneRequest.php",
@@ -94,7 +100,8 @@ $(document).on("click", "#confirm_delete_request", function(){
         data:{
             id: req_id,
             user_name: getCookie("username"),
-            user_id: getCookie(getCookie("username") + "Id")
+            user_id: getCookie(getCookie("username") + "Id"),
+            user_auth: getCookie(getCookie("username") + "Auth")
         },
         success:function(result){
             if(result.code === 200) {
