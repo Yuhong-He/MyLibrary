@@ -35,6 +35,7 @@ let arrLang = {
         "PASSWORD_TOO_LONG": "Invalid password",
         "EMAIL_TOO_LONG": "Email too long",
         "EMAIL_INVALID": "Email can not contains: ()'\";",
+        "404INFO": "Oops... Page Not Found",
 
         "OVERVIEW": "Overview",
         "INTRODUCTION1": "I come from Yunnan, China. Study Computer Science at Technology University Dublin since 2019. This website was developed based on the final project of Web Development course in the upper semester of 2nd year. The site was build with seperated frontend and backend structure, the frontend using Bootstrap, JavaScript and jQuery, the backend using PHP.",
@@ -182,6 +183,7 @@ let arrLang = {
         "PASSWORD_TOO_LONG": "无效密码",
         "EMAIL_TOO_LONG": "邮箱过长",
         "EMAIL_INVALID": "邮箱不可以包括：()'\";",
+        "404INFO": "Oops... 页面走丢了",
 
         "OVERVIEW": "简介",
         "INTRODUCTION1": "我来自中国云南，2019年起入读爱尔兰都柏林理工大学计算机科学专业。这个网站是基于大二上学期网页开发课程期末作业完成的。本站为前后端分离架构，前端使用Bootstrap与JavaScript、jQuery，后端使用PHP。",
@@ -330,6 +332,7 @@ let arrLang = {
         "PASSWORD_TOO_LONG": "無效密碼",
         "EMAIL_TOO_LONG": "郵箱過長",
         "EMAIL_INVALID": "郵箱不可以包括：()'\";",
+        "404INFO": "Oops... 頁面走丟了",
 
         "OVERVIEW": "簡介",
         "INTRODUCTION1": "我來自中國雲南，2019年起入讀愛爾蘭都柏林理工大學計算機科學專業。這個網站是基於大二上學期網頁開發課程期末作業完成的。本站為前後端分離架構，前端使用Bootstrap與JavaScript、jQuery，後端使用PHP。",
