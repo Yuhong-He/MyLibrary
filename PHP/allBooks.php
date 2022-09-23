@@ -21,7 +21,7 @@ if((is_numeric($page)) && ($page > 0) &&
     mysqli_close($db);
 
     $total_pages = ceil($total_records / $rows);
-    $max_nav_pages = 5;                                 // num of navigate bar block
+    $max_nav_pages = 5;
     $curr_page = intval($page);
 
     $nav = PageSelector::getNavArray($max_nav_pages, $curr_page, $total_pages);

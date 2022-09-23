@@ -140,7 +140,9 @@ let arrLang = {
         "FINISH": "Finish",
         "DEL_REQUEST": "Delete Request",
         "NOT_YOUR_REQUEST": "You can only delete your requests",
-        "NO_ACCESS_DELETE_REQUEST": "You don't have access to delete the request. Maybe because the session has expired, please refresh or login again."
+        "NO_ACCESS_DELETE_REQUEST": "You don't have access to delete the request. Maybe because the session has expired, please refresh or login again.",
+        "DELETED": "Deleted",
+        "DISPLAY_DELETED_REQUESTS": "Display deleted requests："
     },
 
     "hans": {
@@ -284,7 +286,9 @@ let arrLang = {
         "FINISH": "已完成",
         "DEL_REQUEST": "删除请求",
         "NOT_YOUR_REQUEST": "你只可以删除自己的请求",
-        "NO_ACCESS_DELETE_REQUEST": "你没有权限删除数据，可能是因为会话已过期，请刷新页面或登录重试。"
+        "NO_ACCESS_DELETE_REQUEST": "你没有权限删除数据，可能是因为会话已过期，请刷新页面或登录重试。",
+        "DELETED": "已删除",
+        "DISPLAY_DELETED_REQUESTS": "显示已删除的请求："
     },
 
     "hant": {
@@ -428,6 +432,8 @@ let arrLang = {
         "FINISH": "已完成",
         "DEL_REQUEST": "刪除請求",
         "NOT_YOUR_REQUEST": "你只可以刪除自己的請求",
-        "NO_ACCESS_DELETE_REQUEST": "你沒有權限刪除數據，可能是因為會話已過期，請刷新頁面或登錄重試。"
+        "NO_ACCESS_DELETE_REQUEST": "你沒有權限刪除數據，可能是因為會話已過期，請刷新頁面或登錄重試。",
+        "DELETED": "已刪除",
+        "DISPLAY_DELETED_REQUESTS": "顯示已刪除的請求："
     }
 };

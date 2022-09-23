@@ -15,6 +15,7 @@ function displayTotalBooks() {
         }
     });
 }
+
 function navBlockColor() {
     $("#nav_home").addClass("active");
 }
