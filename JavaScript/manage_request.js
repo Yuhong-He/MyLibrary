@@ -90,3 +90,50 @@ function build_all_requests_table(result) {
         );
     }
 }
+
+$(document).on("click", ".done-btn", function(){
+    const req_id = $(this).attr("done-id");
+    $.ajax({
+        url:"../PHP/getOneRequest.php",
+        method:"GET",
+        data:{
+            id: req_id
+        },
+        success:function(result){
+            if(result.code === 200) {
+                $("#confirm_mark_done_request_info").html(result.book);
+                $("#confirm_mark_done_request").attr("req-id", req_id);
+            }
+        }
+    });
+    $("#markDoneRequestModal").modal({
+        backdrop: "static"
+    });
+});
+
+$(document).on("click", "#confirm_mark_done_request", function(){
+    const req_id = $(this).attr("req-id");
+    $.ajax({
+        url:"../PHP/markDoneRequest.php",
+        method:"POST",
+        data:{
+            id: req_id,
+            user_name: getCookie("username"),
+            user_id: getCookie(getCookie("username") + "Id"),
+            user_auth: getCookie(getCookie("username") + "Auth")
+        },
+        success:function(result){
+            if(result.code === 200) {
+                to_page();
+                $("#markDoneRequestModal").modal('hide');
+            } else if(result.code === 401) {
+                $("#mark_done_request_error").html(arrLang[lang]["NO_ACCESS_MARK_DONE_REQUEST"]);
+                $("#mark_done_request_fail").css("display", "block");
+            }
+        }
+    });
+});
+
+$(document).on("click", "#close_mark_done_request_fail", function(){
+    $("#mark_done_request_fail").css("display", "none");
+});
