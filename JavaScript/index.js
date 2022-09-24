@@ -1,9 +1,8 @@
 $(document).ready(function(){
     $("#headerContent").load("header.html");
     $("#footerContent").load("footer.html");
-    displayAfterLoad();
-    displayTotalBooks();
     setTimeout(() => navBlockColor(), 50);
+    displayTotalBooks();
 });
 
 function displayTotalBooks() {

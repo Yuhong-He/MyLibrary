@@ -4,7 +4,8 @@ include_once("utils/PageSelector.php");
 $page = $_GET['page'] ?? '';
 $user_name = $_GET['user_name'] ?? '';
 $user_auth = $_GET['user_auth'] ?? '';
-$display_delete = $_GET['display_delete'] ?? '';
+$lang = $_GET['lang'] ?? '';
+$search = $_GET['search'] ?? '';
 $code = 401;
 session_start();
 if(isset($_SESSION["Username"]) && isset($_SESSION[$user_name ."Auth"])) {
@@ -13,8 +14,8 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$user_name ."Auth"])) {
 
             require_once "db.php";
             $rows = 5;
-            $arr = getRequestsList($page, $rows, $display_delete, $db);
-            $total_records = getTotalRecords($display_delete, $db);
+            $arr = getRequestsList($page, $rows, $lang, $search, $db);
+            $total_records = getTotalRecords($search, $db);
             mysqli_close($db);
 
             $total_pages = ceil($total_records / $rows);
@@ -42,48 +43,43 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$user_name ."Auth"])) {
     echo json_encode(array('code' => 401));
 }
 
-function getRequestsList($page, $rows, $display_delete, $db): array
+function getRequestsList($page, $rows, $lang, $search, $db): array
 {
     $start_from = ($page - 1) * $rows;
-    if($display_delete == 'false') {
-        $sql = "SELECT * FROM request WHERE Status != 'D' ORDER BY Time DESC LIMIT $start_from, $rows";
+    if($lang == "zh"){
+        $columns = "Author, Title, Publisher, Category AS CatId, CategoryName AS CatName, UserName, del_books.id";
     } else {
-        $sql = "SELECT * FROM request ORDER BY Time DESC LIMIT $start_from, $rows";
+        $columns = "Author, Title, Publisher, Category AS CatId, EnCatName AS CatName, UserName, del_books.id";
+    }
+    if($search == "") {
+        $sql = "SELECT $columns FROM del_books
+                JOIN category ON del_books.Category = category.CategoryID
+                JOIN User ON del_books.admin_id = user.id
+                ORDER BY id DESC LIMIT $start_from, $rows";
+    } else {
+        $sql = "SELECT $columns FROM del_books
+                JOIN category ON del_books.Category = category.CategoryID
+                JOIN User ON del_books.admin_id = user.id
+                WHERE Title LIKE '%$search%'
+                ORDER BY id DESC LIMIT $start_from, $rows";
     }
     $result = mysqli_query($db, $sql);
     $arr = [];
     if($result != false) {
         while($row = mysqli_fetch_array($result)) {
-            $sql = "SELECT UserName FROM user WHERE id = $row[1]";
-            $resultUser = mysqli_query($db, $sql);
-            $userName = "";
-            while($rowUser = mysqli_fetch_array($resultUser))
-            {
-                $userName = $rowUser["UserName"];
-            }
-            if($row[5] != null) {
-                $sql = "SELECT UserName FROM user WHERE id = $row[5]";
-                $resultAdmin = mysqli_query($db, $sql);
-                $adminName = "";
-                while($rowAdmin = mysqli_fetch_array($resultAdmin))
-                {
-                    $adminName = $rowAdmin["UserName"];
-                }
-                $arr[] = ["book"=>$row[0], "user"=>$userName, "email"=>$row[2], "time"=>$row[3], "status"=>$row[4], "admin"=>$adminName, "id"=>$row[6]];
-            } else {
-                $arr[] = ["book"=>$row[0], "user"=>$userName, "email"=>$row[2], "time"=>$row[3], "status"=>$row[4], "admin"=>"", "id"=>$row[6]];
-            }
+            $arr[] = ["title"=>$row['Title'], "author"=>$row['Author'], "publisher"=>$row['Publisher'], "catId"=>$row['CatId'],
+                "catName"=>$row['CatName'], "admin"=>$row['UserName'], "id"=>$row['id']];
         }
     }
     return $arr;
 }
 
-function getTotalRecords($display_delete, mysqli $db): int
+function getTotalRecords($search, mysqli $db): int
 {
-    if($display_delete == 'false') {
-        $sql = "SELECT COUNT(*) FROM request WHERE Status != 'D'";
+    if($search == '') {
+        $sql = "SELECT COUNT(*) FROM del_books";
     } else {
-        $sql = "SELECT COUNT(*) FROM request";
+        $sql = "SELECT COUNT(*) FROM del_books WHERE Title LIKE '%$search%'";
     }
     $result = mysqli_query($db, $sql);
     $total_records = 0;

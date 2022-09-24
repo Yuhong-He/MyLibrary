@@ -6,7 +6,6 @@ $(document).ready(function(){
     }
     $("#headerContent").load("header.html");
     $("#footerContent").load("footer.html");
-    displayAfterLoad();
     setTimeout(() => displayInfo(), 50);
     setTimeout(() => navBlockColor(), 50);
 });

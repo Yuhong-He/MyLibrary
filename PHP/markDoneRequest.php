@@ -10,10 +10,11 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$user_name ."Auth"])) {
     if ($user_name == $_SESSION["Username"] && $user_auth == $_SESSION[$user_name . "Auth"]) {
         if($user_auth == 2 || $user_auth == 3) {
             require_once "db.php";
-            $sql = "UPDATE request SET Status = 'Y' WHERE id = $id";
+            $time = date('Y-m-d H:i:s');
+            $sql = "UPDATE request SET Status = 'Y', Time = '$time', Admin = $user_id WHERE id = $id";
             mysqli_query($db, $sql);
-            $code = 200;
             mysqli_close($db);
+            $code = 200;
         }
     }
 }

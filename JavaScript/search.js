@@ -6,7 +6,6 @@ $(document).ready(function(){
     setTimeout(() => navBlockColor(), 50);
     checkSortIcon();
     to_page();
-    displayAfterLoad();
     $("#search_box").val(getCookie("search_value"));
     if(document.getElementById('search_box').value !== "") {
         $("#clean_search_box").css("display", "block");

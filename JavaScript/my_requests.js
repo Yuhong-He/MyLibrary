@@ -7,7 +7,6 @@ $(document).ready(function(){
     $("#footerContent").load("footer.html");
     setTimeout(() => navBlockColor(), 50);
     to_page();
-    displayAfterLoad();
 });
 
 function navBlockColor() {

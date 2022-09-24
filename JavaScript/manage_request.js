@@ -8,7 +8,6 @@ $(document).ready(function(){
     $("#footerContent").load("footer.html");
     setTimeout(() => navBlockColor(), 50);
     to_page();
-    displayAfterLoad();
 });
 
 function navBlockColor() {
@@ -30,7 +29,6 @@ function to_page() {
             page: page,
             user_name: getCookie("username"),
             user_auth: getCookie(getCookie("username") + "Auth"),
-            user_id: getCookie(getCookie("username") + "Id"),
             display_delete: display_delete
         },
         success:function(result){
