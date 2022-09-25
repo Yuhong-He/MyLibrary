@@ -1,6 +1,6 @@
 <?php
 header('Content-Type:text/json;charset=utf-8');
-include_once("utils/PageSelector.php");
+include_once("utils/PageHelper.php");
 $page = $_GET['page'] ?? '';
 $rows = $_GET['rows'] ?? '';
 $lang = $_GET['lang'] ?? '';
@@ -13,14 +13,14 @@ if((is_numeric($page)) && ($page > 0) &&
 
     require_once "db.php";
     $arr = getCategoryList($page, $rows, $lang, $search, $db);
-    $total_records = getTotalRecords($search, $lang, $db);
+    $total_records = PageHelper::getTotalRecords(getRecordsSQL($search, $lang), $db);
     mysqli_close($db);
 
     $total_pages = ceil($total_records / $rows);
     $max_nav_pages = 5;
     $curr_page = intval($page);
 
-    $nav = PageSelector::getNavArray($max_nav_pages, $curr_page, $total_pages);
+    $nav = PageHelper::getNavArray($max_nav_pages, $curr_page, $total_pages);
     $str = array
     (
         'count'=>$total_records,
@@ -67,7 +67,7 @@ function getCategoryList($page, $rows, $lang, $search, $db): array
     return $arr;
 }
 
-function getTotalRecords($search, $lang, mysqli $db): int
+function getRecordsSQL($search, $lang): string
 {
     if($lang == "zh"){
         $cat_lang_column = "CategoryName";
@@ -79,12 +79,5 @@ function getTotalRecords($search, $lang, mysqli $db): int
     } else {
         $sql = "SELECT COUNT(*) FROM category WHERE $cat_lang_column LIKE '%$search%'";
     }
-    $result = mysqli_query($db, $sql);
-    $total_records = 0;
-    if($result != false) {
-        while ($row = mysqli_fetch_row($result)) {
-            $total_records = $row[0];
-        }
-    }
-    return $total_records;
+    return $sql;
 }

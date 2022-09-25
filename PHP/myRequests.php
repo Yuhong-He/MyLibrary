@@ -1,6 +1,6 @@
 <?php
 header('Content-Type:text/json;charset=utf-8');
-include_once("utils/PageSelector.php");
+include_once("utils/PageHelper.php");
 $page = $_GET['page'] ?? '';
 $user_name = $_GET['user_name'] ?? '';
 $user_id = $_GET['user_id'] ?? '';
@@ -18,7 +18,7 @@ if(isset($_SESSION["Username"])) {
         $max_nav_pages = 5;
         $curr_page = intval($page);
 
-        $nav = PageSelector::getNavArray($max_nav_pages, $curr_page, $total_pages);
+        $nav = PageHelper::getNavArray($max_nav_pages, $curr_page, $total_pages);
         $str = array
         (
             'code' => 200,

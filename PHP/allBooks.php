@@ -1,6 +1,6 @@
 <?php
 header('Content-Type:text/json;charset=utf-8');
-include_once("utils/PageSelector.php");
+include_once("utils/PageHelper.php");
 $page = $_GET['page'] ?? '';
 $rows = $_GET['rows'] ?? '';
 $sortByColumn = $_GET['sortByColumn'] ?? '';
@@ -17,14 +17,15 @@ if((is_numeric($page)) && ($page > 0) &&
 
     require_once "db.php";
     $arr = getBookList($page, $rows, $sortByColumn, $sortOrder, $lang, $search, $db);
-    $total_records = getTotalRecords($search, $db);
+
+    $total_records = PageHelper::getTotalRecords(getRecordsSQL($search), $db);
     mysqli_close($db);
 
     $total_pages = ceil($total_records / $rows);
     $max_nav_pages = 5;
     $curr_page = intval($page);
 
-    $nav = PageSelector::getNavArray($max_nav_pages, $curr_page, $total_pages);
+    $nav = PageHelper::getNavArray($max_nav_pages, $curr_page, $total_pages);
     $str = array
     (
         'count'=>$total_records,
@@ -75,20 +76,12 @@ function getBookList($page, $rows, $sortByColumn, $sortOrder, $lang, $search, $d
     return $arr;
 }
 
-function getTotalRecords($search, mysqli $db): int
+function getRecordsSQL($search): string
 {
     if($search == ""){
         $sql = "SELECT COUNT(*) FROM books";
     } else {
         $sql = "SELECT COUNT(*) FROM books WHERE Title LIKE '%$search%'";
     }
-    $result = mysqli_query($db, $sql);
-    $total_records = 0;
-    if($result != false) {
-        while ($row = mysqli_fetch_row($result))
-        {
-            $total_records=$row[0];
-        }
-    }
-    return $total_records;
+    return $sql;
 }

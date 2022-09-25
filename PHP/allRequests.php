@@ -1,6 +1,6 @@
 <?php
 header('Content-Type:text/json;charset=utf-8');
-include_once("utils/PageSelector.php");
+include_once("utils/PageHelper.php");
 $page = $_GET['page'] ?? '';
 $user_name = $_GET['user_name'] ?? '';
 $user_auth = $_GET['user_auth'] ?? '';
@@ -14,14 +14,14 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$user_name ."Auth"])) {
             require_once "db.php";
             $rows = 5;
             $arr = getRequestsList($page, $rows, $display_delete, $db);
-            $total_records = getTotalRecords($display_delete, $db);
+            $total_records = PageHelper::getTotalRecords(getRecordsSQL($display_delete), $db);
             mysqli_close($db);
 
             $total_pages = ceil($total_records / $rows);
             $max_nav_pages = 5;
             $curr_page = intval($page);
 
-            $nav = PageSelector::getNavArray($max_nav_pages, $curr_page, $total_pages);
+            $nav = PageHelper::getNavArray($max_nav_pages, $curr_page, $total_pages);
             $str = array
             (
                 'code' => 200,
@@ -78,19 +78,12 @@ function getRequestsList($page, $rows, $display_delete, $db): array
     return $arr;
 }
 
-function getTotalRecords($display_delete, mysqli $db): int
+function getRecordsSQL($display_delete): string
 {
     if($display_delete == 'false') {
         $sql = "SELECT COUNT(*) FROM request WHERE Status != 'D'";
     } else {
         $sql = "SELECT COUNT(*) FROM request";
     }
-    $result = mysqli_query($db, $sql);
-    $total_records = 0;
-    if($result != false) {
-        while ($row = mysqli_fetch_row($result)) {
-            $total_records = $row[0];
-        }
-    }
-    return $total_records;
+    return $sql;
 }
