@@ -149,7 +149,8 @@ let arrLang = {
         "BOOK_ALREADY_EXIST": "This book may already exist, please confirm and add back manually.",
         "NO_ACCESS_RESTORE_DELETE": "You don't have access to mark the restore delete. Maybe because the session has expired, please refresh or login again.",
         "BANNED": "Banned",
-        "AUTHORITY_GROUP": "Authority"
+        "AUTHORITY_GROUP": "Authority",
+        "YOU_WERE_BANNED": "Sorry, your account has been banned."
     },
 
     "hans": {
@@ -302,7 +303,8 @@ let arrLang = {
         "BOOK_ALREADY_EXIST": "这本书可能已存在，请确认后手动恢复。",
         "NO_ACCESS_RESTORE_DELETE": "你没有权限恢复删除，可能是因为会话已过期，请刷新页面或登录重试。",
         "BANNED": "被封禁",
-        "AUTHORITY_GROUP": "权限组"
+        "AUTHORITY_GROUP": "权限组",
+        "YOU_WERE_BANNED": "对不起，你的账户已被封禁"
     },
 
     "hant": {
@@ -455,6 +457,7 @@ let arrLang = {
         "BOOK_ALREADY_EXIST": "這本書可能已存在，請確認後手動恢復。",
         "NO_ACCESS_RESTORE_DELETE": "你沒有權限恢復刪除，可能是因為會話已過期，請刷新頁面或登錄重試。",
         "BANNED": "被封禁",
-        "AUTHORITY_GROUP": "權限組"
+        "AUTHORITY_GROUP": "權限組",
+        "YOU_WERE_BANNED": "對不起，你的賬戶已被封禁"
     }
 };

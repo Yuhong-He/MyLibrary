@@ -26,7 +26,7 @@ if(strlen($un) > 0 && strlen($un) < 16 &&
         }
     }
     if($code != 201 && $code != 400){
-        $result=mysqli_query($db, "SELECT Email,Authority,id FROM user where UserName = '$un'");
+        $result=mysqli_query($db, "SELECT Email, Authority, id FROM user where UserName = '$un'");
         while($row=mysqli_fetch_row($result))
         {
             $email=$row[0];
@@ -35,7 +35,7 @@ if(strlen($un) > 0 && strlen($un) < 16 &&
         }
         session_start();
         $_SESSION["Username"] = $un;
-        $_SESSION[$un ."Password"] = $pw;
+        $_SESSION[$un ."Id"] = $id;
         $_SESSION[$un ."Auth"] = $authority;
     }
     mysqli_close($db);

@@ -237,6 +237,7 @@ $("#username_btn").click(function() {
 $("#nav_request").click(function() {
     if(getCookie("username") !== "") {
         reset_form("#requestModal form");
+        $("#request_fail").css("display", "none");
         $("#send_to_email").val(getCookie(getCookie("username") + "Email"));
         $("#requestModal").modal({
             backdrop:"static"
@@ -275,6 +276,9 @@ $("#confirm_request_btn").click(function() {
                     show_validate_msg("#book_title", "error", arrLang[lang]["INVALID_BOOK_TITLE"]);
                 } else if(result.code === 401) {
                     $("#request_fail_info").html(arrLang[lang]["NO_ACCESS_REQUEST"]);
+                    $("#request_fail").css("display", "block");
+                } else if(result.code === 402) {
+                    $("#request_fail_info").html(arrLang[lang]["YOU_WERE_BANNED"]);
                     $("#request_fail").css("display", "block");
                 }
             }

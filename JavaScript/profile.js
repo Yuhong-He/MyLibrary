@@ -40,6 +40,7 @@ function displayInfo(){
 
 $(document).on("click", "#edit_username_button", function(){
     reset_form("#usernameModal form");
+    $(".profile_update_fail").css("display", "none");
     $("#new_username").val(getCookie("username"));
     $("#usernameModal").modal({
         backdrop:"static"
@@ -48,6 +49,7 @@ $(document).on("click", "#edit_username_button", function(){
 
 $(document).on("click", "#edit_password_button", function(){
     reset_form("#passwordModal form");
+    $(".profile_update_fail").css("display", "none");
     $("#passwordModal").modal({
         backdrop:"static"
     });
@@ -55,6 +57,7 @@ $(document).on("click", "#edit_password_button", function(){
 
 $(document).on("click", "#edit_email_button", function(){
     reset_form("#emailModal form");
+    $(".profile_update_fail").css("display", "none");
     $("#new_email").val(getCookie(getCookie("username") + "Email"));
     $("#emailModal").modal({
         backdrop:"static"
@@ -105,7 +108,11 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
                 } else if(result.code === 204) {
                     show_validate_msg("#new_email", "error", arrLang[lang]["EMAIL_INVALID"]);
                 } else if(result.code === 401) {
-                    $("#profile_update_fail").css("display", "block");
+                    $(".profile_update_fail_info").html(arrLang[lang]["INVALID_PROFILE_UPDATE"]);
+                    $(".profile_update_fail").css("display", "block");
+                } else if(result.code === 402) {
+                    $(".profile_update_fail_info").html(arrLang[lang]["YOU_WERE_BANNED"]);
+                    $(".profile_update_fail").css("display", "block");
                 }
             }
         }
