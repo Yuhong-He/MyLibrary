@@ -84,3 +84,53 @@ $(document).on("click", "#clean_search_box", function(){
     $("#clean_search_box").css("display", "none");
     to_page();
 });
+
+$(document).on("click", ".restore-btn", function(){
+    $("#restore_delete_fail").css("display", "none");
+    const deleted_id = $(this).attr("restore-id");
+    $.ajax({
+        url:"../PHP/getOneDeleteBook.php",
+        method:"GET",
+        data:{
+            id: deleted_id
+        },
+        success:function(result){
+            if(result.code === 200) {
+                $("#confirm_restore_delete_info").html(result.title);
+                $("#confirm_restore_delete").attr("restore-id", deleted_id);
+            }
+        }
+    });
+    $("#confirmRestoreDeleteModal").modal({
+        backdrop: "static"
+    });
+});
+
+$(document).on("click", "#confirm_restore_delete", function(){
+    const deleted_id = $(this).attr("restore-id");
+    $.ajax({
+        url:"../PHP/restoreDelete.php",
+        method:"POST",
+        data:{
+            id: deleted_id,
+            user_name: getCookie("username"),
+            user_auth: getCookie(getCookie("username") + "Auth")
+        },
+        success:function(result){
+            if(result.code === 200) {
+                document.cookie = "book_display_rows=" + 5;
+                document.cookie = "current_page=" + 1;
+                document.cookie = "search_value=";
+                document.cookie = "book_display_sort_column=id";
+                document.cookie = "book_display_sort_order=desc";
+                window.location.replace("search.html");
+            } else if(result.code === 201) {
+                $("#restore_delete_error").html(arrLang[lang]["BOOK_ALREADY_EXIST"]);
+                $("#restore_delete_fail").css("display", "block");
+            } else if(result.code === 401) {
+                $("#restore_delete_error").html(arrLang[lang]["NO_ACCESS_RESTORE_DELETE"]);
+                $("#restore_delete_fail").css("display", "block");
+            }
+        }
+    });
+});

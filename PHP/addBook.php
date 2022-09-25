@@ -18,7 +18,7 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Auth"])) {
             require_once "db.php";
             $code = 200;
             if ($bookNotRepeat != "true") {
-                $resTitle = mysqli_query($db, "SELECT count(Title) as num FROM books where Title = '$tt'");
+                $resTitle = mysqli_query($db, "SELECT count(Title) as num FROM books where Title = '$tt' and Code = '$cd'");
                 $rewTitle = mysqli_fetch_assoc($resTitle);
                 if ($rewTitle['num'] != 0) {
                     $code = 201;

@@ -6,7 +6,6 @@ $user_name = $_GET['user_name'] ?? '';
 $user_auth = $_GET['user_auth'] ?? '';
 $lang = $_GET['lang'] ?? '';
 $search = $_GET['search'] ?? '';
-$code = 401;
 session_start();
 if(isset($_SESSION["Username"]) && isset($_SESSION[$user_name ."Auth"])) {
     if ($user_name == $_SESSION["Username"] && $user_auth == $_SESSION[$user_name . "Auth"]) {

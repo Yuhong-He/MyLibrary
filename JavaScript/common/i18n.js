@@ -145,7 +145,9 @@ let arrLang = {
         "DELETED": "Deleted",
         "DISPLAY_DELETED_REQUESTS": "Display deleted requests：",
         "MARK_DONE_REQUEST": "Mark the request done",
-        "NO_ACCESS_MARK_DONE_REQUEST": "You don't have access to mark the request done. Maybe because the session has expired, please refresh or login again."
+        "NO_ACCESS_MARK_DONE_REQUEST": "You don't have access to mark the request done. Maybe because the session has expired, please refresh or login again.",
+        "BOOK_ALREADY_EXIST": "This book may already exist, please confirm and add back manually.",
+        "NO_ACCESS_RESTORE_DELETE": "You don't have access to mark the restore delete. Maybe because the session has expired, please refresh or login again."
     },
 
     "hans": {
@@ -294,7 +296,9 @@ let arrLang = {
         "DELETED": "已删除",
         "DISPLAY_DELETED_REQUESTS": "显示已删除的请求：",
         "MARK_DONE_REQUEST": "将请求标记为完成",
-        "NO_ACCESS_MARK_DONE_REQUEST": "你没有权限将请求标记为已完成，可能是因为会话已过期，请刷新页面或登录重试。"
+        "NO_ACCESS_MARK_DONE_REQUEST": "你没有权限将请求标记为已完成，可能是因为会话已过期，请刷新页面或登录重试。",
+        "BOOK_ALREADY_EXIST": "这本书可能已存在，请确认后手动恢复。",
+        "NO_ACCESS_RESTORE_DELETE": "你没有权限恢复删除，可能是因为会话已过期，请刷新页面或登录重试。"
     },
 
     "hant": {
@@ -443,6 +447,8 @@ let arrLang = {
         "DELETED": "已刪除",
         "DISPLAY_DELETED_REQUESTS": "顯示已刪除的請求：",
         "MARK_DONE_REQUEST": "將請求標記為完成",
-        "NO_ACCESS_MARK_DONE_REQUEST": "你沒有權限將請求標記為已完成，可能是因為會話已過期，請刷新頁面或登錄重試。"
+        "NO_ACCESS_MARK_DONE_REQUEST": "你沒有權限將請求標記為已完成，可能是因為會話已過期，請刷新頁面或登錄重試。",
+        "BOOK_ALREADY_EXIST": "這本書可能已存在，請確認後手動恢復。",
+        "NO_ACCESS_RESTORE_DELETE": "你沒有權限恢復刪除，可能是因為會話已過期，請刷新頁面或登錄重試。"
     }
 };
