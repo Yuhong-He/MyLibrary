@@ -1,0 +1,18 @@
+#cite_modal_table {
+    border: none;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.cite-textarea {
+    min-width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize:none;
+}
+
+.sort-column-title {
+    cursor: pointer;
+}

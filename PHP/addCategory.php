@@ -48,6 +48,8 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Auth"])) {
                     'page' => $page
                 );
                 mysqli_close($db);
+            } else {
+                $str = array('code' => $code);
             }
         } else {
             $code = 402;

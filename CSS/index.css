@@ -1,0 +1,13 @@
+.content-image {
+    width:20%;
+    border-radius:20px;
+    float:right;
+    margin-top:5px;
+    margin-left:20px;
+    margin-bottom:3px;
+}
+
+#total_books {
+    color: #4cae4c;
+    font-weight: bold;
+}

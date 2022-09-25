@@ -1,0 +1,16 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #014073;
+    font-size: 0.8em;
+    background-color: #f8f8f8;
+    text-align: center;
+    border-top-style: groove;
+}
+
+footer a {
+    color:#014073;
+}

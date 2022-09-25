@@ -11,13 +11,14 @@
     <script type="text/javascript" src="../JavaScript/common/i18n.js"></script>
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script src="https://kit.fontawesome.com/5badc55ad0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/generalCSS.css">
     <title>Header Navigate Bar</title>
 </head>
 
 <body>
 
 <!-- General Warning Box -->
-<div class="alert alert-danger alert-dismissible" role="alert" id="header_warning" style="display: none;">
+<div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="header_warning">
     <button type="button" class="close" aria-label="Close" id="close_header_warning">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -60,7 +61,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="signup_btn" style="float: left">
+                <button type="button" class="btn btn-success float-left" id="signup_btn">
                     <span class="lang" key="REGISTER"></span>
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -165,7 +166,7 @@
 <!-- Request Modal -->
 <div class="modal fade" id="requestModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <div class="alert alert-danger alert-dismissible" role="alert" id="request_fail" style="display: none;">
+        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="request_fail">
             <button type="button" class="close" aria-label="Close" id="close_request_fail">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -220,8 +221,8 @@
 </div>
 
 <!--Main Body-->
-<div class="container">
-    <div class="row" style="margin-top: 2%">
+<div class="container" id="header-container">
+    <div class="row">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -238,7 +239,7 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="font-size: 1.2em">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li id="nav_home">
                             <a href="index.html">
@@ -250,7 +251,7 @@
                                 <span class="lang" key="FIND_BOOKS"></span>
                                 <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu" style="min-width: 0">
+                            <ul class="dropdown-menu min-dropdown">
                                 <li id="nav_search">
                                     <a href="search.html">
                                         <span class="lang" key="BY_SEARCH"></span>
@@ -273,7 +274,7 @@
                                 <span class="lang" key="MANAGE"></span>
                                 <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu" style="min-width: 0">
+                            <ul class="dropdown-menu min-dropdown">
                                 <li id="nav_manage_request">
                                     <a href="manage_request.html">
                                         <span class="lang" key="MANAGE_REQUEST"></span>
@@ -298,7 +299,7 @@
                                 <i class="fa-solid fa-language"></i>
                                 <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu" style="min-width: 0">
+                            <ul class="dropdown-menu min-dropdown">
                                 <li id="select_hans">
                                     <a href="#">简体中文</a>
                                 </li>

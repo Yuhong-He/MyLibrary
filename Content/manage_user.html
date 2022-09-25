@@ -6,13 +6,14 @@
     <script type="text/javascript" src="../JavaScript/common/common.js"></script>
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/manage_user.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/generalCSS.css">
 </head>
 <body>
 
 <!-- Main Body -->
 <div id="headerContent"></div>
 <div class="container">
-    <div class="row" style="font-size: 1.2em;">
+    <div class="row">
         <div class="col-md-12">
             <h2><span class="lang" key="MANAGE_USER"></span></h2>
         </div>
@@ -25,13 +26,13 @@
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </span>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="search_box">
-                <span style="display: none; position: absolute; right: 10px; top: 45%; transform: translateY(-50%); z-index: 111; font-size: 21px; font-weight: bold; opacity: .2; cursor: pointer;" id="clean_search_box">
+                <span id="clean_search_box">
                     &times;
                 </span>
             </div>
         </div>
     </div>
-    <div class="row" style="padding-top: 2%">
+    <div class="row table-top-gap">
         <div class="col-md-12">
             <table class="table table-hover">
                 <thead>
@@ -59,7 +60,7 @@
     </div>
     <div class="row">
         <div class="col-xs-3">
-            <div id="page_info_area" style="padding-top: 10%"></div>
+            <div id="page_info_area"></div>
         </div>
         <div class="col-xs-8">
             <div class="pull-right" id="page_nav_area"></div>

@@ -7,12 +7,13 @@
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/manage_request.js"></script>
     <link rel="stylesheet" type="text/css" href="../CSS/switchButton.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/generalCSS.css">
 </head>
 <body>
 <!--Mark Done Request Modal-->
 <div class="modal fade" id="markDoneRequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="alert alert-danger alert-dismissible" role="alert" id="mark_done_request_fail" style="display: none;">
+        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="mark_done_request_fail">
             <button type="button" class="close" aria-label="Close" id="close_mark_done_request_fail">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -46,7 +47,7 @@
 <!--Confirm Delete Modal-->
 <div class="modal fade" id="delRequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="alert alert-danger alert-dismissible" role="alert" id="del_request_fail" style="display: none;">
+        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="del_request_fail">
             <button type="button" class="close" aria-label="Close" id="close_del_request_fail">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -80,7 +81,7 @@
 <!-- Main Body -->
 <div id="headerContent"></div>
 <div class="container">
-    <div class="row" style="font-size: 1.2em;">
+    <div class="row">
         <div class="col-md-12">
             <h2><span class="lang" key="MANAGE_REQUEST"></span></h2>
         </div>
@@ -94,27 +95,27 @@
             </div>
         </div>
     </div>
-    <div class="row" style="padding-top: 2%">
+    <div class="row table-top-gap">
         <div class="col-md-12">
-            <table class="table table-hover" style="table-layout: fixed; word-break: break-all" id="requests_table">
+            <table class="table table-hover fixed-width-table" id="requests_table">
                 <thead>
                 <tr>
-                    <th style="width: 25%;">
+                    <th class="width25">
                         <span class="lang" key="BOOK_TITLE"></span>
                     </th>
-                    <th style="width: 15%;">
+                    <th class="width15">
                         <span class="lang" key="USER"></span>
                     </th>
-                    <th style="width: 15%;">
+                    <th class="width15">
                         <span class="lang" key="EMAIL"></span>
                     </th>
-                    <th style="width: 15%;">
+                    <th class="width15">
                         <span class="lang" key="TIME"></span>
                     </th>
-                    <th style="width: 6%;">
+                    <th class="width6">
                         <span class="lang" key="STATUS"></span>
                     </th>
-                    <th style="width: 15%;">
+                    <th class="width15">
                         <span class="lang" key="ADMIN"></span>
                     </th>
                     <th>
@@ -128,7 +129,7 @@
     </div>
     <div class="row">
         <div class="col-xs-3">
-            <div id="page_info_area" style="padding-top: 10%"></div>
+            <div id="page_info_area"></div>
         </div>
         <div class="col-xs-8">
             <div class="pull-right" id="page_nav_area"></div>

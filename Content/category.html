@@ -6,13 +6,14 @@
     <script type="text/javascript" src="../JavaScript/common/common.js"></script>
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/category.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/generalCSS.css">
 </head>
 
 <body>
 <!--Add Category Modal-->
 <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="alert alert-danger alert-dismissible" role="alert" id="add_category_fail" style="display: none;">
+        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="add_category_fail">
             <button type="button" class="close" aria-label="Close" id="close_add_category_fail">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -31,7 +32,7 @@
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">
+                        <label class="col-sm-2 control-label" for="new_category_id">
                             <span class="lang" key="ID"></span>
                         </label>
                         <div class="col-sm-10">
@@ -40,7 +41,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">
+                        <label class="col-sm-2 control-label" for="new_category_zh_name">
                             <span class="lang" key="CATEGORY_ZH_NAME"></span>
                         </label>
                         <div class="col-sm-10">
@@ -49,7 +50,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">
+                        <label class="col-sm-2 control-label" for="new_category_en_name">
                             <span class="lang" key="CATEGORY_EN_NAME"></span>
                         </label>
                         <div class="col-sm-10">
@@ -60,12 +61,12 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <div style="float: left">
+                <div class="float-left">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         <span class="lang" key="CLOSE"></span>
                     </button>
                 </div>
-                <div style="float: right">
+                <div class="float-right">
                     <button type="button" class="btn btn-primary" id="insert_new_category_btn">
                         <span class="lang" key="CONFIRM"></span>
                     </button>
@@ -81,7 +82,7 @@
 <!--Confirm Delete Modal-->
 <div class="modal fade" id="delCategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="alert alert-danger alert-dismissible" role="alert" id="del_category_fail" style="display: none;">
+        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="del_category_fail">
             <button type="button" class="close" aria-label="Close" id="close_del_category_fail">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -115,7 +116,7 @@
 <!--Main Body-->
 <div id="headerContent"></div>
 <div class="container" id="main_container">
-    <div class="row" style="font-size: 1.2em;">
+    <div class="row">
         <div class="col-md-12">
             <h2><span class="lang" key="ALL_CATEGORY"></span></h2>
         </div>
@@ -128,7 +129,7 @@
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </span>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="search_box">
-                <span style="display: none; position: absolute; right: 10px; top: 45%; transform: translateY(-50%); z-index: 111; font-size: 21px; font-weight: bold; opacity: .2; cursor: pointer;" id="clean_search_box">
+                <span id="clean_search_box">
                     &times;
                 </span>
             </div>
@@ -142,7 +143,7 @@
                     <span class="lang" key="DISPLAY_ROWS"></span>
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" style="min-width:73px">
+                <ul class="dropdown-menu min-dropdown">
                     <li id="display_5_rows">
                         <a href="#"><span class="lang" key="5Rows"></span></a>
                     </li>
@@ -159,9 +160,9 @@
             </div>
         </div>
     </div>
-    <div class="row" style="padding-top: 2%">
+    <div class="row table-top-gap">
         <div class="col-md-12">
-            <table class="table table-hover" style="table-layout: fixed; word-break: break-all" id="categories_table">
+            <table class="table table-hover fixed-width-table" id="categories_table">
                 <tbody id="all_categories_table_head"></tbody>
                 <tbody id="all_categories_table_body"></tbody>
             </table>
@@ -169,7 +170,7 @@
     </div>
     <div class="row">
         <div class="col-xs-3">
-            <div id="page_info_area" style="padding-top: 10%"></div>
+            <div id="page_info_area"></div>
         </div>
         <div class="col-xs-8">
             <div class="pull-right" id="page_nav_area"></div>

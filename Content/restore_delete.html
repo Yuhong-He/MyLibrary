@@ -6,12 +6,13 @@
     <script type="text/javascript" src="../JavaScript/common/common.js"></script>
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/restore_delete.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/generalCSS.css">
 </head>
 <body>
 <!--Mark Done Request Modal-->
 <div class="modal fade" id="confirmRestoreDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="alert alert-danger alert-dismissible" role="alert" id="restore_delete_fail" style="display: none;">
+        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="restore_delete_fail">
             <button type="button" class="close" aria-label="Close" id="close_restore_delete_fail">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -45,7 +46,7 @@
 <!-- Main Body -->
 <div id="headerContent"></div>
 <div class="container">
-    <div class="row" style="font-size: 1.2em;">
+    <div class="row">
         <div class="col-md-12">
             <h2><span class="lang" key="RESTORE_DELETE"></span></h2>
         </div>
@@ -58,30 +59,30 @@
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </span>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="search_box">
-                <span style="display: none; position: absolute; right: 10px; top: 45%; transform: translateY(-50%); z-index: 111; font-size: 21px; font-weight: bold; opacity: .2; cursor: pointer;" id="clean_search_box">
+                <span id="clean_search_box">
                     &times;
                 </span>
             </div>
         </div>
     </div>
-    <div class="row" style="padding-top: 2%">
+    <div class="row table-top-gap">
         <div class="col-md-12">
-            <table class="table table-hover" style="table-layout: fixed; word-break: break-all">
+            <table class="table table-hover fixed-width-table">
                 <thead>
                 <tr>
-                    <th style="width: 30%;">
+                    <th class="width30">
                         <span class="lang" key="BOOK_TITLE"></span>
                     </th>
-                    <th style="width: 20%;">
+                    <th class="width20">
                         <span class="lang" key="AUTHOR"></span>
                     </th>
-                    <th style="width: 15%;">
+                    <th class="width15">
                         <span class="lang" key="PUBLISHER"></span>
                     </th>
-                    <th style="width: 15%;">
+                    <th class="width15">
                         <span class="lang" key="CATEGORY"></span>
                     </th>
-                    <th style="width: 12%;">
+                    <th class="width12">
                         <span class="lang" key="ADMIN"></span>
                     </th>
                     <th>
@@ -95,7 +96,7 @@
     </div>
     <div class="row">
         <div class="col-xs-3">
-            <div id="page_info_area" style="padding-top: 10%"></div>
+            <div id="page_info_area"></div>
         </div>
         <div class="col-xs-8">
             <div class="pull-right" id="page_nav_area"></div>
