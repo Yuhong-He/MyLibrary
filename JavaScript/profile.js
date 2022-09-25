@@ -63,7 +63,7 @@ $(document).on("click", "#edit_email_button", function(){
 
 function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword, newEmail, authority, id){
     $.ajax({
-        url:"../PHP/updateProfile.php",
+        url:"../PHP/updateUser.php",
         method:"POST",
         data:{
             username: oldUsername,
