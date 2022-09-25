@@ -2,7 +2,7 @@
 
 class PageHelper
 {
-    public static function getTotalRecords($sql, mysqli $db): int
+    public static function getPage($sql, $rows, $page, $arr, mysqli $db): array
     {
         $result = mysqli_query($db, $sql);
         $total_records = 0;
@@ -11,7 +11,21 @@ class PageHelper
                 $total_records = $row[0];
             }
         }
-        return $total_records;
+
+        $total_pages = ceil($total_records / $rows);
+        $max_nav_pages = 5;
+        $curr_page = intval($page);
+
+        $nav = self::getNavArray($max_nav_pages, $curr_page, $total_pages);
+        return array
+        (
+            'code' => 200,
+            'count'=>$total_records,
+            'pages'=>$total_pages,
+            'currentPage'=>$curr_page,
+            'navigatePageNums'=>$nav,
+            'body'=>$arr
+        );
     }
 
     public static function getNavArray($max_nav_pages, $curr_page, $total_pages): array

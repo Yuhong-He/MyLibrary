@@ -14,23 +14,9 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$user_name ."Auth"])) {
             require_once "db.php";
             $rows = 5;
             $arr = getRequestsList($page, $rows, $display_delete, $db);
-            $total_records = PageHelper::getTotalRecords(getRecordsSQL($display_delete), $db);
+            $str = PageHelper::getPage(getRecordsSQL($display_delete), $rows, $page, $arr, $db);
             mysqli_close($db);
 
-            $total_pages = ceil($total_records / $rows);
-            $max_nav_pages = 5;
-            $curr_page = intval($page);
-
-            $nav = PageHelper::getNavArray($max_nav_pages, $curr_page, $total_pages);
-            $str = array
-            (
-                'code' => 200,
-                'count' => $total_records,
-                'pages' => $total_pages,
-                'currentPage' => $curr_page,
-                'navigatePageNums' => $nav,
-                'body' => $arr
-            );
             echo json_encode($str);
         } else {
             echo json_encode(array('code' => 401));

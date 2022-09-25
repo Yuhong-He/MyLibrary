@@ -13,22 +13,9 @@ if((is_numeric($page)) && ($page > 0) &&
 
     require_once "db.php";
     $arr = getCategoryList($page, $rows, $lang, $search, $db);
-    $total_records = PageHelper::getTotalRecords(getRecordsSQL($search, $lang), $db);
+    $str = PageHelper::getPage(getRecordsSQL($search, $lang), $rows, $page, $arr, $db);
     mysqli_close($db);
 
-    $total_pages = ceil($total_records / $rows);
-    $max_nav_pages = 5;
-    $curr_page = intval($page);
-
-    $nav = PageHelper::getNavArray($max_nav_pages, $curr_page, $total_pages);
-    $str = array
-    (
-        'count'=>$total_records,
-        'pages'=>$total_pages,
-        'currentPage'=>$curr_page,
-        'navigatePageNums'=>$nav,
-        'body'=>$arr
-    );
     echo json_encode($str);
 } else {
     echo "Are u trying to do something?\n:(";

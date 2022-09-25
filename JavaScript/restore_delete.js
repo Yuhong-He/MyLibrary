@@ -73,6 +73,7 @@ $(function() {
         } else {
             $("#clean_search_box").css("display", "none");
         }
+        page = 1;
         search = search_value;
         to_page();
     });
