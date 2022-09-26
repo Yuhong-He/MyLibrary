@@ -13,7 +13,7 @@ if((is_numeric($page)) && ($page > 0) &&
 
     require_once "db.php";
     $arr = getCategoryList($page, $rows, $lang, $search, $db);
-    $str = PageHelper::getPage(getRecordsSQL($search, $lang), $rows, $page, $arr, $db);
+    $str = PageHelper::getPage(getRecordsSQL($search, $lang), $rows, $page, $arr, $db, "");
     mysqli_close($db);
 
     echo json_encode($str);

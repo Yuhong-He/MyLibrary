@@ -16,7 +16,7 @@ if((is_numeric($page)) && ($page > 0) &&
     $search = preg_replace("/[\']/","\\'", $search);
     require_once "db.php";
     $arr = getBookList($page, $rows, $sortByColumn, $sortOrder, $lang, $search, $db);
-    $str = PageHelper::getPage(getRecordsSQL($search), $rows, $page, $arr, $db);
+    $str = PageHelper::getPage(getRecordsSQL($search), $rows, $page, $arr, $db, "");
     mysqli_close($db);
 
     echo json_encode($str);

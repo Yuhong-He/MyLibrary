@@ -219,3 +219,26 @@ function build_page_nav(result) {
         nav.appendTo("#page_nav_area");
     }
 }
+
+$(document).on("click", ".cat-link", function(){
+    const cat_id = $(this).attr("cat-id");
+    $.ajax({
+        url:"../PHP/sessionCatId.php",
+        method:"POST",
+        data:{
+            id: cat_id
+        },
+        success:function(result){
+            if(result.code === 200) {
+                window.location.replace("category.html");
+            } else if(result.code === 201) {
+                $("#general_fail_info").html(arrLang[lang]["CATEGORY_NOT_EXIST"]);
+                $("#general_fail").css("display", "block");
+            }
+        }
+    });
+});
+
+$(document).on("click", "#close_general_fail", function(){
+    $("#general_fail").css("display", "none");
+});

@@ -153,7 +153,9 @@ function build_books_table(result){
             const bookPublisher = $("<td></td>").append(item.publisher);
             const bookYear = $("<td></td>").append(item.year);
             const catName = $("<td></td>").append($("<a></a>")
-                .attr("href", "by_category.php?id=" + item.catId)
+                .attr("href", "#")
+                .addClass("cat-link")
+                .attr("cat-id", item.catId)
                 .append(item.catName));
             const citeBtn = $("<button></button>").addClass("btn btn-default btn-sm cite_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-book"));

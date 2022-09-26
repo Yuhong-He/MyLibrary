@@ -87,7 +87,6 @@ function updateInfo(oldUsername, oldPassword, oldEmail, newUsername, newPassword
                 $("#emailModal").modal('hide');
 
                 $("#profile_username").html(newUsername);
-                displayAfterLoad();
 
                 let hiddenPassword = "";
                 for(let i=0; i<newPassword.length; i++){

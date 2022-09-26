@@ -46,7 +46,9 @@ function build_deleted_book_table(result) {
             const author = $("<td></td>").append(item.author);
             const publisher = $("<td></td>").append(item.publisher);
             const catName = $("<td></td>").append($("<a></a>")
-                .attr("href", "by_category.php?id=" + item.catId)
+                .attr("href", "#")
+                .addClass("cat-link")
+                .attr("cat-id", item.catId)
                 .append(item.catName));
             const admin = $("<td></td>").append(item.admin);
             let restoreBtn = $("<button></button>").addClass("btn btn-success btn-sm restore-btn")

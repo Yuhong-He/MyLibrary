@@ -6,119 +6,13 @@
     <script type="text/javascript" src="../JavaScript/common/common.js"></script>
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/category.js"></script>
-    <link rel="stylesheet" type="text/css" href="../CSS/generalCSS.css">
 </head>
-
 <body>
-<!--Add Category Modal-->
-<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="add_category_fail">
-            <button type="button" class="close" aria-label="Close" id="close_add_category_fail">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong><span class="lang" key="ERROR"></span></strong>
-            <span id="add_category_error"></span>
-        </div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">
-                    <span id="add_category_modal_title"></span>
-                </h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="new_category_id">
-                            <span class="lang" key="ID"></span>
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" name="category_id" class="form-control" id="new_category_id">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="new_category_zh_name">
-                            <span class="lang" key="CATEGORY_ZH_NAME"></span>
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" name="category_name" class="form-control" id="new_category_zh_name">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="new_category_en_name">
-                            <span class="lang" key="CATEGORY_EN_NAME"></span>
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" name="category_name" class="form-control" id="new_category_en_name">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="float-left">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        <span class="lang" key="CLOSE"></span>
-                    </button>
-                </div>
-                <div class="float-right">
-                    <button type="button" class="btn btn-primary" id="insert_new_category_btn">
-                        <span class="lang" key="CONFIRM"></span>
-                    </button>
-                    <button type="button" class="btn btn-primary" id="update_category_btn">
-                        <span class="lang" key="UPDATE"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Confirm Delete Modal-->
-<div class="modal fade" id="delCategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="del_category_fail">
-            <button type="button" class="close" aria-label="Close" id="close_del_category_fail">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong><span class="lang" key="ERROR"></span></strong>
-            <span id="del_category_error"></span>
-        </div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">
-                    <span class="lang" key="DEL_CATEGORY"></span>
-                </h4>
-            </div>
-            <div class="modal-body">
-                <span id="confirm_delete_category_info"></span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    <span class="lang" key="CLOSE"></span>
-                </button>
-                <button type="button" class="btn btn-danger" id="confirm_delete_category">
-                    <span class="lang" key="DELETE"></span>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Main Body-->
 <div id="headerContent"></div>
-<div class="container" id="main_container">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2><span class="lang" key="ALL_CATEGORY"></span></h2>
+            <h2><span id="category_title"></span></h2>
         </div>
     </div>
     <div class="row">
@@ -134,10 +28,7 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-3 col-md-offset-0 pull-right">
-            <button type="button" class="btn btn-primary" id="add_new_category_btn">
-                <span class="lang" key="ADD"></span>
-            </button>
+        <div class="col-md-2 col-md-offset-0 pull-right">
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="lang" key="DISPLAY_ROWS"></span>
@@ -162,9 +53,27 @@
     </div>
     <div class="row table-top-gap">
         <div class="col-md-12">
-            <table class="table table-hover fixed-width-table" id="categories_table">
-                <tbody id="all_categories_table_head"></tbody>
-                <tbody id="all_categories_table_body"></tbody>
+            <table class="table table-hover fixed-width-table" id="books_table">
+                <thead>
+                <tr>
+                    <th class="width30">
+                        <span class="lang" key="BOOK_TITLE"></span>
+                    </th>
+                    <th class="width25">
+                        <span class="lang" key="AUTHOR"></span>
+                    </th>
+                    <th class="width15">
+                        <span class="lang" key="PUBLISHER"></span>
+                    </th>
+                    <th class="width10">
+                        <span class="lang" key="YEAR"></span>
+                    </th>
+                    <th>
+                        <span class="lang" key="OPERATION"></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="cat_books_table_body"></tbody>
             </table>
         </div>
     </div>
@@ -177,6 +86,6 @@
         </div>
     </div>
 </div>
-<div id="footerContent"></div>
 </body>
+<div id="footerContent"></div>
 </html>

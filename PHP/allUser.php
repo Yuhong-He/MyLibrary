@@ -13,7 +13,7 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$user_name ."Auth"])) {
             require_once "db.php";
             $rows = 5;
             $arr = getRequestsList($page, $rows, $search, $db);
-            $str = PageHelper::getPage(getRecordsSQL($search), $rows, $page, $arr, $db);
+            $str = PageHelper::getPage(getRecordsSQL($search), $rows, $page, $arr, $db, "");
             mysqli_close($db);
 
             echo json_encode($str);
