@@ -9,6 +9,87 @@
     <link rel="stylesheet" type="text/css" href="../CSS/generalCSS.css">
 </head>
 <body>
+<!--Manage User Modal-->
+<div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="open_manage_user_fail">
+    <button type="button" class="close" aria-label="Close" id="close_open_manage_user_fail">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong><span class="lang" key="ERROR"></span></strong>
+    <span id="open_manage_user_fail_info"></span>
+</div>
+
+<!--Manage User Modal-->
+<div class="modal fade" id="manageUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="manage_user_fail">
+            <button type="button" class="close" aria-label="Close" id="close_manage_user_fail">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong><span class="lang" key="ERROR"></span></strong>
+            <span id="manage_user_error"></span>
+        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="lang" key="MANAGE_USER"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="manage_user_username">
+                            <span class="lang" key="USERNAME"></span>
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="manage_user_username" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="AUTHORITY_GROUP"></span>
+                        </label>
+                        <div class="col-sm-8">
+                            <label class="radio-inline">
+                                <input type="radio" name="authorityOptions" id="authority_1" value="1">
+                                <span class="lang" key="USER"></span>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="authorityOptions" id="authority_2" value="2">
+                                <span class="lang" key="ADMIN"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            <span class="lang" key="BAN"></span>
+                        </label>
+                        <div class="col-sm-8">
+                            <label class="radio-inline">
+                                <input type="radio" name="banOptions" id="ban_1" value="N">
+                                <span class="lang" key="NO"></span>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="banOptions" id="ban_2" value="Y">
+                                <span class="lang" key="YES"></span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="lang" key="CLOSE"></span>
+                </button>
+                <button type="button" class="btn btn-primary" id="confirm_manage_user">
+                    <span class="lang" key="CONFIRM"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Main Body -->
 <div id="headerContent"></div>

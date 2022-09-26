@@ -7,7 +7,6 @@ $unNew = $_POST['newUsername'] ?? '';
 $pwNew = $_POST['newPassword'] ?? '';
 $emNew = $_POST['newEmail'] ?? '';
 $auth = $_POST['authority'] ?? '';
-$banned = $_POST['banned'] ?? '';
 $id = $_POST['id'] ?? '';
 session_start();
 if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Id"])) {
@@ -49,13 +48,10 @@ if(isset($_SESSION["Username"]) && isset($_SESSION[$un ."Id"])) {
                     }
                     if ($code != 201 && $code != 202 && $code != 203) {
                         $encryptPW = password_hash($pwNew, PASSWORD_DEFAULT);
-                        $banned = $banned == "" ? "N" : $banned;
-                        $sql = "UPDATE user
-                            SET UserName='$unNew', Password='$encryptPW', Email='$emNew', Authority='$auth', Banned='$banned'
-                            WHERE id='$id'";
+                        $sql = "UPDATE user SET UserName='$unNew', Password='$encryptPW', Email='$emNew' WHERE id='$id'";
                         mysqli_query($db, $sql);
                         $_SESSION["Username"] = $unNew;
-                        $_SESSION[$unNew . "Id"] = $pwNew;
+                        $_SESSION[$unNew . "Id"] = $id;
                     }
                     mysqli_close($db);
                     $str = array

@@ -94,3 +94,71 @@ $(document).on("click", "#clean_search_box", function(){
     $("#clean_search_box").css("display", "none");
     to_page();
 });
+
+$(document).on("click", ".manage-btn", function(){
+    const user_id = $(this).attr("manage-id");
+    reset_form("#manageUserModal form");
+    $("#manage_user_fail").css("display", "none");
+    $.ajax({
+        url:"../PHP/getOneUser.php",
+        method:"GET",
+        data:{
+            id: user_id
+        },
+        success:function(result){
+            if(result.code === 200) {
+                if(parseInt(result.authority) === 3) {
+                    $("#open_manage_user_fail_info").html(arrLang[lang]["CAN_NOT_MANAGE_SUPER_ADMIN"]);
+                    $("#open_manage_user_fail").css("display", "block");
+                } else {
+                    $("#manage_user_username").val(result.username);
+                    $('input[name="authorityOptions"][value="' + result.authority + '"]').prop("checked",true);
+                    $('input[name="banOptions"][value="' + result.banned + '"]').prop("checked",true);
+                    $("#confirm_manage_user").attr("manage-id", user_id);
+                    $("#manageUserModal").modal({
+                        backdrop: "static"
+                    });
+                }
+            }
+        }
+    });
+});
+
+$(document).on("click", "#confirm_manage_user", function(){
+    const user_id = $(this).attr("manage-id");
+    const authority = $('input[name="authorityOptions"]:checked').val();
+    const banned = $('input[name="banOptions"]:checked').val();
+    $.ajax({
+        url:"../PHP/updateUserAuth.php",
+        method:"POST",
+        data:{
+            id: user_id,
+            authority: authority,
+            banned: banned,
+            user_name: getCookie("username"),
+            user_auth: getCookie(getCookie("username") + "Auth")
+        },
+        success:function(result){
+            if(result.code === 200) {
+                $("#manageUserModal").modal('hide');
+                to_page();
+            } else if(result.code === 201) {
+                $("#manage_user_error").html(arrLang[lang]["CAN_NOT_BAN_ADMIN"]);
+                $("#manage_user_fail").css("display", "block");
+            } else if(result.code === 401) {
+                $("#manage_user_error").html(arrLang[lang]["NO_ACCESS_UPDATE_USER_AUTH"]);
+                $("#manage_user_fail").css("display", "block");
+            } else if(result.code === 402) {
+                $("#manage_user_error").html(arrLang[lang]["NO_USER_RIGHTS_UPDATE_USER_AUTH"]);
+                $("#manage_user_fail").css("display", "block");
+            }
+        }
+    });
+});
+
+$(document).on("click", "#close_open_manage_user_fail", function(){
+    $("#open_manage_user_fail").css("display", "none");
+});
+$(document).on("click", "#close_manage_user_fail", function(){
+    $("#manage_user_fail").css("display", "none");
+});

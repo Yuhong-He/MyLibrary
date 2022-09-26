@@ -150,7 +150,14 @@ let arrLang = {
         "NO_ACCESS_RESTORE_DELETE": "You don't have access to mark the restore delete. Maybe because the session has expired, please refresh or login again.",
         "BANNED": "Banned",
         "AUTHORITY_GROUP": "Authority",
-        "YOU_WERE_BANNED": "Sorry, your account has been banned."
+        "YOU_WERE_BANNED": "Sorry, your account has been banned.",
+        "BAN": "Ban",
+        "YES": "Yes",
+        "NO": "No",
+        "CAN_NOT_MANAGE_SUPER_ADMIN": "Can not manage Super Admin!",
+        "NO_ACCESS_UPDATE_USER_AUTH": "You don't have access to update user authority. Maybe because the session has expired, please refresh or login again.",
+        "NO_USER_RIGHTS_UPDATE_USER_AUTH": "Your account doesn't have rights to update user rights.",
+        "CAN_NOT_BAN_ADMIN": "User with admin rights can not be banned!"
     },
 
     "hans": {
@@ -304,7 +311,14 @@ let arrLang = {
         "NO_ACCESS_RESTORE_DELETE": "你没有权限恢复删除，可能是因为会话已过期，请刷新页面或登录重试。",
         "BANNED": "被封禁",
         "AUTHORITY_GROUP": "权限组",
-        "YOU_WERE_BANNED": "对不起，你的账户已被封禁"
+        "YOU_WERE_BANNED": "对不起，你的账户已被封禁",
+        "BAN": "封禁",
+        "YES": "是",
+        "NO": "否",
+        "CAN_NOT_MANAGE_SUPER_ADMIN": "不可以更改超级管理员！",
+        "NO_ACCESS_UPDATE_USER_AUTH": "你没有权限修改用户权限，可能是因为会话已过期，请刷新页面或登录重试。",
+        "NO_USER_RIGHTS_UPDATE_USER_AUTH": "你的账户没有权限修改用户权限。",
+        "CAN_NOT_BAN_ADMIN": "拥有管理员权限的用户不能被封禁！"
     },
 
     "hant": {
@@ -458,6 +472,13 @@ let arrLang = {
         "NO_ACCESS_RESTORE_DELETE": "你沒有權限恢復刪除，可能是因為會話已過期，請刷新頁面或登錄重試。",
         "BANNED": "被封禁",
         "AUTHORITY_GROUP": "權限組",
-        "YOU_WERE_BANNED": "對不起，你的賬戶已被封禁"
+        "YOU_WERE_BANNED": "對不起，你的賬戶已被封禁",
+        "BAN": "封禁",
+        "YES": "是",
+        "NO": "否",
+        "CAN_NOT_MANAGE_SUPER_ADMIN": "不可以更改超級管理員",
+        "NO_ACCESS_UPDATE_USER_AUTH": "你沒有權限修改用戶權限，可能是因為會話已過期，請刷新頁面或登錄重試。",
+        "NO_USER_RIGHTS_UPDATE_USER_AUTH": "你的賬戶沒有權限修改用戶權限。",
+        "CAN_NOT_BAN_ADMIN": "擁有管理員權限的用戶不能被封禁！"
     }
 };
