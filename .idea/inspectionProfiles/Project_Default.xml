@@ -3,8 +3,9 @@
     <option name="myName" value="Project Default" />
     <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <Languages>
-        <language minSize="351" name="JavaScript" />
-        <language minSize="114" name="PHP" />
+        <language minSize="5" name="Style Sheets" />
+        <language minSize="29" name="JavaScript" />
+        <language minSize="15" name="PHP" />
       </Languages>
     </inspection_tool>
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">

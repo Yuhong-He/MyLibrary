@@ -3,76 +3,13 @@ let rows = 5;
 let search = "";
 let total_page = 0;
 let total_data = 0;
-$(document).ready(function(){
-    $("#headerContent").load("header.html");
-    $("#footerContent").load("footer.html");
-    setTimeout(() => navBlockColor(), 50);
-    to_page();
-});
+generalDocumentReady();
 
 function navBlockColor() {
     $("#nav_books").addClass("active");
     $("#nav_category").addClass("active");
     $("#display_5_rows").addClass("active");
 }
-
-function active_rows_selector(rows) {
-    $("#display_5_rows").removeClass("active");
-    $("#display_10_rows").removeClass("active");
-    $("#display_20_rows").removeClass("active");
-    $("#display_50_rows").removeClass("active");
-    $("#" + rows).addClass("active");
-}
-
-$(document).on("click", "#display_5_rows", function(){
-    page = 1;
-    rows = 5;
-    to_page();
-    active_rows_selector('display_5_rows');
-});
-
-$(document).on("click", "#display_10_rows", function(){
-    page = 1;
-    rows = 10;
-    to_page();
-    active_rows_selector('display_10_rows');
-});
-
-$(document).on("click", "#display_20_rows", function(){
-    page = 1;
-    rows = 20;
-    to_page();
-    active_rows_selector('display_20_rows');
-});
-
-$(document).on("click", "#display_50_rows", function(){
-    page = 1;
-    rows = 50;
-    to_page();
-    active_rows_selector('display_50_rows');
-});
-
-$(function() {
-    $("#search_box").bind("input propertychange", function () {
-        let search_value = $("#search_box").val().trim();
-        search = search_value;
-        if(search_value !== "") {
-            $("#clean_search_box").css("display", "block");
-        } else {
-            $("#clean_search_box").css("display", "none");
-        }
-        page = 1;
-        to_page();
-    });
-});
-
-$(document).on("click", "#clean_search_box", function(){
-    search = "";
-    $("#search_box").val("");
-    $("#clean_search_box").css("display", "none");
-    page = 1;
-    to_page();
-});
 
 function to_page() {
     $.ajax({
@@ -169,30 +106,7 @@ $(document).on("click", "#add_new_category_btn", function(){
 });
 
 $(document).on("click", "#insert_new_category_btn", function(){
-    const id = $("#new_category_id").val().trim();
-    if(id === "") {
-        show_validate_msg("#new_category_id", "error", arrLang[lang]["CATEGORY_ID_REQUIRED"]);
-        return false;
-    }
-    const regId = /(^[0-9]{6}$)/;
-    if(!regId.test(id)) {
-        show_validate_msg("#new_category_id", "error", arrLang[lang]["CAT_ID_FORMAT_NOT_MATCH"]);
-        return false;
-    }
-    if(id < 100000) {
-        show_validate_msg("#new_category_id", "error", arrLang[lang]["CAT_ID_FORMAT_NOT_MATCH"]);
-        return false;
-    }
-    const zh_name = $("#new_category_zh_name").val().trim();
-    if(zh_name === "") {
-        show_validate_msg("#new_category_zh_name", "error", arrLang[lang]["CATEGORY_NAME_REQUIRED"]);
-        return false;
-    }
-    const en_name = $("#new_category_en_name").val().trim();
-    if(en_name === "") {
-        show_validate_msg("#new_category_en_name", "error", arrLang[lang]["CATEGORY_NAME_REQUIRED"]);
-        return false;
-    }
+    validAddCategory();
     $.ajax({
         url:"../PHP/addCategory.php",
         method:"POST",
@@ -206,12 +120,7 @@ $(document).on("click", "#insert_new_category_btn", function(){
         },
         success:function(result){
             if(result.code === 200){
-                search = "";
-                $("#search_box").val("");
-                $("#clean_search_box").css("display", "none");
-                page = result.page;
-                to_page();
-                $("#addCategoryModal").modal('hide');
+                closeAddModalAndToPage();
             } else if(result.code === 201) {
                 show_validate_msg("#new_category_id", "error", arrLang[lang]["CATEGORY_ID_REPEAT"]);
             } else if(result.code === 202) {
@@ -228,6 +137,15 @@ $(document).on("click", "#insert_new_category_btn", function(){
         }
     });
 });
+
+function closeAddModalAndToPage() {
+    search = "";
+    $("#search_box").val("");
+    $("#clean_search_box").css("display", "none");
+    page = result.page;
+    to_page();
+    $("#addCategoryModal").modal('hide');
+}
 
 $(document).on("click", ".edit-btn", function(){
     $("#add_category_modal_title").html(arrLang[lang]["EDIT_CATEGORY"]);
@@ -258,6 +176,42 @@ $(document).on("click", "#update_category_btn", function(){
     const orig_id = $(this).attr("cat-id");
     const orig_zh = $(this).attr("cat-zh");
     const orig_en = $(this).attr("cat-en");
+    validAddCategory();
+    $.ajax({
+        url:"../PHP/updateCategory.php",
+        method:"POST",
+        data:{
+            orig_id: orig_id,
+            orig_zh: orig_zh,
+            orig_en: orig_en,
+            id: id,
+            zh_name: zh_name,
+            en_name: en_name,
+            rows: rows,
+            username: getCookie("username"),
+            authority: getCookie(getCookie("username") + "Auth")
+        },
+        success:function(result){
+            if(result.code === 200){
+                closeAddModalAndToPage();
+            } else if(result.code === 201) {
+                show_validate_msg("#new_category_id", "error", arrLang[lang]["CATEGORY_ID_REPEAT"]);
+            } else if(result.code === 202) {
+                show_validate_msg("#new_category_zh_name", "error", arrLang[lang]["CATEGORY_NAME_REPEAT"]);
+            } else if(result.code === 203) {
+                show_validate_msg("#new_category_en_name", "error", arrLang[lang]["CATEGORY_NAME_REPEAT"]);
+            } else if(result.code === 401) {
+                $("#add_category_error").html(arrLang[lang]["NO_ACCESS_EDIT_CATEGORY"]);
+                $("#add_category_fail").css("display", "block");
+            } else if(result.code === 402) {
+                $("#add_category_error").html(arrLang[lang]["NO_USER_RIGHTS_EDIT_CATEGORY"]);
+                $("#add_category_fail").css("display", "block");
+            }
+        }
+    });
+});
+
+function validAddCategory() {
     const id = $("#new_category_id").val().trim();
     if(id === "") {
         show_validate_msg("#new_category_id", "error", arrLang[lang]["CATEGORY_ID_REQUIRED"]);
@@ -282,44 +236,8 @@ $(document).on("click", "#update_category_btn", function(){
         show_validate_msg("#new_category_en_name", "error", arrLang[lang]["CATEGORY_NAME_REQUIRED"]);
         return false;
     }
-    $.ajax({
-        url:"../PHP/updateCategory.php",
-        method:"POST",
-        data:{
-            orig_id: orig_id,
-            orig_zh: orig_zh,
-            orig_en: orig_en,
-            id: id,
-            zh_name: zh_name,
-            en_name: en_name,
-            rows: rows,
-            username: getCookie("username"),
-            authority: getCookie(getCookie("username") + "Auth")
-        },
-        success:function(result){
-            if(result.code === 200){
-                search = "";
-                $("#search_box").val("");
-                $("#clean_search_box").css("display", "none");
-                page = result.page;
-                to_page();
-                $("#addCategoryModal").modal('hide');
-            } else if(result.code === 201) {
-                show_validate_msg("#new_category_id", "error", arrLang[lang]["CATEGORY_ID_REPEAT"]);
-            } else if(result.code === 202) {
-                show_validate_msg("#new_category_zh_name", "error", arrLang[lang]["CATEGORY_NAME_REPEAT"]);
-            } else if(result.code === 203) {
-                show_validate_msg("#new_category_en_name", "error", arrLang[lang]["CATEGORY_NAME_REPEAT"]);
-            } else if(result.code === 401) {
-                $("#add_category_error").html(arrLang[lang]["NO_ACCESS_EDIT_CATEGORY"]);
-                $("#add_category_fail").css("display", "block");
-            } else if(result.code === 402) {
-                $("#add_category_error").html(arrLang[lang]["NO_USER_RIGHTS_EDIT_CATEGORY"]);
-                $("#add_category_fail").css("display", "block");
-            }
-        }
-    });
-});
+    return true;
+}
 
 $(document).on("click", ".del-btn", function(){
     $("#del_category_fail").css("display", "none");

@@ -1,12 +1,6 @@
 let page = 1;
 let search = "";
-
-$(document).ready(function(){
-    $("#headerContent").load("header.html");
-    $("#footerContent").load("footer.html");
-    setTimeout(() => navBlockColor(), 50);
-    to_page();
-});
+generalDocumentReady();
 
 function navBlockColor() {
     $("#nav_manage").addClass("active");
@@ -73,27 +67,6 @@ function build_user_table(result) {
         );
     }
 }
-
-$(function() {
-    $("#search_box").bind("input propertychange", function () {
-        let search_value = $("#search_box").val();
-        if(search_value !== "") {
-            $("#clean_search_box").css("display", "block");
-        } else {
-            $("#clean_search_box").css("display", "none");
-        }
-        page = 1;
-        search = search_value;
-        to_page();
-    });
-});
-
-$(document).on("click", "#clean_search_box", function(){
-    search = "";
-    $("#search_box").val("");
-    $("#clean_search_box").css("display", "none");
-    to_page();
-});
 
 $(document).on("click", ".manage-btn", function(){
     const user_id = $(this).attr("manage-id");

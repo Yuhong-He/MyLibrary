@@ -242,3 +242,109 @@ $(document).on("click", ".cat-link", function(){
 $(document).on("click", "#close_general_fail", function(){
     $("#general_fail").css("display", "none");
 });
+
+function generalDocumentReady() {
+    $(document).ready(function(){
+        $("#headerContent").load("header.html");
+        $("#footerContent").load("footer.html");
+        setTimeout(() => navBlockColor(), 50);
+        to_page();
+    });
+}
+
+function active_rows_selector(rows) {
+    $("#display_5_rows").removeClass("active");
+    $("#display_10_rows").removeClass("active");
+    $("#display_20_rows").removeClass("active");
+    $("#display_50_rows").removeClass("active");
+    $("#" + rows).addClass("active");
+}
+
+$(document).on("click", "#display_5_rows", function(){
+    page = 1;
+    rows = 5;
+    to_page();
+    active_rows_selector('display_5_rows');
+});
+
+$(document).on("click", "#display_10_rows", function(){
+    page = 1;
+    rows = 10;
+    to_page();
+    active_rows_selector('display_10_rows');
+});
+
+$(document).on("click", "#display_20_rows", function(){
+    page = 1;
+    rows = 20;
+    to_page();
+    active_rows_selector('display_20_rows');
+});
+
+$(document).on("click", "#display_50_rows", function(){
+    page = 1;
+    rows = 50;
+    to_page();
+    active_rows_selector('display_50_rows');
+});
+
+$(function() {
+    $("#search_box").bind("input propertychange", function () {
+        let search_value = $("#search_box").val().trim();
+        search = search_value;
+        if(search_value !== "") {
+            $("#clean_search_box").css("display", "block");
+        } else {
+            $("#clean_search_box").css("display", "none");
+        }
+        page = 1;
+        to_page();
+    });
+});
+
+$(document).on("click", "#clean_search_box", function(){
+    search = "";
+    $("#search_box").val("");
+    $("#clean_search_box").css("display", "none");
+    page = 1;
+    to_page();
+});
+
+function add_book_category_select2() {
+    let select2_language;
+    if(getLang() === "hans") {
+        select2_language = "zh-CN";
+    } else if (getLang() === "hant") {
+        select2_language = "zh-TW";
+    } else {
+        select2_language = "en";
+    }
+    $('#new_book_category').select2({
+        ajax: {
+            url: "../PHP/getCategory.php",
+            dataType: 'json',
+            type : 'GET',
+            delay: 250,
+            data: function (params) {
+                return {
+                    search: params.term,
+                    lang: getLang() === "en" ? "en" : "zh"
+                };
+            },
+            processResults: function (result) {
+                let allCategory = [];
+                $.each(result, function(index, item){
+                    const category = {id: item.id, text: item.name};
+                    allCategory.push(category);
+                })
+                return {
+                    results: allCategory
+                };
+            },
+            cache: true
+        },
+        minimumInputLength: 1,
+        dropdownParent: $('#addBookModal'),
+        language: select2_language
+    });
+}
