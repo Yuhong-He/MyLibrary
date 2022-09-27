@@ -106,21 +106,23 @@ $(document).on("click", "#add_new_category_btn", function(){
 });
 
 $(document).on("click", "#insert_new_category_btn", function(){
-    validAddCategory();
+    if(!validAddCategory()) {
+        return false;
+    }
     $.ajax({
         url:"../PHP/addCategory.php",
         method:"POST",
         data:{
-            id: id,
-            zh_name: zh_name,
-            en_name: en_name,
+            id: $("#new_category_id").val().trim(),
+            zh_name: $("#new_category_zh_name").val().trim(),
+            en_name: $("#new_category_en_name").val().trim(),
             rows: rows,
             username: getCookie("username"),
             authority: getCookie(getCookie("username") + "Auth")
         },
         success:function(result){
             if(result.code === 200){
-                closeAddModalAndToPage();
+                closeAddModalAndToPage(result);
             } else if(result.code === 201) {
                 show_validate_msg("#new_category_id", "error", arrLang[lang]["CATEGORY_ID_REPEAT"]);
             } else if(result.code === 202) {
@@ -138,7 +140,7 @@ $(document).on("click", "#insert_new_category_btn", function(){
     });
 });
 
-function closeAddModalAndToPage() {
+function closeAddModalAndToPage(result) {
     search = "";
     $("#search_box").val("");
     $("#clean_search_box").css("display", "none");
@@ -176,7 +178,9 @@ $(document).on("click", "#update_category_btn", function(){
     const orig_id = $(this).attr("cat-id");
     const orig_zh = $(this).attr("cat-zh");
     const orig_en = $(this).attr("cat-en");
-    validAddCategory();
+    if(!validAddCategory()) {
+        return false;
+    }
     $.ajax({
         url:"../PHP/updateCategory.php",
         method:"POST",
@@ -184,16 +188,16 @@ $(document).on("click", "#update_category_btn", function(){
             orig_id: orig_id,
             orig_zh: orig_zh,
             orig_en: orig_en,
-            id: id,
-            zh_name: zh_name,
-            en_name: en_name,
+            id: $("#new_category_id").val().trim(),
+            zh_name: $("#new_category_zh_name").val().trim(),
+            en_name: $("#new_category_en_name").val().trim(),
             rows: rows,
             username: getCookie("username"),
             authority: getCookie(getCookie("username") + "Auth")
         },
         success:function(result){
             if(result.code === 200){
-                closeAddModalAndToPage();
+                closeAddModalAndToPage(result);
             } else if(result.code === 201) {
                 show_validate_msg("#new_category_id", "error", arrLang[lang]["CATEGORY_ID_REPEAT"]);
             } else if(result.code === 202) {

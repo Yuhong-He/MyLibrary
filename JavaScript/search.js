@@ -311,7 +311,9 @@ $(document).on("click", "#add_new_book_btn", function(){
 });
 
 $(document).on("click", "#insert_new_book_btn", function(){
-    validAddBook();
+    if(!validAddBook()) {
+        return false;
+    }
     $.ajax({
         url:"../PHP/addBook.php",
         method:"POST",
@@ -391,28 +393,3 @@ function restoreSearchPage() {
     document.cookie = "book_display_sort_column=id";
     document.cookie = "book_display_sort_order=desc";
 }
-
-$(document).on("click", "#author_semicolon", function(){
-    document.getElementById("new_book_author").value += "; ";
-    $("#new_book_author").focus();
-});
-
-$(document).on("click", "#author_comma", function(){
-    document.getElementById("new_book_author").value += ",";
-    $("#new_book_author").focus();
-});
-
-$(document).on("click", "#year_comma", function(){
-    document.getElementById("new_book_year").value += ",";
-    $("#new_book_year").focus();
-});
-
-$(document).on("click", "#code_dash", function(){
-    document.getElementById("new_book_code").value += "-";
-    $("#new_book_code").focus();
-});
-
-$(document).on("click", "#code_dot", function(){
-    document.getElementById("new_book_code").value += "·";
-    $("#new_book_code").focus();
-});

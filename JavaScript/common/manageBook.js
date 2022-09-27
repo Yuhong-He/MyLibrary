@@ -121,7 +121,9 @@ $(document).on("click", ".edit-btn", function(){
 
 $(document).on("click", "#update_book_btn", function(){
     const book_id = $(this).attr("book-id");
-    validAddBook();
+    if(!validAddBook()) {
+        return false;
+    }
     $.ajax({
         url:"../PHP/updateBook.php",
         method:"POST",
@@ -194,3 +196,28 @@ function delBookError(result) {
         $("#add_book_fail").css("display", "block");
     }
 }
+
+$(document).on("click", "#author_semicolon", function(){
+    document.getElementById("new_book_author").value += "; ";
+    $("#new_book_author").focus();
+});
+
+$(document).on("click", "#author_comma", function(){
+    document.getElementById("new_book_author").value += ",";
+    $("#new_book_author").focus();
+});
+
+$(document).on("click", "#year_comma", function(){
+    document.getElementById("new_book_year").value += ",";
+    $("#new_book_year").focus();
+});
+
+$(document).on("click", "#code_dash", function(){
+    document.getElementById("new_book_code").value += "-";
+    $("#new_book_code").focus();
+});
+
+$(document).on("click", "#code_dot", function(){
+    document.getElementById("new_book_code").value += "·";
+    $("#new_book_code").focus();
+});

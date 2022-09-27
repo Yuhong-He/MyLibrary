@@ -109,7 +109,9 @@ $(document).on("click", "#add_new_book_btn", function(){
 });
 
 $(document).on("click", "#insert_new_book_btn", function(){
-    validAddBook();
+    if(!validAddBook()) {
+        return false;
+    }
     $.ajax({
         url:"../PHP/addBook.php",
         method:"POST",
