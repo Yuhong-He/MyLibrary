@@ -2,7 +2,7 @@
 
 class PageHelper
 {
-    public static function getPage($sql, $rows, $page, $arr, mysqli $db, $extra): array
+    public static function getPage($sql, $rows, $page, $arr, mysqli $db, $extra1, $extra2): array
     {
         $result = mysqli_query($db, $sql);
         $total_records = 0;
@@ -25,7 +25,8 @@ class PageHelper
             'currentPage'=>$curr_page,
             'navigatePageNums'=>$nav,
             'body'=>$arr,
-            'extra'=>$extra
+            'extra1'=>$extra1,
+            'extra2'=>$extra2
         );
     }
 

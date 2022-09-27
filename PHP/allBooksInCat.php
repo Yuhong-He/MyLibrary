@@ -19,7 +19,7 @@ if((is_numeric($page)) && ($page > 0) &&
         if(checkCatExist($cat_id, $db)) {
             $cat_name = getCatName($cat_id, $lang, $db);
             $arr = getBookList($cat_id, $page, $rows, $search, $db);
-            $str = PageHelper::getPage(getRecordsSQL($cat_id, $search), $rows, $page, $arr, $db, $cat_name);
+            $str = PageHelper::getPage(getRecordsSQL($cat_id, $search), $rows, $page, $arr, $db, $cat_name, $cat_id);
             echo json_encode($str);
         } else {
             echo "aaa";

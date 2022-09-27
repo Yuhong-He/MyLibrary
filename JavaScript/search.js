@@ -555,6 +555,7 @@ $(document).on("click", "#update_book_btn", function(){
 
 $(document).on("click", ".del-btn", function(){
     const book_id = $(this).attr("del-id");
+    $("#del_book_fail").css("display", "none");
     $("#confirm_delete_book").attr("book-id", book_id);
     $.ajax({
         url:"../PHP/getOneBook.php",
