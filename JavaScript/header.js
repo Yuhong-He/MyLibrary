@@ -135,7 +135,9 @@ $("#modal_register_btn").click(function() {
     const password = $("#password_register").val();
     const passwordRepeat = $("#password_register_repeat").val();
     const email = $("#email_register").val();
-    validate_register_form(userName, password, passwordRepeat, email);
+    if(!validate_register_form(userName, password, passwordRepeat, email)) {
+        return false;
+    }
     $.ajax({
         url:"../PHP/register.php",
         method:"POST",
