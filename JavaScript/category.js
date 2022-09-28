@@ -38,7 +38,6 @@ function to_page() {
                 build_books_table(result);
                 build_page_info(result);
                 build_page_nav(result);
-                extendMainContainerHeight();
             } else if(result.code === 201) {
                 window.location.replace("all_category.html");
             }

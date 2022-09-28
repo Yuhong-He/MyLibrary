@@ -32,7 +32,6 @@ function to_page() {
                 build_all_requests_table(result);
                 build_page_info(result);
                 build_page_nav(result);
-                extendMainContainerHeight();
             } else if(result.code === 401) {
                 window.location.replace("index.html");
             }

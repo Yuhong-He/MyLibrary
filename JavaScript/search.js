@@ -91,7 +91,6 @@ function to_page() {
             build_books_table(result);
             build_page_info(result);
             search_book_build_page_nav(result);
-            extendMainContainerHeight();
         }
     });
 }

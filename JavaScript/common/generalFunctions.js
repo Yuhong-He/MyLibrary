@@ -73,16 +73,6 @@ function superAdminDisplay() {
     }
 }
 
-function extendMainContainerHeight() {
-    const bodyHeight = $("body").height();
-    const footerHeight = $("footer").height();
-    const iHeight = document.documentElement.clientHeight || document.body.clientHeight;
-    $("#extended_empty_div").remove();
-    if (bodyHeight > (iHeight - footerHeight * 2)) {
-        $("#main_container").append('<div id="extended_empty_div" style="height: ' + 5 * footerHeight + 'px"></div>');
-    }
-}
-
 function reset_form(element) {
     $(element)[0].reset();
     $(element).find("*").removeClass("has-error has-success");

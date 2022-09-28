@@ -92,62 +92,66 @@
 </div>
 
 <!-- Main Body -->
-<div id="headerContent"></div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2><span class="lang" key="MANAGE_USER"></span></h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-5 col-sm-5 col-md-5">
-            <label for="search_box"></label>
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                </span>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="search_box">
-                <span id="clean_search_box">
-                    &times;
-                </span>
+<div id="wrap">
+    <div id="main">
+        <div id="headerContent"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><span class="lang" key="MANAGE_USER"></span></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-5 col-md-5">
+                    <label for="search_box"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="search_box">
+                        <span id="clean_search_box">
+                            &times;
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row table-top-gap">
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                <span class="lang" key="USERNAME"></span>
+                            </th>
+                            <th>
+                                <span class="lang" key="EMAIL"></span>
+                            </th>
+                            <th>
+                                <span class="lang" key="AUTHORITY_GROUP"></span>
+                            </th>
+                            <th>
+                                <span class="lang" key="BANNED"></span>
+                            </th>
+                            <th>
+                                <span class="lang" key="OPERATION"></span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="all_user_body"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div id="page_info_area"></div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="pull-right" id="page_nav_area"></div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row table-top-gap">
-        <div class="col-md-12">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>
-                        <span class="lang" key="USERNAME"></span>
-                    </th>
-                    <th>
-                        <span class="lang" key="EMAIL"></span>
-                    </th>
-                    <th>
-                        <span class="lang" key="AUTHORITY_GROUP"></span>
-                    </th>
-                    <th>
-                        <span class="lang" key="BANNED"></span>
-                    </th>
-                    <th>
-                        <span class="lang" key="OPERATION"></span>
-                    </th>
-                </tr>
-                </thead>
-                <tbody id="all_user_body"></tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-3">
-            <div id="page_info_area"></div>
-        </div>
-        <div class="col-xs-8">
-            <div class="pull-right" id="page_nav_area"></div>
-        </div>
-    </div>
 </div>
-</body>
 <div id="footerContent"></div>
+</body>
 </html>

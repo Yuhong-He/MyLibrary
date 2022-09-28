@@ -114,66 +114,70 @@
 </div>
 
 <!--Main Body-->
-<div id="headerContent"></div>
-<div class="container" id="main_container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2><span class="lang" key="ALL_CATEGORY"></span></h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-5 col-sm-5 col-md-5">
-            <label for="search_box"></label>
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                </span>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="search_box">
-                <span id="clean_search_box">
-                    &times;
-                </span>
+<div id="wrap">
+    <div id="main">
+        <div id="headerContent"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><span class="lang" key="ALL_CATEGORY"></span></h2>
+                </div>
             </div>
-        </div>
-        <div class="col-md-3 col-md-offset-0 pull-right">
-            <button type="button" class="btn btn-primary" id="add_new_category_btn">
-                <span class="lang" key="ADD"></span>
-            </button>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="lang" key="DISPLAY_ROWS"></span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu min-dropdown">
-                    <li id="display_5_rows">
-                        <a href="#"><span class="lang" key="5Rows"></span></a>
-                    </li>
-                    <li id="display_10_rows">
-                        <a href="#"><span class="lang" key="10Rows"></span></a>
-                    </li>
-                    <li id="display_20_rows">
-                        <a href="#"><span class="lang" key="20Rows"></span></a>
-                    </li>
-                    <li id="display_50_rows">
-                        <a href="#"><span class="lang" key="50Rows"></span></a>
-                    </li>
-                </ul>
+            <div class="row">
+                <div class="col-xs-5 col-sm-5 col-md-5">
+                    <label for="search_box"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="search_box">
+                        <span id="clean_search_box">
+                            &times;
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-md-offset-0 pull-right">
+                    <button type="button" class="btn btn-primary" id="add_new_category_btn">
+                        <span class="lang" key="ADD"></span>
+                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="lang" key="DISPLAY_ROWS"></span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu min-dropdown">
+                            <li id="display_5_rows">
+                                <a href="#"><span class="lang" key="5Rows"></span></a>
+                            </li>
+                            <li id="display_10_rows">
+                                <a href="#"><span class="lang" key="10Rows"></span></a>
+                            </li>
+                            <li id="display_20_rows">
+                                <a href="#"><span class="lang" key="20Rows"></span></a>
+                            </li>
+                            <li id="display_50_rows">
+                                <a href="#"><span class="lang" key="50Rows"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="row table-top-gap">
-        <div class="col-md-12">
-            <table class="table table-hover fixed-width-table" id="categories_table">
-                <tbody id="all_categories_table_head"></tbody>
-                <tbody id="all_categories_table_body"></tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-3">
-            <div id="page_info_area"></div>
-        </div>
-        <div class="col-xs-8">
-            <div class="pull-right" id="page_nav_area"></div>
+            <div class="row table-top-gap">
+                <div class="col-md-12">
+                    <table class="table table-hover fixed-width-table" id="categories_table">
+                        <tbody id="all_categories_table_head"></tbody>
+                        <tbody id="all_categories_table_body"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div id="page_info_area"></div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="pull-right" id="page_nav_area"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

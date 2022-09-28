@@ -28,7 +28,6 @@ function to_page() {
             build_categories_table(result);
             build_page_info(result);
             build_page_nav(result);
-            extendMainContainerHeight();
         }
     });
 }
