@@ -4,14 +4,15 @@ include_once("utils/PageHelper.php");
 $page = $_GET['page'] ?? '';
 $user_name = $_GET['user_name'] ?? '';
 $user_id = $_GET['user_id'] ?? '';
+$display_delete = $_GET['display_delete'] ?? '';
 session_start();
 if(isset($_SESSION["Username"])) {
     if ($user_name == $_SESSION["Username"]) {
 
         require_once "db.php";
         $rows = 5;
-        $arr = getRequestsList($page, $rows, $user_id, $db);
-        $total_records = getTotalRecords($user_id, $db);
+        $arr = getRequestsList($page, $rows, $user_id, $display_delete, $db);
+        $total_records = getTotalRecords($user_id, $display_delete, $db);
         mysqli_close($db);
 
         $total_pages = ceil($total_records / $rows);
@@ -36,10 +37,14 @@ if(isset($_SESSION["Username"])) {
     echo json_encode(array('code' => 401));
 }
 
-function getRequestsList($page, $rows, $user_id, $db): array
+function getRequestsList($page, $rows, $user_id, $display_delete, $db): array
 {
     $start_from = ($page - 1) * $rows;
-    $sql = "SELECT * FROM request WHERE User = $user_id AND Status != 'D' ORDER BY Time DESC LIMIT $start_from, $rows";
+    if($display_delete == 'false') {
+        $sql = "SELECT * FROM request WHERE User = $user_id AND Status != 'D' ORDER BY Time DESC LIMIT $start_from, $rows";
+    } else {
+        $sql = "SELECT * FROM request WHERE User = $user_id ORDER BY Time DESC LIMIT $start_from, $rows";
+    }
     $result = mysqli_query($db, $sql);
     $arr = [];
     if($result != false) {
@@ -61,9 +66,13 @@ function getRequestsList($page, $rows, $user_id, $db): array
     return $arr;
 }
 
-function getTotalRecords($user_id, mysqli $db): int
+function getTotalRecords($user_id, $display_delete, mysqli $db): int
 {
-    $sql = "SELECT COUNT(*) FROM request WHERE User = $user_id AND Status != 'D'";
+    if($display_delete == 'false') {
+        $sql = "SELECT COUNT(*) FROM request WHERE User = $user_id AND Status != 'D'";
+    } else {
+        $sql = "SELECT COUNT(*) FROM request WHERE User = $user_id";
+    }
     $result = mysqli_query($db, $sql);
     $total_records = 0;
     if($result != false) {

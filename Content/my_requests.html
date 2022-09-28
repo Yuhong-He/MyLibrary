@@ -7,6 +7,7 @@
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/my_requests.js"></script>
     <script type="text/javascript" src="../JavaScript/common/manageRequest.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/switchButton.css">
     <link rel="stylesheet" type="text/css" href="../CSS/generalCSS.css">
 </head>
 <body>
@@ -55,7 +56,16 @@
                     <h2><span class="lang" key="MY_REQUEST"></span></h2>
                 </div>
             </div>
-                <div class="row table-top-gap">
+            <div class="row">
+                <div class="col-md-3 col-md-offset-0 pull-right">
+                    <div class="material-switch pull-right">
+                        <span class="lang" key="DISPLAY_DELETED_REQUESTS"></span>
+                        <input id="display_deleted_requests" type="checkbox"/>
+                        <label for="display_deleted_requests" class="label-primary"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row table-top-gap">
                 <div class="col-md-12">
                     <table class="table table-hover fixed-width-table" id="requests_table">
                         <thead>
