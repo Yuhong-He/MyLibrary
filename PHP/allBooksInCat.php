@@ -22,13 +22,11 @@ if((is_numeric($page)) && ($page > 0) &&
             $str = PageHelper::getPage(getRecordsSQL($cat_id, $search), $rows, $page, $arr, $db, $cat_name, $cat_id);
             echo json_encode($str);
         } else {
-            echo "aaa";
             echo json_encode(array('code' => 201));
         }
 
         mysqli_close($db);
     } else {
-        echo "bbb";
         echo json_encode(array('code' => 201));
     }
 } else {
