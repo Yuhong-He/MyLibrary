@@ -6,5 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="5badc55ad0" level="application" />
     <orderEntry type="library" name="select2" level="application" />
+    <orderEntry type="library" name="cookie-consent" level="application" />
   </component>
 </module>

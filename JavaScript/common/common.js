@@ -2,3 +2,11 @@ document.writeln("<link rel=\'shortcut icon\' href=\'../favicon.ico\' type=\'ima
 document.writeln("<link href=\'../Resources/bootstrap/css/bootstrap.min.css\' rel=\'stylesheet\'>");
 document.writeln("<script src=\'../Resources/jquery/jquery-3.6.0.min.js\'></script>");
 document.writeln("<script src=\'../Resources/bootstrap/js/bootstrap.min.js\'></script>");
+document.writeln("<script type=\'text/javascript\' src=\'//www.freeprivacypolicy.com/public/cookie-consent/4.0.0/cookie-consent.js\' charset=\'UTF-8\'></script>");
+document.writeln("    <script type=\'text/javascript\' charset=\'UTF-8\'>");
+document.writeln("        document.addEventListener(\'DOMContentLoaded\', function () {");
+document.writeln("            cookieconsent.run({\'notice_banner_type\':\'headline\',\'consent_type\':\'implied\',\'palette\':\'light\',\'language\':\'en\',\'page_load_consent_levels\':[\'strictly-necessary\',\'functionality\',\'tracking\',\'targeting\'],\'notice_banner_reject_button_hide\':false,\'preferences_center_close_button_hide\':false,\'page_refresh_confirmation_buttons\':false,\'website_name\':\'library.yuhong.me\',\'website_privacy_policy_url\':\'privacy.html\'});");
+document.writeln("        });");
+document.writeln("    </script>");
+document.writeln("    <noscript>Cookie Consent by <a href=\'https://www.freeprivacypolicy.com/\' rel=\'noopener\'>Free Privacy Policy Generator</a></noscript>");
+document.writeln("");
