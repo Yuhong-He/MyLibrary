@@ -44,6 +44,7 @@ let arrLang = {
         "INTRODUCTION3-1": "I am an enthusiast of Yunnan history and geography, and I have the hobby that collect related books. Now there are ",
         "INTRODUCTION3-2": " books info stored in this website.",
         "INTRODUCTION4": "If you need my collections when you study Yunnan history, you can ask request through the embedded \"Request\" entry (login required). If you actually need my help (not limited the data stored in the website), please send me e-mail directly. After all this site is just a homework project.",
+        "FIREFOX_ISSUE": "Due to technical reason, the Firefox browser does not support this site. Open with Firefox would occur an error, please use Chrome or Edge.",
 
         "FIND_BOOK_BY_TITLE": "Find book by title",
         "ADD": "Add",
@@ -204,6 +205,7 @@ let arrLang = {
         "INTRODUCTION3-1": "我是一名云南史地爱好者，有收集云南书籍资料的爱好。本站目前共录有",
         "INTRODUCTION3-2": "本书。",
         "INTRODUCTION4": "如您学习、研究云南历史而需要我所收集的资料，可以通过本站的“互助”提交请求（需要登录）。当然如果您真的有需求（不局限于本站数据库名单内的），请直接给我发送邮件，毕竟这个网站只是一个作业项目。",
+        "FIREFOX_ISSUE": "由于技术原因，Firefox浏览器不支持本站。使用Firefox打开将会出错，请使用Chrome或Edge。",
 
         "FIND_BOOK_BY_TITLE": "按书名找书",
         "ADD": "新增",
@@ -365,6 +367,7 @@ let arrLang = {
         "INTRODUCTION3-1": "我是一名雲南史地愛好者，有收集雲南書籍資料的愛好。本站目前共錄有",
         "INTRODUCTION3-2": "本書。",
         "INTRODUCTION4": "如您學習、研究雲南歷史而需要我所收集的資料，可以通過本站的「互助」提交請求（需要登錄）。當然如果您真的有需求（不局限於本站數據庫名單內的），請直接給我發送郵件，畢竟這個網站只是一個作業項目。",
+        "FIREFOX_ISSUE": "由於技術原因，Firefox瀏覽器不支持本站。使用Firefox打開將會出錯，請使用Chrome或Edge。",
 
         "FIND_BOOK_BY_TITLE": "按書名找書",
         "ADD": "新增",
