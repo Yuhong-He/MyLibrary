@@ -2,6 +2,7 @@ document.writeln("<link rel=\'shortcut icon\' href=\'../favicon.ico\' type=\'ima
 document.writeln("<link href=\'../Resources/bootstrap/css/bootstrap.min.css\' rel=\'stylesheet\'>");
 document.writeln("<script src=\'../Resources/jquery/jquery-3.6.0.min.js\'></script>");
 document.writeln("<script src=\'../Resources/bootstrap/js/bootstrap.min.js\'></script>");
+document.writeln("<script src=\'../JavaScript/common/i18n.js\'></script>");
 document.writeln("<script type=\'text/javascript\' src=\'//www.freeprivacypolicy.com/public/cookie-consent/4.0.0/cookie-consent.js\' charset=\'UTF-8\'></script>");
 document.writeln("    <script type=\'text/javascript\' charset=\'UTF-8\'>");
 document.writeln("        document.addEventListener(\'DOMContentLoaded\', function () {");
