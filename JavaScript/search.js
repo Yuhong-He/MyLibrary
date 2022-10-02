@@ -6,7 +6,7 @@ $(document).ready(function(){
     setTimeout(() => navBlockColor(), 50);
     checkSortIcon();
     to_page();
-    $("#search_box").val(getCookie("search_value"));
+    $("#search_box").val(decodeURIComponent(getCookie("search_value")));
     if(document.getElementById('search_box').value !== "") {
         $("#clean_search_box").css("display", "block");
     }
@@ -71,7 +71,7 @@ function to_page() {
     const display_rows = getCookie("book_display_rows") !== "" ? getCookie("book_display_rows") : 5;
     const sort_column = getCookie("book_display_sort_column") !== "" ? getCookie("book_display_sort_column") : "id";
     const sort_order = getCookie("book_display_sort_order") !== "" ? getCookie("book_display_sort_order") : "desc";
-    const search_value = getCookie("search_value") !== "" ? getCookie("search_value") : "";
+    const search_value = getCookie("search_value") !== "" ? decodeURIComponent(getCookie("search_value")) : "";
     const current_page = getCookie("current_page") !== "" ? getCookie("current_page") : 1;
     $.ajax({
         url:"../PHP/allBooks.php",
@@ -279,7 +279,7 @@ $(document).on("click", "#book_year_header", function(){
 $(function() {
     $("#search_box").bind("input propertychange", function () {
         let search_value = $("#search_box").val();
-        document.cookie = "search_value=" + search_value;
+        document.cookie = "search_value=" + encodeURIComponent(search_value);
         if(search_value !== "") {
             $("#clean_search_box").css("display", "block");
         } else {
