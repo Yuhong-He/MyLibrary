@@ -11,7 +11,7 @@ html, body {
     padding-bottom:60px;
 }
 
-#clean_search_box {
+#clean_search_box, #clean_search_box_duxiu {
     display: none;
     position: absolute;
     right: 10px;

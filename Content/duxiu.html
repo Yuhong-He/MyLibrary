@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>读秀 Duxiu</title>
+    <script type="text/javascript" src="../JavaScript/common/common.js"></script>
+    <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
+    <script type="text/javascript" src="../JavaScript/duxiu.js"></script>
+</head>
+<body>
+<!--Advanced Search Modal-->
+<div class="modal fade" id="advancedSearchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="lang" key="ADVANCED_SEARCH"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="book_author">
+                            <span class="lang" key="AUTHOR"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="book_author">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="book_title1">
+                            <span class="lang" key="KEYWORD1"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="book_title1">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="book_title2">
+                            <span class="lang" key="KEYWORD2"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="book_title2">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="book_publisher">
+                            <span class="lang" key="PUBLISHER"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="book_publisher">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="lang" key="CLOSE"></span>
+                </button>
+                <button type="button" class="btn btn-default" id="modal_clear_btn">
+                    <span class="lang" key="CLEAR"></span>
+                </button>
+                <button type="button" class="btn btn-primary" id="modal_search_btn">
+                    <span class="lang" key="SEARCH"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Body -->
+<div id="wrap">
+    <div id="main">
+        <div id="headerContent"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><span class="lang" key="DUXIU"></span></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 col-sm-5 col-md-5">
+                    <label for="search_box_duxiu"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="search_box_duxiu">
+                        <span id="clean_search_box_duxiu">
+                            &times;
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-7" style="padding-top: 19px;">
+                    <button type="button" class="btn btn-primary" id="general_search">
+                        <span class="lang" key="SEARCH"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" id="advance_search">
+                        <span class="lang" key="ADVANCED_SEARCH"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="row table-top-gap">
+                <div class="col-md-12">
+                    <table class="table table-hover fixed-width-table" id="books_table">
+                        <thead>
+                        <tr>
+                            <th class="sort-column-title width30">
+                                <span class="lang" key="BOOK_TITLE"></span>
+                            </th>
+                            <th class="sort-column-title width20">
+                                <span class="lang" key="AUTHOR"></span>
+                            </th>
+                            <th class="sort-column-title width15">
+                                <span class="lang" key="PUBLISHER"></span>
+                            </th>
+                            <th class="sort-column-title width7">
+                                <span class="lang" key="YEAR"></span>
+                            </th>
+                            <th class="width15">
+                                <span class="lang" key="BOOK_CODE"></span>
+                            </th>
+                            <th>
+                                <span class="lang" key="OPERATION"></span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="all_books_table_body"></tbody>
+                    </table>
+                    <div class="progress" id="progress_bar">
+                        <div class="progress-bar progress-bar-striped active width100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div id="page_info_area"></div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="pull-right" id="page_nav_area"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footerContent"></div>
+</body>
+</html>

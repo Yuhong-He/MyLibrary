@@ -4,15 +4,16 @@
     <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <Languages>
         <language minSize="5" name="Style Sheets" />
-        <language minSize="29" name="JavaScript" />
-        <language minSize="15" name="PHP" />
+        <language minSize="37" name="JavaScript" />
+        <language minSize="27" name="PHP" />
       </Languages>
     </inspection_tool>
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="1">
+          <list size="2">
             <item index="0" class="java.lang.String" itemvalue="key" />
+            <item index="1" class="java.lang.String" itemvalue="search" />
           </list>
         </value>
       </option>
