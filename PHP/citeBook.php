@@ -108,8 +108,8 @@ function cleanCodeForWP($code): string
     if(sizeof($code_nums) > 9) {
         $arr_isbn = $code_nums;
         if(sizeof($arr_isbn) == 10) {
-            $check_digit = (1*$arr_isbn[0] + 2*$arr_isbn[1] + 3*$arr_isbn[2] + 4*$arr_isbn[3] + 5*$arr_isbn[4] + 6*$arr_isbn[5]
-                    + 7*$arr_isbn[6] + 8*$arr_isbn[7] + 9*$arr_isbn[8]) % 11;
+            $check_digit = (1 * $arr_isbn[0] + 2 * $arr_isbn[1] + 3 * $arr_isbn[2] + 4 * $arr_isbn[3] + 5 * $arr_isbn[4]
+                    + 6 * $arr_isbn[5] + 7 * $arr_isbn[6] + 8 * $arr_isbn[7] + 9 * $arr_isbn[8]) % 11;
             if($check_digit == 10) {
                 $check_digit='X';
             }
@@ -118,8 +118,9 @@ function cleanCodeForWP($code): string
             }
         }
         else if(sizeof($arr_isbn) == 13) {
-            $check_digit=(1*$arr_isbn[0] + 3*$arr_isbn[1] + 1*$arr_isbn[2] + 3*$arr_isbn[3] + 1*$arr_isbn[4] + 3*$arr_isbn[5]
-                    + 1*$arr_isbn[6] + 3*$arr_isbn[7] + 1*$arr_isbn[8] + 3*$arr_isbn[9] + 1*$arr_isbn[10] + 3*$arr_isbn[11]) % 10;
+            $check_digit=(1 * $arr_isbn[0] + 3 * $arr_isbn[1] + 1 * $arr_isbn[2] + 3 * $arr_isbn[3] + 1 * $arr_isbn[4]
+                    + 3 * $arr_isbn[5] + 1 * $arr_isbn[6] + 3 * $arr_isbn[7] + 1 * $arr_isbn[8] + 3 * $arr_isbn[9]
+                    + 1 * $arr_isbn[10] + 3 * $arr_isbn[11]) % 10;
             if($check_digit != 0) {
                 $check_digit = 10 - $check_digit;
             }

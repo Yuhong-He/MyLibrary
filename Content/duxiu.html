@@ -6,6 +6,7 @@
     <script type="text/javascript" src="../JavaScript/common/common.js"></script>
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/duxiu.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/search.css">
 </head>
 <body>
 <!--Advanced Search Modal-->
@@ -75,6 +76,68 @@
     </div>
 </div>
 
+<!-- Cite Book Modal -->
+<div class="modal fade" id="citeBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="lang" key="CITE_BOOK"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table id="cite_modal_table">
+                    <tr>
+                        <td colspan="2">
+                            <label for="wikipedia_template">
+                                <span class="lang" key="WIKIPEDIA"></span>
+                                <a href="https://en.wikipedia.org/wiki/Template:Cite_book" target="_blank">
+                                    <span class="lang" key="CITE_BOOK_TEMPLATE"></span>
+                                </a>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="cite-textarea" id="wikipedia_template" readonly></textarea>
+                        </td>
+                        <td class="center-text">
+                            <a tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-placement="right" data-trigger="focus" data-content=&checkmark; id="wikipedia_copy_button">
+                                <span class="lang" key="COPY"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="gbt7714_2015">
+                                <span class="lang" key="GBT7714"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="cite-textarea" id="gbt7714_2015" readonly></textarea>
+                        </td>
+                        <td class="center-text">
+                            <a tabindex="0" class="btn btn-primary" role="button" data-toggle="popover" data-placement="right" data-trigger="focus" data-content=&checkmark; id="gbt7714_copy_button">
+                                <span class="lang" key="COPY"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="lang" key="CLOSE"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Main Body -->
 <div id="wrap">
     <div id="main">
@@ -112,16 +175,16 @@
                     <table class="table table-hover fixed-width-table" id="books_table">
                         <thead>
                         <tr>
-                            <th class="sort-column-title width30">
+                            <th class="width30">
                                 <span class="lang" key="BOOK_TITLE"></span>
                             </th>
-                            <th class="sort-column-title width20">
+                            <th class="width20">
                                 <span class="lang" key="AUTHOR"></span>
                             </th>
-                            <th class="sort-column-title width15">
+                            <th class="width15">
                                 <span class="lang" key="PUBLISHER"></span>
                             </th>
-                            <th class="sort-column-title width7">
+                            <th class="width7">
                                 <span class="lang" key="YEAR"></span>
                             </th>
                             <th class="width15">
