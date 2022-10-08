@@ -42,7 +42,7 @@ function to_page() {
 function initialTable() {
     $("#progress_bar").hide();
     $("#all_books_table_body").html(
-        "<td colspan='6' style='text-align: center; font-size: large; color: grey;'>" +
+        "<td colspan='7' style='text-align: center; font-size: large; color: grey;'>" +
         arrLang[lang]["NO_DATA"] +
         "</td>"
     );
@@ -54,6 +54,7 @@ function build_book_table(result) {
         $("#all_books_table_body").empty();
         const book = result.body;
         $.each(book, function(index, item){
+            const id = $("<td></td>").append(item.id);
             const title = $("<td></td>").append(item.title);
             const author = $("<td></td>").append(item.author);
             const publisher = $("<td></td>").append(item.publisher);
@@ -79,12 +80,12 @@ function build_book_table(result) {
             } else {
                 btnTd = $("<td></td>").append(citeBtn);
             }
-            $("<tr></tr>").append(title).append(author).append(publisher).append(year).append(code).append(btnTd)
+            $("<tr></tr>").append(id).append(title).append(author).append(publisher).append(year).append(code).append(btnTd)
                 .appendTo("#all_books_table_body");
         })
     } else {
         $("#all_books_table_body").html(
-            "<td colspan='6' style='text-align: center; font-size: large; color: grey;'>" +
+            "<td colspan='7' style='text-align: center; font-size: large; color: grey;'>" +
             arrLang[lang]["NO_DATA"] +
             "</td>"
         );

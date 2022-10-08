@@ -95,6 +95,7 @@ let arrLang = {
         "KEYWORD1": "Keyword 1",
         "KEYWORD2": "Keyword 2",
         "CLEAR": "Clear",
+        "SS_ID": "SS ID",
 
         "CHANGE_USERNAME": "Change Username",
         "CHANGE_PASSWORD": "Change Password",
@@ -262,6 +263,7 @@ let arrLang = {
         "KEYWORD1": "关键词 1",
         "KEYWORD2": "关键词 2",
         "CLEAR": "清空",
+        "SS_ID": "SS号",
 
         "CHANGE_USERNAME": "修改用户名",
         "CHANGE_PASSWORD": "修改密码",
@@ -429,6 +431,7 @@ let arrLang = {
         "KEYWORD1": "關鍵詞 1",
         "KEYWORD2": "關鍵詞 2",
         "CLEAR": "清空",
+        "SS_ID": "SS號",
 
         "CHANGE_USERNAME": "修改用戶名",
         "CHANGE_PASSWORD": "修改密碼",
