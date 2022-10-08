@@ -3,7 +3,7 @@
 I was studying Computer Science at Technological University Dublin when I develop this project, which was developed based on the final project of the Web Development course in the upper semester of 2nd year. The site was build with seperated frontend and backend structure.
 
 ## Dev Technologies
-- Frontend: [Bootstrap 3.4.1](https://getbootstrap.com/docs/3.4/), [jQuery 3.6.0](https://jquery.com/), [Select2 4.0.13](https://select2.org/), HTML 5, CSS 3
+- Frontend: [Bootstrap 3.4.1](https://getbootstrap.com/docs/3.4/), [jQuery 3.6.0](https://jquery.com/), [Select2 4.0.13](https://select2.org/), HTML 5, CSS 3, JavaScript
 - Backend: PHP 7.3
 - Front-back interaction: JSON, AJAX
 - Database: MySQL 5.7.26
