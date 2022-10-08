@@ -50,7 +50,7 @@ function initialTable() {
     $("#progress_bar").hide();
     $("#all_books_table_body").html(
         "<td colspan='7' style='text-align: center; font-size: large; color: grey;'>" +
-        arrLang[lang]["NO_DATA"] +
+        arrLang[lang]["PLEASE_SEARCH"] +
         "</td>"
     );
 }
