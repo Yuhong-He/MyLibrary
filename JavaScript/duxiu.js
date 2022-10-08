@@ -1,6 +1,13 @@
 let page = 1;
 let search = "general";
-generalDocumentReady();
+
+$(document).ready(function(){
+    $("#headerContent").load("header.html");
+    $("#footerContent").load("footer.html");
+    setTimeout(() => navBlockColor(), 50);
+    to_page();
+    add_book_category_select2();
+});
 
 function navBlockColor() {
     $("#nav_books").addClass("active");
@@ -57,7 +64,12 @@ function build_book_table(result) {
             const id = $("<td></td>").append(item.id);
             const title = $("<td></td>").append(item.title);
             const author = $("<td></td>").append(item.author);
-            const publisher = $("<td></td>").append(item.publisher);
+            let publisher_name = item.publisher;
+            if(publisher_name.includes("：")) {
+                const index = publisher_name.indexOf("：");
+                publisher_name = publisher_name.substring(index + 1, publisher_name.length);
+            }
+            const publisher = $("<td></td>").append(publisher_name);
             const year = $("<td></td>").append(item.year);
             const code = $("<td></td>").append(item.code);
             const citeBtn = $("<button></button>").addClass("btn btn-default btn-sm cite_btn")
@@ -67,7 +79,7 @@ function build_book_table(result) {
             citeBtn.attr("cite-publisher", item.publisher);
             citeBtn.attr("cite-year", item.year);
             citeBtn.attr("cite-code", item.code);
-            let saveBtn = $("<button></button>").addClass("btn btn-primary btn-sm save-btn")
+            let saveBtn = $("<button></button>").addClass("btn btn-primary btn-sm save_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-plus"));
             saveBtn.attr("save-title", item.title);
             saveBtn.attr("save-author", item.author);
@@ -232,3 +244,49 @@ function getGbt7714Ref(title, author, publisher, year) {
     }
     return reference;
 }
+
+$(document).on("click", ".save_btn", function(){
+    cleanAddModal();
+    $("#new_book_category").html("");
+    const title = $(this).attr("save-title");
+    let author = $(this).attr("save-author");
+    author = author.replace(/，/g,",");
+    author = author.replace(/；/g,"; ");
+    let publisher = $(this).attr("save-publisher");
+    const year = $(this).attr("save-year");
+    const code = $(this).attr("save-code");
+    $("#new_book_title").val(title);
+    $("#new_book_author").val(author);
+    let location = "";
+    if(publisher.includes("：")) {
+        const index = publisher.indexOf("：");
+        location = publisher.substring(0, index);
+        publisher = publisher.substring(index + 1, publisher.length);
+    }
+    $("#new_book_location").val(location);
+    $("#new_book_publisher").val(publisher);
+    $("#new_book_year").val(year);
+    $("#new_book_code").val(code);
+    $("#addBookModal").modal({
+        backdrop: "static"
+    });
+});
+
+$(document).on("click", "#insert_new_book_btn", function(){
+    if(!validAddBook()) {
+        return false;
+    }
+    $.ajax({
+        url:"../PHP/addBook.php",
+        method:"POST",
+        data:addBookData(),
+        success:function(result){
+            if(result.code === 200){
+                $("#addBookModal").modal('hide');
+                window.location.replace("search.html");
+            } else {
+                addBookError(result);
+            }
+        }
+    });
+});

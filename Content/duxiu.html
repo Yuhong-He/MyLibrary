@@ -6,6 +6,12 @@
     <script type="text/javascript" src="../JavaScript/common/common.js"></script>
     <script type="text/javascript" src="../JavaScript/common/generalFunctions.js"></script>
     <script type="text/javascript" src="../JavaScript/duxiu.js"></script>
+    <script type="text/javascript" src="../JavaScript/common/manageBook.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/zh-CN.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/zh-TW.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/en.js"></script>
     <link rel="stylesheet" type="text/css" href="../CSS/search.css">
 </head>
 <body>
@@ -132,6 +138,115 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                     <span class="lang" key="CLOSE"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Local Book Modal -->
+<div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="alert alert-danger alert-dismissible modal-alert" role="alert" id="add_book_fail">
+            <button type="button" class="close" aria-label="Close" id="close_add_book_fail">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong><span class="lang" key="ERROR"></span></strong>
+            <span id="add_book_error"></span>
+        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="lang" key="ADD_BOOK"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="new_book_author">
+                            <span class="lang" key="AUTHOR"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="author" class="form-control" id="new_book_author">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="new_book_title">
+                            <span class="lang" key="BOOK_TITLE"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="book_title" class="form-control" id="new_book_title">
+                            <span class="help-block"></span>
+                            <div id="display_book_repeat_checkbox" class="modal-alert">
+                                <label for="confirm_book_not_repeat">
+                                    <input type="checkbox" id="confirm_book_not_repeat">
+                                    <span class="lang" key="BOOK_REPEAT_CHECK"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="new_book_location">
+                            <span class="lang" key="LOCATION"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="location" class="form-control" id="new_book_location">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="new_book_publisher">
+                            <span class="lang" key="PUBLISHER"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="publisher" class="form-control" id="new_book_publisher">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="new_book_year">
+                            <span class="lang" key="YEAR"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="year" class="form-control" id="new_book_year">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="new_book_code">
+                            <span class="lang" key="BOOK_CODE"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="code" class="form-control" id="new_book_code">
+                            <span class="help-block"></span>
+                            <div id="display_code_repeat_checkbox" class="modal-alert">
+                                <label for="confirm_code_not_repeat">
+                                    <input type="checkbox" id="confirm_code_not_repeat">
+                                    <span class="lang" key="CODE_REPEAT_CHECK"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group padding-bottom-17">
+                        <label class="col-sm-2 control-label" for="new_book_category">
+                            <span class="lang" key="CATEGORY"></span>
+                        </label>
+                        <div class="col-sm-10">
+                            <select class="js-example-basic-single" name="state" id="new_book_category" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="lang" key="CLOSE"></span>
+                </button>
+                <button type="button" class="btn btn-primary" id="insert_new_book_btn">
+                    <span class="lang" key="CONFIRM"></span>
                 </button>
             </div>
         </div>
