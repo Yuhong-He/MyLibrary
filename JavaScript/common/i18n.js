@@ -38,7 +38,7 @@ let arrLang = {
         "404INFO": "Oops... Page Not Found",
 
         "OVERVIEW": "Overview",
-        "INTRODUCTION1": "I come from Yunnan, China. Study Computer Science at Technology University Dublin since 2019. This website was developed based on the final project of Web Development course in the upper semester of 2nd year. The site was build with seperated frontend and backend structure, the frontend using Bootstrap and jQuery, the backend using PHP.",
+        "INTRODUCTION1": "I come from Yunnan, China. Study Computer Science at Technological University Dublin since 2019. This website was developed based on the final project of Web Development course in the upper semester of 2nd year. The site was build with seperated frontend and backend structure, the frontend using Bootstrap and jQuery, the backend using PHP.",
         "INTRODUCTION2": "This website is only the learning project, the data is only for demo.",
         "LIBRARY": "Library",
         "INTRODUCTION3": "I am an enthusiast of Yunnan history and geography, and I have the hobby that collect related books.",
