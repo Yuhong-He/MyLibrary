@@ -1,5 +1,11 @@
 let page = 1;
 let search = "general";
+let pages_style = getCookie("pagesStyle") === "2" ? 2 : 1;
+let title;
+let author;
+let publisher;
+let year;
+let code;
 
 $(document).ready(function(){
     $("#headerContent").load("header.html");
@@ -144,13 +150,14 @@ $(document).on("click", "#clean_search_box_duxiu", function(){
 });
 
 $(document).on("click", ".cite_btn", function(){
-    const title = $(this).attr("cite-title");
-    const author = $(this).attr("cite-author");
-    const publisher = $(this).attr("cite-publisher");
-    const year = $(this).attr("cite-year");
-    const code = $(this).attr("cite-code");
+    title = $(this).attr("cite-title");
+    author = $(this).attr("cite-author");
+    publisher = $(this).attr("cite-publisher");
+    year = $(this).attr("cite-year");
+    code = $(this).attr("cite-code");
     const wikipedia = getWikipediaRef(title, author, publisher, year, code);
     const gbt7714 = getGbt7714Ref(title, author, publisher, year);
+    $('input[name="pages_style"][value="' + pages_style + '"]').prop("checked",true);
     $("#wikipedia_template").html(wikipedia);
     $("#gbt7714_2015").html(gbt7714);
     $("#citeBookModal").modal({
@@ -159,7 +166,21 @@ $(document).on("click", ".cite_btn", function(){
 });
 
 function getWikipediaRef(title, author, publisher, year, code) {
-    let reference = "<ref>{{cite book";
+    if(code.includes("\r")) {
+        code = code.substring(0, code.length - 1);
+    }
+    let reference = "{{cite book";
+    if(pages_style === 1) {
+        let ref_name;
+        if(code !== "") {
+            ref_name = ":" + code;
+        } else {
+            ref_name = title.substring(0, 5);
+        }
+        reference = "<ref" + " name=\"" + ref_name + "\">" + reference;
+    } else {
+        reference = "<ref>" + reference;
+    }
     if(author !== "") {
         author = author.replace(/，/g,",");
         author = author.replace(/；/g,"; ");
@@ -181,9 +202,6 @@ function getWikipediaRef(title, author, publisher, year, code) {
         reference = reference + " |year=" + year;
     }
     if(code !== "") {
-        if(code.includes("\r")) {
-            code = code.substring(0, code.length - 1);
-        }
         if(code !== "") {
             const pure_code = code.replace(/·/g,"");
             if(pure_code.length < 10) {
@@ -196,7 +214,15 @@ function getWikipediaRef(title, author, publisher, year, code) {
             }
         }
     }
-    reference = reference + " }}</ref>";
+    if(pages_style === 2) {
+        reference = reference + " |pages=";
+    }
+    reference = reference + " }}";
+    if(pages_style === 1) {
+        reference = reference + "</ref>{{rp|}}";
+    } else {
+        reference = reference + "</ref>";
+    }
     return reference;
 }
 
@@ -289,4 +315,18 @@ $(document).on("click", "#insert_new_book_btn", function(){
             }
         }
     });
+});
+
+$(document).on("click", ".pages_style_1", function(){
+    pages_style = 1;
+    document.cookie = "pagesStyle=" + pages_style;
+    const wikipedia = getWikipediaRef(title, author, publisher, year, code);
+    $("#wikipedia_template").html(wikipedia);
+});
+
+$(document).on("click", ".pages_style_2", function(){
+    pages_style = 2;
+    document.cookie = "pagesStyle=" + pages_style;
+    const wikipedia = getWikipediaRef(title, author, publisher, year, code);
+    $("#wikipedia_template").html(wikipedia);
 });
